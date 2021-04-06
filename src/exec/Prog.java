@@ -5,6 +5,8 @@
  */
 package exec;
 
+// ceci est un test
+
 public class Prog {
 
     public static void test1() {
