@@ -15,6 +15,9 @@
  *       - système d'argent (money)
  *       - des objets magiques (utiliser pour balancer des boules de feu,...)
  *       - des effets d'armes
+ *       - ajouter des boss avec des trésors
+ *       - customisation du perso
+ *       - charte graphique
  */
 
 
