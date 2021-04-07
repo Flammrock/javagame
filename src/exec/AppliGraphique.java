@@ -513,6 +513,12 @@ public class AppliGraphique extends javax.swing.JFrame {
 
     private void equiperBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equiperBoutonActionPerformed
         // TODO add your handling code here:
+        int selected = listeObjetInventaire.getSelectedIndex();
+        boolean success = this.aventure.getJoueur().equip(selected);
+        if (success) {
+            this.aventure.onActionJoueur();
+            this.mettreAJourTout();
+        }
     }//GEN-LAST:event_equiperBoutonActionPerformed
 
     private void jeterBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeterBoutonActionPerformed
