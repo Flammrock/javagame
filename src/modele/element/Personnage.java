@@ -129,7 +129,7 @@ public class Personnage extends Element  {
 
     /**
      *
-     * @return 
+     * @return l'armure totale
      */
     public double getArmureTotal() {
         double armureTotal = this.getArmure().getModificateurProtection();
@@ -139,5 +139,4 @@ public class Personnage extends Element  {
     private void mort() {
         this.setPv(0.0);
     }
-    
 }
