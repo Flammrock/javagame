@@ -5,15 +5,16 @@ import java.util.ArrayList;
 
 
 public class Personnage extends Element  {
-private String nom;
-private int age;
-private int force;
-private int agilite;
-private int pv;
-private ArrayList<Objet> inventaire;
-private Objet main;
-private Objet armure;
-private Lieu pieceActuel;
+    
+    private String nom;
+    private int age;
+    private int force;
+    private int agilite;
+    private double pv;
+    private ArrayList<Objet> inventaire;
+    private Objet main;
+    private Objet armure;
+    private Lieu pieceActuel;
 
     public Personnage(String nom, int age, int force, int agilite, int pv, ArrayList<Objet> inventaire) {
         this.nom = nom;
@@ -23,12 +24,20 @@ private Lieu pieceActuel;
         this.pv = pv;
         this.inventaire = inventaire;
     }
+    
+    public String getNom() {
+        return nom;
+    }
 
-    public int getPv() {
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public double getPv() {
         return pv;
     }
 
-    public void setPv(int pv) {
+    public void setPv(double pv) {
         this.pv = pv;
     }
 
@@ -65,7 +74,9 @@ private Lieu pieceActuel;
     }
 
 
-
+    public void ajoutePointVie(double valeur) {
+        this.pv += valeur;
+    }
 
 
 
