@@ -74,9 +74,9 @@ public class AppliGraphique extends javax.swing.JFrame {
     private void mettreAJourArmure(){
         Equipement armure = this.aventure.getJoueur().getArmure();
         if (armure != null) {
-            jTextPaneArmeEnMain.setText(armure.toString());
+            jTextPaneArmure.setText(armure.toString());
         } else {
-            jTextPaneArmeEnMain.setText("(VIDE)");
+            jTextPaneArmure.setText("(VIDE)");
         }
     }
     
