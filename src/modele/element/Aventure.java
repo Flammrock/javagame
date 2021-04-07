@@ -86,7 +86,11 @@ public class Aventure extends Element {
         List<Personnage> monstres = lieu.getMonstres();
         
         for (Personnage monstre : monstres) {
-            monstre.attaque(this.getJoueur());
+            if(monstre.getPv()!=0){
+                monstre.attaque(this.getJoueur());
+            }else{
+                monstres.remove(monstre);
+            }
         }
         
     }
