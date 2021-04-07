@@ -97,6 +97,7 @@ public class Aventure extends Element {
         
         for (i=0;i<monstresMort.length;i++) {
             monstres.remove(i);
+            monstres.add(new Personnage("Cadavre","une dépouille inutile",0,0,0,1,new ArrayList<Objet>()));
         }
     }
 }
