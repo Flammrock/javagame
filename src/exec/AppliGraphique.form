@@ -304,8 +304,11 @@
                           <Component id="jScrollPane14" max="32767" attributes="0"/>
                           <Component id="jScrollPane15" alignment="0" pref="161" max="32767" attributes="0"/>
                           <Component id="jScrollPane16" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane17" alignment="0" max="32767" attributes="0"/>
                           <Component id="jScrollPane18" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane17" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

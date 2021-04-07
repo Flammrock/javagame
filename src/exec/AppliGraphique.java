@@ -353,8 +353,10 @@ public class AppliGraphique extends javax.swing.JFrame {
                     .addComponent(jScrollPane14)
                     .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                     .addComponent(jScrollPane16)
-                    .addComponent(jScrollPane17)
-                    .addComponent(jScrollPane18))
+                    .addComponent(jScrollPane18)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
