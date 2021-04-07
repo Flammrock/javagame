@@ -68,6 +68,20 @@ public class Prog {
         
         Aventure a = new Aventure(joueur);
         
+        String pieceprincipal = "piece principal";
+        String piecesecondaire = "piece secondaire";
+
+        
+        
+        
+        a.ajouterLieu(pieceprincipal);
+        a.ajouterLieu(piecesecondaire);
+        
+        a.ajouterPorte("porte nord",pieceprincipal,piecesecondaire);
+        
+        
+        a.getJoueur().setPieceActuel(a.getLieu(pieceprincipal));
+        
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
     }
