@@ -70,7 +70,7 @@ public class Prog {
         
         String pieceprincipal = "piece principal";
         String piecesecondaire = "piece secondaire";
-
+        String piecetertiaire = "piece tertiare";
         
         
         
@@ -78,6 +78,7 @@ public class Prog {
         a.ajouterLieu(piecesecondaire);
         
         a.ajouterPorte("porte nord",pieceprincipal,piecesecondaire);
+        a.ajouterPorte("porte rouge",piecetertiaire,piecesecondaire);
         
         
         a.getJoueur().setPieceActuel(a.getLieu(pieceprincipal));
