@@ -9,11 +9,12 @@ package modele.element;
  *
  * @author User
  */
-public class Nourriture extends Object {
+public class Nourriture extends Objet {
     
     private double valeur;
     
-    public Nourriture(int valeur) {
+    public Nourriture(String nom, String description, double poids, int valeur) {
+        super(nom,description,poids);
         this.valeur = valeur;
     }
     
