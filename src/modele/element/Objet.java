@@ -35,11 +35,11 @@ public abstract class Objet extends Element {
         return false;
     }
 
-    public boolean utiliser(Personnage p) {
+    public boolean mettreAJourUtiliser(Personnage p) {
         if (this.peutUtiliser()) {
             if (this.nbUtilisation == -1 || this.nbUtilisation > 0) {
                 if (this.nbUtilisation != -1) this.nbUtilisation--;
-                return this.onUtiliser(p);
+                return true;
             }
         }
         return false;
