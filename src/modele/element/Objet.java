@@ -20,5 +20,8 @@ public abstract class Objet extends Element {
         return "";
     }
 
+    public String toString() {
+        return this.nom;
+    }
     
 }
