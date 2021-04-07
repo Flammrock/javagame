@@ -66,6 +66,8 @@ public class Prog {
         
         Personnage joueur = new Personnage("Hero", 20, 15, 15, 100, new ArrayList<Objet>());
         
+        Personnage monstre = new Personnage("monstre de la mort", 2, 2, 2, 10, new ArrayList<Objet>());
+        
         Aventure a = new Aventure(joueur);
         
         String pieceprincipal = "piece principal";
@@ -77,6 +79,8 @@ public class Prog {
         a.ajouterLieu(pieceprincipal);
         a.ajouterLieu(piecesecondaire);
         a.ajouterLieu(piecetertiaire);
+        
+        a.ajouterMonstre(monstre,piecesecondaire);
         
         a.ajouterPorte("porte nord",pieceprincipal,piecesecondaire);
         a.ajouterPorte("porte rouge",piecetertiaire,piecesecondaire);

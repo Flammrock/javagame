@@ -139,4 +139,10 @@ public class Personnage extends Element  {
     private void mort() {
         this.setPv(0.0);
     }
+    
+    
+    
+    public String toString() {
+        return this.nom;
+    }
 }

@@ -58,6 +58,16 @@ public class Aventure extends Element {
     public boolean ajouterPorte(String nom_porte, String nom_lieu1, String nom_lieu2) {
         return donjon.ajouterPorte(nom_porte, nom_lieu1, nom_lieu2);
     }
+
+    /**
+     * Permet d'ajouter un monstre dans un lieu
+     * @param monstre le mon stre à ajouter
+     * @param lieu le lieu dans le donjon
+     * @return retourne true si le monstre a bien été ajouté, sinon false
+     */
+    public boolean ajouterMonstre(Personnage monstre, String lieu) {
+        return donjon.ajouterMonstre(monstre, lieu);
+    }
     
     
     

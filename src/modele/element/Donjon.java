@@ -55,4 +55,16 @@ public class Donjon extends Element{
         if (lieu2 == null) return false;
         return lieu1.ajoutePorteVers(nom_porte, lieu2);
     }
+
+    /**
+     * Permet d'ajouter un monstre dans un lieu
+     * @param monstre le mon stre à ajouter
+     * @param lieu le lieu dans le donjon
+     * @return retourne true si le monstre a bien été ajouté, sinon false
+     */
+    public boolean ajouterMonstre(Personnage monstre, String lieu) {
+        Lieu lieuobj = this.getLieu(lieu);
+        if (lieuobj == null) return false;
+        return lieuobj.ajouterMonstre(monstre);
+    }
 }
