@@ -34,6 +34,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourForce();
         this.mettreAJourNom();
         this.mettreAJourPv();
+        this.mettreAJourListeInventaire();
     }
     
     private void mettreAJourListeMonstre(){
@@ -67,17 +68,16 @@ public class AppliGraphique extends javax.swing.JFrame {
         if (main != null) {
             jTextPaneArmeEnMain.setText(main.toString());
         } else {
-            jTextPaneArmeEnMain.setText("(VIDE)");
+            jTextPaneArmeEnMain.setText("VIDE");
         }
     }
     
-    // odsijdjsl
     private void mettreAJourArmure(){
         Equipement armure = this.aventure.getJoueur().getArmure();
         if (armure != null) {
             jTextPaneArmure.setText(armure.toString());
         } else {
-            jTextPaneArmure.setText("(VIDE)");
+            jTextPaneArmure.setText("VIDE");
         }
     }
     
@@ -91,6 +91,12 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     private void mettreAJourForce(){
         jTextPaneForce.setText(this.aventure.getJoueur().getForce()+"");
+    }
+    
+    private void mettreAJourListeInventaire(){
+        DefaultListModel<Objet> g = new DefaultListModel<>();
+        g.addAll(this.aventure.getJoueur().getInventaire());
+        listeObjetInventaire.setModel(g);
     }
     
     /**
@@ -143,6 +149,10 @@ public class AppliGraphique extends javax.swing.JFrame {
         jScrollPane18 = new javax.swing.JScrollPane();
         jTextPaneArmure = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        jTextPaneInventaireFixe = new javax.swing.JTextPane();
+        jScrollPane20 = new javax.swing.JScrollPane();
+        listeObjetInventaire = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -274,7 +284,7 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane13)
                     .addComponent(jScrollPane14)
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                     .addComponent(jScrollPane16)
                     .addComponent(jScrollPane17)
                     .addComponent(jScrollPane18))
@@ -311,15 +321,25 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        jTextPaneInventaireFixe.setEditable(false);
+        jTextPaneInventaireFixe.setText("Inventaire:");
+        jScrollPane19.setViewportView(jTextPaneInventaireFixe);
+
+        jScrollPane20.setViewportView(listeObjetInventaire);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+            .addComponent(jScrollPane19)
+            .addComponent(jScrollPane20, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane20))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -328,11 +348,11 @@ public class AppliGraphique extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addComponent(jScrollPane6)
                 .addGap(315, 315, 315))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -354,7 +374,7 @@ public class AppliGraphique extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jPanelAffichageSalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -437,7 +457,9 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane18;
+    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane20;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -455,12 +477,14 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneArmureFixe;
     private javax.swing.JTextPane jTextPaneForce;
     private javax.swing.JTextPane jTextPaneForceFixe;
+    private javax.swing.JTextPane jTextPaneInventaireFixe;
     private javax.swing.JTextPane jTextPaneNom;
     private javax.swing.JTextPane jTextPaneNomFixe;
     private javax.swing.JTextPane jTextPanePv;
     private javax.swing.JTextPane jTextPanePvFixe;
     private javax.swing.JList<Personnage> listeMonstre;
     private javax.swing.JList<Objet> listeObjet;
+    private javax.swing.JList<Objet> listeObjetInventaire;
     private javax.swing.JList<Porte> listePortes;
     private javax.swing.JTextArea logger;
     // End of variables declaration//GEN-END:variables
