@@ -24,6 +24,10 @@ public class Nourriture extends Objet {
         return utilisateur.getNom() + " a mangé ";
     }
     
+    public boolean peutUtiliser() {
+        return true;
+    }
+    
     public boolean onUtiliser(Personnage p) {
         p.ajoutePointVie(this.valeur);
         return true;
