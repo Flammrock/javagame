@@ -68,6 +68,7 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         });
 
+        jTextPane1.setEditable(false);
         jScrollPane3.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
