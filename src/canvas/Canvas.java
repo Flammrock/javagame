@@ -24,7 +24,7 @@ public class Canvas extends JPanel {
         graphic2d.setColor(Color.BLUE);
         graphic2d.fillRect(230, 110, 60, 80);
         
-        Sprite s = new Sprite("/spritetest.png",100,100);
+        Sprite s = new Sprite("/spritetest.png",-100,-100);
         s.load();
         s.draw(this, g);
         
