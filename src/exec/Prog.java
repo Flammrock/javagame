@@ -80,7 +80,7 @@ public class Prog {
         a.ajouterLieu(piecesecondaire);
         a.ajouterLieu(piecetertiaire);
         
-        a.ajouterMonstre(piecesecondaire);
+        a.ajouterMonstre(monstre,piecesecondaire);
         
         a.ajouterPorte("porte nord",pieceprincipal,piecesecondaire);
         a.ajouterPorte("porte rouge",piecetertiaire,piecesecondaire);
