@@ -5,6 +5,8 @@
 /**
  * @TODO : 
  * 
+ *       - cycle jour/nuit
+ *       - système de lumière
  *       - malédiction du temple => les objets disparaissent au bout d'un certain moment
  *       - ajouter effet de salles
  *       - génération de niveau aléaroire
