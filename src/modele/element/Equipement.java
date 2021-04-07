@@ -24,6 +24,4 @@ public class Equipement extends Objet {
     public double getModificateurProtection() {
         return 0.0;
     }
-    
-    
 }
