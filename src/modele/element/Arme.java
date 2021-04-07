@@ -11,4 +11,40 @@ package modele.element;
  */
 public class Arme extends Equipement {
     
+    private double bonus_agilite;
+    private double bonus_force;
+    
+    public Arme(double agilite, double force) {
+        this.bonus_agilite = agilite;
+        this.bonus_force = force;
+    }
+
+    public double getBonus_agilite() {
+        return bonus_agilite;
+    }
+
+    public void setBonus_agilite(double bonus_agilite) {
+        this.bonus_agilite = bonus_agilite;
+    }
+
+    public double getBonus_force() {
+        return bonus_force;
+    }
+
+    public void setBonus_force(double bonus_force) {
+        this.bonus_force = bonus_force;
+    }
+    
+    
+    
+    @Override
+    public double getModificateurAgilite() {
+        return this.bonus_agilite;
+    }
+    @Override
+    public double getModificateurForce() {
+        return this.bonus_force;
+    }
+    
+    
 }
