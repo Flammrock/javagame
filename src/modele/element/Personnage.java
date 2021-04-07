@@ -26,7 +26,7 @@ public class Personnage extends Element  {
         this.inventaire = inventaire;
         this.main = null;
         this.armure = null;
-    }
+    }//coucou
 
     
     public String getNom() {
