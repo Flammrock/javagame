@@ -82,7 +82,7 @@ public class Personnage extends Element  {
     }
 
     public double getAgilite() {
-        return agilite;
+        return this.agilite;
     }
 
     public void setAgilite(double agilite) {
