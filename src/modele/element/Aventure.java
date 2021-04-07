@@ -55,7 +55,7 @@ public class Aventure extends Element {
      * @return retourne true si la porte a été ajouté, false sinon
      */
     public boolean ajouterPorte(String nom_lieu1, String nom_lieu2) {
-        return donjon.ajouterPorte(String nom_lieu1, String nom_lieu2);
+        return donjon.ajouterPorte(nom_lieu1, nom_lieu2);
     }
     
     
