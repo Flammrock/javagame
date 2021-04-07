@@ -194,6 +194,6 @@ public class Personnage extends Element  {
         if (this.description.trim().equals("")) {
             return this.nom;
         }
-        return this.nom + " (" + this.description + ")";
+        return this.nom + " (" + this.description + ") " + this.pv + "PV";
     }
 }
