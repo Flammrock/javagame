@@ -19,5 +19,9 @@ public class Nourriture extends Object {
         return utilisateur.getNom() + " a mangé ";
     }
 
+    public double getValeur() {
+        return valeur;
+    }
+
     
 }
