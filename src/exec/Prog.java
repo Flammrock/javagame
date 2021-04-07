@@ -64,7 +64,10 @@ public class Prog {
 
     public static void main(String[] args) {
         
-        Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100, new ArrayList<Objet>());
+        ArrayList<Objet> listeInventaire = new ArrayList<Objet>();
+        listeInventaire.add(new Arme("épée cassé","une épée qui jadis tranchas des tete et inspirer la terreur",1,0,0));
+        
+        Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100, listeInventaire);
         
         Personnage monstre = new Personnage("Goblin", "monstre de la mort", 2, 2, 2, 10, new ArrayList<Objet>());
         
