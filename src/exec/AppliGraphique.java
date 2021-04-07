@@ -131,6 +131,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         listeMonstre = new javax.swing.JList<>();
         Combattre = new javax.swing.JButton();
+        ramasser = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
@@ -164,7 +165,9 @@ public class AppliGraphique extends javax.swing.JFrame {
         jTextPaneInventaireFixe = new javax.swing.JTextPane();
         jScrollPane20 = new javax.swing.JScrollPane();
         listeObjetInventaire = new javax.swing.JList<>();
-        utiliserbouton = new javax.swing.JButton();
+        utiliserBouton = new javax.swing.JButton();
+        equiperBouton = new javax.swing.JButton();
+        jeterBouton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -197,13 +200,22 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         });
 
+        ramasser.setText("Ramasser");
+        ramasser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ramasserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAffichageSalleLayout = new javax.swing.GroupLayout(jPanelAffichageSalle);
         jPanelAffichageSalle.setLayout(jPanelAffichageSalleLayout);
         jPanelAffichageSalleLayout.setHorizontalGroup(
             jPanelAffichageSalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAffichageSalleLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Combattre)
+                .addGroup(jPanelAffichageSalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ramasser)
+                    .addComponent(Combattre))
                 .addGap(207, 207, 207))
             .addGroup(jPanelAffichageSalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelAffichageSalleLayout.createSequentialGroup()
@@ -229,7 +241,9 @@ public class AppliGraphique extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAffichageSalleLayout.createSequentialGroup()
                 .addContainerGap(129, Short.MAX_VALUE)
                 .addComponent(Combattre)
-                .addGap(84, 84, 84))
+                .addGap(50, 50, 50)
+                .addComponent(ramasser)
+                .addContainerGap())
             .addGroup(jPanelAffichageSalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelAffichageSalleLayout.createSequentialGroup()
                     .addContainerGap()
@@ -367,10 +381,24 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addComponent(jScrollPane20))
         );
 
-        utiliserbouton.setText("Utiliser");
-        utiliserbouton.addActionListener(new java.awt.event.ActionListener() {
+        utiliserBouton.setText("Utiliser");
+        utiliserBouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                utiliserboutonActionPerformed(evt);
+                utiliserBoutonActionPerformed(evt);
+            }
+        });
+
+        equiperBouton.setText("Equiper");
+        equiperBouton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                equiperBoutonActionPerformed(evt);
+            }
+        });
+
+        jeterBouton.setText("Jeter");
+        jeterBouton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jeterBoutonActionPerformed(evt);
             }
         });
 
@@ -388,7 +416,11 @@ public class AppliGraphique extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(utiliserbouton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jeterBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(equiperBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(utiliserBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -397,7 +429,10 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(utiliserbouton))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(utiliserBouton)
+                        .addComponent(equiperBouton)
+                        .addComponent(jeterBouton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -457,7 +492,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourTout();
     }//GEN-LAST:event_CombattreActionPerformed
 
-    private void utiliserboutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utiliserboutonActionPerformed
+    private void utiliserBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utiliserBoutonActionPerformed
         // TODO add your handling code here:
         int selected = listeObjetInventaire.getSelectedIndex();
         
@@ -470,7 +505,19 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.aventure.onActionJoueur();
         
         this.mettreAJourTout();
-    }//GEN-LAST:event_utiliserboutonActionPerformed
+    }//GEN-LAST:event_utiliserBoutonActionPerformed
+
+    private void ramasserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ramasserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ramasserActionPerformed
+
+    private void equiperBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equiperBoutonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_equiperBoutonActionPerformed
+
+    private void jeterBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeterBoutonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jeterBoutonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,6 +557,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Combattre;
     private javax.swing.JButton allerDansPorte;
+    private javax.swing.JButton equiperBouton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -549,11 +597,13 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneNomFixe;
     private javax.swing.JTextPane jTextPanePv;
     private javax.swing.JTextPane jTextPanePvFixe;
+    private javax.swing.JButton jeterBouton;
     private javax.swing.JList<Personnage> listeMonstre;
     private javax.swing.JList<Objet> listeObjet;
     private javax.swing.JList<Objet> listeObjetInventaire;
     private javax.swing.JList<Porte> listePortes;
     private javax.swing.JTextArea logger;
-    private javax.swing.JButton utiliserbouton;
+    private javax.swing.JButton ramasser;
+    private javax.swing.JButton utiliserBouton;
     // End of variables declaration//GEN-END:variables
 }
