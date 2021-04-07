@@ -76,6 +76,7 @@ public class Prog {
         
         a.ajouterLieu(pieceprincipal);
         a.ajouterLieu(piecesecondaire);
+        a.ajouterLieu(piecetertiaire);
         
         a.ajouterPorte("porte nord",pieceprincipal,piecesecondaire);
         a.ajouterPorte("porte rouge",piecetertiaire,piecesecondaire);
