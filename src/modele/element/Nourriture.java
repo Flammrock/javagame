@@ -17,11 +17,5 @@ public class Nourriture extends Object {
         utilisateur.ajoutePointVie(this.valeur);
         valeur = 0; //la nourriture ne peut etre utilisée deux fois
         return utilisateur.getNom() + " a mangé ";
-    }
-
-    public double getValeur() {
-        return valeur;
-    }
-
-    
+    }   
 }
