@@ -25,5 +25,6 @@ public class Nourriture extends Object {
     
     public boolean onUtiliser(Personnage p) {
         p.ajoutePointVie(this.valeur);
+        return true;
     }
 }
