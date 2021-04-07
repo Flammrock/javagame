@@ -8,15 +8,15 @@ public class Personnage extends Element  {
     
     private String nom;
     private int age;
-    private int force;
-    private int agilite;
+    private double force;
+    private double agilite;
     private double pv;
     private ArrayList<Objet> inventaire;
     private Objet main;
     private Objet armure;
     private Lieu pieceActuel;
 
-    public Personnage(String nom, int age, int force, int agilite, int pv, ArrayList<Objet> inventaire) {
+    public Personnage(String nom, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
         this.nom = nom;
         this.age = age;
         this.force = force;
