@@ -5,6 +5,12 @@
 /**
  * @TODO : 
  * 
+ *       - prendre en compte le poids des objets dans l'inventaire
+ *       - possibilité d'améliorer l'inventaire, les objets
+ *       - possibilité de réparer les objets
+ *       - possibilité de crafter des objets
+ *       - ajouter des évènements aléatoires
+ *       - les monstres drops des matériaux, on peut vendre et gagner des matériaux
  *       - système d'expérience
  *       - système de clé/serrure
  *       - système d'effet (poison...)
@@ -17,6 +23,8 @@
  *       - des effets d'armes
  *       - ajouter des boss avec des trésors
  *       - customisation du perso
+ *       - barre de faim, de soif,...
+ *       - rajouter des modes de difficulté
  *       - charte graphique
  */
 
