@@ -47,6 +47,16 @@ public class Aventure extends Element {
     public Lieu getLieu(String nom) {
         return donjon.getLieu(nom);
     }
+
+    /**
+     * Permet d'ajouter une porte entre deux lieux
+     * @param nom_lieu1
+     * @param nom_lieu2
+     * @return retourne true si la porte a été ajouté, false sinon
+     */
+    public boolean ajouterPorte(String nom_lieu1, String nom_lieu2) {
+        return donjon.ajouterPorte(nom_lieu1, nom_lieu2);
+    }
     
     
     
