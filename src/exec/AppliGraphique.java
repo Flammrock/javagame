@@ -128,7 +128,11 @@ public class AppliGraphique extends javax.swing.JFrame {
         if (obj == null) return;
         
         if (obj instanceof Equipement) {
-            utiliserBouton.setText("Equiper");
+            if (this.aventure.getJoueur().getMain()==obj) {
+                utiliserBouton.setText("Déséquiper");
+            } else {
+                utiliserBouton.setText("Equiper");
+            }
         } else if (obj.peutUtiliser()) {
             utiliserBouton.setText("Utiliser");
         }
