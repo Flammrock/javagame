@@ -44,7 +44,10 @@ public class Personnage extends Element  {
     }
 
     public void setPv(double pv) {
-        if (pv > this.pvmax) this.pv = this.pvmax;
+        if (pv > this.pvmax) {
+            this.pv = this.pvmax;
+            return;
+        }
         this.pv = pv;
     }
 
@@ -108,7 +111,10 @@ public class Personnage extends Element  {
 
 
     public void ajoutePointVie(double valeur) {
-        if (this.pv + valeur > this.pvmax) this.pv = this.pvmax;
+        if (this.pv + valeur > this.pvmax) {
+            this.pv = this.pvmax;
+            return;
+        }
         this.pv += valeur;
     }
     
