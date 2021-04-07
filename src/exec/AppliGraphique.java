@@ -166,8 +166,6 @@ public class AppliGraphique extends javax.swing.JFrame {
         jScrollPane20 = new javax.swing.JScrollPane();
         listeObjetInventaire = new javax.swing.JList<>();
         utiliserBouton = new javax.swing.JButton();
-        equiperBouton = new javax.swing.JButton();
-        jeterBouton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -388,20 +386,6 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         });
 
-        equiperBouton.setText("Equiper");
-        equiperBouton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                equiperBoutonActionPerformed(evt);
-            }
-        });
-
-        jeterBouton.setText("Jeter");
-        jeterBouton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jeterBoutonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -416,10 +400,6 @@ public class AppliGraphique extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jeterBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(equiperBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(utiliserBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -429,10 +409,7 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(utiliserBouton)
-                        .addComponent(equiperBouton)
-                        .addComponent(jeterBouton)))
+                    .addComponent(utiliserBouton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -495,35 +472,25 @@ public class AppliGraphique extends javax.swing.JFrame {
     private void utiliserBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utiliserBoutonActionPerformed
         // TODO add your handling code here:
         int selected = listeObjetInventaire.getSelectedIndex();
+        Objet obj = listeObjetInventaire.getSelectedValue();
         
-        boolean b = this.aventure.getJoueur().utiliserObjet(selected);
-        if (!b) return;
+        boolean needUpdate = false;
         
-        this.mettreAJourListeInventaire();
-        this.mettreAJourStatistiquePerso();
-        
-        this.aventure.onActionJoueur();
-        
-        this.mettreAJourTout();
+        if (obj instanceof Equipement) {
+            needUpdate = this.aventure.getJoueur().equip(selected);
+        } else if (obj.peutUtiliser()) {
+            needUpdate = this.aventure.getJoueur().utiliserObjet(selected);
+        }
+         
+        if (needUpdate) {
+            this.aventure.onActionJoueur();
+            this.mettreAJourTout();
+        }
     }//GEN-LAST:event_utiliserBoutonActionPerformed
 
     private void ramasserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ramasserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ramasserActionPerformed
-
-    private void equiperBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equiperBoutonActionPerformed
-        // TODO add your handling code here:
-        int selected = listeObjetInventaire.getSelectedIndex();
-        boolean success = this.aventure.getJoueur().equip(selected);
-        if (success) {
-            this.aventure.onActionJoueur();
-            this.mettreAJourTout();
-        }
-    }//GEN-LAST:event_equiperBoutonActionPerformed
-
-    private void jeterBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeterBoutonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jeterBoutonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -563,7 +530,6 @@ public class AppliGraphique extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Combattre;
     private javax.swing.JButton allerDansPorte;
-    private javax.swing.JButton equiperBouton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -603,7 +569,6 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneNomFixe;
     private javax.swing.JTextPane jTextPanePv;
     private javax.swing.JTextPane jTextPanePvFixe;
-    private javax.swing.JButton jeterBouton;
     private javax.swing.JList<Personnage> listeMonstre;
     private javax.swing.JList<Objet> listeObjet;
     private javax.swing.JList<Objet> listeObjetInventaire;
