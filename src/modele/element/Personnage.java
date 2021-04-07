@@ -16,8 +16,9 @@ public class Personnage extends Element  {
     private Equipement armure;
     private Lieu pieceActuel;
 
-    public Personnage(String nom, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
+    public Personnage(String nom, String description, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
         this.nom = nom;
+        this.description = description;
         this.age = age;
         this.force = force;
         this.agilite = agilite;
@@ -167,6 +168,6 @@ public class Personnage extends Element  {
     
     
     public String toString() {
-        return this.nom;
+        return this.nom + "(" + this.description + ")";
     }
 }
