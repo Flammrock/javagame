@@ -67,4 +67,16 @@ public class Donjon extends Element{
         if (lieuobj == null) return false;
         return lieuobj.ajouterMonstre(monstre);
     }
+
+    /**
+     * Permet d'ajouter un objet dans un lieu
+     * @param obj l'objet à rajouter
+     * @param lieu le lieu où on ajoute l'objet
+     * @return retourne true si l'objet a bien été ahouté, sinon false
+     */
+    public boolean ajouterObjet(Objet obj, String lieu) {
+        Lieu lieuobj = this.getLieu(lieu);
+        if (lieuobj == null) return false;
+        return lieuobj.ajouterObjet(obj);
+    }
 }
