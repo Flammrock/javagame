@@ -98,7 +98,7 @@ public class Personnage extends Element  {
     }
     
     /**
-     *
+     * permet a un personnage d'attaquer un autre personnage
      * @param ennemie le personnage que l'on affronte
      */
     public void attaque(Personnage ennemie){
@@ -110,11 +110,11 @@ public class Personnage extends Element  {
     }
 
     private void blesse(Personnage ennemie) {
-        double pv = ennemie.getPv();
+        double pointdevie = ennemie.getPv();
         double degats = caluleDegatsBrut() - ennemie.getArmureTotal();
-        pv -= degats;
-        if(pv>0){
-            ennemie.setPv(pv);
+        pointdevie -= degats;
+        if(pointdevie>0){
+            ennemie.setPv(pointdevie);
         }else{
             ennemie.mort();
         }
