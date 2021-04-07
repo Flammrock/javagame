@@ -5,10 +5,14 @@
  */
 package modele.element;
 
+import java.util.List;
+
 /**
  *
  * @author Utilisateur
  */
 public class Donjon {
-    
+    private List<Lieu> salles;
+    private Lieu entree;
+    private Lieu sortie;
 }
