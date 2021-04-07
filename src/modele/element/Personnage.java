@@ -62,7 +62,11 @@ public class Personnage extends Element  {
     }
 
     public Equipement getArmure() {
-        return armure;
+        if(armure!=null){
+            return armure;
+        }else{
+            return new Equipement("","",0);
+        }
     }
 
     public void setArmure(Equipement armure) {
