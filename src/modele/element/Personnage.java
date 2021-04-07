@@ -171,6 +171,6 @@ public class Personnage extends Element  {
     
     
     public String toString() {
-        return this.nom + "(" + this.description + ")";
+        return this.nom + " (" + this.description + ")";
     }
 }
