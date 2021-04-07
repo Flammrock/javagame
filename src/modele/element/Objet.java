@@ -22,7 +22,7 @@ public abstract class Objet extends Element {
     }
 
     public String toString() {
-        return this.nom + "(" + this.description + ")";
+        return this.nom + " (" + this.description + ")";
     }
     
 }
