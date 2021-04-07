@@ -11,6 +11,7 @@ public class Personnage extends Element  {
     private double force;
     private double agilite;
     private double pv;
+    private double pvmax;
     private ArrayList<Objet> inventaire;
     private Equipement main;
     private Equipement armure;
@@ -23,6 +24,7 @@ public class Personnage extends Element  {
         this.force = force;
         this.agilite = agilite;
         this.pv = pv;
+        this.pvmax = pv;
         this.inventaire = inventaire;
         this.main = null;
         this.armure = null;
@@ -42,6 +44,7 @@ public class Personnage extends Element  {
     }
 
     public void setPv(double pv) {
+        if (pv > this.pvmax) this.pv = this.pvmax;
         this.pv = pv;
     }
 
@@ -105,6 +108,7 @@ public class Personnage extends Element  {
 
 
     public void ajoutePointVie(double valeur) {
+        if (this.pv + valeur > this.pvmax) this.pv = this.pvmax;
         this.pv += valeur;
     }
     
