@@ -11,17 +11,34 @@ package modele.element;
  */
 public class Equipement extends Objet {
     
+    private double bonus_agilite;
+    private double bonus_protection;
+    private double bonus_force;
+    
     public Equipement(String nom, String description, double poids) {
         super(nom,description,poids);
+        this.bonus_force = 0.0;
+        this.bonus_protection = 0.0;
+        this.bonus_agilite = 0.0;
+    }
+    
+    public void setModificateurAgilite(double agilite) {
+        this.bonus_agilite = agilite;
+    }
+    public void setModificateurForce(double force) {
+        this.bonus_force = force;
+    }
+    public void setModificateurProtection(double protection) {
+        this.bonus_protection = protection;
     }
    
     public double getModificateurAgilite() {
-        return 0.0;
+        return this.bonus_agilite;
     }
     public double getModificateurForce() {
-        return 0.0;
+        return this.bonus_force;
     }
     public double getModificateurProtection() {
-        return 0.0;
+        return this.bonus_protection;
     }
 }
