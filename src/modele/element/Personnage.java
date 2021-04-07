@@ -80,19 +80,27 @@ public class Personnage extends Element  {
         this.pv += valeur;
     }
 
+    /**
+     *
+     * @return retourne la valeur de combat
+     */
     public double valeurCombat(){
         double bonusArme = this.getArmure().getModificateurAgilite();
         double valeurCombat = this.agilite+bonusArme;
-        return this.agilite;
+        return valeurCombat;
     }
     
-    public boolean aToucher(double Probabilité){
+    private boolean aToucher(double Probabilité){
         double NombreMin = 0.0;
         double NombreMax = 100;
         double nombreAleatoire = NombreMin + (Math.random() * (NombreMax - NombreMin));
         return nombreAleatoire<=Probabilité;
     }
     
+    /**
+     *
+     * @param ennemie le personnage que l'on affronte
+     */
     public void attaque(Personnage ennemie){
         double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+ennemie.valeurCombat());
         boolean toucher = aToucher(probabiliteDeToucher);
@@ -119,7 +127,11 @@ public class Personnage extends Element  {
         return degats;
     }
 
-    private double getArmureTotal() {
+    /**
+     *
+     * @return 
+     */
+    public double getArmureTotal() {
         double armureTotal = this.getArmure().getModificateurProtection();
         return armureTotal;
     }
@@ -127,4 +139,5 @@ public class Personnage extends Element  {
     private void mort() {
         this.setPv(0.0);
     }
+    
 }
