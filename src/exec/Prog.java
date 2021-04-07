@@ -5,14 +5,9 @@
  */
 package exec;
 
-// ceci est un test
-// test
-
 public class Prog {
 
     public static void test1() {
-        
-        // bonjour
         
         /*
         Personnage p = new Personnage("Toto", "Un Heros", 50, 50, 50, 80, 20); //un constructeur nom/desc/force/agilite/charisme/poids/Vie
@@ -65,7 +60,8 @@ public class Prog {
     }
 
     public static void main(String[] args) {
-
+        AppliGraphique g = new AppliGraphique();
+        g.setVisible(true);
     }
 
 }
