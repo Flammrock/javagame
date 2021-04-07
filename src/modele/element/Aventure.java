@@ -6,6 +6,7 @@
 package modele.element;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -77,6 +78,17 @@ public class Aventure extends Element {
      */
     public boolean ajouterObjet(Objet obj, String lieu) {
         return donjon.ajouterObjet(obj,lieu);
+    }
+
+    public void onActionJoueur() {
+        
+        Lieu lieu = this.getJoueur().getPieceActuel();
+        List<Personnage> monstres = lieu.getMonstres();
+        
+        for (Personnage monstre : monstres) {
+            monstre.attaque(this.getJoueur());
+        }
+        
     }
     
     
