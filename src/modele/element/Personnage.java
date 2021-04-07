@@ -79,11 +79,21 @@ public class Personnage extends Element  {
     }
 
     public double valeurCombat(){
+        double bonus = 0;                       //TODO compter les bonus d'arme
+        double valeurCombat = this.agilite+bonus;
         return this.agilite;
+    }
+    
+    public boolean aToucher(double Probabilité){
+        double NombreMin = 0.0;
+        double NombreMax = 100;
+        double nombreAleatoire = NombreMin + (Math.random() * (NombreMax - NombreMin));
+        return nombreAleatoire<=Probabilité;
     }
     
     public void attaque(Personnage ennemie){
         double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+ennemie.valeurCombat());
+        boolean touche = aToucher(probabiliteDeToucher);
         
     }
 }
