@@ -23,8 +23,6 @@ public class Porte extends Element{
     public String getNom() {
         return nom;
     }
-    
-    
 
     public Lieu getLieu1() {
         return lieu1;
