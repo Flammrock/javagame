@@ -121,6 +121,20 @@ public class Personnage extends Element  {
         }
         return false;
     }
+    
+    public boolean desequip(int index) {
+        if (index < 0 || index > this.inventaire.size()) return false;
+        Objet obj = this.inventaire.get(index);
+        if (obj == null) return false;
+        if (obj instanceof Arme) {
+            this.setMain(null);
+            return true;
+        } else if (obj instanceof Armure) {
+            this.setArmure(null);
+            return true;
+        }
+        return false;
+    }
 
     /**
      *
