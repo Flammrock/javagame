@@ -25,6 +25,9 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.aventure = aventure;
         initComponents();
         this.mettreAJourListePorte();
+        this.mettreAJourListeObjet();
+        this.mettreAJourListeMonstre();
+        this.mettreAJourSalle();
     }
     
     private void mettreAJourListeMonstre(){
@@ -142,6 +145,9 @@ public class AppliGraphique extends javax.swing.JFrame {
         if (p!=null) {
             this.aventure.getJoueur().setPieceActuel(p.getLieu2());
             this.mettreAJourListePorte();
+            this.mettreAJourListeObjet();
+            this.mettreAJourListeMonstre();
+            this.mettreAJourSalle();
         }
     }//GEN-LAST:event_allerDansPorteActionPerformed
 
