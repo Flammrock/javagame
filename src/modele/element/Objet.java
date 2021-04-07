@@ -38,7 +38,7 @@ public abstract class Objet extends Element {
     public boolean utiliser(Personnage p) {
         if (this.peutUtiliser()) {
             if (this.nbUtilisation == -1 || this.nbUtilisation > 0) {
-                this.nbUtilisation--;
+                if (this.nbUtilisation != -1) this.nbUtilisation--;
                 return this.onUtiliser(p);
             }
         }
