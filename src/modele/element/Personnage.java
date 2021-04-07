@@ -4,7 +4,7 @@ package modele.element;
 import java.util.ArrayList;
 
 
-public class Personnage extends Element  {
+public class Personnage extends Element {
     
     private String nom;
     private int age;
