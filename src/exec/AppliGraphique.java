@@ -59,6 +59,11 @@ public class AppliGraphique extends javax.swing.JFrame {
         jScrollPane2.setViewportView(listePortes);
 
         allerDansPorte.setText("Aller");
+        allerDansPorte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                allerDansPorteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,6 +93,15 @@ public class AppliGraphique extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void allerDansPorteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allerDansPorteActionPerformed
+        // TODO add your handling code here:
+        Porte p = listePortes.getSelectedValue();
+        if (p!=null) {
+            this.aventure.getJoueur().setPieceActuel(p.getLieu2());
+            this.mettreAJourListePorte();
+        }
+    }//GEN-LAST:event_allerDansPorteActionPerformed
 
     /**
      * @param args the command line arguments
