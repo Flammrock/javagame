@@ -124,7 +124,6 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     private void onSelectObjetInventaire() {
-        int selected = listeObjetInventaire.getSelectedIndex();
         Objet obj = listeObjetInventaire.getSelectedValue();
         if (obj == null) return;
         
