@@ -9,17 +9,6 @@ package modele.element;
  *
  * @author User
  */
-public class Equipement {
-   
-    public int getModificateurAgilite() {
-        return 0;
-    }
-    public int getModificateurForce() {
-        return 0;
-    }
-    public int getModificateurProtection() {
-        return 0;
-    }
-    
+public class Armure extends Equipement {
     
 }
