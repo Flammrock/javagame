@@ -24,11 +24,16 @@ public class AppliGraphique extends javax.swing.JFrame {
     public AppliGraphique(Aventure aventure) {
         this.aventure = aventure;
         initComponents();
-        this.mettreAJourListePorte();
-        this.mettreAJourListeObjet();
-        this.mettreAJourListeMonstre();
-        this.mettreAJourSalle();
-        this.mettreAJourStatistiquePerso();
+        mettreAJourTout();
+    }
+    
+    private void mettreAJourTout() {
+        mettreAJourStatistiquePerso();
+        mettreAJourListeMonstre();
+        mettreAJourListeObjet();
+        mettreAJourSalle();
+        mettreAJourListePorte();
+        mettreAJourListeInventaire();
     }
     
     private void mettreAJourStatistiquePerso(){
@@ -448,6 +453,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         }
         
         this.aventure.onActionJoueur();
+        
+        this.mettreAJourTout();
     }//GEN-LAST:event_CombattreActionPerformed
 
     private void utiliserboutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utiliserboutonActionPerformed
@@ -458,6 +465,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourStatistiquePerso();
         
         this.aventure.onActionJoueur();
+        
+        this.mettreAJourTout();
     }//GEN-LAST:event_utiliserboutonActionPerformed
 
     /**
