@@ -54,11 +54,7 @@ public class Personnage extends Element  {
     }
 
     public Equipement getMain() {
-        if(main!=null){
-            return main;
-        }else{
-            return new Equipement("","",0);
-        }
+        return main;
     }
 
     public void setMain(Equipement main) {
@@ -66,11 +62,7 @@ public class Personnage extends Element  {
     }
 
     public Equipement getArmure() {
-        if(armure!=null){
-            return armure;
-        }else{
-            return new Equipement("","",0);
-        }
+        return armure;
     }
 
     public void setArmure(Equipement armure) {
