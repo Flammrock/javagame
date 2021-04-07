@@ -22,6 +22,9 @@ public abstract class Objet extends Element {
     }
 
     public String toString() {
+        if (this.description.trim().equals("")) {
+            return this.nom;
+        }
         return this.nom + " (" + this.description + ")";
     }
     
