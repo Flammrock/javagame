@@ -65,6 +65,30 @@ public class Personnage extends Element  {
         this.armure = armure;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public double getForce() {
+        return force;
+    }
+
+    public void setForce(double force) {
+        this.force = force;
+    }
+
+    public double getAgilite() {
+        return agilite;
+    }
+
+    public void setAgilite(double agilite) {
+        this.agilite = agilite;
+    }
+
 
 
     public Lieu getPieceActuel() {
