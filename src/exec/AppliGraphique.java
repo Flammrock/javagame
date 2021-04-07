@@ -443,6 +443,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         Personnage p = listeMonstre.getSelectedValue();
         if (p!=null) {
             this.aventure.getJoueur().attaque(p);
+            p.attaque(this.aventure.getJoueur());
             this.mettreAJourStatistiquePerso();
         }
     }//GEN-LAST:event_CombattreActionPerformed
