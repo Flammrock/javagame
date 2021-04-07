@@ -12,7 +12,7 @@ package modele.element;
 public class Arme extends Equipement {
     
     private double bonus_agilite;
-    private double bonus_force
+    private double bonus_force;
     
     public Arme(double agilite, double force) {
         this.bonus_agilite = agilite;
