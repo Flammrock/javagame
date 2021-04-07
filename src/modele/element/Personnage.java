@@ -212,6 +212,9 @@ public class Personnage extends Element  {
         return reussiAutiliser;
     }
     
+    public boolean ajouterObjet(Objet o){
+        return this.inventaire.add(o);
+    } 
     
     public String toString() {
         if (this.description.trim().equals("")) {
