@@ -27,10 +27,25 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourListePorte();
     }
     
+    private void mettreAJourListeMonstre(){
+        DefaultListModel<Personnage> g = new DefaultListModel<>();
+        g.addAll(this.aventure.getJoueur().getPieceActuel().getMonstres());
+        listeMonstre.setModel(g);
+    }
+    
+    private void mettreAJourListeObjet(){
+        DefaultListModel<Objet> g = new DefaultListModel<>();
+        g.addAll(this.aventure.getJoueur().getPieceActuel().getObjets());
+        listeObjet.setModel(g);
+    }
+    
+    private void mettreAJourSalle(){
+        jTextPane1.setText(this.aventure.getJoueur().getPieceActuel().toString());
+    }
+    
     private void mettreAJourListePorte() {
         DefaultListModel<Porte> g = new DefaultListModel<>();
         g.addAll(this.aventure.getJoueur().getPieceActuel().getListePorte());
-        jTextPane1.setText(this.aventure.getJoueur().getPieceActuel().toString());
         listePortes.setModel(g);
     }
 
@@ -51,9 +66,9 @@ public class AppliGraphique extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jScrollPane4 = new javax.swing.JScrollPane();
-        listePortes1 = new javax.swing.JList<>();
+        listeObjet = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        listePortes2 = new javax.swing.JList<>();
+        listeMonstre = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,9 +90,9 @@ public class AppliGraphique extends javax.swing.JFrame {
         jTextPane1.setEditable(false);
         jScrollPane3.setViewportView(jTextPane1);
 
-        jScrollPane4.setViewportView(listePortes1);
+        jScrollPane4.setViewportView(listeObjet);
 
-        jScrollPane5.setViewportView(listePortes2);
+        jScrollPane5.setViewportView(listeMonstre);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,9 +188,9 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JList<Personnage> listeMonstre;
+    private javax.swing.JList<Objet> listeObjet;
     private javax.swing.JList<Porte> listePortes;
-    private javax.swing.JList<Porte> listePortes1;
-    private javax.swing.JList<Porte> listePortes2;
     private javax.swing.JTextArea logger;
     // End of variables declaration//GEN-END:variables
 }
