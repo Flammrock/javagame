@@ -13,7 +13,7 @@ public class Nourriture extends Objet {
     
     private double valeur;
     
-    public Nourriture(String nom, String description, double poids, int valeur) {
+    public Nourriture(String nom, String description, double poids, double valeur) {
         super(nom,description,poids);
         this.valeur = valeur;
     }
