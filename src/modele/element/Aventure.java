@@ -42,7 +42,7 @@ public class Aventure extends Element {
     /**
      * Permet de récupérer un lieu via son nom
      * @param nom le nom du lieu
-     * @return
+     * @return retourne le lieu portant ce nom sinon reoturne null
      */
     public Lieu getLieu(String nom) {
         return donjon.getLieu(nom);
