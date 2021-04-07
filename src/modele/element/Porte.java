@@ -9,7 +9,7 @@ package modele.element;
  *
  * @author Utilisateur
  */
-public class Porte {
+public class Porte extends Element{
     private Lieu lieu1;
     private Lieu lieu2; 
 }
