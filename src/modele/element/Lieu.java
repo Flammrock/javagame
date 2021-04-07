@@ -10,12 +10,6 @@ public class Lieu extends Element {
     List<Porte> listePorte;
     List<Objet> objets;
     List<Personnage> monstres;
-    
-    public Lieu() {
-        this.listePorte = new ArrayList<Porte>();
-        this.objets = new ArrayList<Objet>();
-        this.monstres = new ArrayList<Personnage>();
-    }
 
     public String getNom() {
         return nom;
@@ -51,6 +45,9 @@ public class Lieu extends Element {
      */
     public Lieu(String nom) {
         this.nom = nom;
+        this.listePorte = new ArrayList<Porte>();
+        this.objets = new ArrayList<Objet>();
+        this.monstres = new ArrayList<Personnage>();
     }
     
     /**
