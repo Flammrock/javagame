@@ -68,6 +68,9 @@ public class Prog {
         
         Personnage monstre = new Personnage("monstre de la mort", 2, 2, 2, 10, new ArrayList<Objet>());
         
+                
+        Arme epee = new Arme("epee legendaire",25.2,-5,100);
+        
         Aventure a = new Aventure(joueur);
         
         String pieceprincipal = "piece principal";
@@ -81,6 +84,7 @@ public class Prog {
         a.ajouterLieu(piecetertiaire);
         
         a.ajouterMonstre(monstre,piecesecondaire);
+        a.ajouterObjet(epee,piecetertiaire);
         
         a.ajouterPorte("porte nord",pieceprincipal,piecesecondaire);
         a.ajouterPorte("porte rouge",piecetertiaire,piecesecondaire);
