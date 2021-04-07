@@ -9,7 +9,7 @@ package modele.element;
  *
  * @author User
  */
-public class Equipement {
+public class Equipement extends Object {
    
     public int getModificateurAgilite() {
         return 0;
