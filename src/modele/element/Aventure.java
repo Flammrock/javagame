@@ -65,7 +65,7 @@ public class Aventure extends Element {
      * @param lieu le lieu dans le donjon
      * @return retourne true si le monstre a bien été ajouté, sinon false
      */
-    public void ajouterMonstre(Personnage monstre, String lieu) {
+    public boolean ajouterMonstre(Personnage monstre, String lieu) {
         return donjon.ajouterMonstre(monstre, lieu);
     }
     
