@@ -30,6 +30,14 @@ public class Aventure extends Element {
     public Personnage getJoueur() {
         return joueur;
     }
+
+    /**
+     * Permet d'ajouter un lieu
+     * @param nom
+     */
+    public void ajouterLieu(String nom) {
+        donjon.ajouterLieu(new Lieu(nom));
+    }
     
     
     
