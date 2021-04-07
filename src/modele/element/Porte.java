@@ -42,5 +42,9 @@ public class Porte extends Element{
         this.lieu2 = lieu2;
     }
     
+    public String toString() {
+        return this.nom;
+    }
+    
     
 }
