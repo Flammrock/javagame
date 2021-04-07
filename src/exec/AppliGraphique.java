@@ -520,6 +520,8 @@ public class AppliGraphique extends javax.swing.JFrame {
 
     private void ramasserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ramasserActionPerformed
         // TODO add your handling code here:
+        //int selected = listeObjet.getSelectedIndex();
+        //this.aventure.getJoueur().getInventaire().ajouterObjet(this.aventure.getJoueur().getPieceActuel().remove(selected));
     }//GEN-LAST:event_ramasserActionPerformed
 
     /**
