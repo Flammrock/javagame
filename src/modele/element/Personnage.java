@@ -139,4 +139,8 @@ public class Personnage extends Element  {
     private void mort() {
         this.setPv(0.0);
     }
+    
+    public void manger(Nourriture nourriture){
+        ajoutePointVie(nourriture.getValeur());
+    }
 }
