@@ -5,6 +5,8 @@
  */
 package exec;
 
+import modele.element.*;
+
 public class Prog {
 
     public static void test1() {
@@ -60,7 +62,10 @@ public class Prog {
     }
 
     public static void main(String[] args) {
-        AppliGraphique g = new AppliGraphique();
+        
+        Aventure a = new Aventure();
+        
+        AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
     }
 
