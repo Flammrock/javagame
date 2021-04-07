@@ -14,8 +14,8 @@ public class Arme extends Equipement {
     private double bonus_agilite;
     private double bonus_force;
     
-    public Arme(String nom, double poids, double agilite, double force) {
-        super(nom,poids);
+    public Arme(String nom, String description, double poids, double agilite, double force) {
+        super(nom,description,poids);
         this.bonus_agilite = agilite;
         this.bonus_force = force;
     }
