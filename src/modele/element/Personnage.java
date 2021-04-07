@@ -54,7 +54,11 @@ public class Personnage extends Element  {
     }
 
     public Equipement getMain() {
-        return main;
+        if(main!=null){
+            return main;
+        }else{
+            return new Equipement("","",0);
+        }
     }
 
     public void setMain(Equipement main) {
@@ -153,7 +157,7 @@ public class Personnage extends Element  {
     }
 
     private double caluleDegatsBrut() {
-        double bonusArme = this.main.getModificateurForce();
+        double bonusArme = this.getMain().getModificateurForce();
         double bonusForce = this.force;
         double degats = bonusArme + bonusForce;
         return degats;
