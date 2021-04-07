@@ -1,10 +1,5 @@
 
 /**
- * @BUG : tuer le monstre puis manger une pomme
- */
-
-
-/**
  * @TODO : 
  * 
  *       - cycle jour/nuit
