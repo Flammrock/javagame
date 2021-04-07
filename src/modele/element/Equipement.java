@@ -11,8 +11,8 @@ package modele.element;
  */
 public class Equipement extends Objet {
     
-    public Equipement(String nom, double poids) {
-        super(nom,poids);
+    public Equipement(String nom, String description, double poids) {
+        super(nom,description,poids);
     }
    
     public double getModificateurAgilite() {
