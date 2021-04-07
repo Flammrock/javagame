@@ -178,6 +178,7 @@ public class Personnage extends Element  {
         Objet obj = this.inventaire.get(index);
         if (obj == null) return false;
         boolean reussiAutiliser = obj.utiliser(this);
+        if (!reussiAutiliser) return false;
         if (obj.nbUtilisationRestante() <= 0 && obj.nbUtilisationRestante() != -1) this.inventaire.remove(index);
         return reussiAutiliser;
     }
