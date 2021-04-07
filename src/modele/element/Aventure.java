@@ -26,4 +26,11 @@ public class Aventure extends Element {
         this.donjon = new Donjon();
         
     }
+
+    public Personnage getJoueur() {
+        return joueur;
+    }
+    
+    
+    
 }
