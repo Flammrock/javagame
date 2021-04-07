@@ -16,7 +16,11 @@ public class Donjon extends Element{
     private Lieu entree;
     private Lieu sortie;
 
-    void ajouterLieu(Lieu lieu) {
+    /**
+     * Permet d'ajouter un lieu
+     * @param lieu
+     */
+    public void ajouterLieu(Lieu lieu) {
         salles.add(lieu);
     }
 
