@@ -507,7 +507,11 @@ public class AppliGraphique extends javax.swing.JFrame {
         boolean needUpdate = false;
         
         if (obj instanceof Equipement) {
-            needUpdate = this.aventure.getJoueur().equip(selected);
+            if (this.aventure.getJoueur().getMain()==obj) {
+                needUpdate = this.aventure.getJoueur().desequip(selected);
+            } else {
+                needUpdate = this.aventure.getJoueur().equip(selected);
+            }
         } else if (obj.peutUtiliser()) {
             needUpdate = this.aventure.getJoueur().utiliserObjet(selected);
         }
