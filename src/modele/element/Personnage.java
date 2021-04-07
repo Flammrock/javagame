@@ -169,6 +169,15 @@ public class Personnage extends Element  {
     }
     
     
+    public boolean utiliserObjet(int index) {
+        if (index < 0 || index > this.inventaire.size()) return false;
+        Objet obj = this.inventaire.get(index);
+        if (obj == null) return false;
+        boolean reussiAutiliser = obj.utiliser(this);
+        if (obj.nbUtilisationRestante()<=0) this.inventaire.remove(index);
+        return reussiAutiliser;
+    }
+    
     
     public String toString() {
         if (this.description.trim().equals("")) {
