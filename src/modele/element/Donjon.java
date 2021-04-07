@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Utilisateur
  */
-public class Donjon {
+public class Donjon extends Element{
     private List<Lieu> salles;
     private Lieu entree;
     private Lieu sortie;
