@@ -128,9 +128,9 @@ public class Personnage extends Element  {
     
     private boolean aToucher(double Probabilité){
         double NombreMin = 0.0;
-        double NombreMax = 100;
+        double NombreMax = 1.0;
         double nombreAleatoire = NombreMin + (Math.random() * (NombreMax - NombreMin));
-        return true;//nombreAleatoire<=Probabilité;
+        return nombreAleatoire<=Probabilité;
     }
     
     /**
