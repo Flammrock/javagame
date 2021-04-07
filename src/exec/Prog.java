@@ -5,9 +5,12 @@
 /**
  * @TODO : 
  * 
+ *       - malédiction du temple => impossible de jeter des objets
+ *      -  ajouter effet de salles
  *       - génération de niveau aléaroire
  *       - prendre en compte le poids des objets dans l'inventaire
  *       - possibilité d'améliorer l'inventaire, les objets
+ *       - possibilité de détuire les objets pour récupérer des matériaux
  *       - possibilité de réparer les objets
  *       - possibilité de crafter des objets
  *       - ajouter des évènements aléatoires
