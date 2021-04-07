@@ -28,6 +28,10 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourListeObjet();
         this.mettreAJourListeMonstre();
         this.mettreAJourSalle();
+        this.mettreAJourStatistiquePerso();
+    }
+    
+    private void mettreAJourStatistiquePerso(){
         this.mettreAJourAgilite();
         this.mettreAJourArmeEnMain();
         this.mettreAJourArmure();
@@ -36,6 +40,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourPv();
         this.mettreAJourListeInventaire();
     }
+    
     
     private void mettreAJourListeMonstre(){
         DefaultListModel<Personnage> g = new DefaultListModel<>();
@@ -120,6 +125,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         listeObjet = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
         listeMonstre = new javax.swing.JList<>();
+        Combattre = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
@@ -178,11 +184,21 @@ public class AppliGraphique extends javax.swing.JFrame {
 
         jScrollPane5.setViewportView(listeMonstre);
 
+        Combattre.setText("Combattre");
+        Combattre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CombattreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAffichageSalleLayout = new javax.swing.GroupLayout(jPanelAffichageSalle);
         jPanelAffichageSalle.setLayout(jPanelAffichageSalleLayout);
         jPanelAffichageSalleLayout.setHorizontalGroup(
             jPanelAffichageSalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAffichageSalleLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Combattre)
+                .addGap(207, 207, 207))
             .addGroup(jPanelAffichageSalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelAffichageSalleLayout.createSequentialGroup()
                     .addContainerGap()
@@ -204,7 +220,10 @@ public class AppliGraphique extends javax.swing.JFrame {
         );
         jPanelAffichageSalleLayout.setVerticalGroup(
             jPanelAffichageSalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 236, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAffichageSalleLayout.createSequentialGroup()
+                .addContainerGap(129, Short.MAX_VALUE)
+                .addComponent(Combattre)
+                .addGap(84, 84, 84))
             .addGroup(jPanelAffichageSalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelAffichageSalleLayout.createSequentialGroup()
                     .addContainerGap()
@@ -220,6 +239,8 @@ public class AppliGraphique extends javax.swing.JFrame {
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
+
+        Combattre.getAccessibleContext().setAccessibleName("Combattre");
 
         jTextPane2.setEditable(false);
         jTextPane2.setText("Feuille de personnage");
@@ -347,14 +368,14 @@ public class AppliGraphique extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6)
-                .addGap(315, 315, 315))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,6 +427,15 @@ public class AppliGraphique extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_allerDansPorteActionPerformed
 
+    private void CombattreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CombattreActionPerformed
+        // TODO add your handling code here:
+        Personnage p = listeMonstre.getSelectedValue();
+        if (p!=null) {
+            this.aventure.getJoueur().attaque(p);
+            this.mettreAJourStatistiquePerso();
+        }
+    }//GEN-LAST:event_CombattreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -442,6 +472,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     }*****/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Combattre;
     private javax.swing.JButton allerDansPorte;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
