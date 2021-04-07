@@ -107,6 +107,20 @@ public class Personnage extends Element  {
     public void ajoutePointVie(double valeur) {
         this.pv += valeur;
     }
+    
+    public boolean equip(int index) {
+        if (index < 0 || index > this.inventaire.size()) return false;
+        Objet obj = this.inventaire.get(index);
+        if (obj == null) return false;
+        if (obj instanceof Arme) {
+            this.setMain((Arme)obj);
+            return true;
+        } else if (obj instanceof Armure) {
+            this.setArmure((Armure)obj);
+            return true;
+        }
+        return false;
+    }
 
     /**
      *
