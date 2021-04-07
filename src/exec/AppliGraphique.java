@@ -5,6 +5,7 @@
  */
 package exec;
 
+import javax.swing.DefaultListModel;
 import modele.element.*;
 
 
@@ -23,6 +24,13 @@ public class AppliGraphique extends javax.swing.JFrame {
     public AppliGraphique(Aventure aventure) {
         this.aventure = aventure;
         initComponents();
+        this.mettreAJourListePorte();
+    }
+    
+    private void mettreAJourListePorte() {
+        DefaultListModel<Porte> g = new DefaultListModel<>();
+        g.addAll(this.aventure.getJoueur().getPieceActuel().getListePorte());
+        listePortes.setModel(g);
     }
 
     /**
@@ -36,12 +44,21 @@ public class AppliGraphique extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         logger = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listePortes = new javax.swing.JList<>();
+        allerDansPorte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        logger.setEditable(false);
+        logger.setBackground(new java.awt.Color(204, 204, 204));
         logger.setColumns(20);
         logger.setRows(5);
         jScrollPane1.setViewportView(logger);
+
+        jScrollPane2.setViewportView(listePortes);
+
+        allerDansPorte.setText("Aller");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -49,7 +66,13 @@ public class AppliGraphique extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(allerDansPorte, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -57,7 +80,11 @@ public class AppliGraphique extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(allerDansPorte)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -99,7 +126,10 @@ public class AppliGraphique extends javax.swing.JFrame {
     }*****/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton allerDansPorte;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<Porte> listePortes;
     private javax.swing.JTextArea logger;
     // End of variables declaration//GEN-END:variables
 }
