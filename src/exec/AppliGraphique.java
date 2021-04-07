@@ -6,6 +6,8 @@
 package exec;
 
 import javax.swing.DefaultListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import modele.element.*;
 
 
@@ -24,6 +26,18 @@ public class AppliGraphique extends javax.swing.JFrame {
     public AppliGraphique(Aventure aventure) {
         this.aventure = aventure;
         initComponents();
+        
+        AppliGraphique _this = this;
+        listeObjetInventaire.addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (e.getValueIsAdjusting()) {
+                    _this.onSelectObjetInventaire();
+                }
+            }
+        });
+        
+        
         mettreAJourTout();
     }
     
@@ -107,6 +121,18 @@ public class AppliGraphique extends javax.swing.JFrame {
         DefaultListModel<Objet> g = new DefaultListModel<>();
         g.addAll(this.aventure.getJoueur().getInventaire());
         listeObjetInventaire.setModel(g);
+    }
+    
+    private void onSelectObjetInventaire() {
+        int selected = listeObjetInventaire.getSelectedIndex();
+        Objet obj = listeObjetInventaire.getSelectedValue();
+        if (obj == null) return;
+        
+        if (obj instanceof Equipement) {
+            utiliserBouton.setText("Equiper");
+        } else if (obj.peutUtiliser()) {
+            utiliserBouton.setText("Utiliser");
+        }
     }
     
     /**
