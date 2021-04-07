@@ -92,9 +92,5 @@ public class Aventure extends Element {
                 monstres.remove(monstre);
             }
         }
-        
     }
-    
-    
-    
 }
