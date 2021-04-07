@@ -173,7 +173,7 @@ public class Personnage extends Element  {
         if(pointdevie>0){
             ennemie.setPv(pointdevie);
         }else{
-            ennemie.mort();
+            ennemie.mort(this.inventaire);
         }
     }
 
@@ -195,8 +195,9 @@ public class Personnage extends Element  {
         return armureTotal;
     }
 
-    private void mort() {
+    private void mort(ArrayList<Objet> loot) {
         this.setPv(0.0);
+        this.inventaire.addAll(loot);
     }
     
     
