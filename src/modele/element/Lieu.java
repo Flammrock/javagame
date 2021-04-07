@@ -38,6 +38,10 @@ public class Lieu extends Element {
     public void setMonstres(List<Personnage> monstres) {
         this.monstres = monstres;
     }
+    
+    public boolean ajouterObjet(Objet o){
+        return this.objets.add(o);
+    }
 
     /**
      * Chaque lieu doit avoir un nom unique
