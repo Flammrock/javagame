@@ -30,7 +30,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private void mettreAJourListePorte() {
         DefaultListModel<Porte> g = new DefaultListModel<>();
         g.addAll(this.aventure.getJoueur().getPieceActuel().getListePorte());
-        jTextPanel.addAll(this.aventure.getJoueur().getPieceActuel().toString())
+        jTextPane1.setText(this.aventure.getJoueur().getPieceActuel().toString());
         listePortes.setModel(g);
     }
 
