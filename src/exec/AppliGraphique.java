@@ -28,6 +28,12 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourListeObjet();
         this.mettreAJourListeMonstre();
         this.mettreAJourSalle();
+        this.mettreAJourAgilite();
+        this.mettreAJourArmeEnMain();
+        this.mettreAJourArmure();
+        this.mettreAJourForce();
+        this.mettreAJourNom();
+        this.mettreAJourPv();
     }
     
     private void mettreAJourListeMonstre(){
@@ -51,7 +57,31 @@ public class AppliGraphique extends javax.swing.JFrame {
         g.addAll(this.aventure.getJoueur().getPieceActuel().getListePorte());
         listePortes.setModel(g);
     }
-
+    
+    private void mettreAJourAgilite(){
+        jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+"");
+    }
+    
+    private void mettreAJourArmeEnMain(){
+        jTextPaneArmeEnMain.setText(this.aventure.getJoueur().getMain().toString());
+    }
+    
+    private void mettreAJourArmure(){
+        jTextPaneArmure.setText(this.aventure.getJoueur().getArmure().toString());
+    }
+    
+    private void mettreAJourPv(){
+        jTextPanePv.setText(this.aventure.getJoueur().getPv()+"");
+    }
+    
+    private void mettreAJourNom(){
+        jTextPaneNom.setText(this.aventure.getJoueur().getNom());
+    }
+    
+    private void mettreAJourForce(){
+        jTextPaneForce.setText(this.aventure.getJoueur().getForce()+"");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,29 +108,29 @@ public class AppliGraphique extends javax.swing.JFrame {
         jTextPane2 = new javax.swing.JTextPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
+        jTextPaneNomFixe = new javax.swing.JTextPane();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTextPane4 = new javax.swing.JTextPane();
+        jTextPanePvFixe = new javax.swing.JTextPane();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextPane5 = new javax.swing.JTextPane();
+        jTextPaneForceFixe = new javax.swing.JTextPane();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTextPane6 = new javax.swing.JTextPane();
+        jTextPaneAgiliteFixe = new javax.swing.JTextPane();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTextPane7 = new javax.swing.JTextPane();
+        jTextPaneArmeEnMainFixe = new javax.swing.JTextPane();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTextPane8 = new javax.swing.JTextPane();
+        jTextPaneArmureFixe = new javax.swing.JTextPane();
         jScrollPane13 = new javax.swing.JScrollPane();
-        jTextPane9 = new javax.swing.JTextPane();
+        jTextPaneNom = new javax.swing.JTextPane();
         jScrollPane14 = new javax.swing.JScrollPane();
-        jTextPane10 = new javax.swing.JTextPane();
+        jTextPanePv = new javax.swing.JTextPane();
         jScrollPane15 = new javax.swing.JScrollPane();
-        jTextPane11 = new javax.swing.JTextPane();
+        jTextPaneForce = new javax.swing.JTextPane();
         jScrollPane16 = new javax.swing.JScrollPane();
-        jTextPane12 = new javax.swing.JTextPane();
+        jTextPaneAgilite = new javax.swing.JTextPane();
         jScrollPane17 = new javax.swing.JScrollPane();
-        jTextPane13 = new javax.swing.JTextPane();
+        jTextPaneArmeEnMain = new javax.swing.JTextPane();
         jScrollPane18 = new javax.swing.JScrollPane();
-        jTextPane14 = new javax.swing.JTextPane();
+        jTextPaneArmure = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -174,53 +204,47 @@ public class AppliGraphique extends javax.swing.JFrame {
         jTextPane2.setText("Feuille de personnage");
         jScrollPane6.setViewportView(jTextPane2);
 
-        jTextPane3.setEditable(false);
-        jTextPane3.setText("Nom");
-        jScrollPane7.setViewportView(jTextPane3);
+        jTextPaneNomFixe.setEditable(false);
+        jTextPaneNomFixe.setText("Nom");
+        jScrollPane7.setViewportView(jTextPaneNomFixe);
 
-        jTextPane4.setEditable(false);
-        jTextPane4.setText("PV");
-        jScrollPane8.setViewportView(jTextPane4);
+        jTextPanePvFixe.setEditable(false);
+        jTextPanePvFixe.setText("PV");
+        jScrollPane8.setViewportView(jTextPanePvFixe);
 
-        jTextPane5.setEditable(false);
-        jTextPane5.setText("Force");
-        jScrollPane9.setViewportView(jTextPane5);
+        jTextPaneForceFixe.setEditable(false);
+        jTextPaneForceFixe.setText("Force");
+        jScrollPane9.setViewportView(jTextPaneForceFixe);
 
-        jTextPane6.setEditable(false);
-        jTextPane6.setText("Agilté");
-        jScrollPane10.setViewportView(jTextPane6);
+        jTextPaneAgiliteFixe.setEditable(false);
+        jTextPaneAgiliteFixe.setText("Agilté");
+        jScrollPane10.setViewportView(jTextPaneAgiliteFixe);
 
-        jTextPane7.setEditable(false);
-        jTextPane7.setText("Arme en main");
-        jScrollPane11.setViewportView(jTextPane7);
+        jTextPaneArmeEnMainFixe.setEditable(false);
+        jTextPaneArmeEnMainFixe.setText("Arme en main");
+        jScrollPane11.setViewportView(jTextPaneArmeEnMainFixe);
 
-        jTextPane8.setEditable(false);
-        jTextPane8.setText("Armure");
-        jScrollPane12.setViewportView(jTextPane8);
+        jTextPaneArmureFixe.setEditable(false);
+        jTextPaneArmureFixe.setText("Armure");
+        jScrollPane12.setViewportView(jTextPaneArmureFixe);
 
-        jTextPane9.setEditable(false);
-        jTextPane9.setText("Nom");
-        jScrollPane13.setViewportView(jTextPane9);
+        jTextPaneNom.setEditable(false);
+        jScrollPane13.setViewportView(jTextPaneNom);
 
-        jTextPane10.setEditable(false);
-        jTextPane10.setText("PV");
-        jScrollPane14.setViewportView(jTextPane10);
+        jTextPanePv.setEditable(false);
+        jScrollPane14.setViewportView(jTextPanePv);
 
-        jTextPane11.setEditable(false);
-        jTextPane11.setText("Force");
-        jScrollPane15.setViewportView(jTextPane11);
+        jTextPaneForce.setEditable(false);
+        jScrollPane15.setViewportView(jTextPaneForce);
 
-        jTextPane12.setEditable(false);
-        jTextPane12.setText("Agilté");
-        jScrollPane16.setViewportView(jTextPane12);
+        jTextPaneAgilite.setEditable(false);
+        jScrollPane16.setViewportView(jTextPaneAgilite);
 
-        jTextPane13.setEditable(false);
-        jTextPane13.setText("Arme en main");
-        jScrollPane17.setViewportView(jTextPane13);
+        jTextPaneArmeEnMain.setEditable(false);
+        jScrollPane17.setViewportView(jTextPaneArmeEnMain);
 
-        jTextPane14.setEditable(false);
-        jTextPane14.setText("Armure");
-        jScrollPane18.setViewportView(jTextPane14);
+        jTextPaneArmure.setEditable(false);
+        jScrollPane18.setViewportView(jTextPaneArmure);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -411,19 +435,19 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane10;
-    private javax.swing.JTextPane jTextPane11;
-    private javax.swing.JTextPane jTextPane12;
-    private javax.swing.JTextPane jTextPane13;
-    private javax.swing.JTextPane jTextPane14;
     private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
-    private javax.swing.JTextPane jTextPane4;
-    private javax.swing.JTextPane jTextPane5;
-    private javax.swing.JTextPane jTextPane6;
-    private javax.swing.JTextPane jTextPane7;
-    private javax.swing.JTextPane jTextPane8;
-    private javax.swing.JTextPane jTextPane9;
+    private javax.swing.JTextPane jTextPaneAgilite;
+    private javax.swing.JTextPane jTextPaneAgiliteFixe;
+    private javax.swing.JTextPane jTextPaneArmeEnMain;
+    private javax.swing.JTextPane jTextPaneArmeEnMainFixe;
+    private javax.swing.JTextPane jTextPaneArmure;
+    private javax.swing.JTextPane jTextPaneArmureFixe;
+    private javax.swing.JTextPane jTextPaneForce;
+    private javax.swing.JTextPane jTextPaneForceFixe;
+    private javax.swing.JTextPane jTextPaneNom;
+    private javax.swing.JTextPane jTextPaneNomFixe;
+    private javax.swing.JTextPane jTextPanePv;
+    private javax.swing.JTextPane jTextPanePvFixe;
     private javax.swing.JList<Personnage> listeMonstre;
     private javax.swing.JList<Objet> listeObjet;
     private javax.swing.JList<Porte> listePortes;
