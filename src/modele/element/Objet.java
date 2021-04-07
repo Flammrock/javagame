@@ -3,12 +3,15 @@ package modele.element;
 
 public abstract class Objet extends Element {
     
-    private String nom;
-    private double poids;
+    String nom;
+    double poids;
+    int nbUtilisation; // -1 for infinite
+    
     
     public Objet() {
         this.nom = "";
         this.poids = 0.0;
+        this.nbUtilisation = 1;
     }
     
     public Objet(String nom, String description, double poids) {
@@ -26,6 +29,28 @@ public abstract class Objet extends Element {
             return this.nom;
         }
         return this.nom + " (" + this.description + ")";
+    }
+    
+    public boolean peutUtiliser() {
+        return false;
+    }
+
+    public boolean utiliser(Personnage p) {
+        if (this.peutUtiliser()) {
+            if (this.nbUtilisation == -1 || this.nbUtilisation > 0) {
+                this.nbUtilisation--;
+                return this.onUtiliser(p);
+            }
+        }
+        return false;
+    }
+    
+    public boolean onUtiliser(Personnage p) {
+        return false;
+    }
+
+    public int nbUtilisationRestante() {
+        return this.nbUtilisation;
     }
     
 }
