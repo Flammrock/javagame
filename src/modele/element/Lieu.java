@@ -109,5 +109,9 @@ public class Lieu extends Element {
         this.objets.add(obj);
         return true;
     }
+    
+    public String toString() {
+        return this.nom;
+    }
 
 }
