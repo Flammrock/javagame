@@ -12,11 +12,19 @@ package modele.element;
 public class Porte extends Element{
     private Lieu lieu1;
     private Lieu lieu2;
+    private String name;
     
-    public Porte(Lieu lieu1, Lieu lieu2) {
+    public Porte(String name, Lieu lieu1, Lieu lieu2) {
+        this.name = name;
         this.lieu1 = lieu1;
         this.lieu2 = lieu2;
     }
+
+    public String getName() {
+        return name;
+    }
+    
+    
 
     public Lieu getLieu1() {
         return lieu1;
