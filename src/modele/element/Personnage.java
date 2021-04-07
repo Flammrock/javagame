@@ -113,6 +113,7 @@ public class Personnage extends Element  {
      * @return retourne la valeur de combat
      */
     public double valeurCombat(){
+        if (this.getArmure()==null) return this.agilite;
         double bonusArme = this.getArmure().getModificateurAgilite();
         double valeurCombat = this.agilite+bonusArme;
         return valeurCombat;
@@ -149,6 +150,7 @@ public class Personnage extends Element  {
     }
 
     private double caluleDegatsBrut() {
+        if (this.getMain()==null) return this.force;
         double bonusArme = this.getMain().getModificateurForce();
         double bonusForce = this.force;
         double degats = bonusArme + bonusForce;
@@ -160,6 +162,7 @@ public class Personnage extends Element  {
      * @return l'armure totale
      */
     public double getArmureTotal() {
+        if (this.getArmure()==null) return 0.0;
         double armureTotal = this.getArmure().getModificateurProtection();
         return armureTotal;
     }
