@@ -473,6 +473,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selected = listeObjetInventaire.getSelectedIndex();
         Objet obj = listeObjetInventaire.getSelectedValue();
+        if (obj == null) return;
         
         boolean needUpdate = false;
         
