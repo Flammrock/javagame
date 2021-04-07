@@ -1,3 +1,34 @@
+
+
+
+
+/**
+ * @TODO : 
+ * 
+ *       - système d'expérience
+ *       - système de clé/serrure
+ *       - système d'effet (poison...)
+ *       - nouvelle classe (potion,....)
+ *       - avoir plusieurs persos
+ *       - ajouter le multijoueur
+ *       - acheter/vendre
+ *       - système d'argent (money)
+ *       - des objets magiques (utiliser pour balancer des boules de feu,...)
+ *       - des effets d'armes
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
