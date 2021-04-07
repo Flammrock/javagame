@@ -81,8 +81,8 @@ public class Personnage extends Element  {
     }
 
     public double valeurCombat(){
-        double bonus = 0;                       //TODO compter les bonus d'arme
-        double valeurCombat = this.agilite+bonus;
+        double bonusArme = this.getArmure().getModificateurAgilite();
+        double valeurCombat = this.agilite+bonusArme;
         return this.agilite;
     }
     
@@ -97,18 +97,24 @@ public class Personnage extends Element  {
         double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+ennemie.valeurCombat());
         boolean toucher = aToucher(probabiliteDeToucher);
         if(toucher){
-         this.blesse(ennemie);   
+            this.blesse(ennemie);   
         }
-        }
+    }
 
     private void blesse(Personnage ennemie) {
-        double PV = ennemie.getPv();
+        double pv = ennemie.getPv();
         double degats = caluleDegatsBrut() - ennemie.getArmureTotal();
+        pv -= degats;
+        if(pv>0){
+            ennemie.setPv(pv);
+        }else{
+            ennemie.mort();
+        }
     }
 
     private double caluleDegatsBrut() {
-        double bonusArme = 0;              //TODO ajouter Bonus Arme
-        double bonusForce = 0;
+        double bonusArme = this.main.getModificateurForce();
+        double bonusForce = this.force;
         double degats = bonusArme + bonusForce;
         return degats;
     }
@@ -116,5 +122,9 @@ public class Personnage extends Element  {
     private double getArmureTotal() {
         double armureTotal = this.getArmure().getModificateurProtection();
         return armureTotal;
+    }
+
+    private void mort() {
+        this.setPv(0.0);
     }
 }
