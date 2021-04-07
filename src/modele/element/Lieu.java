@@ -92,4 +92,14 @@ public class Lieu extends Element {
         return this.nom;
     }
 
+    /**
+     * Permet d'ajouter un monstre dans le lieu
+     * @param monstre
+     * @return retourne true si le monstre a bien été ajouté
+     */
+    public boolean ajouterMonstre(Personnage monstre) {
+        this.monstres.add(monstre);
+        return true;
+    }
+
 }
