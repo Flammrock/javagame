@@ -33,10 +33,19 @@ public class Aventure extends Element {
 
     /**
      * Permet d'ajouter un lieu
-     * @param nom
+     * @param nom le nom du lieu
      */
     public void ajouterLieu(String nom) {
         donjon.ajouterLieu(new Lieu(nom));
+    }
+
+    /**
+     * Permet de récupérer un lieu via son nom
+     * @param nom le nom du lieu
+     * @return retourne le lieu portant ce nom sinon reoturne null
+     */
+    public Lieu getLieu(String nom) {
+        return donjon.getLieu(nom);
     }
     
     
