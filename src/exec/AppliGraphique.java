@@ -71,6 +71,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         }
     }
     
+    // odsijdjsl
     private void mettreAJourArmure(){
         Equipement armure = this.aventure.getJoueur().getArmure();
         if (armure != null) {
