@@ -102,4 +102,14 @@ public class Lieu extends Element {
         return true;
     }
 
+    /**
+     * Permet d'ajouter un objet dans le lieu
+     * @param obj l'objet à ajouter
+     * @return retoutne true si l'objet a bien été ajouté, sinon false
+     */
+    public boolean ajouterObjet(Objet obj) {
+        this.objets.add(obj);
+        return true;
+    }
+
 }
