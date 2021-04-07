@@ -6,6 +6,7 @@
 package exec;
 
 // ceci est un test
+// test
 
 public class Prog {
 
