@@ -87,5 +87,9 @@ public class Lieu extends Element {
         }
         return null;
     }
+    
+    public String toString() {
+        return this.nom;
+    }
 
 }
