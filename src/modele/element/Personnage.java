@@ -78,6 +78,12 @@ public class Personnage extends Element  {
         this.pv += valeur;
     }
 
-
-
+    public double valeurCombat(){
+        return this.agilite;
+    }
+    
+    public void attaque(Personnage ennemie){
+        double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+ennemie.valeurCombat());
+        
+    }
 }
