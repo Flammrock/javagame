@@ -10,5 +10,6 @@ package modele.element;
  * @author Utilisateur
  */
 public class Aventure {
-    
+    private Personnage joueur;
+    private Donjon donjon;
 }
