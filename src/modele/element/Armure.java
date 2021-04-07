@@ -11,4 +11,8 @@ package modele.element;
  */
 public class Armure extends Equipement {
     
+    public Armure(String nom, double poids) {
+        super(nom, poids);
+    }
+    
 }

@@ -9,7 +9,11 @@ package modele.element;
  *
  * @author User
  */
-public class Equipement extends Object {
+public class Equipement extends Objet {
+    
+    public Equipement(String nom, double poids) {
+        super(nom,poids);
+    }
    
     public double getModificateurAgilite() {
         return 0.0;
