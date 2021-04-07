@@ -66,6 +66,7 @@ public class Prog {
         
         ArrayList<Objet> listeInventaire = new ArrayList<Objet>();
         listeInventaire.add(new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0));
+        listeInventaire.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,10.0));
         
         Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100, listeInventaire);
         
