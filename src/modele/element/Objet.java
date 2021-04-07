@@ -11,8 +11,9 @@ public abstract class Objet extends Element {
         this.poids = 0.0;
     }
     
-    public Objet(String nom, double poids) {
+    public Objet(String nom, String description, double poids) {
         this.nom = nom;
+        this.description = description;
         this.poids = poids;
     }
     
@@ -21,7 +22,7 @@ public abstract class Objet extends Element {
     }
 
     public String toString() {
-        return this.nom;
+        return this.nom + "(" + this.description + ")";
     }
     
 }
