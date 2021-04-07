@@ -12,8 +12,8 @@ public class Personnage extends Element  {
     private double agilite;
     private double pv;
     private ArrayList<Objet> inventaire;
-    private Objet main;
-    private Objet armure;
+    private Equipement main;
+    private Equipement armure;
     private Lieu pieceActuel;
 
     public Personnage(String nom, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
@@ -49,21 +49,23 @@ public class Personnage extends Element  {
         this.inventaire = inventaire;
     }
 
-    public Objet getMain() {
+    public Equipement getMain() {
         return main;
     }
 
-    public void setMain(Objet main) {
+    public void setMain(Equipement main) {
         this.main = main;
     }
 
-    public Objet getArmure() {
+    public Equipement getArmure() {
         return armure;
     }
 
-    public void setArmure(Objet armure) {
+    public void setArmure(Equipement armure) {
         this.armure = armure;
     }
+
+
 
     public Lieu getPieceActuel() {
         return pieceActuel;
@@ -93,7 +95,26 @@ public class Personnage extends Element  {
     
     public void attaque(Personnage ennemie){
         double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+ennemie.valeurCombat());
-        boolean touche = aToucher(probabiliteDeToucher);
-        
+        boolean toucher = aToucher(probabiliteDeToucher);
+        if(toucher){
+         this.blesse(ennemie);   
+        }
+        }
+
+    private void blesse(Personnage ennemie) {
+        double PV = ennemie.getPv();
+        double degats = caluleDegatsBrut() - ennemie.getArmureTotal();
+    }
+
+    private double caluleDegatsBrut() {
+        double bonusArme = 0;              //TODO ajouter Bonus Arme
+        double bonusForce = 0;
+        double degats = bonusArme + bonusForce;
+        return degats;
+    }
+
+    private double getArmureTotal() {
+        double armureTotal = this.getArmure().getModificateurProtection();
+        return armureTotal;
     }
 }
