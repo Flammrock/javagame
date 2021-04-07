@@ -195,6 +195,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         jScrollPane20 = new javax.swing.JScrollPane();
         listeObjetInventaire = new javax.swing.JList<>();
         utiliserBouton = new javax.swing.JButton();
+        jeterBouton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -415,6 +416,13 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         });
 
+        jeterBouton.setText("Jeter");
+        jeterBouton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jeterBoutonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -429,6 +437,8 @@ public class AppliGraphique extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jeterBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(utiliserBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -438,7 +448,9 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(utiliserBouton))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(utiliserBouton)
+                        .addComponent(jeterBouton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -524,9 +536,21 @@ public class AppliGraphique extends javax.swing.JFrame {
 
     private void ramasserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ramasserActionPerformed
         // TODO add your handling code here:
-        //int selected = listeObjet.getSelectedIndex();
-        //this.aventure.getJoueur().getInventaire().ajouterObjet(this.aventure.getJoueur().getPieceActuel().remove(selected));
+        int selected = listeObjet.getSelectedIndex();
+        if(selected!=-1){
+            this.aventure.getJoueur().ajouterObjet(this.aventure.getJoueur().getPieceActuel().getObjets().remove(selected));
+            mettreAJourTout();
+        }
     }//GEN-LAST:event_ramasserActionPerformed
+
+    private void jeterBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeterBoutonActionPerformed
+        // TODO add your handling code here:
+        int selected = listeObjetInventaire.getSelectedIndex();
+        if(selected!=-1){
+            this.aventure.getJoueur().getPieceActuel().ajouterObjet(this.aventure.getJoueur().getInventaire().remove(selected));
+            mettreAJourTout();
+        }
+    }//GEN-LAST:event_jeterBoutonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -605,6 +629,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneNomFixe;
     private javax.swing.JTextPane jTextPanePv;
     private javax.swing.JTextPane jTextPanePvFixe;
+    private javax.swing.JButton jeterBouton;
     private javax.swing.JList<Personnage> listeMonstre;
     private javax.swing.JList<Objet> listeObjet;
     private javax.swing.JList<Objet> listeObjetInventaire;
