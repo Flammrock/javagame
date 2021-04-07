@@ -5,6 +5,7 @@
  */
 package modele.element;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,10 @@ public class Donjon extends Element{
     private List<Lieu> salles;
     private Lieu entree;
     private Lieu sortie;
+    
+    public Donjon() {
+        this.salles = new ArrayList<Lieu>();
+    }
 
     /**
      * Permet d'ajouter un lieu
