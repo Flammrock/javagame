@@ -443,10 +443,11 @@ public class AppliGraphique extends javax.swing.JFrame {
         Personnage p = listeMonstre.getSelectedValue();
         if (p!=null) {
             this.aventure.getJoueur().attaque(p);
-            p.attaque(this.aventure.getJoueur());
             this.mettreAJourStatistiquePerso();
             this.mettreAJourListeMonstre();
         }
+        
+        this.aventure.onActionJoueur();
     }//GEN-LAST:event_CombattreActionPerformed
 
     private void utiliserboutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utiliserboutonActionPerformed
@@ -455,6 +456,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.aventure.getJoueur().utiliserObjet(selected);
         this.mettreAJourListeInventaire();
         this.mettreAJourStatistiquePerso();
+        
+        this.aventure.onActionJoueur();
     }//GEN-LAST:event_utiliserboutonActionPerformed
 
     /**
