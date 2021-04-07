@@ -28,6 +28,12 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourListeObjet();
         this.mettreAJourListeMonstre();
         this.mettreAJourSalle();
+        this.mettreAJourAgilite();
+        this.mettreAJourArmeEnMain();
+        this.mettreAJourArmure();
+        this.mettreAJourForce();
+        this.mettreAJourNom();
+        this.mettreAJourPv();
     }
     
     private void mettreAJourListeMonstre(){
@@ -69,7 +75,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     private void mettreAJourNom(){
-        jTextPaneNom.setText(this.aventure.getJoueur().getNom().toString());
+        jTextPaneNom.setText(this.aventure.getJoueur().getNom());
     }
     
     private void mettreAJourForce(){
@@ -223,27 +229,21 @@ public class AppliGraphique extends javax.swing.JFrame {
         jScrollPane12.setViewportView(jTextPaneArmureFixe);
 
         jTextPaneNom.setEditable(false);
-        jTextPaneNom.setText("Nom");
         jScrollPane13.setViewportView(jTextPaneNom);
 
         jTextPanePv.setEditable(false);
-        jTextPanePv.setText("PV");
         jScrollPane14.setViewportView(jTextPanePv);
 
         jTextPaneForce.setEditable(false);
-        jTextPaneForce.setText("Force");
         jScrollPane15.setViewportView(jTextPaneForce);
 
         jTextPaneAgilite.setEditable(false);
-        jTextPaneAgilite.setText("Agilté");
         jScrollPane16.setViewportView(jTextPaneAgilite);
 
         jTextPaneArmeEnMain.setEditable(false);
-        jTextPaneArmeEnMain.setText("Arme en main");
         jScrollPane17.setViewportView(jTextPaneArmeEnMain);
 
         jTextPaneArmure.setEditable(false);
-        jTextPaneArmure.setText("Armure");
         jScrollPane18.setViewportView(jTextPaneArmure);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
