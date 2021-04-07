@@ -70,7 +70,10 @@ public class Prog {
         
         Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100, listeInventaire);
         
-        Personnage monstre = new Personnage("Goblin", "monstre de la mort", 2, 2, 2, 10, new ArrayList<Objet>());
+        ArrayList<Objet> listeloot = new ArrayList<Objet>();
+        listeloot.add(new Nourriture("banane","Une grosse banane",2.0,15.0));
+        
+        Personnage monstre = new Personnage("Goblin", "monstre de la mort", 2, 2, 2, 10, listeloot);
         
                 
         Arme epee = new Arme("Epée","Epée Légendaire",25.2,-5,100);
