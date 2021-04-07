@@ -5,6 +5,7 @@
  */
 package exec;
 
+import java.util.ArrayList;
 import modele.element.*;
 
 public class Prog {
@@ -63,7 +64,9 @@ public class Prog {
 
     public static void main(String[] args) {
         
-        Aventure a = new Aventure();
+        Personnage joueur = new Personnage("Hero", 20, 15, 15, 100, new ArrayList<Objet>());
+        
+        Aventure a = new Aventure(joueur);
         
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
