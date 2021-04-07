@@ -24,7 +24,9 @@ public class Personnage extends Element  {
         this.agilite = agilite;
         this.pv = pv;
         this.inventaire = inventaire;
+        this.main = new Arme("main","ses mains",0,0,0);
     }
+
     
     public String getNom() {
         return nom;
