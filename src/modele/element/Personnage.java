@@ -140,6 +140,10 @@ public class Personnage extends Element  {
         this.setPv(0.0);
     }
     
+    /**
+     * permet de manger de la nouriture
+     * @param nourriture un objet nouriture qui permet de se regenerer
+     */
     public void manger(Nourriture nourriture){
         ajoutePointVie(nourriture.getValeur());
     }
