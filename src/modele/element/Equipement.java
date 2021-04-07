@@ -11,9 +11,9 @@ package modele.element;
  */
 public class Equipement extends Objet {
     
-    private double bonus_agilite;
-    private double bonus_protection;
-    private double bonus_force;
+    double bonus_agilite;
+    double bonus_protection;
+    double bonus_force;
     
     public Equipement(String nom, String description, double poids) {
         super(nom,description,poids);
