@@ -15,6 +15,15 @@ private Objet main;
 private Objet armure;
 private Lieu pieceActuel;
 
+    public Personnage(String nom, int age, int force, int agilite, int pv, ArrayList<Objet> inventaire) {
+        this.nom = nom;
+        this.age = age;
+        this.force = force;
+        this.agilite = agilite;
+        this.pv = pv;
+        this.inventaire = inventaire;
+    }
+
     public int getPv() {
         return pv;
     }
