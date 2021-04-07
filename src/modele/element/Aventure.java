@@ -9,7 +9,7 @@ package modele.element;
  *
  * @author Utilisateur
  */
-public class Aventure {
+public class Aventure extends Element{
     private Personnage joueur;
     private Donjon donjon;
 }
