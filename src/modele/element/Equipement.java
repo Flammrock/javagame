@@ -11,14 +11,14 @@ package modele.element;
  */
 public class Equipement extends Object {
    
-    public int getModificateurAgilite() {
-        return 0;
+    public double getModificateurAgilite() {
+        return 0.0;
     }
-    public int getModificateurForce() {
-        return 0;
+    public double getModificateurForce() {
+        return 0.0;
     }
-    public int getModificateurProtection() {
-        return 0;
+    public double getModificateurProtection() {
+        return 0.0;
     }
     
     
