@@ -84,15 +84,19 @@ public class Aventure extends Element {
         
         Lieu lieu = this.getJoueur().getPieceActuel();
         List<Personnage> monstres = lieu.getMonstres();
-        
+        int[] monstresMort = new int[monstres.size()];
+        int i=0;
         for (Personnage monstre : monstres) {
-            monstre.attaque(this.getJoueur());
+            if(monstre.getPv()!=0){
+                monstre.attaque(this.getJoueur());
+            }else{
+                monstresMort[i] = monstres.indexOf(monstre);
+                i++;
+            }
         }
         
-        for (Personnage monstre : monstres) {
-            if(monstre.getPv()==0){
-                monstres.remove(monstre);
-            }
+        for (i=0;i<monstresMort.length;i++) {
+            monstres.remove(i);
         }
     }
 }
