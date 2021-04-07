@@ -24,8 +24,8 @@ public class Personnage extends Element  {
         this.agilite = agilite;
         this.pv = pv;
         this.inventaire = inventaire;
-        this.main = new Arme("main","ses mains",0,0,0);
-        this.armure = new Armure("Vetement de fermier","de simple vetement",0);
+        this.main = null;
+        this.armure = null;
     }
 
     
