@@ -64,12 +64,12 @@ public class Prog {
 
     public static void main(String[] args) {
         
-        Personnage joueur = new Personnage("Hero", 20, 15, 15, 100, new ArrayList<Objet>());
+        Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100, new ArrayList<Objet>());
         
-        Personnage monstre = new Personnage("monstre de la mort", 2, 2, 2, 10, new ArrayList<Objet>());
+        Personnage monstre = new Personnage("Goblin", "monstre de la mort", 2, 2, 2, 10, new ArrayList<Objet>());
         
                 
-        Arme epee = new Arme("epee legendaire",25.2,-5,100);
+        Arme epee = new Arme("Epée","Epée Légendaire",25.2,-5,100);
         
         Aventure a = new Aventure(joueur);
         
