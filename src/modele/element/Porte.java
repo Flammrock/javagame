@@ -12,16 +12,16 @@ package modele.element;
 public class Porte extends Element{
     private Lieu lieu1;
     private Lieu lieu2;
-    private String name;
+    private String nom;
     
-    public Porte(String name, Lieu lieu1, Lieu lieu2) {
-        this.name = name;
+    public Porte(String nom, Lieu lieu1, Lieu lieu2) {
+        this.nom = nom;
         this.lieu1 = lieu1;
         this.lieu2 = lieu2;
     }
 
-    public String getName() {
-        return name;
+    public String getNom() {
+        return nom;
     }
     
     
