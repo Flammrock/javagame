@@ -10,5 +10,6 @@ package modele.element;
  * @author Utilisateur
  */
 public class Porte {
-    
+    private Lieu lieu1;
+    private Lieu lieu2; 
 }
