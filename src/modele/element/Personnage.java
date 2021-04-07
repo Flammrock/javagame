@@ -126,7 +126,7 @@ public class Personnage extends Element  {
         double NombreMin = 0.0;
         double NombreMax = 100;
         double nombreAleatoire = NombreMin + (Math.random() * (NombreMax - NombreMin));
-        return nombreAleatoire<=Probabilité;
+        return true;//nombreAleatoire<=Probabilité;
     }
     
     /**
