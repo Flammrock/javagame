@@ -4,7 +4,7 @@ package modele.element;
 
 public abstract class Element {
     String description;
-   
+    
     
     public String getDescription() {
         return description;
