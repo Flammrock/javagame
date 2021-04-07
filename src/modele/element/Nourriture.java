@@ -13,9 +13,17 @@ public class Nourriture extends Object {
     
     private double valeur;
     
+    public Nourriture(int valeur) {
+        this.valeur = valeur;
+    }
+    
     public String effet(Personnage utilisateur, Element cible) {
         utilisateur.ajoutePointVie(this.valeur);
         valeur = 0; //la nourriture ne peut etre utilisée deux fois
         return utilisateur.getNom() + " a mangé ";
-    }   
+    }
+    
+    public boolean onUtiliser(Personnage p) {
+        p.ajoutePointVie(this.valeur);
+    }
 }
