@@ -5,16 +5,21 @@
  */
 package exec;
 
+import modele.element.*;
+
 /**
  *
  * @author pierrecharbit
  */
 public class AppliGraphique extends javax.swing.JFrame {
 
+    private Aventure aventure;
+    
     /**
      * Creates new form AppliGraphique
      */
-    public AppliGraphique() {
+    public AppliGraphique(Aventure aventure) {
+        this.aventure = aventure;
         initComponents();
     }
 
@@ -27,17 +32,30 @@ public class AppliGraphique extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        logger = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        logger.setColumns(20);
+        logger.setRows(5);
+        jScrollPane1.setViewportView(logger);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(273, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,5 +97,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea logger;
     // End of variables declaration//GEN-END:variables
 }
