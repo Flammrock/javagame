@@ -138,7 +138,7 @@ public class SpriteSheet extends Sprite {
     
     private void nextKeyAnimation() {
         
-        if (this.keyMap.size()==0) return;
+        if (this.keyMap.isEmpty()) return;
         
         this.tick++;
         if (this.tick < this.tickMax) return;
