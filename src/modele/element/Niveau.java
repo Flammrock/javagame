@@ -135,8 +135,6 @@ public class Niveau extends Element implements Generable {
         // contiendra la dernière salle ajouté
         Lieu lastAjouter = null;
         
-        int j = 1; // le numéro des portes
-        
         // tant qu'il reste des salles à rajouter
         while (!lieux.isEmpty()) {
         
@@ -162,8 +160,7 @@ public class Niveau extends Element implements Generable {
             if (lastAjouter != null) {
                 
                 // on connecte les lieux
-                lastAjouter.ajoutePorteVers("Porte "+j, lieu);
-                j++;
+                lastAjouter.ajoutePorteVers("Porte", lieu);
                 
             }
             
