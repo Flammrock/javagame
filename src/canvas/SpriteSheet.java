@@ -7,6 +7,7 @@ package canvas;
 
 import java.awt.Graphics;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
@@ -26,31 +27,86 @@ public class SpriteSheet extends Sprite {
     
     int key; // clé d'animation
     
-    public SpriteSheet(String spritefile) {
-        super(spritefile);
-    }
+    int index; // indice du tableau d'animations
+    ArrayList<Integer> keyMap; // tableau des clés d'animations
     
+    int tick; // le tick courrant
+    int tickMax; // le nombre max de tick avant de passer à la next frame
+    
+    /**
+     * Permet de créer un sprite depuis un spritesheet sans aucune animation
+     * @param spritefile le nom du fichier
+     * @param x la position en x du sprite sur le canvas
+     * @param y la position en y du sprite sur le canvas
+     * @param width la longueur du sprite sur le canvas
+     * @param height la hauteur du sprite sur le canvas
+     */
     public SpriteSheet(String spritefile, int x, int y, int width, int height) {
         super(spritefile,x,y);
+        this.tick = 0;
+        this.tickMax = 10;
         this.width = width;
         this.height = height;
-        this.spriteWidth = width;
-        this.spriteHeight = height;
+        this.spriteWidth = 0;
+        this.spriteHeight = 0;
         this.nx = 1;
         this.ny = 1;
         this.key = 0;
+        keyMap = new ArrayList<Integer>();
     }
     
+    /**
+     * Permet de créer un sprite depuis un spritesheet sans aucune animation
+     * @param spritefile le nom du fichier
+     * @param x la position en x du sprite sur le canvas
+     * @param y la position en y du sprite sur le canvas
+     * @param spriteWidth la longueur du sous-sprite dans le spritesheet
+     * @param spriteHeight la hauteur du sous-sprite dans le spritesheet
+     * @param width la longueur du sprite sur le canvas
+     * @param height la hauteur du sprite sur le canvas
+     */
     public SpriteSheet(String spritefile, int x, int y, int spriteWidth, int spriteHeight, int width, int height) {
-        super(spritefile,x,y);
-        this.width = width;
-        this.height = height;
+        this(spritefile,x,y,width,height);
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
-        this.nx = 1;
-        this.ny = 1;
-        this.key = 0;
     }
+
+    
+    public void SetIntervalTick(int tickMax) {
+        this.tickMax = tickMax;
+    }
+    
+    public int getIntervalTick() {
+        return this.tickMax;
+    }
+    
+    
+    
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public ArrayList<Integer> getKeyMap() {
+        return keyMap;
+    }
+
+    public void setKeyMap(ArrayList<Integer> keyMap) {
+        this.keyMap = keyMap;
+    }
+    
+    public void setKeyMap(int[] keyMap) {
+        this.keyMap.clear();
+        for (int i = 0; i < keyMap.length; i++) {
+            this.keyMap.add(keyMap[i]);
+        }
+    }
+    
+    
+    
     
     public void setWidth(int width) {
         this.width = width;
@@ -60,7 +116,7 @@ public class SpriteSheet extends Sprite {
         this.height = height;
     }
     
-    public boolean load() {
+    public boolean loadImage() {
         boolean r = super.load();
         if (!r) return false;
         if (this.spriteWidth > this.image.getWidth()) this.spriteWidth = this.image.getWidth();
@@ -81,8 +137,24 @@ public class SpriteSheet extends Sprite {
     }
     
     private void nextKeyAnimation() {
-        this.key++;
+        
+        if (this.keyMap.size()==0) return;
+        
+        this.tick++;
+        if (this.tick < this.tickMax) return;
+        
+        this.tick = 0;
+        
+        this.index++;
+        
+        if (this.index < 0) this.index = this.keyMap.size()-1;
+        if (this.index > this.keyMap.size()-1) this.index = 0;
+        
+        this.key = this.keyMap.get(this.index);
+        
+        if (this.key < 0) this.key = 0;
         if (this.key > this.nx*this.ny-1) this.key = 0;
+        
     }
     
     @Override
