@@ -19,8 +19,9 @@ public class Niveau extends Element{
     Lieu entree;
     Lieu sortie;
     
-    public Niveau(String nom) {
+    public Niveau(String nom,String description) {
         this.nom = nom;
+        this.description = description;
         this.salles = new ArrayList<>();
     }
 
