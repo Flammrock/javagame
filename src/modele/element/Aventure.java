@@ -74,11 +74,14 @@ public class Aventure extends Element {
     /**
      * Permet d'ajouter un monstre dans un lieu
      * @param monstre le mon stre à ajouter
+     * @param niveaunom le nom du niveau
      * @param lieu le lieu dans le donjon
      * @return retourne true si le monstre a bien été ajouté, sinon false
      */
-    public boolean ajouterMonstre(Personnage monstre, String lieu) {
-        return donjon.ajouterMonstre(monstre, lieu);
+    public boolean ajouterMonstre(Personnage monstre, String niveaunom, String lieu) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return false;
+        return n.ajouterMonstre(monstre, lieu);
     }
 
     /**
