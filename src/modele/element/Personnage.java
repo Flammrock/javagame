@@ -302,6 +302,7 @@ public class Personnage extends Element {
         boolean reussiAutiliser = obj.onUtiliser(this);
         if (!reussiAutiliser) return false;
         obj.mettreAJourUtiliser(this);
+        actionEffetConsomable();
         if (obj.nbUtilisationRestante() <= 0 && obj.nbUtilisationRestante() != -1) this.inventaire.remove(index);
         return reussiAutiliser;
     }
@@ -343,6 +344,28 @@ public class Personnage extends Element {
         }
         return true;
     } 
+    
+    public boolean actionEffetConsomable(){
+        int[] effetASupp = new int[this.effetCourant.size()];
+        int i = 0;
+        for(Effet effet : this.effetCourant){
+            if(effet.getDuréeDeLEffet()==-2){
+                if(effet.tourPasse()==false){
+                    this.force += effet.getForceAjoute();
+                    this.agilite += effet.getAgiliteAjoute();
+                    this.pv += effet.getPvAjoute();
+                    this.pvMax += effet.getPvMaxAjoute();
+                    this.poidsMax += effet.getPoidsAjoute();
+                    effetASupp[i] = this.effetCourant.indexOf(effet);
+                    i++;
+                }
+            }
+        }
+            for(int j=0;j<i;j++){
+            this.effetCourant.remove(effetASupp[j]-j);
+        }
+        return true;
+    }
     
     @Override
     public String toString() {
