@@ -73,6 +73,10 @@ public class Effet extends Element {
         return tpSalle;
     }
 
+    public void setTpSalle(Lieu tpSalle) {
+        this.tpSalle = tpSalle;
+    }
+
     public double getPoidsAjoute() {
         return poidsAjoute;
     }
