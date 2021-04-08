@@ -131,8 +131,9 @@ public class Prog {
         String piecetertiaire = "piece tertiare";
         
         
-        Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
+        Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence",5);
         
+        a.ajouterNiveau(niveau1);
         
         a.ajouterLieu(niveau1,pieceprincipal);
         a.ajouterLieu(niveau1,piecesecondaire);
@@ -143,7 +144,6 @@ public class Prog {
         
         a.ajouterPorte(niveau1,"porte nord",pieceprincipal,piecesecondaire);
         a.ajouterPorte(niveau1,"porte rouge",piecetertiaire,piecesecondaire);
-        
         
         a.getJoueur().setPieceActuel(a.getLieu(niveau1,pieceprincipal));
         

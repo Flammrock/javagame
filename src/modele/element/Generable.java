@@ -9,8 +9,8 @@ package modele.element;
  *
  * @author User
  */
-public interface Generable<T> {
+public interface Generable {
     
-    T generate();
+    boolean generate();
     
 }
