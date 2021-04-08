@@ -15,6 +15,7 @@ public class Effet extends Element {
     private double[] forceAjoute = new double[3];   //tableau ou l'indice: 0=effetCourant, 1=effetInitial, 2=effetContinu
     private double[] agiliteAjoute = new double[3];
     private double[] pvAjoute = new double[3];
+    private double[] pvMaxAjoute = new double[3];
     private Lieu tpSalle;
     private double[] poidsAjoute = new double[3];
 
@@ -33,6 +34,9 @@ public class Effet extends Element {
         this.pvAjoute[0] = pvAjoute;
         this.pvAjoute[1] = pvAjoute;
         this.pvAjoute[2] = 0;
+        this.pvMaxAjoute[0] = 0;
+        this.pvMaxAjoute[1] = 0;
+        this.pvMaxAjoute[2] = 0;
         this.tpSalle = tpSalle;
         this.poidsAjoute[0] = poidsAjoute;
         this.poidsAjoute[1] = poidsAjoute;
@@ -73,44 +77,41 @@ public class Effet extends Element {
         return poidsAjoute[0];
     }
     
+    /**
+     *fonction a appeler a la fin du tour lorque l'on a deja getter les effets
+     * @return retourn true si l'effet doit rester actif et false si l'effet est fini est doit etre detruit
+     */
     public boolean tourPasse(){
-        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]==-1){//effet permanant 
-            forceAjoute[0] = 0;
-            agiliteAjoute[0] = 0;
-            pvAjoute[0] = 0;
+        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]==-1){//effet permanant (l'effet restera actif pour toujours)
             tpSalle = null;
-            poidsAjoute[0] = 0;
-        }
-        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]<-1){//effet instantané
-            forceAjoute[0] = 0;
-            agiliteAjoute[0] = 0;
-            pvAjoute[0] = 0;
-            tpSalle = null;
-            poidsAjoute[0] = 0;
-        }
-        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]>-1){//effet a durée limité dans le temps
-            forceAjoute[0] = 0;
-            agiliteAjoute[0] = 0;
-            pvAjoute[0] = 0;
-            tpSalle = null;
-            poidsAjoute[0] = 0;
-        }
-        if(duréeDeLEffet[0] == 0 && duréeDeLEffet[0]>-1){//fin de l'effet
-            forceAjoute[0] = -forceAjoute[1];         //A finir
-            agiliteAjoute[0] = -agiliteAjoute[1];
-            pvAjoute[0] = -pvAjoute[1];
-            tpSalle = null;
-            poidsAjoute[0] = -poidsAjoute[1];
-        }
-        
-        if(this.duréeDeLEffet[0]!=-1){
-            this.duréeDeLEffet[0]--;
-        }
-        if(this.duréeDeLEffet[0]<-1){
-            return false;
-        }else{
             return true;
         }
+        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]<-1){//effet instantané (l'effet se detruira)
+            forceAjoute[0] = 0;
+            agiliteAjoute[0] = 0;
+            pvAjoute[0] = 0;
+            tpSalle = null;
+            poidsAjoute[0] = 0;
+            pvMaxAjoute[0] = 0;
+            return false;
+        }
+        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]>-1){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
+            tpSalle = null;
+        }
+        if(duréeDeLEffet[0] == 0 ){//fin de l'effet a durée limité
+            forceAjoute[0] = 0;
+            agiliteAjoute[0] = 0;
+            pvAjoute[0] = 0;
+            pvMaxAjoute[0] = 0;
+            tpSalle = null;
+            poidsAjoute[0] = 0;
+            return false;
+        }
+        
+        if(this.duréeDeLEffet[0]>=0){
+            this.duréeDeLEffet[0]--;
+        }
+        return true;
     }
     
     
