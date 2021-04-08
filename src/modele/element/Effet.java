@@ -132,7 +132,7 @@ public class Effet extends Element {
         String listesEffets = getNom()+"\n";
         if(duréeDeLEffet[0]>=0){
             if(getDuréeDeLEffet()>0){
-                listesEffets += "Durée : "+getDuréeDeLEffet() + "Tours\n"; 
+                listesEffets += "Durée : "+(int)getDuréeDeLEffet() + "Tours\n"; 
             }
             if(getPvAjoute()!=0){
                 if(getPvAjoute()>0){
