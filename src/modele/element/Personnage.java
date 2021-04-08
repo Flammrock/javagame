@@ -16,6 +16,7 @@ public class Personnage extends Element {
     private Equipement main;
     private Equipement armure;
     private Lieu pieceActuel;
+    private double poidsMax;
 
     public Personnage(String nom, String description, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
         this.nom = nom;
@@ -28,6 +29,7 @@ public class Personnage extends Element {
         this.inventaire = inventaire;
         this.main = null;
         this.armure = null;
+        this.poidsMax = force;
     }
 
     
@@ -233,7 +235,16 @@ public class Personnage extends Element {
         return reussiAutiliser;
     }
     
+    private double getPoidsInventaire(){
+        double poidsInventaire = 0;
+        for(Objet objet:this.inventaire){
+            poidsInventaire =+ objet.getPoids();
+        }
+        return poidsInventaire;
+    }
+    
     public boolean ajouterObjet(Objet o){
+        if(o.getPoids()+ this.getPoidsInventaire()>this.poidsMax);
         return this.inventaire.add(o);
     } 
     
