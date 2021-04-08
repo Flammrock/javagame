@@ -32,6 +32,24 @@ public class Niveau extends Element implements Generable {
     public String getNom() {
         return nom;
     }
+
+    /**
+     * Permet de récupérer l'entrée du niveau
+     * @return retourne l'entrée du niveau
+     */
+    public Lieu getEntree() {
+        return entree;
+    }
+
+    /**
+     * Permet de récupérer la sortie du niveau
+     * @return retourne la sortie du niveau
+     */
+    public Lieu getSortie() {
+        return sortie;
+    }
+    
+    
     
 
     /**
@@ -96,10 +114,66 @@ public class Niveau extends Element implements Generable {
     @Override
     public boolean generate(GenerableParametre s) {
         
+        // on cast pour récupérer les paramètres
         GenerableNiveauParametre p = (GenerableNiveauParametre)s;
         
+        // on recupère le nombre de salles à générer
+        int nbsalles = p.getNombreSalles();
+        nbsalles = nbsalles < 2 ? 2 : nbsalles;
         
-        return false;
+        // on génère {nbsalles}
+        ArrayList<Lieu> lieux = new ArrayList<>();
+        for (int i = 0; i < nbsalles; i++) {
+            Lieu lieu = new Lieu("Lieu "+i);
+            //lieu.generate(p); // @TODO rendre les lieux générables
+            lieux.add(lieu);
+        }
+        
+        // on enlève déjà toutes les salles du niveau (on génère à partir de zéro)
+        this.salles.clear();
+        
+        // contiendra la dernière salle ajouté
+        Lieu lastAjouter = null;
+        
+        // tant qu'il reste des salles à rajouter
+        while (!lieux.isEmpty()) {
+        
+            // on choisit une salle aléatoirement (et on l'enlève de la liste)
+            int index = (int)(Math.random() * lieux.size());
+            Lieu lieu = lieux.remove(index);
+            
+            // on l'ajoute dans la liste des salles
+            this.salles.add(lieu);
+            
+            // s'il s'agit de la 1ere salle
+            if (this.salles.size()==1) {
+                this.entree = lieu;
+            }
+            
+            // s'il s'agit de la dernière salle
+            else if (lieux.isEmpty()) {
+                this.sortie = lieu;
+            }
+            
+            
+            // on essaie de connecter ce lieu avec le précédent lieu
+            if (lastAjouter != null) {
+                
+                // on connecte les lieux
+                lastAjouter.ajoutePorteVers("Porte", lieu);
+                
+            }
+            
+            
+            
+            // on définit cette salle comme la salle qu'on vient d'ajouter (utilie ensuite pour connecter les salles)
+            lastAjouter = lieu;
+            
+        }
+        
+        
+        
+        return true;
     }
     
     
