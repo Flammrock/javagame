@@ -80,15 +80,15 @@ public class Aventure extends Element {
         return donjon.ajouterObjet(obj,lieu);
     }
 
-    public void onActionJoueur() {
-        
+    public String onActionJoueur() {
+        String logs = "";
         Lieu lieu = this.getJoueur().getPieceActuel();
         List<Personnage> monstres = lieu.getMonstres();
         int[] monstresMort = new int[monstres.size()];
         int i=0;
         for (Personnage monstre : monstres) {
             if(monstre.getPv()!=0){
-                monstre.attaque(this.getJoueur());
+                logs += monstre.attaque(this.getJoueur());
             }else{
                 monstresMort[i] = monstres.indexOf(monstre);
                 i++;
@@ -102,5 +102,6 @@ public class Aventure extends Element {
                 monstres.add(new Personnage("Cadavre","une dépouille inutile",0,0,0,1,listeloot));
             }
         }
+        return logs;
     }
 }
