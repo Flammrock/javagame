@@ -12,12 +12,10 @@ package modele.element;
 public class Effet extends Element {
     private String Nom;
     private double duréeDeLEffet;
+    private double duréeDeLEffetintial;
     private double forceAjoute;
-    private double forceAjouteContinue;
     private double agiliteAjoute;
-    private double agiliteAjouteContinue;
     private double pvAjoute;
-    private double pvAjouteContinue;
     private Lieu tpSalle;
     private double poidsAjoute;
 
@@ -25,12 +23,10 @@ public class Effet extends Element {
         this.Nom = Nom;
         this.description = description;
         this.duréeDeLEffet = duréeDeLEffet;
+        this.duréeDeLEffetintial = duréeDeLEffet;
         this.forceAjoute = forceAjoute;
-        this.forceAjouteContinue = forceAjouteContinue;
         this.agiliteAjoute = agiliteAjoute;
-        this.agiliteAjouteContinue = agiliteAjouteContinue;
         this.pvAjoute = pvAjoute;
-        this.pvAjouteContinue = pvAjouteContinue;
         this.tpSalle = tpSalle;
         this.poidsAjoute = poidsAjoute;
     }
@@ -49,24 +45,12 @@ public class Effet extends Element {
         return forceAjoute;
     }
 
-    public double getForceAjouteContinue() {
-        return forceAjouteContinue;
-    }
-
     public double getAgiliteAjoute() {
         return agiliteAjoute;
     }
 
-    public double getAgiliteAjouteContinue() {
-        return agiliteAjouteContinue;
-    }
-
     public double getPvAjoute() {
         return pvAjoute;
-    }
-
-    public double getPvAjouteContinue() {
-        return pvAjouteContinue;
     }
 
     public Lieu getTpSalle() {
@@ -81,7 +65,30 @@ public class Effet extends Element {
         return poidsAjoute;
     }
     
-    public boolean tourPasser(){
+    public boolean tourPasse(){
+        if(duréeDeLEffet==duréeDeLEffetintial && duréeDeLEffet==-1);//effet permanant 
+        if(duréeDeLEffet==duréeDeLEffetintial && duréeDeLEffet<-1){//effet instantané
+            forceAjoute = 0;
+            agiliteAjoute = 0;
+            pvAjoute = 0;
+            tpSalle = null;
+            poidsAjoute = 0;
+        }
+        if(duréeDeLEffet==duréeDeLEffetintial && duréeDeLEffet>-1){//effet a durée limité dans le temps
+            forceAjoute = 0;
+            agiliteAjoute = 0;
+            pvAjoute = 0;
+            tpSalle = null;
+            poidsAjoute = 0;
+        }
+        if(duréeDeLEffet == 0 && duréeDeLEffet>-1){//fin de l'effet
+            forceAjoute = -forceAjoute;         //A finir
+            agiliteAjoute = -agiliteAjoute;
+            pvAjoute = -pvAjoute;
+            tpSalle = null;
+            poidsAjoute = -poidsAjoute;
+        }
+        
         if(this.duréeDeLEffet!=-1){
             this.duréeDeLEffet--;
         }
@@ -91,4 +98,7 @@ public class Effet extends Element {
             return true;
         }
     }
+    
+    
+    
 }
