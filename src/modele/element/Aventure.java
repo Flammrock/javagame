@@ -47,11 +47,14 @@ public class Aventure extends Element {
 
     /**
      * Permet de récupérer un lieu via son nom
+     * @param niveaunom le nom du niveau
      * @param nom le nom du lieu
      * @return retourne le lieu portant ce nom sinon reoturne null
      */
-    public Lieu getLieu(String nom) {
-        return donjon.getLieu(nom);
+    public Lieu getLieu(String niveaunom, String nom) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return null;
+        return n.getLieu(nom);
     }
 
     /**
