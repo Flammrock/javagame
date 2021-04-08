@@ -9,7 +9,7 @@ package modele.element;
  *
  * @author User
  */
-class GenerableNiveauParametre extends GenerableParametre {
+public class GenerableNiveauParametre extends GenerableParametre {
     
     int nombreSalles;
     
