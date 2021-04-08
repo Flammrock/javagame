@@ -328,12 +328,8 @@ public class Personnage extends Element {
     public boolean ajoutEffets(ArrayList<Effet> o){
         return this.effetCourant.addAll(o);
     }
-    public boolean actionEffet(){
+    public boolean actionEffetFinDuTour(){
         for(Effet effet : this.effetCourant){
-            this.agilite += effet.getAgiliteAjoute();
-            this.force += effet.getForceAjoute();
-            this.pvMax += effet.getPvAjoute();
-            this.poidsMax += effet.getPoidsAjoute();
             effet.tourPasse();
         }
         return true;
