@@ -42,7 +42,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         });
         
         SpriteSheet s = new SpriteSheet("/spritesheettest.png",0,0,50,37,50*3,37*3);
-        s.load();
+        s.loadImage();
+        s.setKeyMap(new int[] {0, 1, 2, 3});
         canvas1.ajouterItem(s);
         
         
