@@ -131,19 +131,21 @@ public class Prog {
         String piecetertiaire = "piece tertiare";
         
         
-        
-        a.ajouterLieu(pieceprincipal);
-        a.ajouterLieu(piecesecondaire);
-        a.ajouterLieu(piecetertiaire);
-        
-        a.ajouterMonstre(monstre,piecesecondaire);
-        a.ajouterObjet(epee,piecetertiaire);
-        
-        a.ajouterPorte("porte nord",pieceprincipal,piecesecondaire);
-        a.ajouterPorte("porte rouge",piecetertiaire,piecesecondaire);
+        Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
         
         
-        a.getJoueur().setPieceActuel(a.getLieu(pieceprincipal));
+        a.ajouterLieu(niveau1,pieceprincipal);
+        a.ajouterLieu(niveau1,piecesecondaire);
+        a.ajouterLieu(niveau1,piecetertiaire);
+        
+        a.ajouterMonstre(niveau1,piecesecondaire,monstre);
+        a.ajouterObjet(niveau1,piecetertiaire,epee);
+        
+        a.ajouterPorte(niveau1,"porte nord",pieceprincipal,piecesecondaire);
+        a.ajouterPorte(niveau1,"porte rouge",piecetertiaire,piecesecondaire);
+        
+        
+        a.getJoueur().setPieceActuel(a.getLieu(niveau1,pieceprincipal));
         
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
