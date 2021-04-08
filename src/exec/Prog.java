@@ -138,6 +138,7 @@ public class Prog {
         niveautest.generate(new GenerableNiveauParametre(5));
         
         a.ajouterNiveau(niveau1);
+        a.ajouterNiveau(niveautest);
         
         a.ajouterLieu(niveau1,pieceprincipal);
         a.ajouterLieu(niveau1,piecesecondaire);
@@ -149,7 +150,7 @@ public class Prog {
         a.ajouterPorte(niveau1,"porte nord",pieceprincipal,piecesecondaire);
         a.ajouterPorte(niveau1,"porte rouge",piecetertiaire,piecesecondaire);
         
-        a.getJoueur().setPieceActuel(a.getLieu(niveau1,pieceprincipal));
+        a.getJoueur().setPieceActuel(a.getLieu(niveautest,niveautest.getEntree().getNom()));
         
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
