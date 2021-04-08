@@ -110,7 +110,7 @@ public class Effet extends Element {
         if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]>-1){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
             tpSalle = null;
         }
-        if(duréeDeLEffet[0] == 0 ){//fin de l'effet a durée limité
+        if(duréeDeLEffet[0] == 1 ){//fin de l'effet a durée limité
             forceAjoute[0] = 0;
             agiliteAjoute[0] = 0;
             pvAjoute[0] = 0;
@@ -118,6 +118,7 @@ public class Effet extends Element {
             tpSalle = null;
             poidsAjoute[0] = 0;
             armureAjoute[0] = 0;
+            duréeDeLEffet[0] = 0;
             return false;
         }
         
