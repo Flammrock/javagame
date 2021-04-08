@@ -239,6 +239,7 @@ public class Personnage extends Element {
         if(toucher){
             attaque = this.blesse(ennemie);   
         }
+        this.actionEffetFinDuTour();
         if(toucher){
             return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque reussi.\nIl inflige "+attaque+" degats.\n";
         }else{
@@ -328,12 +329,8 @@ public class Personnage extends Element {
     public boolean ajoutEffets(ArrayList<Effet> o){
         return this.effetCourant.addAll(o);
     }
-    public boolean actionEffet(){
+    public boolean actionEffetFinDuTour(){
         for(Effet effet : this.effetCourant){
-            this.agilite += effet.getAgiliteAjoute();
-            this.force += effet.getForceAjoute();
-            this.pvMax += effet.getPvAjoute();
-            this.poidsMax += effet.getPoidsAjoute();
             effet.tourPasse();
         }
         return true;

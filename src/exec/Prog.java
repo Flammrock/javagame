@@ -114,7 +114,8 @@ public class Prog {
         listeInventaire.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,10.0));
         
         Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100, listeInventaire);
-        
+        Effet nouvelleEffet = new Effet("Homme de fer","augmente la force",3, 5, 0, 0, new Lieu("Rien"), 0);
+        joueur.ajoutEffet(nouvelleEffet);
         ArrayList<Objet> listeloot = new ArrayList<Objet>();
         listeloot.add(new Nourriture("banane","Une grosse banane",2.0,15.0));
         listeloot.add(new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10));

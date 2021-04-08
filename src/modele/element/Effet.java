@@ -20,12 +20,11 @@ public class Effet extends Element {
     private double[] poidsAjoute = new double[3];
     private double[] armureAjoute = new double[3];
 
-    public Effet(String Nom,String description, double duréeDeLEffet, double forceAjoute, double forceAjouteContinue, double agiliteAjoute, double agiliteAjouteContinue, double pvAjoute, double pvAjouteContinue, Lieu tpSalle, double poidsAjoute) {
+    public Effet(String Nom,String description, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, Lieu tpSalle, double poidsAjoute) {
         this.Nom = Nom;
         this.description = description;
         this.duréeDeLEffet[0] = duréeDeLEffet;
         this.duréeDeLEffet[1] = duréeDeLEffet;
-        this.duréeDeLEffet[2] = 0;
         this.forceAjoute[0] = forceAjoute;
         this.forceAjoute[1] = forceAjoute;
         this.forceAjoute[2] = 0;
@@ -133,7 +132,7 @@ public class Effet extends Element {
         String listesEffets = getNom()+"\n";
         if(duréeDeLEffet[0]>=0){
             if(getDuréeDeLEffet()>0){
-                listesEffets += "Durée : "+getDuréeDeLEffet() + "Tours\n"; 
+                listesEffets += "Durée : "+(int)getDuréeDeLEffet() + "Tours\n"; 
             }
             if(getPvAjoute()!=0){
                 if(getPvAjoute()>0){
