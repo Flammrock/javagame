@@ -11,6 +11,6 @@ package modele.element;
  */
 public interface Generable {
     
-    boolean generate();
+    boolean generate(GenerableParametre p);
     
 }
