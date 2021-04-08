@@ -87,11 +87,14 @@ public class Aventure extends Element {
     /**
      * Permet d'ajouter un objet dans un lieu
      * @param obj l'objet à rajouter
+     * @param niveaunom le nom du niveau
      * @param lieu le lieu où on ajoute l'objet
      * @return retourne true si l'objet a bien été ahouté, sinon false
      */
-    public boolean ajouterObjet(Objet obj, String lieu) {
-        return donjon.ajouterObjet(obj,lieu);
+    public boolean ajouterObjet(Objet obj, String niveaunom, String lieu) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return false;
+        return n.ajouterObjet(obj,lieu);
     }
 
     public String onActionJoueur() {
