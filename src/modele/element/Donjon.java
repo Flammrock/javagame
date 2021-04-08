@@ -6,6 +6,7 @@
 package modele.element;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -13,70 +14,55 @@ import java.util.List;
  * @author Utilisateur
  */
 public class Donjon extends Element{
-    private List<Lieu> salles;
-    private Lieu entree;
-    private Lieu sortie;
+    
+    HashMap<String, Niveau> list_niveaux;
     
     public Donjon() {
-        this.salles = new ArrayList<Lieu>();
+        this.list_niveaux = new HashMap<>();
     }
 
     /**
-     * Permet d'ajouter un lieu
-     * @param lieu
+     * Permet de récupérer un niveau via son nom
+     * @param nom le nom du niveau
+     * @return retourne le niveau s'il existe sinon retourne null
      */
-    public void ajouterLieu(Lieu lieu) {
-        salles.add(lieu);
+    public Niveau getNiveau(String nom) {
+        return this.list_niveaux.get(nom);
     }
-
+    
     /**
-     * Permet de récupérer un lieu via son nom
-     * @param nom le nom du lieu
-     * @return retourne le lieu s'il y a un lieu portant ce nom sinon reoturne null
+     * Permet d'enlever un niveau ia son nom
+     * @param nom le nom du niveau
+     * @return retourne le niveau qui a été enlevé, si rien n'a été enlevé alors retourne null
      */
-    public Lieu getLieu(String nom) {
-        for (Lieu l : salles) {
-            if (l.getNom().equals(nom)) return l;
-        }
-        return null;
+    public Niveau enleverNiveau(String nom) {
+        return this.list_niveaux.remove(nom);
     }
-
+    
     /**
-     * Permet d'ajouter une porte entre deux lieux
-     * @param nom_porte
-     * @param nom_lieu1
-     * @param nom_lieu2
-     * @return retourne true si la porte a été ajouté, false sinon
+     * Permet d'ajouter un niveau (attention si un niveau existe déjà sous le même nom alors il sera remplacé)
+     * @param n le niveau à ajouter
+     * @return retourne true si le niveau a été ajouté
      */
-    boolean ajouterPorte(String nom_porte, String nom_lieu1, String nom_lieu2) {
-        Lieu lieu1 = this.getLieu(nom_lieu1);
-        if (lieu1 == null) return false;
-        Lieu lieu2 = this.getLieu(nom_lieu2);
-        if (lieu2 == null) return false;
-        return lieu1.ajoutePorteVers(nom_porte, lieu2);
+    public boolean ajouterNiveau(Niveau n) {
+        if (n==null) return false;
+        return this.list_niveaux.put(n.getNom(), n)!=null;
     }
-
+    
     /**
-     * Permet d'ajouter un monstre dans un lieu
-     * @param monstre le mon stre à ajouter
-     * @param lieu le lieu dans le donjon
-     * @return retourne true si le monstre a bien été ajouté, sinon false
+     * Permet de générer un niveau dans le donjon
+     * 
+     * @param nbLieu
+     * @return
      */
-    public boolean ajouterMonstre(Personnage monstre, String lieu) {
-        Lieu lieuobj = this.getLieu(lieu);
-        if (lieuobj == null) return false;
-        return lieuobj.ajouterMonstre(monstre);
+    public boolean genererNiveau(int nbLieu) {
+        return false;
     }
-
-    /**
-     * Permet d'ajouter un objet dans un lieu
-     * @param obj l'objet à rajouter
-     * @param lieu le lieu où on ajoute l'objet
-     * @return retourne true si l'objet a bien été ahouté, sinon false
-     */
-    public boolean ajouterObjet(Objet obj, String lieu) {
-        Lieu lieuobj = this.getLieu(lieu);
-        if (lieuobj == null) return false;
-        return lieuobj.ajouterObjet(obj);
-    }
+    
+    
+    
+    
+    
+    
+    
 }
