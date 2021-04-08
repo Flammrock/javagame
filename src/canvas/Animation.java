@@ -29,8 +29,6 @@ public class Animation {
     public Animation(String nom, ArrayList<Integer> keyMap) {
         this.nom = nom;
         this.keyMap = keyMap;
-        this.playing = true;
-        
         this.init();
     }
     
@@ -41,10 +39,10 @@ public class Animation {
      */
     public Animation(String nom, int[] keyMap) {
         this.nom = nom;
+        this.keyMap = new ArrayList<>();
         for (int i = 0; i < keyMap.length; i++) {
             this.keyMap.add(keyMap[i]);
         }
-        
         this.init();
     }
     
