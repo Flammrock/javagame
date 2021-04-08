@@ -12,13 +12,19 @@ package modele.element;
 public class GenerableNiveauParametre extends GenerableParametre {
     
     int nombreSalles;
+    GenerableLieuParametre lieup;
     
-    public GenerableNiveauParametre(int nombreSalles) {
+    public GenerableNiveauParametre(int nombreSalles, GenerableLieuParametre lieup) {
         this.nombreSalles = nombreSalles;
+        this.lieup = lieup;
     }
 
     public int getNombreSalles() {
         return nombreSalles;
+    }
+    
+    public GenerableLieuParametre getGenerableLieuParametre() {
+        return this.lieup;
     }
     
     
