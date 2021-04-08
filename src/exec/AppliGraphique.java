@@ -138,7 +138,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         }
     }
     
-    private void affichageLogsAttaque(String t){
+    private void affichageLogs(String t){
         logger.setText(logger.getText()+t);
     }
     
@@ -571,12 +571,12 @@ public class AppliGraphique extends javax.swing.JFrame {
         Personnage p = listeMonstre.getSelectedValue();
         if (p == null) return;
         
-        affichageLogsAttaque(this.aventure.getJoueur().attaque(p));
+        affichageLogs(this.aventure.getJoueur().attaque(p));
         this.mettreAJourStatistiquePerso();
         this.mettreAJourListeMonstre();
         
-        affichageLogsAttaque(this.aventure.onActionJoueur());
-        
+        affichageLogs(this.aventure.onActionJoueur());
+        affichageLogs("Fin du tour\n\n");
         this.mettreAJourTout();
     }//GEN-LAST:event_CombattreActionPerformed
 
