@@ -11,16 +11,20 @@ package modele.element;
  */
 public class Nourriture extends Objet {
     
-    private double valeur;
+    private double NbrObjet;
+    private Effet effetConsommable;
     
-    public Nourriture(String nom, String description, double poids, double valeur) {
+    public Nourriture(String nom, String description, double poids, double NbrObjet,Effet effetConsommable) {
         super(nom,description,poids);
-        this.valeur = valeur;
+        this.NbrObjet = NbrObjet;
+        this.effetConsommable = effetConsommable;
     }
     
     public String effet(Personnage utilisateur, Element cible) {
-        utilisateur.ajoutePointVie(this.valeur);
-        valeur = 0; //la nourriture ne peut etre utilisée deux fois
+        if(NbrObjet>0){
+            utilisateur.ajoutEffet(this.effetConsommable);
+            this.NbrObjet --; //la nourriture ne peut etre utilisée deux fois
+        }
         return utilisateur.getNom() + " a mangé ";
     }
     
@@ -29,7 +33,7 @@ public class Nourriture extends Objet {
     }
     
     public boolean onUtiliser(Personnage p) {
-        p.ajoutePointVie(this.valeur);
+        p.ajoutePointVie(this.effetConsommable.getPvAjoute());
         return true;
     }
 }
