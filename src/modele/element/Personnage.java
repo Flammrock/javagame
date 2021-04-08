@@ -239,6 +239,7 @@ public class Personnage extends Element {
         if(toucher){
             attaque = this.blesse(ennemie);   
         }
+        this.actionEffetFinDuTour();
         if(toucher){
             return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque reussi.\nIl inflige "+attaque+" degats.\n";
         }else{
