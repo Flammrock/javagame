@@ -17,7 +17,7 @@ public class Personnage extends Element {
     private Equipement armure;
     private Lieu pieceActuel;
     private double poidsMax;
-    private ArrayList<Effet> EffetCourant; 
+    private ArrayList<Effet> effetCourant; 
 
     public Personnage(String nom, String description, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
         this.nom = nom;
@@ -31,7 +31,7 @@ public class Personnage extends Element {
         this.main = null;
         this.armure = null;
         this.poidsMax = force;
-        this.EffetCourant = new ArrayList<Effet>();
+        this.effetCourant = new ArrayList<Effet>();
     }
 
     
@@ -121,6 +121,58 @@ public class Personnage extends Element {
         }
         this.pv += valeur;
     }
+    private double getEffetForce(){
+        double force = 0;
+        for(Effet effet : this.effetCourant){
+            force = effet.getForceAjoute();
+        }
+        return force;
+    }
+    
+    private Lieu getEffetTeleportation(){//TODO implementer la methode
+        return null;
+    }
+    
+    private double getEffetAgilite(){
+        double agilite = 0;
+        for(Effet effet : this.effetCourant){
+            agilite = effet.getAgiliteAjoute();
+        }
+        return agilite;
+    }
+    
+    private double getEffetPv(){
+        double pv = 0;
+        for(Effet effet : this.effetCourant){
+            pv = effet.getPvAjoute();
+        }
+        return pv;
+    }
+    
+    private double getEffetPvMax(){
+        double pvMax = 0;
+        for(Effet effet : this.effetCourant){
+            pvMax = effet.getPvMaxAjoute();
+        }
+        return pvMax;
+    }
+    
+    private double getEffetPoids(){
+        double poids = 0;
+        for(Effet effet : this.effetCourant){
+            poids = effet.getPoidsAjoute();
+        }
+        return poids;
+    }
+    
+    private double getEffetArmure(){
+        double Armure = 0;
+        for(Effet effet : this.effetCourant){
+            Armure = effet.getArmureAjoute();
+        }
+        return Armure;
+    }
+    
     
     public boolean equip(int index) {
         if (index < 0 || index > this.inventaire.size()) return false;
@@ -155,9 +207,14 @@ public class Personnage extends Element {
      * @return retourne la valeur de combat
      */
     public double valeurCombat(){
-        if (this.getArmure()==null) return this.agilite;
-        double bonusArme = this.getArmure().getModificateurAgilite();
-        double valeurCombat = this.agilite+bonusArme;
+        double bonusArmure;
+        if (this.getArmure()==null){
+            bonusArmure = 0;
+        }else{
+            bonusArmure = this.getArmure().getModificateurAgilite();
+        }
+        double bonusEffet = this.getEffetAgilite();
+        double valeurCombat = this.agilite+bonusArmure+bonusEffet;
         return valeurCombat;
     }
     
@@ -200,10 +257,15 @@ public class Personnage extends Element {
     }
 
     private double caluleDegatsBrut() {
-        if (this.getMain()==null) return this.force;
-        double bonusArme = this.getMain().getModificateurForce();
+        double bonusArme;
+        if (this.getMain()==null){
+            bonusArme = 0;
+        }else{
+            bonusArme = this.getMain().getModificateurForce();
+        }
         double bonusForce = this.force;
-        double degats = bonusArme + bonusForce;
+        double bonusEffet = this.getEffetForce();
+        double degats = bonusArme + bonusForce + bonusEffet;
         return degats;
     }
 
@@ -212,8 +274,14 @@ public class Personnage extends Element {
      * @return l'armure totale
      */
     public double getArmureTotal() {
-        if (this.getArmure()==null) return 0.0;
-        double armureTotal = this.getArmure().getModificateurProtection();
+        double bonusArmure;
+        if (this.getArmure()==null){
+            bonusArmure = 0.0;
+        }else{
+            bonusArmure = this.getArmure().getModificateurProtection();
+        }
+        double bonusEffet = this.getEffetArmure();
+        double armureTotal = bonusArmure + bonusEffet;
         return armureTotal;
     }
 
@@ -244,7 +312,7 @@ public class Personnage extends Element {
     }
     
     public boolean ajouterObjet(Objet o){
-        if(o.getPoids()+ this.getPoidsInventaire()<=this.poidsMax){
+        if(o.getPoids()+ this.getPoidsInventaire()<=(this.poidsMax + this.getEffetPoids())){
             return this.inventaire.add(o);
         }else{
             return false;
@@ -252,14 +320,14 @@ public class Personnage extends Element {
     } 
     
     public boolean ajoutEffet(Effet o){
-        return EffetCourant.add(o);
+        return this.effetCourant.add(o);
     }
     
     public boolean ajoutEffets(ArrayList<Effet> o){
-        return EffetCourant.addAll(o);
+        return this.effetCourant.addAll(o);
     }
     public boolean actionEffet(){
-        for(Effet effet : this.EffetCourant){
+        for(Effet effet : this.effetCourant){
             this.agilite += effet.getAgiliteAjoute();
             this.force += effet.getForceAjoute();
             this.pvMax += effet.getPvAjoute();
