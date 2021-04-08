@@ -3,7 +3,7 @@ package modele.element;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lieu extends Element {
+public class Lieu extends Element implements Generable {
     
     String nom;
 
@@ -119,6 +119,11 @@ public class Lieu extends Element {
     
     public String toString() {
         return this.nom;
+    }
+
+    @Override
+    public boolean generate(GenerableParametre p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
