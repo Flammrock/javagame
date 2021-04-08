@@ -125,7 +125,7 @@ public class Niveau extends Element implements Generable {
         ArrayList<Lieu> lieux = new ArrayList<>();
         for (int i = 0; i < nbsalles; i++) {
             Lieu lieu = new Lieu("Lieu "+i);
-            lieu.generate(p);
+            lieu.generate(p.getGenerableLieuParametre());
             lieux.add(lieu);
         }
         
