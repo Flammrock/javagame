@@ -131,7 +131,7 @@ public class Prog {
         String piecetertiaire = "piece tertiare";
         
         
-        Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
+        Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence",5);
         
         a.ajouterNiveau(niveau1);
         
