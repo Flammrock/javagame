@@ -8,6 +8,7 @@ package canvas;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 
 /**
@@ -25,13 +26,8 @@ public class SpriteSheet extends Sprite {
     int nx; // nombre d'image en x
     int ny; // nombre d'image en y
     
-    int key; // clé d'animation
-    
-    int index; // indice du tableau d'animations
-    ArrayList<Integer> keyMap; // tableau des clés d'animations
-    
-    int tick; // le tick courrant
-    int tickMax; // le nombre max de tick avant de passer à la next frame
+    HashMap<String, Animation> animations; // liste des animations
+    String animationCourrante; // nom de l'animation courrante
     
     /**
      * Permet de créer un sprite depuis un spritesheet sans aucune animation
@@ -43,16 +39,14 @@ public class SpriteSheet extends Sprite {
      */
     public SpriteSheet(String spritefile, int x, int y, int width, int height) {
         super(spritefile,x,y);
-        this.tick = 0;
-        this.tickMax = 10;
         this.width = width;
         this.height = height;
         this.spriteWidth = 0;
         this.spriteHeight = 0;
         this.nx = 1;
         this.ny = 1;
-        this.key = 0;
-        keyMap = new ArrayList<Integer>();
+        this.animationCourrante = "";
+        this.animations = new HashMap<>();
     }
     
     /**
@@ -71,41 +65,35 @@ public class SpriteSheet extends Sprite {
         this.spriteHeight = spriteHeight;
     }
 
-    
-    public void SetIntervalTick(int tickMax) {
-        this.tickMax = tickMax;
-    }
-    
-    public int getIntervalTick() {
-        return this.tickMax;
-    }
-    
-    
-    
-    public int getKey() {
-        return key;
+    public HashMap<String, Animation> getAnimations() {
+        return this.animations;
     }
 
-    public void setKey(int key) {
-        this.key = key;
+    public Animation getAnimationCourrante() {
+        if (this.animations.isEmpty()) return null;
+        return this.animations.get(this.animationCourrante);
     }
 
-    public ArrayList<Integer> getKeyMap() {
-        return keyMap;
-    }
-
-    public void setKeyMap(ArrayList<Integer> keyMap) {
-        this.keyMap = keyMap;
+    public Animation getAnimationParNom(String nom) {
+        if (this.animations.isEmpty()) return null;
+        return this.animations.get(nom);
     }
     
-    public void setKeyMap(int[] keyMap) {
-        this.keyMap.clear();
-        for (int i = 0; i < keyMap.length; i++) {
-            this.keyMap.add(keyMap[i]);
-        }
+    public void ajouterAnimation(Animation a) {
+        this.animations.put(a.getNom(), a);
     }
     
+    public void enleverAnimation(String nom) {
+        this.animations.remove(nom);
+    }
     
+    public boolean setAnimation(String nom) {
+        if (this.animations.isEmpty()) return false;
+        if (this.getAnimationParNom(nom)==null) return false;
+        this.animationCourrante = nom;
+        this.getAnimationParNom(nom).reset();
+        return true;
+    }
     
     
     public void setWidth(int width) {
@@ -128,32 +116,26 @@ public class SpriteSheet extends Sprite {
     
     private int getSpriteX() {
         if (this.nx == 0) return 0;
-        return (this.key % this.nx) * this.spriteWidth;
+        if (this.getAnimationCourrante()==null) return 0;
+        int key = this.getAnimationCourrante().getKey();
+        if (key > this.nx*this.ny-1) key = 0;
+        return (key % this.nx) * this.spriteWidth;
     }
     
     private int getSpriteY() {
         if (this.ny == 0) return 0;
-        return (this.key / this.ny) * this.spriteHeight;
+        if (this.getAnimationCourrante()==null) return 0;
+        int key = this.getAnimationCourrante().getKey();
+        if (key > this.nx*this.ny-1) key = 0;
+        return (key / this.ny) * this.spriteHeight;
     }
     
     private void nextKeyAnimation() {
         
-        if (this.keyMap.isEmpty()) return;
+        if (this.animations.isEmpty()) return;
+        if (this.getAnimationCourrante()==null) return;
         
-        this.tick++;
-        if (this.tick < this.tickMax) return;
-        
-        this.tick = 0;
-        
-        this.index++;
-        
-        if (this.index < 0) this.index = this.keyMap.size()-1;
-        if (this.index > this.keyMap.size()-1) this.index = 0;
-        
-        this.key = this.keyMap.get(this.index);
-        
-        if (this.key < 0) this.key = 0;
-        if (this.key > this.nx*this.ny-1) this.key = 0;
+        this.getAnimationCourrante().nextKey();
         
     }
     
