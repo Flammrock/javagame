@@ -42,6 +42,10 @@ public abstract class Objet extends Element {
             }
         }
     }
+
+    public double getPoids() {
+        return poids;
+    }
     
     public boolean onUtiliser(Personnage p) {
         return false;
