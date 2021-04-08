@@ -41,7 +41,7 @@ public class Porte extends Element{
     }
     
     public String toString() {
-        return this.nom + "(vers "+this.lieu2.getNom()+")";
+        return this.nom + " (vers "+this.lieu2.getNom()+")";
     }
     
     
