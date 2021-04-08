@@ -98,13 +98,6 @@ public class Effet extends Element {
             return true;
         }
         if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]<-1){//effet instantané (l'effet se detruira)
-            forceAjoute[0] = 0;
-            agiliteAjoute[0] = 0;
-            pvAjoute[0] = 0;
-            tpSalle = null;
-            poidsAjoute[0] = 0;
-            pvMaxAjoute[0] = 0;
-            armureAjoute[0] = 0;
             return false;
         }
         if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]>-1){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
