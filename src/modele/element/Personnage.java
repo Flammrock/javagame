@@ -103,7 +103,9 @@ public class Personnage extends Element {
         this.agilite = agilite;
     }
 
-
+    public ArrayList<Effet> getEffetCourant() {
+        return effetCourant;
+    }
 
     public Lieu getPieceActuel() {
         return pieceActuel;
