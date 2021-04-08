@@ -55,6 +55,16 @@ public class Animation {
         this.key = 0;
         this.playing = true;
     }
+    
+    
+    public void SetIntervalTick(int tickMax) {
+        this.tickMax = tickMax;
+    }
+    
+    public int getIntervalTick() {
+        return this.tickMax;
+    }
+    
 
     /**
      * Permet de récupérer le nom de l'animation
