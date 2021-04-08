@@ -110,6 +110,11 @@ public class Lieu extends Element {
         return true;
     }
     
+    public boolean ajouterPlusieursObjet(ArrayList<Objet> obj){
+        this.objets.addAll(obj);
+        return true;
+    }
+    
     public String toString() {
         return this.nom;
     }
