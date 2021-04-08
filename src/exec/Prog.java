@@ -131,7 +131,10 @@ public class Prog {
         String piecetertiaire = "piece tertiare";
         
         
-        Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence",5);
+        Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
+        
+        Niveau niveautest = new Niveau("Niveau Test","Test de génération automatique");
+        niveautest.generate(new GenerableNiveauParametre(5));
         
         a.ajouterNiveau(niveau1);
         
