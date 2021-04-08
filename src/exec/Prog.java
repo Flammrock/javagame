@@ -134,8 +134,17 @@ public class Prog {
         
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
         
+        ArrayList<Personnage> monstres = new ArrayList<>();
+        monstres.add(monstre);
+        ArrayList<Objet> objets = new ArrayList<>();
+        objets.add(epee);
+        objets.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,10.0));
+        
+        GenerableLieuParametre lieup = new GenerableLieuParametre(0.1,0.1);
+        lieup.setMonstres(monstres);
+        lieup.setObjets(objets);
         Niveau niveautest = new Niveau("Niveau Test","Test de génération automatique");
-        niveautest.generate(new GenerableNiveauParametre(5));
+        niveautest.generate(new GenerableNiveauParametre(5,lieup));
         
         a.ajouterNiveau(niveau1);
         a.ajouterNiveau(niveautest);
