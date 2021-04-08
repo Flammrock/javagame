@@ -91,6 +91,7 @@ public class Aventure extends Element {
                 logs += monstre.attaque(this.getJoueur());
             }else{
                 monstresMort[i] = monstres.indexOf(monstre);
+                logs += monstre.getNom()+" est mort\n";
                 i++;
             }
         }
