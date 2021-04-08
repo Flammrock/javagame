@@ -639,8 +639,10 @@ public class AppliGraphique extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selected = listeObjetInventaire.getSelectedIndex();
         if(selected!=-1){
-            this.aventure.getJoueur().getPieceActuel().ajouterObjet(this.aventure.getJoueur().getInventaire().remove(selected));
-            mettreAJourTout();
+            if(selected!=this.aventure.getJoueur().getInventaire().indexOf(this.aventure.getJoueur().getMain())){
+                this.aventure.getJoueur().getPieceActuel().ajouterObjet(this.aventure.getJoueur().getInventaire().remove(selected));
+                mettreAJourTout();
+            }
         }
     }//GEN-LAST:event_jeterBoutonActionPerformed
 

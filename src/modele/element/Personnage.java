@@ -242,7 +242,7 @@ public class Personnage extends Element {
     }
     
     public boolean ajouterObjet(Objet o){
-        if(o.getPoids()+ this.getPoidsInventaire()<this.poidsMax){
+        if(o.getPoids()+ this.getPoidsInventaire()<=this.poidsMax){
             return this.inventaire.add(o);
         }else{
             return false;
