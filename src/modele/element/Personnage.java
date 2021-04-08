@@ -17,6 +17,7 @@ public class Personnage extends Element {
     private Equipement armure;
     private Lieu pieceActuel;
     private double poidsMax;
+    private ArrayList<Effet> EffetCourant; 
 
     public Personnage(String nom, String description, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
         this.nom = nom;
@@ -30,6 +31,7 @@ public class Personnage extends Element {
         this.main = null;
         this.armure = null;
         this.poidsMax = force;
+        this.EffetCourant = new ArrayList<Effet>();
     }
 
     
@@ -248,6 +250,14 @@ public class Personnage extends Element {
             return false;
         }
     } 
+    
+    public boolean ajoutEffet(Effet o){
+        return EffetCourant.add(o);
+    }
+    
+    public boolean ajoutEffets(ArrayList<Effet> o){
+        return EffetCourant.addAll(o);
+    }
     
     public String toString() {
         if (this.description.trim().equals("")) {
