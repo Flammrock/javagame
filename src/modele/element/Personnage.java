@@ -337,6 +337,7 @@ public class Personnage extends Element {
         return true;
     } 
     
+    @Override
     public String toString() {
         if (this.description.trim().equals("")) {
             return this.nom;
