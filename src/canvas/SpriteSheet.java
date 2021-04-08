@@ -63,21 +63,21 @@ public class SpriteSheet extends Sprite {
     public boolean load() {
         boolean r = super.load();
         if (!r) return false;
-        if (this.width > this.image.getWidth()) this.width = this.image.getWidth();
-        if (this.height > this.image.getHeight()) this.height = this.image.getHeight();
-        this.nx = (int)Math.floor(this.image.getWidth() / this.width);
-        this.ny = (int)Math.floor(this.image.getHeight() / this.height);
+        if (this.spriteWidth > this.image.getWidth()) this.spriteWidth = this.image.getWidth();
+        if (this.spriteHeight > this.image.getHeight()) this.spriteHeight = this.image.getHeight();
+        this.nx = (int)Math.floor(this.image.getWidth() / this.spriteWidth);
+        this.ny = (int)Math.floor(this.image.getHeight() / this.spriteHeight);
         return true;
     }
     
     private int getSpriteX() {
         if (this.nx == 0) return 0;
-        return this.key % this.nx;
+        return (this.key % this.nx) * this.spriteWidth;
     }
     
     private int getSpriteY() {
         if (this.ny == 0) return 0;
-        return this.key / this.ny;
+        return (this.key / this.ny) * this.spriteHeight;
     }
     
     private void nextKeyAnimation() {
@@ -88,7 +88,7 @@ public class SpriteSheet extends Sprite {
     @Override
     public void draw(Canvas c, Graphics g) {
         if (!this.isLoaded()) return;
-        g.drawImage(this.image, this.getSpriteX(), this.getSpriteY(), this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height, null);
+        g.drawImage(this.image, this.x, this.y, this.x+this.width, this.y+this.height, this.getSpriteX(), this.getSpriteY(), this.getSpriteX()+this.spriteWidth, this.getSpriteY()+this.spriteHeight, null);
         this.nextKeyAnimation();
     }
     
