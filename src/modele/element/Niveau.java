@@ -25,6 +25,15 @@ public class Niveau extends Element{
     }
 
     /**
+     * Permet de récupérer le nom du niveau
+     * @return retourne le nom du niveau
+     */
+    public String getNom() {
+        return nom;
+    }
+    
+
+    /**
      * Permet d'ajouter un lieu
      * @param lieu
      */
