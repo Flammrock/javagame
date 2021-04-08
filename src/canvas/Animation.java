@@ -31,7 +31,7 @@ public class Animation {
         this.keyMap = keyMap;
         this.playing = true;
         
-        this.reset();
+        this.init();
     }
     
     /**
@@ -45,16 +45,35 @@ public class Animation {
             this.keyMap.add(keyMap[i]);
         }
         
-        this.reset();
+        this.init();
     }
     
-    private void reset() {
+    private void init() {
         this.index = 0;
         this.tick = 0;
         this.tickMax = 10;
         this.key = 0;
         this.playing = true;
     }
+    
+    /**
+     * Permet de reset une animation
+     */
+    public void reset() {
+        this.index = 0;
+        this.tick = 0;
+        this.key = 0;
+    }
+    
+    
+    public void SetIntervalTick(int tickMax) {
+        this.tickMax = tickMax;
+    }
+    
+    public int getIntervalTick() {
+        return this.tickMax;
+    }
+    
 
     /**
      * Permet de récupérer le nom de l'animation
