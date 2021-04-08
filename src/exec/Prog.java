@@ -111,14 +111,16 @@ public class Prog {
         
         ArrayList<Objet> listeInventaire = new ArrayList<Objet>();
         listeInventaire.add(new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0));
-        listeInventaire.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,1,new Effet("","",-2, 0, 0, 10, new Lieu("Rien"), 0)));
+        listeInventaire.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,new Effet("","",-2, 0, 0, 10, new Lieu("Rien"), 0)));
         
         Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100, listeInventaire);
         Effet nouvelleEffet = new Effet("Homme de fer","augmente la force",3, 5, 0, 0, new Lieu("Rien"), 0);
         joueur.ajoutEffet(nouvelleEffet);
         joueur.ajoutEffet(new Effet("Homme de fer","augmente la force",3, 5, 0, 0, new Lieu("Rien"), 0));
+        joueur.ajouterObjet(new Nourriture("Potion de force","augmente la force",1,new Effet("Homme de fer","augmente la force",3, 5, 0, 0, new Lieu("Rien"), 0)));
+        
         ArrayList<Objet> listeloot = new ArrayList<Objet>();
-        listeloot.add(new Nourriture("banane","Une grosse banane",2.0,1,new Effet("","",-2, 0, 0, 15, new Lieu("Rien"), 0)));
+        listeloot.add(new Nourriture("banane","Une grosse banane",2.0,new Effet("","",-2, 0, 0, 15, new Lieu("Rien"), 0)));
         listeloot.add(new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10));
         
         Personnage monstre = new Personnage("Goblin", "monstre de la mort", 5, 10, 10, 20, listeloot);
@@ -139,7 +141,7 @@ public class Prog {
         monstres.add(monstre);
         ArrayList<Objet> objets = new ArrayList<>();
         objets.add(epee);
-        objets.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,1,new Effet("","",-2, 0, 0, 10, new Lieu("Rien"), 0)));
+        objets.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,new Effet("","",-2, 0, 0, 10, new Lieu("Rien"), 0)));
         
         GenerableLieuParametre lieup = new GenerableLieuParametre(0.5,0.5);
         lieup.setMonstres(monstres);
