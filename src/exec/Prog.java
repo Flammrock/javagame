@@ -140,7 +140,7 @@ public class Prog {
         objets.add(epee);
         objets.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,10.0));
         
-        GenerableLieuParametre lieup = new GenerableLieuParametre(0.1,0.1);
+        GenerableLieuParametre lieup = new GenerableLieuParametre(0.5,0.5);
         lieup.setMonstres(monstres);
         lieup.setObjets(objets);
         Niveau niveautest = new Niveau("Niveau Test","Test de génération automatique");
