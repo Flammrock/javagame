@@ -117,9 +117,10 @@ public class Prog {
         
         ArrayList<Objet> listeloot = new ArrayList<Objet>();
         listeloot.add(new Nourriture("banane","Une grosse banane",2.0,15.0));
+        listeloot.add(new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10));
         
-        Personnage monstre = new Personnage("Goblin", "monstre de la mort", 5, 10, 10, 40, listeloot);
-        
+        Personnage monstre = new Personnage("Goblin", "monstre de la mort", 5, 10, 10, 20, listeloot);
+        monstre.equip(1);
                 
         Arme epee = new Arme("Epée","Epée Légendaire",25.2,-5,100);
         
