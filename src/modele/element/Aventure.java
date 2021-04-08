@@ -34,50 +34,67 @@ public class Aventure extends Element {
 
     /**
      * Permet d'ajouter un lieu
+     * @param niveaunom le nom du niveau
      * @param nom le nom du lieu
+     * @return retourne true si le lieu a bien été ajouté au niveau
      */
-    public void ajouterLieu(String nom) {
-        donjon.ajouterLieu(new Lieu(nom));
+    public boolean ajouterLieu(String niveaunom, String nom) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return false;
+        n.ajouterLieu(new Lieu(nom));
+        return true;
     }
 
     /**
      * Permet de récupérer un lieu via son nom
+     * @param niveaunom le nom du niveau
      * @param nom le nom du lieu
      * @return retourne le lieu portant ce nom sinon reoturne null
      */
-    public Lieu getLieu(String nom) {
-        return donjon.getLieu(nom);
+    public Lieu getLieu(String niveaunom, String nom) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return null;
+        return n.getLieu(nom);
     }
 
     /**
      * Permet d'ajouter une porte entre deux lieux
+     * @param niveaunom le nom du niveau
      * @param nom_porte
      * @param nom_lieu1
      * @param nom_lieu2
      * @return retourne true si la porte a été ajouté, false sinon
      */
-    public boolean ajouterPorte(String nom_porte, String nom_lieu1, String nom_lieu2) {
-        return donjon.ajouterPorte(nom_porte, nom_lieu1, nom_lieu2);
+    public boolean ajouterPorte(String niveaunom, String nom_porte, String nom_lieu1, String nom_lieu2) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return false;
+        return n.ajouterPorte(nom_porte, nom_lieu1, nom_lieu2);
     }
 
     /**
      * Permet d'ajouter un monstre dans un lieu
      * @param monstre le mon stre à ajouter
+     * @param niveaunom le nom du niveau
      * @param lieu le lieu dans le donjon
      * @return retourne true si le monstre a bien été ajouté, sinon false
      */
-    public boolean ajouterMonstre(Personnage monstre, String lieu) {
-        return donjon.ajouterMonstre(monstre, lieu);
+    public boolean ajouterMonstre(Personnage monstre, String niveaunom, String lieu) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return false;
+        return n.ajouterMonstre(monstre, lieu);
     }
 
     /**
      * Permet d'ajouter un objet dans un lieu
      * @param obj l'objet à rajouter
+     * @param niveaunom le nom du niveau
      * @param lieu le lieu où on ajoute l'objet
      * @return retourne true si l'objet a bien été ahouté, sinon false
      */
-    public boolean ajouterObjet(Objet obj, String lieu) {
-        return donjon.ajouterObjet(obj,lieu);
+    public boolean ajouterObjet(Objet obj, String niveaunom, String lieu) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return false;
+        return n.ajouterObjet(obj,lieu);
     }
 
     public String onActionJoueur() {
