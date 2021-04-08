@@ -167,6 +167,7 @@ public class Personnage extends Element {
     /**
      * permet a un personnage d'attaquer un autre personnage
      * @param ennemie le personnage que l'on affronte
+     * @return retourn la chaine de charactere explicitant l'attaque
      */
     public String attaque(Personnage ennemie){
         double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+ennemie.valeurCombat());
@@ -176,9 +177,9 @@ public class Personnage extends Element {
             attaque = this.blesse(ennemie);   
         }
         if(toucher){
-            return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque reussi.\nIl inflige "+attaque+" degats";
+            return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque reussi.\nIl inflige "+attaque+" degats.\n";
         }else{
-            return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque échoue";
+            return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque échoue.\n";
         }
     }
 
