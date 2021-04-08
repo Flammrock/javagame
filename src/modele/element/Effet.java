@@ -85,6 +85,10 @@ public class Effet extends Element {
         if(this.duréeDeLEffet!=-1){
             this.duréeDeLEffet--;
         }
-        return true;
+        if(this.duréeDeLEffet<-1){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
