@@ -139,7 +139,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     private void affichageLogsAttaque(String t){
-        logger.setText(t);
+        logger.setText(logger.getText()+t);
     }
     
     /**
@@ -576,7 +576,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourStatistiquePerso();
         this.mettreAJourListeMonstre();
         
-        this.aventure.onActionJoueur();
+        affichageLogsAttaque(this.aventure.onActionJoueur());
         
         this.mettreAJourTout();
     }//GEN-LAST:event_CombattreActionPerformed
