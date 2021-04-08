@@ -12,7 +12,7 @@ import java.util.List;
  * Un niveau contient un début et une fin
  * @author User
  */
-public class Niveau extends Element implements Generable<Niveau> {
+public class Niveau extends Element implements Generable {
     
     String nom;
     List<Lieu> salles;
@@ -98,9 +98,12 @@ public class Niveau extends Element implements Generable<Niveau> {
     }
 
     @Override
-    public Niveau generate() {
+    public boolean generate(GenerableParametre s) {
         
-        return null;
+        GenerableNiveauParametre p = (GenerableNiveauParametre)s;
+        
+        
+        return false;
     }
     
     
