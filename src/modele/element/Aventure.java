@@ -142,4 +142,13 @@ public class Aventure extends Element {
         }
         return logs;
     }
+
+    /**
+     * Permet d'ajouter un niveau dans le donjon
+     * @param niveau le niveau à ajouter
+     * @return retourne true si le niveau a bien été ajouté, sinon false
+     */
+    public boolean ajouterNiveau(Niveau niveau) {
+        return this.donjon.ajouterNiveau(niveau);
+    }
 }
