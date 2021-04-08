@@ -216,6 +216,8 @@ public class Personnage extends Element {
     private void mort(Personnage ennemie) {
         ennemie.setPv(0.0);
         this.pieceActuel.ajouterPlusieursObjet(ennemie.getInventaire());
+        this.pieceActuel.ajouterObjet(ennemie.getMain());
+        this.pieceActuel.ajouterObjet(ennemie.getArmure());
     }
     
     
