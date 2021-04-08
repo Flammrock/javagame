@@ -11,7 +11,7 @@ public class Personnage extends Element {
     private double force;
     private double agilite;
     private double pv;
-    private double pvmax;
+    private double pvMax;
     private ArrayList<Objet> inventaire;
     private Equipement main;
     private Equipement armure;
@@ -26,7 +26,7 @@ public class Personnage extends Element {
         this.force = force;
         this.agilite = agilite;
         this.pv = pv;
-        this.pvmax = pv;
+        this.pvMax = pv;
         this.inventaire = inventaire;
         this.main = null;
         this.armure = null;
@@ -48,8 +48,8 @@ public class Personnage extends Element {
     }
 
     public void setPv(double pv) {
-        if (pv > this.pvmax) {
-            this.pv = this.pvmax;
+        if (pv > this.pvMax) {
+            this.pv = this.pvMax;
             return;
         }
         this.pv = pv;
@@ -115,8 +115,8 @@ public class Personnage extends Element {
 
 
     public void ajoutePointVie(double valeur) {
-        if (this.pv + valeur > this.pvmax) {
-            this.pv = this.pvmax;
+        if (this.pv + valeur > this.pvMax) {
+            this.pv = this.pvMax;
             return;
         }
         this.pv += valeur;
@@ -258,6 +258,16 @@ public class Personnage extends Element {
     public boolean ajoutEffets(ArrayList<Effet> o){
         return EffetCourant.addAll(o);
     }
+    public boolean actionEffet(){
+        for(Effet effet : this.EffetCourant){
+            this.agilite += effet.getAgiliteAjoute();
+            this.force += effet.getForceAjoute();
+            this.pvMax += effet.getPvAjoute();
+            this.poidsMax += effet.getPoidsAjoute();
+            effet.tourPasse();
+        }
+        return true;
+    } 
     
     public String toString() {
         if (this.description.trim().equals("")) {
