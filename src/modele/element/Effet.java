@@ -11,24 +11,32 @@ package modele.element;
  */
 public class Effet extends Element {
     private String Nom;
-    private double duréeDeLEffet;
-    private double duréeDeLEffetintial;
-    private double forceAjoute;
-    private double agiliteAjoute;
-    private double pvAjoute;
+    private double[] duréeDeLEffet = new double[2];
+    private double[] forceAjoute = new double[3];   //tableau ou l'indice: 0=effetCourant, 1=effetInitial, 2=effetContinu
+    private double[] agiliteAjoute = new double[3];
+    private double[] pvAjoute = new double[3];
     private Lieu tpSalle;
-    private double poidsAjoute;
+    private double[] poidsAjoute = new double[3];
 
     public Effet(String Nom,String description, double duréeDeLEffet, double forceAjoute, double forceAjouteContinue, double agiliteAjoute, double agiliteAjouteContinue, double pvAjoute, double pvAjouteContinue, Lieu tpSalle, double poidsAjoute) {
         this.Nom = Nom;
         this.description = description;
-        this.duréeDeLEffet = duréeDeLEffet;
-        this.duréeDeLEffetintial = duréeDeLEffet;
-        this.forceAjoute = forceAjoute;
-        this.agiliteAjoute = agiliteAjoute;
-        this.pvAjoute = pvAjoute;
+        this.duréeDeLEffet[0] = duréeDeLEffet;
+        this.duréeDeLEffet[1] = duréeDeLEffet;
+        this.duréeDeLEffet[2] = 0;
+        this.forceAjoute[0] = forceAjoute;
+        this.forceAjoute[1] = forceAjoute;
+        this.forceAjoute[2] = 0;
+        this.agiliteAjoute[0] = agiliteAjoute;
+        this.agiliteAjoute[1] = agiliteAjoute;
+        this.agiliteAjoute[2] = 0;
+        this.pvAjoute[0] = pvAjoute;
+        this.pvAjoute[1] = pvAjoute;
+        this.pvAjoute[2] = 0;
         this.tpSalle = tpSalle;
-        this.poidsAjoute = poidsAjoute;
+        this.poidsAjoute[0] = poidsAjoute;
+        this.poidsAjoute[1] = poidsAjoute;
+        this.poidsAjoute[2] = 0;
     }
 
     
@@ -38,19 +46,19 @@ public class Effet extends Element {
     }
 
     public double getDuréeDeLEffet() {
-        return duréeDeLEffet;
+        return duréeDeLEffet[0];
     }
 
     public double getForceAjoute() {
-        return forceAjoute;
+        return forceAjoute[0];
     }
 
     public double getAgiliteAjoute() {
-        return agiliteAjoute;
+        return agiliteAjoute[0];
     }
 
     public double getPvAjoute() {
-        return pvAjoute;
+        return pvAjoute[0];
     }
 
     public Lieu getTpSalle() {
@@ -62,37 +70,43 @@ public class Effet extends Element {
     }
 
     public double getPoidsAjoute() {
-        return poidsAjoute;
+        return poidsAjoute[0];
     }
     
     public boolean tourPasse(){
-        if(duréeDeLEffet==duréeDeLEffetintial && duréeDeLEffet==-1);//effet permanant 
-        if(duréeDeLEffet==duréeDeLEffetintial && duréeDeLEffet<-1){//effet instantané
-            forceAjoute = 0;
-            agiliteAjoute = 0;
-            pvAjoute = 0;
+        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]==-1){//effet permanant 
+            forceAjoute[0] = 0;
+            agiliteAjoute[0] = 0;
+            pvAjoute[0] = 0;
             tpSalle = null;
-            poidsAjoute = 0;
+            poidsAjoute[0] = 0;
         }
-        if(duréeDeLEffet==duréeDeLEffetintial && duréeDeLEffet>-1){//effet a durée limité dans le temps
-            forceAjoute = 0;
-            agiliteAjoute = 0;
-            pvAjoute = 0;
+        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]<-1){//effet instantané
+            forceAjoute[0] = 0;
+            agiliteAjoute[0] = 0;
+            pvAjoute[0] = 0;
             tpSalle = null;
-            poidsAjoute = 0;
+            poidsAjoute[0] = 0;
         }
-        if(duréeDeLEffet == 0 && duréeDeLEffet>-1){//fin de l'effet
-            forceAjoute = -forceAjoute;         //A finir
-            agiliteAjoute = -agiliteAjoute;
-            pvAjoute = -pvAjoute;
+        if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]>-1){//effet a durée limité dans le temps
+            forceAjoute[0] = 0;
+            agiliteAjoute[0] = 0;
+            pvAjoute[0] = 0;
             tpSalle = null;
-            poidsAjoute = -poidsAjoute;
+            poidsAjoute[0] = 0;
+        }
+        if(duréeDeLEffet[0] == 0 && duréeDeLEffet[0]>-1){//fin de l'effet
+            forceAjoute[0] = -forceAjoute[1];         //A finir
+            agiliteAjoute[0] = -agiliteAjoute[1];
+            pvAjoute[0] = -pvAjoute[1];
+            tpSalle = null;
+            poidsAjoute[0] = -poidsAjoute[1];
         }
         
-        if(this.duréeDeLEffet!=-1){
-            this.duréeDeLEffet--;
+        if(this.duréeDeLEffet[0]!=-1){
+            this.duréeDeLEffet[0]--;
         }
-        if(this.duréeDeLEffet<-1){
+        if(this.duréeDeLEffet[0]<-1){
             return false;
         }else{
             return true;
