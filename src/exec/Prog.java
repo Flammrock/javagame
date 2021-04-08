@@ -139,7 +139,7 @@ public class Prog {
         monstres.add(monstre);
         ArrayList<Objet> objets = new ArrayList<>();
         objets.add(epee);
-        objets.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,10.0));
+        objets.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,1,new Effet("","",-2, 0, 0, 10, new Lieu("Rien"), 0)));
         
         GenerableLieuParametre lieup = new GenerableLieuParametre(0.5,0.5);
         lieup.setMonstres(monstres);
