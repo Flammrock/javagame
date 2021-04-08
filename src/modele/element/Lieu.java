@@ -60,12 +60,14 @@ public class Lieu extends Element {
      */
     public boolean ajoutePorteVers(String nom, Lieu lieu2) {
         
-        // on regarde si une porte d'une même nom existe déjà
+        // on regarde si une porte va au même endroit
         for (Porte p : this.listePorte) {
-            if (p.getNom().equals(nom)) return false;
+            if (p.getLieu1().getNom().equals(this.nom) && p.getLieu2().getNom().equals(lieu2.getNom())) return false;
+            if (p.getLieu2().getNom().equals(this.nom) && p.getLieu1().getNom().equals(lieu2.getNom())) return false;
         }
         for (Porte p : lieu2.getListePorte()) {
-            if (p.getNom().equals(nom)) return false;
+            if (p.getLieu1().getNom().equals(this.nom) && p.getLieu2().getNom().equals(lieu2.getNom())) return false;
+            if (p.getLieu2().getNom().equals(this.nom) && p.getLieu1().getNom().equals(lieu2.getNom())) return false;
         }
 
         Porte p1 = new Porte(nom, this, lieu2);
