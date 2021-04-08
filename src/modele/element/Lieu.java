@@ -122,8 +122,25 @@ public class Lieu extends Element implements Generable {
     }
 
     @Override
-    public boolean generate(GenerableParametre p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean generate(GenerableParametre s) {
+        
+        // on cast pour récupérer les paramètres
+        GenerableLieuParametre p = (GenerableLieuParametre)s;
+        
+        double r = Math.random();
+        if (r < p.getProba_monstre() && p.getMonstres().size() > 0) {
+            int index = (int)(Math.random() * p.getMonstres().size());
+            this.monstres.add(p.getMonstres().get(index));
+        }
+        
+        r = Math.random();
+        if (r < p.getProba_objet() && p.getObjets().size() > 0) {
+            int index = (int)(Math.random() * p.getObjets().size());
+            this.objets.add(p.getObjets().get(index));
+        }
+        
+        return true;
+        
     }
 
 }
