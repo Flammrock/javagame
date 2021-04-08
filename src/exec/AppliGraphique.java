@@ -6,6 +6,9 @@
 package exec;
 
 import canvas.SpriteSheet;
+import java.awt.Toolkit;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -41,6 +44,15 @@ public class AppliGraphique extends javax.swing.JFrame {
         SpriteSheet s = new SpriteSheet("/spritesheettest.png",0,0,50,37,50*3,37*3);
         s.load();
         canvas1.ajouterItem(s);
+        
+        
+        new Timer("Drawer", true).scheduleAtFixedRate( new TimerTask(){
+            public void run(){
+               canvas1.repaint();
+            }
+        }, 
+        100, // Start in 100 ms
+        (int)(1000 / 60));
         
 
         mettreAJourTout();
