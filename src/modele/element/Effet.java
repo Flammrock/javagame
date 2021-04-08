@@ -25,7 +25,6 @@ public class Effet extends Element {
         this.description = description;
         this.duréeDeLEffet[0] = duréeDeLEffet;
         this.duréeDeLEffet[1] = duréeDeLEffet;
-        this.duréeDeLEffet[2] = 0;
         this.forceAjoute[0] = forceAjoute;
         this.forceAjoute[1] = forceAjoute;
         this.forceAjoute[2] = 0;
