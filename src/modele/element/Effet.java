@@ -20,7 +20,7 @@ public class Effet extends Element {
     private double[] poidsAjoute = new double[3];
     private double[] armureAjoute = new double[3];
 
-    public Effet(String Nom,String description, double duréeDeLEffet, double forceAjoute, double forceAjouteContinue, double agiliteAjoute, double agiliteAjouteContinue, double pvAjoute, double pvAjouteContinue, Lieu tpSalle, double poidsAjoute) {
+    public Effet(String Nom,String description, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, Lieu tpSalle, double poidsAjoute) {
         this.Nom = Nom;
         this.description = description;
         this.duréeDeLEffet[0] = duréeDeLEffet;
