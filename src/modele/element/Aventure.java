@@ -44,6 +44,10 @@ public class Aventure extends Element {
         n.ajouterLieu(new Lieu(nom));
         return true;
     }
+    
+    public boolean ajouterLieu(Niveau niveau, String nom) {
+        return this.ajouterLieu(niveau.getNom(),  nom);
+    }
 
     /**
      * Permet de récupérer un lieu via son nom
@@ -55,6 +59,10 @@ public class Aventure extends Element {
         Niveau n = donjon.getNiveau(niveaunom);
         if (n==null) return null;
         return n.getLieu(nom);
+    }
+    
+    public Lieu getLieu(Niveau niveau, String nom) {
+        return this.getLieu(niveau.getNom(), nom);
     }
 
     /**
@@ -70,31 +78,43 @@ public class Aventure extends Element {
         if (n==null) return false;
         return n.ajouterPorte(nom_porte, nom_lieu1, nom_lieu2);
     }
+    
+    public boolean ajouterPorte(Niveau niveau, String nom_porte, String nom_lieu1, String nom_lieu2) {
+        return this.ajouterPorte(niveau.getNom(), nom_porte, nom_lieu1, nom_lieu2);
+    }
 
     /**
      * Permet d'ajouter un monstre dans un lieu
-     * @param monstre le mon stre à ajouter
      * @param niveaunom le nom du niveau
      * @param lieu le lieu dans le donjon
+     * @param monstre le mon stre à ajouter
      * @return retourne true si le monstre a bien été ajouté, sinon false
      */
-    public boolean ajouterMonstre(Personnage monstre, String niveaunom, String lieu) {
+    public boolean ajouterMonstre(String niveaunom, String lieu, Personnage monstre) {
         Niveau n = donjon.getNiveau(niveaunom);
         if (n==null) return false;
         return n.ajouterMonstre(monstre, lieu);
     }
+    
+    public boolean ajouterMonstre(Niveau niveau, String lieu, Personnage monstre) {
+        return this.ajouterMonstre(niveau.getNom(), lieu, monstre);
+    }
 
     /**
      * Permet d'ajouter un objet dans un lieu
-     * @param obj l'objet à rajouter
      * @param niveaunom le nom du niveau
      * @param lieu le lieu où on ajoute l'objet
+     * @param obj l'objet à rajouter
      * @return retourne true si l'objet a bien été ahouté, sinon false
      */
-    public boolean ajouterObjet(Objet obj, String niveaunom, String lieu) {
+    public boolean ajouterObjet(String niveaunom, String lieu, Objet obj) {
         Niveau n = donjon.getNiveau(niveaunom);
         if (n==null) return false;
         return n.ajouterObjet(obj,lieu);
+    }
+    
+    public boolean ajouterObjet(Niveau niveau, String lieu, Objet obj) {
+        return this.ajouterObjet(niveau.getNom(), lieu, obj);
     }
 
     public String onActionJoueur() {
