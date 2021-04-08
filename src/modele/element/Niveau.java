@@ -12,7 +12,7 @@ import java.util.List;
  * Un niveau contient un début et une fin
  * @author User
  */
-public class Niveau extends Element{
+public class Niveau extends Element implements Generable<Niveau> {
     
     String nom;
     List<Lieu> salles;
@@ -91,6 +91,11 @@ public class Niveau extends Element{
         Lieu lieuobj = this.getLieu(lieu);
         if (lieuobj == null) return false;
         return lieuobj.ajouterObjet(obj);
+    }
+
+    @Override
+    public Niveau generate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
