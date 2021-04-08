@@ -5,6 +5,7 @@
  */
 package exec;
 
+import canvas.Animation;
 import canvas.SpriteSheet;
 import java.awt.Toolkit;
 import java.util.Timer;
@@ -43,7 +44,10 @@ public class AppliGraphique extends javax.swing.JFrame {
         
         SpriteSheet s = new SpriteSheet("/spritesheettest.png",0,0,50,37,50*3,37*3);
         s.loadImage();
-        s.setKeyMap(new int[] {0, 1, 2, 3});
+        s.ajouterAnimation(new Animation("Idle",new int[] {0, 1, 2, 3}));
+        s.setAnimation("Idle");
+        
+        
         canvas1.ajouterItem(s);
         
         
