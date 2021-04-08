@@ -9,8 +9,6 @@ package modele.element;
  *
  * @author User
  */
-public interface Generable {
-    
-    boolean generate(GenerableParametre p);
+public abstract class GenerableParametre {
     
 }
