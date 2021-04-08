@@ -18,6 +18,7 @@ public class Effet extends Element {
     private double[] pvMaxAjoute = new double[3];
     private Lieu tpSalle;
     private double[] poidsAjoute = new double[3];
+    private double[] armureAjoute = new double[3];
 
     public Effet(String Nom,String description, double duréeDeLEffet, double forceAjoute, double forceAjouteContinue, double agiliteAjoute, double agiliteAjouteContinue, double pvAjoute, double pvAjouteContinue, Lieu tpSalle, double poidsAjoute) {
         this.Nom = Nom;
@@ -41,6 +42,9 @@ public class Effet extends Element {
         this.poidsAjoute[0] = poidsAjoute;
         this.poidsAjoute[1] = poidsAjoute;
         this.poidsAjoute[2] = 0;
+        this.armureAjoute[0] = 0;   //a ajouter
+        this.armureAjoute[1] = 0;
+        this.armureAjoute[2] = 0;
     }
 
     
@@ -81,6 +85,10 @@ public class Effet extends Element {
         return pvMaxAjoute[0];
     }
     
+    public double getArmureAjoute() {
+        return armureAjoute[0];
+    }
+    
     /**
      *fonction a appeler a la fin du tour lorque l'on a deja getter les effets
      * @return retourn true si l'effet doit rester actif et false si l'effet est fini est doit etre detruit
@@ -97,6 +105,7 @@ public class Effet extends Element {
             tpSalle = null;
             poidsAjoute[0] = 0;
             pvMaxAjoute[0] = 0;
+            armureAjoute[0] = 0;
             return false;
         }
         if(duréeDeLEffet[0]==duréeDeLEffet[1] && duréeDeLEffet[0]>-1){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
@@ -109,6 +118,7 @@ public class Effet extends Element {
             pvMaxAjoute[0] = 0;
             tpSalle = null;
             poidsAjoute[0] = 0;
+            armureAjoute[0] = 0;
             return false;
         }
         
