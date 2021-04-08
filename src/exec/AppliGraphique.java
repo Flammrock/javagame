@@ -570,11 +570,11 @@ public class AppliGraphique extends javax.swing.JFrame {
         // TODO add your handling code here:
         Personnage p = listeMonstre.getSelectedValue();
         if (p == null) return;
-        
+        affichageLogs("Tour de "+this.aventure.getJoueur()+":\n");
         affichageLogs(this.aventure.getJoueur().attaque(p));
         this.mettreAJourStatistiquePerso();
         this.mettreAJourListeMonstre();
-        
+        affichageLogs("Tour des monstres :\n");
         affichageLogs(this.aventure.onActionJoueur());
         affichageLogs("Fin du tour\n\n");
         this.mettreAJourTout();
