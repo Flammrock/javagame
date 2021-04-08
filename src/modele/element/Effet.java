@@ -128,6 +128,57 @@ public class Effet extends Element {
         return true;
     }
     
-    
+    @Override
+    public String toString(){
+        String listesEffets = getNom()+"\n";
+        if(duréeDeLEffet[0]>=0){
+            if(getDuréeDeLEffet()>0){
+                listesEffets += "Durée : "+getDuréeDeLEffet() + "Tours\n"; 
+            }
+            if(getPvAjoute()!=0){
+                if(getPvAjoute()>0){
+                    listesEffets += "PV : +"+getPvAjoute()+"\n";
+                }else{
+                    listesEffets += "PV : "+getPvAjoute()+"\n";
+                }
+            }
+            if(getPvMaxAjoute()!=0){
+                if(getPvMaxAjoute()>0){
+                    listesEffets += "PV max : +"+getPvMaxAjoute()+"\n";
+                }else{
+                    listesEffets += "PV max : "+getPvMaxAjoute()+"\n";
+                }
+            }
+            if(getForceAjoute()!=0){
+                if(getForceAjoute()>0){
+                    listesEffets += "Force : +"+getForceAjoute()+"\n";
+                }else{
+                    listesEffets += "Force : "+getForceAjoute()+"\n";
+                }
+            }
+            if(getAgiliteAjoute()!=0){
+                if(getAgiliteAjoute()>0){
+                    listesEffets += "Agilité : +"+getAgiliteAjoute()+"\n";
+                }else{
+                    listesEffets += "Agilité : "+getAgiliteAjoute()+"\n";
+                }
+            }
+            if(getPoidsAjoute()!=0){
+                if(getPoidsAjoute()>0){
+                    listesEffets += "Poids : +"+getPoidsAjoute()+"\n";
+                }else{
+                    listesEffets += "Poids : "+getPoidsAjoute()+"\n";
+                }
+            }
+            if(getArmureAjoute()!=0){
+                if(getArmureAjoute()>0){
+                    listesEffets += "Armure : +"+getArmureAjoute()+"\n";
+                }else{
+                    listesEffets += "Armure : "+getArmureAjoute()+"\n";
+                }
+            }
+        }
+        return listesEffets;
+    }
     
 }
