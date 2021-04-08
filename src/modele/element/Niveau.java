@@ -100,7 +100,7 @@ public class Niveau extends Element implements Generable<Niveau> {
     @Override
     public Niveau generate() {
         
-        
+        return null;
     }
     
     
