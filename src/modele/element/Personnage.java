@@ -168,15 +168,21 @@ public class Personnage extends Element {
      * permet a un personnage d'attaquer un autre personnage
      * @param ennemie le personnage que l'on affronte
      */
-    public void attaque(Personnage ennemie){
+    public String attaque(Personnage ennemie){
         double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+ennemie.valeurCombat());
         boolean toucher = aToucher(probabiliteDeToucher);
+        double attaque = 0;
         if(toucher){
-            this.blesse(ennemie);   
+            attaque = this.blesse(ennemie);   
+        }
+        if(toucher){
+            return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque reussi.\nIl inflige "+attaque+" degats";
+        }else{
+            return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque échoue";
         }
     }
 
-    private void blesse(Personnage ennemie) {
+    private double blesse(Personnage ennemie) {
         double pointdevie = ennemie.getPv();
         double degats = caluleDegatsBrut() - ennemie.getArmureTotal();
         pointdevie -= degats;
@@ -185,6 +191,7 @@ public class Personnage extends Element {
         }else{
             mort(ennemie);
         }
+        return degats;
     }
 
     private double caluleDegatsBrut() {
