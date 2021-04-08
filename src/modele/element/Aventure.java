@@ -136,7 +136,7 @@ public class Aventure extends Element {
         for (int j=0;j<i;j++) {
             if(!(monstres.remove(j).getNom().equals("Cadavre"))){
                 ArrayList<Objet> listeloot = new ArrayList<Objet>();
-                listeloot.add(new Nourriture("chaire putidre", "il est déconseiller de la manger", 5, 1,new Effet("","",-2, 0, 0, 3, new Lieu("Rien"), 0)));
+                listeloot.add(new Nourriture("chaire putidre", "il est déconseiller de la manger", 5,new Effet("","",-2, 0, 0, 3, new Lieu("Rien"), 0)));
                 monstres.add(new Personnage("Cadavre","une dépouille inutile",0,0,0,1,listeloot));
             }
         }
