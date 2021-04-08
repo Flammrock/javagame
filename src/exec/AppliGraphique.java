@@ -5,6 +5,7 @@
  */
 package exec;
 
+import canvas.SpriteSheet;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -37,7 +38,11 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         });
         
+        SpriteSheet s = new SpriteSheet("/spritesheettest.png",0,0,50,37,50*3,37*3);
+        s.load();
+        canvas1.ajouterItem(s);
         
+
         mettreAJourTout();
     }
     
@@ -74,6 +79,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     private void mettreAJourSalle(){
+        canvas1.repaint();
         jTextPane1.setText(this.aventure.getJoueur().getPieceActuel().toString());
     }
     
@@ -498,6 +504,8 @@ public class AppliGraphique extends javax.swing.JFrame {
 
         jTextPane1.setEditable(false);
         jScrollPane3.setViewportView(jTextPane1);
+
+        canvas1.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout canvas1Layout = new javax.swing.GroupLayout(canvas1);
         canvas1.setLayout(canvas1Layout);
