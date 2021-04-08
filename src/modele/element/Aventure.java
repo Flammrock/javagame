@@ -34,10 +34,15 @@ public class Aventure extends Element {
 
     /**
      * Permet d'ajouter un lieu
+     * @param niveaunom le nom du niveau
      * @param nom le nom du lieu
+     * @return retourne true si le lieu a bien été ajouté au niveau
      */
-    public void ajouterLieu(String nom) {
-        donjon.ajouterLieu(new Lieu(nom));
+    public boolean ajouterLieu(String niveaunom, String nom) {
+        Niveau n = donjon.getNiveau(niveaunom);
+        if (n==null) return false;
+        n.ajouterLieu(new Lieu(nom));
+        return true;
     }
 
     /**
