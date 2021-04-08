@@ -126,7 +126,7 @@ public class Personnage extends Element {
     private double getEffetForce(){
         double force = 0;
         for(Effet effet : this.effetCourant){
-            force = effet.getForceAjoute();
+            force += effet.getForceAjoute();
         }
         return force;
     }
@@ -138,7 +138,7 @@ public class Personnage extends Element {
     private double getEffetAgilite(){
         double agilite = 0;
         for(Effet effet : this.effetCourant){
-            agilite = effet.getAgiliteAjoute();
+            agilite += effet.getAgiliteAjoute();
         }
         return agilite;
     }
@@ -146,7 +146,7 @@ public class Personnage extends Element {
     private double getEffetPv(){
         double pv = 0;
         for(Effet effet : this.effetCourant){
-            pv = effet.getPvAjoute();
+            pv += effet.getPvAjoute();
         }
         return pv;
     }
@@ -154,7 +154,7 @@ public class Personnage extends Element {
     private double getEffetPvMax(){
         double pvMax = 0;
         for(Effet effet : this.effetCourant){
-            pvMax = effet.getPvMaxAjoute();
+            pvMax += effet.getPvMaxAjoute();
         }
         return pvMax;
     }
@@ -162,7 +162,7 @@ public class Personnage extends Element {
     private double getEffetPoids(){
         double poids = 0;
         for(Effet effet : this.effetCourant){
-            poids = effet.getPoidsAjoute();
+            poids += effet.getPoidsAjoute();
         }
         return poids;
     }
@@ -170,7 +170,7 @@ public class Personnage extends Element {
     private double getEffetArmure(){
         double Armure = 0;
         for(Effet effet : this.effetCourant){
-            Armure = effet.getArmureAjoute();
+            Armure += effet.getArmureAjoute();
         }
         return Armure;
     }
@@ -339,7 +339,7 @@ public class Personnage extends Element {
             }
         }
         for(int j=0;j<i;j++){
-            this.effetCourant.remove(effetASupp[j]);
+            this.effetCourant.remove(effetASupp[j]-j);
         }
         return true;
     } 
