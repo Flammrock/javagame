@@ -80,8 +80,14 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.mettreAJourNom();
         this.mettreAJourPv();
         this.mettreAJourListeInventaire();
+        this.mettreAJourListeEffet();
     }
     
+    private void mettreAJourListeEffet(){
+        DefaultListModel<Effet> g = new DefaultListModel<>();
+        g.addAll(this.aventure.getJoueur().getEffetCourant());
+        listeEffetJoueur.setModel(g);
+    }
     
     private void mettreAJourListeMonstre(){
         DefaultListModel<Personnage> g = new DefaultListModel<>();
@@ -217,6 +223,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         textArmure = new javax.swing.JTextArea();
         jScrollPane22 = new javax.swing.JScrollPane();
         textArmeEnMain = new javax.swing.JTextArea();
+        jScrollPane23 = new javax.swing.JScrollPane();
+        listeEffetJoueur = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane19 = new javax.swing.JScrollPane();
         jTextPaneInventaireFixe = new javax.swing.JTextPane();
@@ -399,27 +407,32 @@ public class AppliGraphique extends javax.swing.JFrame {
         textArmeEnMain.setRows(1);
         jScrollPane22.setViewportView(textArmeEnMain);
 
+        jScrollPane23.setViewportView(listeEffetJoueur);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane7)
-                    .addComponent(jScrollPane8)
-                    .addComponent(jScrollPane9)
-                    .addComponent(jScrollPane10)
-                    .addComponent(jScrollPane11)
-                    .addComponent(jScrollPane12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                    .addComponent(jScrollPane13)
-                    .addComponent(jScrollPane14)
-                    .addComponent(jScrollPane15)
-                    .addComponent(jScrollPane16)
-                    .addComponent(jScrollPane22, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane7)
+                            .addComponent(jScrollPane8)
+                            .addComponent(jScrollPane9)
+                            .addComponent(jScrollPane10)
+                            .addComponent(jScrollPane11)
+                            .addComponent(jScrollPane12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane21)
+                            .addComponent(jScrollPane13)
+                            .addComponent(jScrollPane14)
+                            .addComponent(jScrollPane15)
+                            .addComponent(jScrollPane16)
+                            .addComponent(jScrollPane22, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -450,7 +463,9 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -472,7 +487,7 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(236, 236, 236))
+                .addGap(239, 239, 239))
         );
 
         jTextPaneInventaireFixe.setEditable(false);
@@ -502,9 +517,9 @@ public class AppliGraphique extends javax.swing.JFrame {
             .addComponent(jScrollPane19)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jeterBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
                 .addComponent(utiliserBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollPane20)
+            .addComponent(jScrollPane20, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -515,8 +530,8 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(246, 246, 246))
+                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(185, 185, 185))
         );
 
         jTextPane1.setEditable(false);
@@ -545,7 +560,7 @@ public class AppliGraphique extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanelAffichageSalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -571,9 +586,9 @@ public class AppliGraphique extends javax.swing.JFrame {
                         .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -710,6 +725,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane20;
     private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane22;
+    private javax.swing.JScrollPane jScrollPane23;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -731,6 +747,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPanePv;
     private javax.swing.JTextPane jTextPanePvFixe;
     private javax.swing.JButton jeterBouton;
+    private javax.swing.JList<Effet> listeEffetJoueur;
     private javax.swing.JList<Personnage> listeMonstre;
     private javax.swing.JList<Objet> listeObjet;
     private javax.swing.JList<Objet> listeObjetInventaire;
