@@ -32,6 +32,24 @@ public class Niveau extends Element implements Generable {
     public String getNom() {
         return nom;
     }
+
+    /**
+     * Permet de récupérer l'entrée du niveau
+     * @return retourne l'entrée du niveau
+     */
+    public Lieu getEntree() {
+        return entree;
+    }
+
+    /**
+     * Permet de récupérer la sortie du niveau
+     * @return retourne la sortie du niveau
+     */
+    public Lieu getSortie() {
+        return sortie;
+    }
+    
+    
     
 
     /**
