@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 public class Canvas extends JPanel {
     
     ArrayList<Drawable> itemsdrawable;
-    Graphics crayon;
     
     public Canvas() {
         super();
@@ -30,16 +29,9 @@ public class Canvas extends JPanel {
         this.itemsdrawable.add(item);
     }
     
-    public void mettreAJour() {
-        if (this.crayon==null) return;
-        this.paint(this.crayon);
-    }
-    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-        crayon = g;
         
         //Graphics2D graphic2d = (Graphics2D) g;
         //graphic2d.setColor(Color.BLUE);
