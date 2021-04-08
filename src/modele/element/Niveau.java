@@ -19,14 +19,10 @@ public class Niveau extends Element implements Generable {
     Lieu entree;
     Lieu sortie;
     
-    // utile pour la génération
-    int nombreSalles; // au moins 2 (début et sortie)
-    
-    public Niveau(String nom,String description,int nombreSalles) {
+    public Niveau(String nom,String description) {
         this.nom = nom;
         this.description = description;
         this.salles = new ArrayList<>();
-        this.nombreSalles = nombreSalles < 2 ? 2 : nombreSalles; // au moins 2
     }
 
     /**
