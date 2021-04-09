@@ -1,8 +1,10 @@
 
 package modele.element;
 
+import java.io.*;
 
-public abstract class Element {
+
+public abstract class Element implements Serializable {
     String description;
     
     
@@ -12,6 +14,20 @@ public abstract class Element {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public Element clone() {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (Element) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
 
     @Override
