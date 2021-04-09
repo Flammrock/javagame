@@ -115,6 +115,10 @@ public class Personnage extends Element {
         this.pieceActuel = pieceActuel;
     }
 
+    public double getPoidsMax() {
+        return poidsMax;
+    }
+
 
     public void ajoutePointVie(double valeur) {
         if (this.pv + valeur > this.pvMax) {
@@ -307,7 +311,7 @@ public class Personnage extends Element {
         return reussiAutiliser;
     }
     
-    private double getPoidsInventaire(){
+    public double getPoidsInventaire(){
         double poidsInventaire = 0;
         for(Objet objet:this.inventaire){
             poidsInventaire =+ objet.getPoids();
