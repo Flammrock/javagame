@@ -1,15 +1,17 @@
 
 package modele.element;
 
-public abstract class Objet extends Element {
+public abstract class Objet extends Element implements Generable {
     
     String nom;
+    double probaDeGeneration;
     double poids;
     int nbUtilisation; // -1 for infinite
     
     
     public Objet() {
         this.nom = "";
+        this.probaDeGeneration = 1.0;
         this.poids = 0.0;
         this.nbUtilisation = 1;
     }
@@ -54,5 +56,24 @@ public abstract class Objet extends Element {
     public int nbUtilisationRestante() {
         return this.nbUtilisation;
     }
+    
+    
+    
+    @Override
+    public double getProbabilite() {
+        return this.probaDeGeneration;
+    }
+
+    @Override
+    public void setProbabilite(double proba) {
+        this.probaDeGeneration = proba;
+    }
+
+    @Override
+    public boolean generate(GenerableParametre p) {
+        return false; // pas générable pour l'instant
+    }
+    
+    
     
 }
