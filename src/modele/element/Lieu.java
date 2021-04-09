@@ -6,6 +6,7 @@ import java.util.List;
 public class Lieu extends Element implements Generable {
     
     String nom;
+    double probaDeGeneration;
 
     List<Porte> listePorte;
     List<Objet> objets;
@@ -46,9 +47,10 @@ public class Lieu extends Element implements Generable {
      */
     public Lieu(String nom) {
         this.nom = nom;
-        this.listePorte = new ArrayList<Porte>();
-        this.objets = new ArrayList<Objet>();
-        this.monstres = new ArrayList<Personnage>();
+        this.listePorte = new ArrayList<>();
+        this.objets = new ArrayList<>();
+        this.monstres = new ArrayList<>();
+        this.probaDeGeneration = 1.0;
     }
     
     /**
@@ -141,6 +143,16 @@ public class Lieu extends Element implements Generable {
         
         return true;
         
+    }
+
+    @Override
+    public double getProbabilite() {
+        return this.probaDeGeneration;
+    }
+
+    @Override
+    public void setProbabilite(double proba) {
+        this.probaDeGeneration = proba;
     }
 
 }
