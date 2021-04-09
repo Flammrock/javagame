@@ -59,7 +59,6 @@ public class Canvas extends JPanel {
     }
 
     public void onAppuiTouche(KeyEvent e) {
-        System.out.println(e.getKeyCode());
         this.keyMap.put(e.getKeyCode(), Boolean.TRUE);
     }
     

@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.function.Consumer;
 import javax.imageio.ImageIO;
 
 /**
@@ -22,12 +23,14 @@ public class Sprite implements Drawable {
     
     String spritefile;
     BufferedImage image;
+    Consumer<Canvas> ondraw;
     
     public Sprite(String spritefile) {
         this.spritefile = spritefile;
         this.image = null;
         this.x = 0;
         this.y = 0;
+        this.ondraw = null;
     }
     
     public Sprite(String spritefile, int x, int y) {
@@ -81,6 +84,11 @@ public class Sprite implements Drawable {
     public void draw(Canvas c, Graphics g) {
         if (!this.isLoaded()) return;
         g.drawImage(this.image, this.x, this.y, null);
+        if (this.ondraw!=null) this.ondraw.accept(c);
+    }
+    
+    public void setOnDraw(Consumer<Canvas> fn) {
+        this.ondraw = fn;
     }
     
 }

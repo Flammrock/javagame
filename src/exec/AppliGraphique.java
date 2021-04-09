@@ -55,6 +55,27 @@ public class AppliGraphique extends javax.swing.JFrame {
         s.loadImage();
         s.ajouterAnimation(new Animation("Idle",new int[] {0, 1, 2, 3}));
         s.setAnimation("Idle");
+        s.setOnDraw((canvas) -> {
+            
+            // LEFT
+            if (canvas.isAppuyer(37)) {
+                s.MoveBy(-2, 0);
+                
+            // UP
+            } else if (canvas.isAppuyer(38)) {
+                s.MoveBy(0, -2);
+            
+            // RIGHT
+            } else if (canvas.isAppuyer(39)) {
+                s.MoveBy(2, 0);
+                
+            // DOWN
+            } else if (canvas.isAppuyer(40)) {
+                s.MoveBy(0, 2);
+                
+            }
+            
+        });
         
         
         canvas1.ajouterItem(s);
