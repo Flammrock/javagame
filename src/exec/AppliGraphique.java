@@ -8,6 +8,8 @@ package exec;
 import canvas.Animation;
 import canvas.SpriteSheet;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.DefaultListModel;
@@ -61,6 +63,40 @@ public class AppliGraphique extends javax.swing.JFrame {
         
 
         mettreAJourTout();
+    }
+    
+    public String onActionJoueur(String action,Personnage ennemie) {
+        String logs = "";
+        if(action.equals("attaque")){
+            logs+="Tour de "+this.aventure.getJoueur()+":\n";
+            logs+=this.aventure.getJoueur().attaque(ennemie);
+            this.mettreAJourStatistiquePerso();
+            this.mettreAJourListeMonstre();
+        }
+        logs+="Tour des monstres :\n";
+        Lieu lieu = this.aventure.getJoueur().getPieceActuel();
+        List<Personnage> monstres = lieu.getMonstres();
+        int[] monstresMort = new int[monstres.size()];
+        int i=0;
+        for (Personnage monstre : monstres) {
+            if(monstre.getPv()!=0){
+                logs += monstre.attaque(this.aventure.getJoueur());
+            }else{
+                monstresMort[i] = monstres.indexOf(monstre);
+                logs += monstre.getNom()+" est mort\n";
+                i++;
+            }
+        }
+        logs += "Fin du tour\n\n";
+
+        for (int j=0;j<i;j++) {
+            if(!(monstres.remove(j).getNom().equals("Cadavre"))){
+                ArrayList<Objet> listeloot = new ArrayList<Objet>();
+                listeloot.add(new Nourriture("chaire putidre", "il est déconseiller de la manger", 5,new Effet("","",-2, 0, 0, 3, new Lieu("Rien"), 0)));
+                monstres.add(new Personnage("Cadavre","une dépouille inutile",0,0,0,1,listeloot));
+            }
+        }
+        return logs;
     }
     
     private void mettreAJourTout() {
@@ -611,13 +647,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         // TODO add your handling code here:
         Personnage p = listeMonstre.getSelectedValue();
         if (p == null) return;
-        affichageLogs("Tour de "+this.aventure.getJoueur()+":\n");
-        affichageLogs(this.aventure.getJoueur().attaque(p));
-        this.mettreAJourStatistiquePerso();
-        this.mettreAJourListeMonstre();
-        affichageLogs("Tour des monstres :\n");
-        affichageLogs(this.aventure.onActionJoueur());
-        affichageLogs("Fin du tour\n\n");
+        affichageLogs(this.onActionJoueur("attaque",p));
         this.mettreAJourTout();
     }//GEN-LAST:event_CombattreActionPerformed
 
@@ -640,7 +670,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         }
          
         if (needUpdate) {
-            this.aventure.onActionJoueur();
+            this.onActionJoueur("equipe",null);
             this.mettreAJourTout();
         }
     }//GEN-LAST:event_utiliserBoutonActionPerformed

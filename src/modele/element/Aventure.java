@@ -117,31 +117,7 @@ public class Aventure extends Element {
         return this.ajouterObjet(niveau.getNom(), lieu, obj);
     }
 
-    public String onActionJoueur() {
-        String logs = "";
-        Lieu lieu = this.getJoueur().getPieceActuel();
-        List<Personnage> monstres = lieu.getMonstres();
-        int[] monstresMort = new int[monstres.size()];
-        int i=0;
-        for (Personnage monstre : monstres) {
-            if(monstre.getPv()!=0){
-                logs += monstre.attaque(this.getJoueur());
-            }else{
-                monstresMort[i] = monstres.indexOf(monstre);
-                logs += monstre.getNom()+" est mort\n";
-                i++;
-            }
-        }
-        
-        for (int j=0;j<i;j++) {
-            if(!(monstres.remove(j).getNom().equals("Cadavre"))){
-                ArrayList<Objet> listeloot = new ArrayList<Objet>();
-                listeloot.add(new Nourriture("chaire putidre", "il est déconseiller de la manger", 5,new Effet("","",-2, 0, 0, 3, new Lieu("Rien"), 0)));
-                monstres.add(new Personnage("Cadavre","une dépouille inutile",0,0,0,1,listeloot));
-            }
-        }
-        return logs;
-    }
+    
 
     /**
      * Permet d'ajouter un niveau dans le donjon
