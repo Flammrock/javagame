@@ -20,7 +20,7 @@ public class Personnage extends Element implements Generable {
     private double poidsMax;
     private ArrayList<Effet> effetCourant; 
 
-    public Personnage(String nom, String description, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
+    public Personnage(String nom, String description, int age, double force, double agilite, double pv) {
         this.nom = nom;
         this.probaDeGeneration = 1.0;
         this.description = description;
@@ -29,11 +29,11 @@ public class Personnage extends Element implements Generable {
         this.agilite = agilite;
         this.pv = pv;
         this.pvMax = pv;
-        this.inventaire = inventaire;
+        this.inventaire = new ArrayList<>();
         this.main = null;
         this.armure = null;
         this.poidsMax = force;
-        this.effetCourant = new ArrayList<Effet>();
+        this.effetCourant = new ArrayList<>();
     }
 
     
@@ -397,6 +397,14 @@ public class Personnage extends Element implements Generable {
     @Override
     public boolean generate(GenerableParametre p) {
         return false; // pas générable pour l'instant
+    }
+
+    public void ajouter(Element e) {
+        if (e instanceof Objet) {
+            this.inventaire.add((Objet)e);
+        } else if (e instanceof Effet) {
+            this.effetCourant.add((Effet)e);
+        }
     }
     
 }
