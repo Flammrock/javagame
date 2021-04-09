@@ -5,6 +5,8 @@
  */
 package modele.element;
 
+import canvas.Canvas;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,7 @@ import java.util.ArrayList;
  * @author Utilisateur
  */
 public class Effet extends Element {
+    
     private String Nom;
     private boolean permanant;
     private boolean consomable;
@@ -171,6 +174,11 @@ public class Effet extends Element {
             }
         }
         return listesEffets;
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
