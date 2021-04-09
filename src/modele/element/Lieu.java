@@ -94,33 +94,32 @@ public class Lieu extends Element implements Generable {
     }
     
 
-    /**
-     * Permet d'ajouter un monstre dans le lieu
-     * @param monstre
-     * @return retourne true si le monstre a bien été ajouté
-     */
-    public boolean ajouterMonstre(Personnage monstre) {
-        this.monstres.add(monstre);
-        return true;
-    }
-
-    /**
-     * Permet d'ajouter un objet dans le lieu
-     * @param obj l'objet à ajouter
-     * @return retoutne true si l'objet a bien été ajouté, sinon false
-     */
-    public boolean ajouterObjet(Objet obj) {
-        this.objets.add(obj);
-        return true;
-    }
-    
-    public boolean ajouterPlusieursObjet(ArrayList<Objet> obj){
-        this.objets.addAll(obj);
-        return true;
-    }
     
     public String toString() {
         return this.nom;
+    }
+    
+    public boolean ajouter(Object o) {
+        if (o instanceof Objet) {
+            this.objets.add((Objet)o);
+            return true;
+        }
+        if (o instanceof Personnage) {
+            this.monstres.add((Personnage)o);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean ajouterPlusieurs(ArrayList<Object> os) {
+        for (Object o : os) {
+            if (o instanceof Objet) {
+                this.objets.add((Objet)o);
+            } else if (o instanceof Personnage) {
+                this.monstres.add((Personnage)o);
+            }
+        }
+        return true;
     }
 
     @Override
@@ -129,6 +128,7 @@ public class Lieu extends Element implements Generable {
         // on cast pour récupérer les paramètres
         GenerableLieuParametre p = (GenerableLieuParametre)s;
         
+        // on itère sur tout les Generables
         double r = Math.random();
         if (r < p.getProba_monstre() && p.getMonstres().size() > 0) {
             int index = (int)(Math.random() * p.getMonstres().size());
