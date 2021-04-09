@@ -60,7 +60,8 @@ public class Animation {
     public void reset() {
         this.index = 0;
         this.tick = 0;
-        this.key = 0;
+        if (this.keyMap.isEmpty()) this.key = 0;
+        else this.key = this.keyMap.get(this.index);
     }
     
     
