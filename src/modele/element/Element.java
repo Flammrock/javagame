@@ -16,7 +16,7 @@ public abstract class Element implements Serializable {
         this.description = description;
     }
     
-    public Element clone() {
+    public Element copie() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);
