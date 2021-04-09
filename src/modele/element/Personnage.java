@@ -4,9 +4,10 @@ package modele.element;
 import java.util.ArrayList;
 
 
-public class Personnage extends Element {
+public class Personnage extends Element implements Generable {
     
     private String nom;
+    private double probaDeGeneration;
     private int age;
     private double force;
     private double agilite;
@@ -21,6 +22,7 @@ public class Personnage extends Element {
 
     public Personnage(String nom, String description, int age, double force, double agilite, double pv, ArrayList<Objet> inventaire) {
         this.nom = nom;
+        this.probaDeGeneration = 1.0;
         this.description = description;
         this.age = age;
         this.force = force;
@@ -378,4 +380,21 @@ public class Personnage extends Element {
         }
         return this.nom + " (" + this.description + ") " + this.pv + "PV";
     }
+    
+    
+    @Override
+    public double getProbabilite() {
+        return this.probaDeGeneration;
+    }
+
+    @Override
+    public void setProbabilite(double proba) {
+        this.probaDeGeneration = proba;
+    }
+
+    @Override
+    public boolean generate(GenerableParametre p) {
+        return false; // pas générable pour l'instant
+    }
+    
 }

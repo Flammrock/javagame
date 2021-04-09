@@ -15,12 +15,14 @@ import java.util.List;
 public class Niveau extends Element implements Generable {
     
     String nom;
+    double probaDeGeneration;
     List<Lieu> salles;
     Lieu entree;
     Lieu sortie;
     
     public Niveau(String nom,String description) {
         this.nom = nom;
+        this.probaDeGeneration = 1.0;
         this.description = description;
         this.salles = new ArrayList<>();
     }
@@ -178,7 +180,15 @@ public class Niveau extends Element implements Generable {
     
     
     
-    
+    @Override
+    public double getProbabilite() {
+        return this.probaDeGeneration;
+    }
+
+    @Override
+    public void setProbabilite(double proba) {
+        this.probaDeGeneration = proba;
+    }
     
     
 }
