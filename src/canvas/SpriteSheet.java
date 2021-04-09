@@ -144,6 +144,7 @@ public class SpriteSheet extends Sprite {
         if (!this.isLoaded()) return;
         g.drawImage(this.image, this.x, this.y, this.x+this.width, this.y+this.height, this.getSpriteX(), this.getSpriteY(), this.getSpriteX()+this.spriteWidth, this.getSpriteY()+this.spriteHeight, null);
         this.nextKeyAnimation();
+        if (this.ondraw!=null) this.ondraw.accept(c);
     }
     
     
