@@ -116,7 +116,7 @@ public class Prog {
         Effet effetPomme = new Effet("","",false,true,0, 0, 0, 10,0,0,0, new Lieu("Rien"));
         Nourriture pomme = new Nourriture("Pomme","Une bonne petite pomme",2.0,effetPomme);
         Effet hommeDeFer = new Effet("Homme de fer","augmente la force",false,false,3,5,0,0,0,0,0,new Lieu("Rien"));
-        Nourriture potion = new Nourriture("Potion de force","augmente la force",1,hommeDeFer);
+        Nourriture potion = new Nourriture("Potion de force","augmente la force",1,new Effet("Homme de fer","augmente la force",false,false,3,5,0,0,0,0,0,new Lieu("Rien")));
         Effet effetBanane = new Effet("","",false,true,0, 0, 0, 15,0,0,0, new Lieu("Rien"));
         Nourriture banane = new Nourriture("banane","Une grosse banane",2.0,effetBanane);
         Armure armureBadass = new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10);
