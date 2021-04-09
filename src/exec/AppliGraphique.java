@@ -150,6 +150,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         DefaultListModel<Objet> g = new DefaultListModel<>();
         g.addAll(this.aventure.getJoueur().getInventaire());
         listeObjetInventaire.setModel(g);
+        jTextPaneInventaire.setText("Inventaire (" + this.aventure.getJoueur().getPoidsInventaire() + "/" + this.aventure.getJoueur().getPoidsMax()+")");
     }
     
     private void onSelectObjetInventaire() {
@@ -227,7 +228,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         listeEffetJoueur = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane19 = new javax.swing.JScrollPane();
-        jTextPaneInventaireFixe = new javax.swing.JTextPane();
+        jTextPaneInventaire = new javax.swing.JTextPane();
         jScrollPane20 = new javax.swing.JScrollPane();
         listeObjetInventaire = new javax.swing.JList<>();
         jeterBouton = new javax.swing.JButton();
@@ -490,9 +491,9 @@ public class AppliGraphique extends javax.swing.JFrame {
                 .addGap(239, 239, 239))
         );
 
-        jTextPaneInventaireFixe.setEditable(false);
-        jTextPaneInventaireFixe.setText("Inventaire:");
-        jScrollPane19.setViewportView(jTextPaneInventaireFixe);
+        jTextPaneInventaire.setEditable(false);
+        jTextPaneInventaire.setText("Inventaire:");
+        jScrollPane19.setViewportView(jTextPaneInventaire);
 
         jScrollPane20.setViewportView(listeObjetInventaire);
 
@@ -586,7 +587,7 @@ public class AppliGraphique extends javax.swing.JFrame {
                         .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -741,7 +742,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneArmureFixe;
     private javax.swing.JTextPane jTextPaneForce;
     private javax.swing.JTextPane jTextPaneForceFixe;
-    private javax.swing.JTextPane jTextPaneInventaireFixe;
+    private javax.swing.JTextPane jTextPaneInventaire;
     private javax.swing.JTextPane jTextPaneNom;
     private javax.swing.JTextPane jTextPaneNomFixe;
     private javax.swing.JTextPane jTextPanePv;
