@@ -99,20 +99,20 @@ public class Lieu extends Element implements Generable {
         return this.nom;
     }
     
-    public boolean ajouter(Object o) {
+    public boolean ajouter(Element o) {
         if (o instanceof Objet) {
-            this.objets.add((Objet)o);
+            this.objets.add((Objet)o.copie());
             return true;
         }
         if (o instanceof Personnage) {
-            this.monstres.add((Personnage)o);
+            this.monstres.add((Personnage)o.copie());
             return true;
         }
         return false;
     }
     
-    public boolean ajouterPlusieurs(ArrayList<Object> os) {
-        for (Object o : os) {
+    public boolean ajouterPlusieurs(ArrayList<Element> os) {
+        for (Element o : os) {
             if (o instanceof Objet) {
                 this.objets.add((Objet)o);
             } else if (o instanceof Personnage) {
@@ -121,6 +121,11 @@ public class Lieu extends Element implements Generable {
         }
         return true;
     }
+    
+    public void enleverTout() {
+        this.monstres.clear();
+        this.objets.clear();
+    }
 
     @Override
     public boolean generate(GenerableParametre s) {
@@ -128,19 +133,21 @@ public class Lieu extends Element implements Generable {
         // on cast pour récupérer les paramètres
         GenerableLieuParametre p = (GenerableLieuParametre)s;
         
-        // on itère sur tout les Generables
-        double r = Math.random();
-        if (r < p.getProba_monstre() && p.getMonstres().size() > 0) {
-            int index = (int)(Math.random() * p.getMonstres().size());
-            this.monstres.add(p.getMonstres().get(index));
+        // on vide le lieu
+        this.enleverTout();
+        
+        // on récupère les Generable
+        ArrayList<Generable> gs = p.getGenerables();
+        
+        // on itère sur tout les Generables et on ajoute
+        for (Generable g : gs) {
+            double r = Math.random();
+            if (r < g.getProbabilite()) {
+                this.ajouter(g);
+            }
         }
         
-        r = Math.random();
-        if (r < p.getProba_objet() && p.getObjets().size() > 0) {
-            int index = (int)(Math.random() * p.getObjets().size());
-            this.objets.add(p.getObjets().get(index));
-        }
-        
+        // la génération s'est bien passé
         return true;
         
     }
