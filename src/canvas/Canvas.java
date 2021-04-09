@@ -50,7 +50,7 @@ public class Canvas extends JPanel {
     }
 
     public void onAppuiTouche(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("bojnour keyevent depuis canvas!");
     }
     
 
