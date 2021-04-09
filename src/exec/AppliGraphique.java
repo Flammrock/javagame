@@ -72,6 +72,7 @@ public class AppliGraphique extends javax.swing.JFrame {
             logs+=this.aventure.getJoueur().attaque(ennemie);
             this.mettreAJourStatistiquePerso();
             this.mettreAJourListeMonstre();
+            this.aventure.getJoueur().actionEffetFinDuTour();
         }
         logs+="Tour des monstres :\n";
         Lieu lieu = this.aventure.getJoueur().getPieceActuel();

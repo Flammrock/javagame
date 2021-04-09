@@ -245,7 +245,7 @@ public class Personnage extends Element implements Generable {
         if(toucher){
             attaque = this.blesse(ennemie);   
         }
-        this.actionEffetFinDuTour();
+        //this.actionEffetFinDuTour();
         if(toucher){
             return this.getNom()+" Attaque "+ennemie.getNom()+":\nL'attaque reussi.\nIl inflige "+attaque+" degats.\n";
         }else{
