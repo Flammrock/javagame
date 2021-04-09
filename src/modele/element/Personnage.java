@@ -357,7 +357,7 @@ public class Personnage extends Element implements Generable {
         int[] effetASupp = new int[this.effetCourant.size()];
         int i = 0;
         for(Effet effet : this.effetCourant){
-            if(effet.getDuréeDeLEffet()==-2){
+            if(effet.isConsomable()){
                 if(effet.tourPasse()==false){
                     this.force += effet.getForceAjoute();
                     this.agilite += effet.getAgiliteAjoute();

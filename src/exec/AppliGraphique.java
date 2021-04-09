@@ -707,7 +707,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         }
          
         if (needUpdate) {
-            this.onActionJoueur("equipe",null);
+            affichageLogs(this.onActionJoueur("equipe",null));
             this.mettreAJourTout();
         }
     }//GEN-LAST:event_utiliserBoutonActionPerformed

@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Effet extends Element {
     private String Nom;
-    private boolean isPermanant;
-    private boolean isConsomable;
+    private boolean permanant;
+    private boolean consomable;
     private double duréeDeLEffet;
     private double forceAjoute;
     private double agiliteAjoute ;
@@ -24,11 +24,11 @@ public class Effet extends Element {
     private double armureAjoute;
     private Lieu tpSalle;
 
-    public Effet(String Nom,String description, boolean isPermanant, boolean isConsomable, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, double pvMaxAjoute, double poidsAjoute, double armureAjoute, Lieu tpSalle) {
+    public Effet(String Nom,String description, boolean permanant, boolean consomable, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, double pvMaxAjoute, double poidsAjoute, double armureAjoute, Lieu tpSalle) {
         this.Nom = Nom;
         this.description = description;
-        this.isPermanant = isPermanant;
-        this.isConsomable = isConsomable;
+        this.permanant = permanant;
+        this.consomable = consomable;
         this.duréeDeLEffet = duréeDeLEffet;
         this.forceAjoute = forceAjoute;
         this.agiliteAjoute = agiliteAjoute;
@@ -78,17 +78,25 @@ public class Effet extends Element {
     public double getArmureAjoute() {
         return armureAjoute;
     }
+
+    public boolean isPermanant() {
+        return permanant;
+    }
+
+    public boolean isConsomable() {
+        return consomable;
+    }
     
     /**
      *fonction a appeler a la fin du tour lorque l'on a deja getter les effets
      * @return retourn true si l'effet doit rester actif et false si l'effet est fini est doit etre detruit
      */
     public boolean tourPasse(){
-        if(isPermanant){//effet permanant (l'effet restera actif pour toujours)
+        if(permanant){//effet permanant (l'effet restera actif pour toujours)
             tpSalle = null;
             return true;
         }
-        if(isConsomable){//effet instantané (l'effet se detruira)
+        if(consomable){//effet instantané (l'effet se detruira)
             return false;
         }
         if(duréeDeLEffet>=0){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
