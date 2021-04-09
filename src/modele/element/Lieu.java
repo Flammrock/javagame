@@ -141,12 +141,14 @@ public class Lieu extends Element implements Generable {
         
         // on itère sur tout les Generables et on ajoute
         for (Generable g : gs) {
-            double r = Math.random();
-            if (r < g.getProbabilite()) {
-                this.ajouter(g);
+            if (g instanceof Element) {
+                double r = Math.random();
+                if (r < g.getProbabilite()) {
+                    this.ajouter((Element) g);
+                }
             }
         }
-        
+
         // la génération s'est bien passé
         return true;
         
