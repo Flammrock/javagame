@@ -8,10 +8,6 @@ import java.io.*;
 public abstract class Element implements Serializable, Drawable {
     String description;
     
-    int x;
-    int y;
-    
-    
     public String getDescription() {
         return description;
     }
