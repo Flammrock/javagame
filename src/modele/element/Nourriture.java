@@ -5,6 +5,9 @@
  */
 package modele.element;
 
+import canvas.Canvas;
+import java.awt.Graphics;
+
 /**
  *
  * @author User
@@ -27,5 +30,10 @@ public class Nourriture extends Objet {
     public boolean onUtiliser(Personnage p) {
         p.ajouter(this.effetConsommable);
         return true;
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
