@@ -16,7 +16,7 @@
  *       - les monstres drops des matériaux, on peut vendre et gagner des matériaux
  *       - système d'expérience
  *       - système de clé/serrure
- *       - système d'effet (poison...)
+ *       - système d'effet (poison...)                                                  Check (pas pour le poison mais pour les stats de bases)
  *       - nouvelle classe (potion,....)
  *       - avoir plusieurs persos
  *       - ajouter le multijoueur
