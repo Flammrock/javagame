@@ -109,60 +109,61 @@ public class Prog {
 
     public static void main(String[] args) {
         
-        ArrayList<Objet> listeInventaire = new ArrayList<Objet>();
-        listeInventaire.add(new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0));
-        listeInventaire.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,new Effet("","",-2, 0, 0, 10, new Lieu("Rien"), 0)));
+        // tout les objets on les met ici :
         
-        Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100, listeInventaire);
-        Effet nouvelleEffet = new Effet("Homme de fer","augmente la force",3, 5, 0, 0, new Lieu("Rien"), 0);
-        joueur.ajoutEffet(nouvelleEffet);
-        joueur.ajoutEffet(new Effet("Homme de fer","augmente la force",3, 5, 0, 0, new Lieu("Rien"), 0));
-        joueur.ajouterObjet(new Nourriture("Potion de force","augmente la force",1,new Effet("Homme de fer","augmente la force",3, 5, 0, 0, new Lieu("Rien"), 0)));
+        /****************** BIBLIOTHEQUE OBJET ******************/
+        Arme epeeCasser = new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0);
+        Nourriture pomme = new Nourriture("Pomme","Une bonne petite pomme",2.0,new Effet("","",-2, 0, 0, 10, new Lieu("Rien"), 0));
+        Effet hommeDeFer = new Effet("Homme de fer","augmente la force",3, 5, 0, 0, new Lieu("Rien"), 0);
+        Nourriture potion = new Nourriture("Potion de force","augmente la force",1,hommeDeFer);
+        Nourriture banane = new Nourriture("banane","Une grosse banane",2.0,new Effet("","",-2, 0, 0, 15, new Lieu("Rien"), 0));
+        Armure armureBadass = new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10);
+        /********************************************************/
         
-        ArrayList<Objet> listeloot = new ArrayList<Objet>();
-        listeloot.add(new Nourriture("banane","Une grosse banane",2.0,new Effet("","",-2, 0, 0, 15, new Lieu("Rien"), 0)));
-        listeloot.add(new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10));
+        /***************** BIBLIOTHEQUE MONSTRE *****************/
+        Personnage monstre = new Personnage("Goblin", "monstre de la mort", 5, 10, 15, 20);
+        monstre.ajouter(banane);
+        monstre.ajouter(armureBadass);
         
-        Personnage monstre = new Personnage("Goblin", "monstre de la mort", 5, 10, 15, 20, listeloot);
-        monstre.equip(1);
-                
-        Arme epee = new Arme("Epée","Epée Légendaire",25.2,-5,100);
         
+        /********************************************************/
+        
+        
+        // on créé un joueur
+        Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100);
+        joueur.ajouter(epeeCasser);
+        joueur.ajouter(pomme);
+        joueur.ajouter(hommeDeFer);
+        joueur.ajouter(hommeDeFer);
+        joueur.ajouter(hommeDeFer);
+        
+        
+        
+        // on créé une aventure
         Aventure a = new Aventure(joueur);
         
-        String pieceprincipal = "piece principal";
-        String piecesecondaire = "piece secondaire";
-        String piecetertiaire = "piece tertiare";
-        
-        
+        // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
         
-        ArrayList<Personnage> monstres = new ArrayList<>();
-        monstres.add(monstre);
-        ArrayList<Objet> objets = new ArrayList<>();
-        objets.add(epee);
-        objets.add(new Nourriture("Pomme","Une bonne petite pomme",2.0,new Effet("","",-2, 0, 0, 10, new Lieu("Rien"), 0)));
         
-        GenerableLieuParametre lieup = new GenerableLieuParametre(0.5,0.5);
-        lieup.setMonstres(monstres);
-        lieup.setObjets(objets);
-        Niveau niveautest = new Niveau("Niveau Test","Test de génération automatique");
-        niveautest.generate(new GenerableNiveauParametre(5,lieup));
+        // on créé les paramètres de génération
+        GenerableLieuParametre lieup = new GenerableLieuParametre();
+        ArrayList<Generable> generables = new ArrayList<>();
+        generables.add(pomme);
+        generables.add(monstre);
+        lieup.setGenerables(generables);
         
+        
+        
+        // on génère le niveau avec ces paramètres
+        niveau1.generate(new GenerableNiveauParametre(5,lieup));
+        
+        
+        // on ajoute le niveau dans le donjon
         a.ajouterNiveau(niveau1);
-        a.ajouterNiveau(niveautest);
-        
-        a.ajouterLieu(niveau1,pieceprincipal);
-        a.ajouterLieu(niveau1,piecesecondaire);
-        a.ajouterLieu(niveau1,piecetertiaire);
-        
-        a.ajouterMonstre(niveau1,piecesecondaire,monstre);
-        a.ajouterObjet(niveau1,piecetertiaire,epee);
-        
-        a.ajouterPorte(niveau1,"porte nord",pieceprincipal,piecesecondaire);
-        a.ajouterPorte(niveau1,"porte rouge",piecetertiaire,piecesecondaire);
-        
-        a.getJoueur().setPieceActuel(a.getLieu(niveautest,niveautest.getEntree().getNom()));
+
+        // on place le joueur dans le 1er lieu de ce niveau
+        a.getJoueur().setPieceActuel(a.getLieu(niveau1,niveau1.getEntree().getNom()));
         
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
