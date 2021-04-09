@@ -314,7 +314,7 @@ public class Personnage extends Element {
     public double getPoidsInventaire(){
         double poidsInventaire = 0;
         for(Objet objet:this.inventaire){
-            poidsInventaire =+ objet.getPoids();
+            poidsInventaire += objet.getPoids();
         }
         return poidsInventaire;
     }
