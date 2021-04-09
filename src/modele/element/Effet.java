@@ -12,27 +12,27 @@ import java.util.ArrayList;
  * @author Utilisateur
  */
 public class Effet extends Element {
-    private String Nom;
-    private ArrayList<Double> duréeDeLEffet = new ArrayList<Double>();
-    private ArrayList<Double> forceAjoute = new ArrayList<Double>();   //tableau ou l'indice: 0=effetCourant, 1=effetInitial, 2=effetContinu
-    private ArrayList<Double> agiliteAjoute = new ArrayList<Double>();
-    private ArrayList<Double> pvAjoute = new ArrayList<Double>();
-    private ArrayList<Double> pvMaxAjoute = new ArrayList<Double>();
-    private Lieu tpSalle;
-    private ArrayList<Double> poidsAjoute = new ArrayList<Double>();
-    private ArrayList<Double> armureAjoute = new ArrayList<Double>();
+    public String Nom;
+    public double duréeDeLEffet;
+    public double forceAjoute;   //tableau ou l'indice: 0=effetCourant, 1=effetInitial, 2=effetContinu
+    public double agiliteAjoute ;
+    public double pvAjoute;
+    public double pvMaxAjoute;
+    public Lieu tpSalle;
+    public double poidsAjoute;
+    public double armureAjoute;
 
     public Effet(String Nom,String description, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, Lieu tpSalle, double poidsAjoute) {
         this.Nom = Nom;
         this.description = description;
-        this.duréeDeLEffet.add(0,duréeDeLEffet);
-        this.forceAjoute.add(0,forceAjoute);
-        this.agiliteAjoute.add(0,agiliteAjoute);
-        this.pvAjoute.add(0,pvAjoute);
-        this.pvMaxAjoute.add(0,(double)0);
+        this.duréeDeLEffet = duréeDeLEffet;
+        this.forceAjoute = forceAjoute;
+        this.agiliteAjoute = agiliteAjoute;
+        this.pvAjoute = pvAjoute;
+        this.pvMaxAjoute = 0;
         this.tpSalle = tpSalle;
-        this.poidsAjoute.add(0,poidsAjoute);
-        this.armureAjoute.add(0,(double)0);
+        this.poidsAjoute = poidsAjoute;
+        this.armureAjoute = 0;
     }
 
     
@@ -42,19 +42,19 @@ public class Effet extends Element {
     }
 
     public double getDuréeDeLEffet() {
-        return duréeDeLEffet.get(0);
+        return duréeDeLEffet;
     }
 
     public double getForceAjoute() {
-        return forceAjoute.get(0);
+        return forceAjoute;
     }
 
     public double getAgiliteAjoute() {
-        return agiliteAjoute.get(0);
+        return agiliteAjoute;
     }
 
     public double getPvAjoute() {
-        return pvAjoute.get(0);
+        return pvAjoute;
     }
 
     public Lieu getTpSalle() {
@@ -66,15 +66,15 @@ public class Effet extends Element {
     }
 
     public double getPoidsAjoute() {
-        return poidsAjoute.get(0);
+        return poidsAjoute;
     }
     
     public double getPvMaxAjoute() {
-        return pvMaxAjoute.get(0);
+        return pvMaxAjoute;
     }
     
     public double getArmureAjoute() {
-        return armureAjoute.get(0);
+        return armureAjoute;
     }
     
     /**
@@ -82,30 +82,30 @@ public class Effet extends Element {
      * @return retourn true si l'effet doit rester actif et false si l'effet est fini est doit etre detruit
      */
     public boolean tourPasse(){
-        if(duréeDeLEffet.get(0)==-1){//effet permanant (l'effet restera actif pour toujours)
+        if(duréeDeLEffet==-1){//effet permanant (l'effet restera actif pour toujours)
             tpSalle = null;
             return true;
         }
-        if(duréeDeLEffet.get(0)<-1){//effet instantané (l'effet se detruira)
+        if(duréeDeLEffet<-1){//effet instantané (l'effet se detruira)
             return false;
         }
-        if(duréeDeLEffet.get(0)>=0){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
+        if(duréeDeLEffet>=0){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
             tpSalle = null;
         }
-        if(duréeDeLEffet.get(0) == 1 ){//fin de l'effet a durée limité
-            forceAjoute.add(0,(double)0);
-            agiliteAjoute.add(0,(double)0);
-            pvAjoute.add(0,(double)0);
-            pvMaxAjoute.add(0,(double)0);
+        if(duréeDeLEffet == 1 ){//fin de l'effet a durée limité
+            forceAjoute = 0;
+            agiliteAjoute = 0;
+            pvAjoute = 0;
+            pvMaxAjoute = 0;
             tpSalle = null;
-            poidsAjoute.add(0,(double)0);
-            armureAjoute.add(0,(double)0);
-            duréeDeLEffet.add(0,(double)0);
+            poidsAjoute = 0;
+            armureAjoute = 0;
+            duréeDeLEffet = 0;
             return false;
         }
         
-        if(this.duréeDeLEffet.get(0)>=0){
-            this.duréeDeLEffet.add(0,this.duréeDeLEffet.get(0)-1);
+        if(this.duréeDeLEffet>=0){
+            this.duréeDeLEffet-=1;
         }
         return true;
     }
@@ -113,7 +113,7 @@ public class Effet extends Element {
     @Override
     public String toString(){
         String listesEffets = getNom()+" \n";
-        if(duréeDeLEffet.get(0)>=0){
+        if(duréeDeLEffet>=0){
             if(getDuréeDeLEffet()>0){
                 listesEffets += "Durée : "+(int)getDuréeDeLEffet() + " Tours \n"; 
             }

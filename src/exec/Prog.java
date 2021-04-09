@@ -124,7 +124,7 @@ public class Prog {
         Personnage monstre = new Personnage("Goblin", "monstre de la mort", 5, 10, 15, 20);
         monstre.ajouter(banane);
         monstre.ajouter(armureBadass);
-        monstre.equip(monstre.getInventaire().indexOf(armureBadass));
+        monstre.equip(1);
         
         /********************************************************/
         
