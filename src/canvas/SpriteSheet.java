@@ -95,6 +95,15 @@ public class SpriteSheet extends Sprite {
         return true;
     }
     
+    public boolean setAnimationIfNot(String nom) {
+        if (this.animations.isEmpty()) return false;
+        if (this.getAnimationParNom(nom)==null) return false;
+        if (this.animationCourrante.equals(nom)) return false;
+        this.animationCourrante = nom;
+        this.getAnimationParNom(nom).reset();
+        return true;
+    }
+    
     
     public void setWidth(int width) {
         this.width = width;
@@ -105,7 +114,7 @@ public class SpriteSheet extends Sprite {
     }
     
     public boolean loadImage() {
-        boolean r = super.load();
+        boolean r = super.loadImage();
         if (!r) return false;
         if (this.spriteWidth > this.image.getWidth()) this.spriteWidth = this.image.getWidth();
         if (this.spriteHeight > this.image.getHeight()) this.spriteHeight = this.image.getHeight();
@@ -127,7 +136,7 @@ public class SpriteSheet extends Sprite {
         if (this.getAnimationCourrante()==null) return 0;
         int key = this.getAnimationCourrante().getKey();
         if (key > this.nx*this.ny-1) key = 0;
-        return (key / this.ny) * this.spriteHeight;
+        return (key / this.nx) * this.spriteHeight;
     }
     
     private void nextKeyAnimation() {
