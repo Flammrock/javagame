@@ -136,6 +136,7 @@ public class Prog {
         joueur.ajouter(hommeDeFer);
         joueur.ajouter(hommeDeFer);
         joueur.ajouter(hommeDeFer);
+        joueur.ajouter(potion);
         
         
         
