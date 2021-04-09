@@ -13,29 +13,22 @@ import java.util.ArrayList;
  */
 public class GenerableLieuParametre extends GenerableParametre {
     
-    ArrayList<Personnage> monstres;
-    ArrayList<Objet> objets;
+    ArrayList<Generable> generables;
     
     public GenerableLieuParametre() {
-        this.monstres = new ArrayList<>();
-        this.objets = new ArrayList<>();
+        this.generables = new ArrayList<>();
+    }
+
+    public ArrayList<Generable> getGenerables() {
+        return generables;
+    }
+
+    public void setGenerables(ArrayList<Generable> generables) {
+        this.generables = generables;
     }
     
-    public ArrayList<Personnage> getMonstres() {
-        return monstres;
-    }
-
-    public void setMonstres(ArrayList<Personnage> monstres) {
-        this.monstres = monstres;
-    }
-
-    public ArrayList<Objet> getObjets() {
-        return objets;
-    }
-
-    public void setObjets(ArrayList<Objet> objets) {
-        this.objets = objets;
-    }
+    
+    
     
     
     
