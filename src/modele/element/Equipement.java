@@ -5,6 +5,9 @@
  */
 package modele.element;
 
+import canvas.Canvas;
+import java.awt.Graphics;
+
 /**
  *
  * @author User
@@ -40,5 +43,10 @@ public class Equipement extends Objet {
     }
     public double getModificateurProtection() {
         return this.bonus_protection;
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
