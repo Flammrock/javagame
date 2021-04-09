@@ -824,12 +824,9 @@ public class AppliGraphique extends javax.swing.JFrame {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
             if (e.getID() == KeyEvent.KEY_PRESSED) {
-                //System.out.println("tester");
-                //canvas1.onAppuiTouche(e);
+                canvas1.onAppuiTouche(e);
             } else if (e.getID() == KeyEvent.KEY_RELEASED) {
-                //System.out.println("2test2");
-            } else if (e.getID() == KeyEvent.KEY_TYPED) {
-                //System.out.println("3test3");
+                canvas1.onRelacheTouche(e);
             }
             return false;
         }
