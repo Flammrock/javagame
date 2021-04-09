@@ -20,6 +20,7 @@ public abstract class Objet extends Element implements Generable {
         this.nom = nom;
         this.description = description;
         this.poids = poids;
+        this.probaDeGeneration = 1.0;
     }
     
     public String effet(Personnage utilisateur, Element cible) {
