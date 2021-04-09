@@ -5,6 +5,8 @@
  */
 package modele.element;
 
+import canvas.Canvas;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,5 +111,13 @@ public class Aventure extends Element {
      */
     public boolean ajouterNiveau(Niveau niveau) {
         return this.donjon.ajouterNiveau(niveau);
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        
+        // pour l'instant, on dessine que le joueur
+        this.joueur.draw(c, g);
+        
     }
 }
