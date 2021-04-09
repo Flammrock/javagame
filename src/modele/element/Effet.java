@@ -12,31 +12,33 @@ import java.util.ArrayList;
  * @author Utilisateur
  */
 public class Effet extends Element {
-    public String Nom;
-    public double duréeDeLEffet;
-    public double forceAjoute;   //tableau ou l'indice: 0=effetCourant, 1=effetInitial, 2=effetContinu
-    public double agiliteAjoute ;
-    public double pvAjoute;
-    public double pvMaxAjoute;
-    public Lieu tpSalle;
-    public double poidsAjoute;
-    public double armureAjoute;
+    private String Nom;
+    private boolean isPermanant;
+    private boolean isConsomable;
+    private double duréeDeLEffet;
+    private double forceAjoute;
+    private double agiliteAjoute ;
+    private double pvAjoute;
+    private double pvMaxAjoute;
+    private double poidsAjoute;
+    private double armureAjoute;
+    private Lieu tpSalle;
 
-    public Effet(String Nom,String description, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, Lieu tpSalle, double poidsAjoute) {
+    public Effet(String Nom,String description, boolean isPermanant, boolean isConsomable, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, double pvMaxAjoute, double poidsAjoute, double armureAjoute, Lieu tpSalle) {
         this.Nom = Nom;
         this.description = description;
+        this.isPermanant = isPermanant;
+        this.isConsomable = isConsomable;
         this.duréeDeLEffet = duréeDeLEffet;
         this.forceAjoute = forceAjoute;
         this.agiliteAjoute = agiliteAjoute;
         this.pvAjoute = pvAjoute;
-        this.pvMaxAjoute = 0;
-        this.tpSalle = tpSalle;
+        this.pvMaxAjoute = pvMaxAjoute;
         this.poidsAjoute = poidsAjoute;
-        this.armureAjoute = 0;
+        this.armureAjoute = armureAjoute;
+        this.tpSalle = tpSalle;
     }
-
     
-
     public String getNom() {
         return Nom;
     }
@@ -82,11 +84,11 @@ public class Effet extends Element {
      * @return retourn true si l'effet doit rester actif et false si l'effet est fini est doit etre detruit
      */
     public boolean tourPasse(){
-        if(duréeDeLEffet==-1){//effet permanant (l'effet restera actif pour toujours)
+        if(isPermanant){//effet permanant (l'effet restera actif pour toujours)
             tpSalle = null;
             return true;
         }
-        if(duréeDeLEffet<-1){//effet instantané (l'effet se detruira)
+        if(isConsomable){//effet instantané (l'effet se detruira)
             return false;
         }
         if(duréeDeLEffet>=0){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
