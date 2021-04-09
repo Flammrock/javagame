@@ -90,27 +90,15 @@ public class Niveau extends Element implements Generable {
     }
 
     /**
-     * Permet d'ajouter un monstre dans un lieu
-     * @param monstre le mon stre à ajouter
+     * Permet d'ajouter un element dans un lieu
+     * @param e l'élément à ajouter
      * @param lieu le lieu dans le donjon
-     * @return retourne true si le monstre a bien été ajouté, sinon false
+     * @return retourne true si l'élément a bien été ajouté, sinon false
      */
-    public boolean ajouterMonstre(Personnage monstre, String lieu) {
+    public boolean ajouter(Element e, String lieu) {
         Lieu lieuobj = this.getLieu(lieu);
         if (lieuobj == null) return false;
-        return lieuobj.ajouterMonstre(monstre);
-    }
-
-    /**
-     * Permet d'ajouter un objet dans un lieu
-     * @param obj l'objet à rajouter
-     * @param lieu le lieu où on ajoute l'objet
-     * @return retourne true si l'objet a bien été ahouté, sinon false
-     */
-    public boolean ajouterObjet(Objet obj, String lieu) {
-        Lieu lieuobj = this.getLieu(lieu);
-        if (lieuobj == null) return false;
-        return lieuobj.ajouterObjet(obj);
+        return lieuobj.ajouter(e);
     }
 
     @Override
