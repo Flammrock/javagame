@@ -25,7 +25,7 @@ public class Nourriture extends Objet {
     }
     
     public boolean onUtiliser(Personnage p) {
-        p.ajoutEffet(this.effetConsommable);
+        p.ajouter(this.effetConsommable);
         return true;
     }
 }
