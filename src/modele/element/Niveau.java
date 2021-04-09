@@ -5,6 +5,8 @@
  */
 package modele.element;
 
+import canvas.Canvas;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -176,6 +178,11 @@ public class Niveau extends Element implements Generable {
     @Override
     public void setProbabilite(double proba) {
         this.probaDeGeneration = proba;
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
