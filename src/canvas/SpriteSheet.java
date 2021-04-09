@@ -29,6 +29,9 @@ public class SpriteSheet extends Sprite {
     HashMap<String, Animation> animations; // liste des animations
     String animationCourrante; // nom de l'animation courrante
     
+    int savedSpriteX;
+    int savedSpriteY;
+    
     /**
      * Permet de créer un sprite depuis un spritesheet sans aucune animation
      * @param spritefile le nom du fichier
@@ -47,6 +50,8 @@ public class SpriteSheet extends Sprite {
         this.ny = 1;
         this.animationCourrante = "";
         this.animations = new HashMap<>();
+        this.savedSpriteX = 0;
+        this.savedSpriteY = 0;
     }
     
     /**
@@ -124,19 +129,21 @@ public class SpriteSheet extends Sprite {
     }
     
     private int getSpriteX() {
-        if (this.nx == 0) return 0;
-        if (this.getAnimationCourrante()==null) return 0;
+        if (this.nx == 0) return this.savedSpriteX;
+        if (this.getAnimationCourrante()==null) return this.savedSpriteX;
         int key = this.getAnimationCourrante().getKey();
         if (key > this.nx*this.ny-1) key = 0;
-        return (key % this.nx) * this.spriteWidth;
+        this.savedSpriteX = (key % this.nx) * this.spriteWidth;
+        return this.savedSpriteX;
     }
     
     private int getSpriteY() {
-        if (this.ny == 0) return 0;
-        if (this.getAnimationCourrante()==null) return 0;
+        if (this.ny == 0) return this.savedSpriteY;
+        if (this.getAnimationCourrante()==null) return this.savedSpriteY;
         int key = this.getAnimationCourrante().getKey();
         if (key > this.nx*this.ny-1) key = 0;
-        return (key / this.nx) * this.spriteHeight;
+        this.savedSpriteY = (key / this.nx) * this.spriteHeight;
+        return this.savedSpriteY;
     }
     
     private void nextKeyAnimation() {
