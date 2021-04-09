@@ -296,7 +296,9 @@ public class Personnage extends Element implements Generable {
 
     private void mort(Personnage ennemie) {
         ennemie.setPv(0.0);
-        this.pieceActuel.ajouterPlusieursObjet(ennemie.getInventaire());
+        ArrayList<Element> e = new ArrayList<>();
+        e.addAll(ennemie.getInventaire());
+        this.pieceActuel.ajouterPlusieurs(e);
     }
     
     
