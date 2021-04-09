@@ -5,6 +5,8 @@
  */
 package modele.element;
 
+import canvas.Canvas;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,11 @@ public class Donjon extends Element{
      */
     public boolean genererNiveau(int nbLieu) {
         return false;
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
