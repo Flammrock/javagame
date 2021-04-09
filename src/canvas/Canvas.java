@@ -11,6 +11,8 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -21,10 +23,12 @@ import javax.swing.JPanel;
 public class Canvas extends JPanel {
     
     ArrayList<Drawable> itemsdrawable;
+    HashMap<Integer, Boolean> keyMap;
     
     public Canvas() {
         super();
         this.itemsdrawable = new ArrayList<>();
+        this.keyMap = new HashMap<>();
     }
     
     public void ajouterItem(Drawable item) {
@@ -48,9 +52,19 @@ public class Canvas extends JPanel {
         }
         
     }
+    
+    public boolean isAppuyer(int keycode) {
+        if (!this.keyMap.containsKey(keycode)) return false;
+        return Objects.equals(this.keyMap.get(keycode), Boolean.TRUE);
+    }
 
     public void onAppuiTouche(KeyEvent e) {
-        System.out.println("bojnour keyevent depuis canvas!");
+        System.out.println(e.getKeyCode());
+        this.keyMap.put(e.getKeyCode(), Boolean.TRUE);
+    }
+    
+    public void onRelacheTouche(KeyEvent e) {
+        this.keyMap.put(e.getKeyCode(), Boolean.FALSE);
     }
     
 
