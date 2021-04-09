@@ -91,9 +91,9 @@ public class AppliGraphique extends javax.swing.JFrame {
 
         for (int j=0;j<i;j++) {
             if(!(monstres.remove(j).getNom().equals("Cadavre"))){
-                ArrayList<Objet> listeloot = new ArrayList<Objet>();
-                listeloot.add(new Nourriture("chaire putidre", "il est déconseiller de la manger", 5,new Effet("","",-2, 0, 0, 3, new Lieu("Rien"), 0)));
-                monstres.add(new Personnage("Cadavre","une dépouille inutile",0,0,0,1,listeloot));
+                //ArrayList<Objet> listeloot = new ArrayList<Objet>();
+                //listeloot.add(new Nourriture("chaire putidre", "il est déconseiller de la manger", 5,new Effet("","",-2, 0, 0, 3, new Lieu("Rien"), 0)));
+                //monstres.add(new Personnage("Cadavre","une dépouille inutile",0,0,0,1,listeloot));
             }
         }
         return logs;
@@ -691,7 +691,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         int selected = listeObjetInventaire.getSelectedIndex();
         if(selected!=-1){
             if(selected!=this.aventure.getJoueur().getInventaire().indexOf(this.aventure.getJoueur().getMain())){
-                this.aventure.getJoueur().getPieceActuel().ajouterObjet(this.aventure.getJoueur().getInventaire().remove(selected));
+                this.aventure.getJoueur().getPieceActuel().ajouter(this.aventure.getJoueur().getInventaire().remove(selected));
                 mettreAJourTout();
             }
         }
