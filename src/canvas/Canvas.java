@@ -8,6 +8,8 @@ package canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,13 +18,13 @@ import javax.swing.JPanel;
  *
  * @author User
  */
-public class Canvas extends JPanel {
+public class Canvas extends JPanel implements KeyListener {
     
     ArrayList<Drawable> itemsdrawable;
     
     public Canvas() {
         super();
-        this.itemsdrawable = new ArrayList<Drawable>();
+        this.itemsdrawable = new ArrayList<>();
     }
     
     public void ajouterItem(Drawable item) {
@@ -46,5 +48,18 @@ public class Canvas extends JPanel {
         }
         
     }
+    
+    
+    public void keyTyped(KeyEvent e) {
+        System.out.println("keyTyped: "+e);
+    }
+    public void keyPressed(KeyEvent e) {
+        System.out.println("keyPressed: "+e);
+    }
+    public void keyReleased(KeyEvent e) {
+        System.out.println("keyReleased: "+e);
+    }
+    
+    
 
 }
