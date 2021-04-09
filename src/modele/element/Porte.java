@@ -5,11 +5,15 @@
  */
 package modele.element;
 
+import canvas.Canvas;
+import java.awt.Graphics;
+
 /**
  *
  * @author Utilisateur
  */
-public class Porte extends Element{
+public class Porte extends Element {
+    
     private Lieu lieu1;
     private Lieu lieu2;
     private String nom;
@@ -42,6 +46,11 @@ public class Porte extends Element{
     
     public String toString() {
         return this.nom + " (vers "+this.lieu2.getNom()+")";
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
