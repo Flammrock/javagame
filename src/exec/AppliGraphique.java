@@ -6,6 +6,7 @@
 package exec;
 
 import canvas.Animation;
+import canvas.Sprite;
 import canvas.SpriteSheet;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
@@ -51,28 +52,50 @@ public class AppliGraphique extends javax.swing.JFrame {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
         
-        SpriteSheet s = new SpriteSheet("/spritesheettest.png",0,0,50,37,50*3,37*3);
+
+        SpriteSheet s = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*3,64*3);
         s.loadImage();
-        s.ajouterAnimation(new Animation("Idle",new int[] {0, 1, 2, 3}));
-        s.setAnimation("Idle");
+        s.ajouterAnimation(new Animation("Idle-Left",new int[] {0, 1, 2, 3}));
+        s.ajouterAnimation(new Animation("Idle-Up",new int[] {4, 5, 6, 7}));
+        s.ajouterAnimation(new Animation("Idle-Right",new int[] {8, 9, 10, 11}));
+        s.ajouterAnimation(new Animation("Idle-Down",new int[] {12, 13, 14, 15}));
+        s.ajouterAnimation(new Animation("Walk-Left",new int[] {16, 17, 18, 19}));
+        s.ajouterAnimation(new Animation("Walk-Up",new int[] {20, 21, 22, 23}));
+        s.ajouterAnimation(new Animation("Walk-Right",new int[] {24, 25, 26, 27}));
+        s.ajouterAnimation(new Animation("Walk-Down",new int[] {28, 29, 30, 31}));
+        s.setAnimation("Idle-Left");
         s.setOnDraw((canvas) -> {
             
             // LEFT
             if (canvas.isAppuyer(37)) {
                 s.MoveBy(-2, 0);
+                s.setAnimationIfNot("Walk-Left");
                 
             // UP
             } else if (canvas.isAppuyer(38)) {
                 s.MoveBy(0, -2);
+                s.setAnimationIfNot("Walk-Up");
             
             // RIGHT
             } else if (canvas.isAppuyer(39)) {
                 s.MoveBy(2, 0);
+                s.setAnimationIfNot("Walk-Right");
                 
             // DOWN
             } else if (canvas.isAppuyer(40)) {
                 s.MoveBy(0, 2);
+                s.setAnimationIfNot("Walk-Down");
                 
+            } else {
+                if (s.getAnimationCourrante().getNom().equals("Walk-Left")) {
+                    s.setAnimation("Idle-Left");
+                } else if (s.getAnimationCourrante().getNom().equals("Walk-Up")) {
+                    s.setAnimation("Idle-Up");
+                } else if (s.getAnimationCourrante().getNom().equals("Walk-Right")) {
+                    s.setAnimation("Idle-Right");
+                } else if (s.getAnimationCourrante().getNom().equals("Walk-Down")) {
+                    s.setAnimation("Idle-Down");
+                }
             }
             
         });
