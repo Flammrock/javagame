@@ -1,6 +1,8 @@
 
 package modele.element;
 
+import canvas.*;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 
@@ -18,7 +20,11 @@ public class Personnage extends Element implements Generable {
     private Equipement armure;
     private Lieu pieceActuel;
     private double poidsMax;
-    private ArrayList<Effet> effetCourant; 
+    private ArrayList<Effet> effetCourant;
+    
+    private SpriteSheet sprite;
+    
+    
 
     public Personnage(String nom, String description, int age, double force, double agilite, double pv) {
         this.nom = nom;
@@ -34,7 +40,18 @@ public class Personnage extends Element implements Generable {
         this.armure = null;
         this.poidsMax = force;
         this.effetCourant = new ArrayList<>();
+        this.sprite = null;
     }
+
+    public SpriteSheet getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(SpriteSheet sprite) {
+        this.sprite = sprite;
+    }
+    
+    
 
     
     public String getNom() {
@@ -405,6 +422,16 @@ public class Personnage extends Element implements Generable {
         } else if (e instanceof Effet) {
             this.effetCourant.add((Effet)e);
         }
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        
+        // pour l'instant, on dessine juste le sprite
+        if (this.sprite == null) return;
+        
+        this.sprite.draw(c, g);
+        
     }
     
 }
