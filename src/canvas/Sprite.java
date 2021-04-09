@@ -72,7 +72,7 @@ public class Sprite implements Drawable {
         return this.image != null;
     }
     
-    public boolean load() {
+    public boolean loadImage() {
         try {
             this.image = ImageIO.read(getClass().getResourceAsStream(this.spritefile));
             return true;
