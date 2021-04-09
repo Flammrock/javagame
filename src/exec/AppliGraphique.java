@@ -7,7 +7,10 @@ package exec;
 
 import canvas.Animation;
 import canvas.SpriteSheet;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -43,6 +46,10 @@ public class AppliGraphique extends javax.swing.JFrame {
                 }
             }
         });
+        
+        
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(new MyDispatcher());
         
         SpriteSheet s = new SpriteSheet("/spritesheettest.png",0,0,50,37,50*3,37*3);
         s.loadImage();
@@ -275,6 +282,14 @@ public class AppliGraphique extends javax.swing.JFrame {
         canvas1 = new canvas.Canvas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         logger.setEditable(false);
         logger.setBackground(new java.awt.Color(204, 204, 204));
@@ -698,6 +713,16 @@ public class AppliGraphique extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jeterBoutonActionPerformed
 
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        // TODO add your handling code here:
+        System.out.println("keyTyped: "+evt);
+    }//GEN-LAST:event_formKeyTyped
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        System.out.println("keyPressed: "+evt);
+    }//GEN-LAST:event_formKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -790,4 +815,23 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JTextArea textArmure;
     private javax.swing.JButton utiliserBouton;
     // End of variables declaration//GEN-END:variables
+
+
+
+
+    private class MyDispatcher implements KeyEventDispatcher {
+
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+            if (e.getID() == KeyEvent.KEY_PRESSED) {
+                System.out.println("tester");
+            } else if (e.getID() == KeyEvent.KEY_RELEASED) {
+                System.out.println("2test2");
+            } else if (e.getID() == KeyEvent.KEY_TYPED) {
+                System.out.println("3test3");
+            }
+            return false;
+        }
+    }
+
 }
