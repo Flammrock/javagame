@@ -129,7 +129,7 @@ public class Personnage extends Element implements Generable {
         }
         this.pv += valeur;
     }
-    private double getEffetForce(){
+    public double getEffetForce(){
         double force = 0;
         for(Effet effet : this.effetCourant){
             force += effet.getForceAjoute();
@@ -141,7 +141,7 @@ public class Personnage extends Element implements Generable {
         return null;
     }
     
-    private double getEffetAgilite(){
+    public double getEffetAgilite(){
         double agilite = 0;
         for(Effet effet : this.effetCourant){
             agilite += effet.getAgiliteAjoute();

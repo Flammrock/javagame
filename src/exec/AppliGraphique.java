@@ -201,7 +201,11 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     private void mettreAJourAgilite(){
-        jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+"");
+        if(this.aventure.getJoueur().getEffetAgilite()!= 0){
+            jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+" + "+this.aventure.getJoueur().getEffetAgilite());
+        }else{
+            jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+"");
+        }
     }
     
     private void mettreAJourArmeEnMain(){
@@ -232,6 +236,11 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     private void mettreAJourForce(){
         jTextPaneForce.setText(this.aventure.getJoueur().getForce()+"");
+        if(this.aventure.getJoueur().getEffetForce()!= 0){
+            jTextPaneForce.setText(this.aventure.getJoueur().getForce()+" + "+this.aventure.getJoueur().getEffetForce());
+        }else{
+            jTextPaneForce.setText(this.aventure.getJoueur().getForce()+"");
+        }
     }
     
     private void mettreAJourListeInventaire(){
