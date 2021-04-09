@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  *
  * @author User
  */
-public class Canvas extends JPanel implements KeyListener {
+public class Canvas extends JPanel {
     
     ArrayList<Drawable> itemsdrawable;
     
@@ -49,16 +49,6 @@ public class Canvas extends JPanel implements KeyListener {
         
     }
     
-    
-    public void keyTyped(KeyEvent e) {
-        System.out.println("keyTyped: "+e);
-    }
-    public void keyPressed(KeyEvent e) {
-        System.out.println("keyPressed: "+e);
-    }
-    public void keyReleased(KeyEvent e) {
-        System.out.println("keyReleased: "+e);
-    }
     
     
 
