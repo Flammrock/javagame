@@ -116,6 +116,7 @@ public class Prog {
         /****************** BIBLIOTHEQUE OBJET ******************/
         Arme epeeCasser = new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0);
         Effet effetPomme = new Effet("","",false,true,0, 0, 0, 10,0,0,0, new Lieu("Rien"));
+        Effet regeneration = new Effet("régeneration","augmente la vie dans le temmps",true,false,0,0,0,3,0,0,0,new Lieu("Rien"));
         Nourriture pomme = new Nourriture("Pomme","Une bonne petite pomme",2.0,effetPomme);
         Effet hommeDeFer = new Effet("Homme de fer","augmente la force",false,false,3,5,0,0,0,0,0,new Lieu("Rien"));
         Nourriture potion = new Nourriture("Potion de regen","regen la vie",1,new Effet("régeneration","augmente la vie dans le temmps",false,false,3,0,0,3,0,0,0,new Lieu("Rien")));
@@ -137,6 +138,7 @@ public class Prog {
         Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100);
         joueur.ajouter(epeeCasser);
         joueur.ajouter(pomme);
+        joueur.ajouter(regeneration);
         joueur.ajouter(hommeDeFer);
         joueur.ajouter(new Effet("Homme de fer","augmente la force",false,false,3,5,0,0,0,0,0,new Lieu("Rien")));
         joueur.ajouter(potion);
