@@ -125,13 +125,11 @@ public class Effet extends Element {
     
     @Override
     public String toString(){
-        String listesEffets = getNom()+" \n";
-        if(duréeDeLEffet>=0){
-            if(getDuréeDeLEffet()>0){
-                listesEffets += "Durée : "+(int)getDuréeDeLEffet() + " Tours \n"; 
-            }
+        String listesEffets = getNom()+": \n";
+        if(getDuréeDeLEffet()>0){
+            listesEffets += "Durée "+(int)getDuréeDeLEffet() + " Tours: \n"; 
         }else{
-            listesEffets += "Effet passif \n"; 
+            listesEffets += "Effet passif: \n"; 
         }
         if(getPvAjoute()!=0){
             if(getPvAjoute()>0){
