@@ -359,6 +359,7 @@ public class Personnage extends Element implements Generable {
         int[] effetASupp = new int[this.effetCourant.size()];
         int i = 0;
         for(Effet effet : this.effetCourant){
+            this.pv += getEffetPv();
             if(effet.tourPasse()==false){
                 effetASupp[i] = this.effetCourant.indexOf(effet);
                 i++;
