@@ -19,6 +19,7 @@ import java.util.Objects;
 import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import modele.element.Element;
 
 /**
  *
@@ -62,11 +63,18 @@ public class Canvas extends JPanel {
         }
         while (!pile.isEmpty()) {
             Drawable item = pile.removeFirst();
+            Element h = (Element) item;
+            System.out.println(h.getDescription());
             if (!items.contains(item)) {
                 items.add(item);
                 ArrayList<Drawable> itemss = item.getDrawables();
                 if (itemss != null) {
-                    pile.addAll(itemss);
+                    //pile.addAll(itemss);
+                    for (Drawable titem : itemss) {
+                        pile.add(titem);
+                        Element m = (Element) item;
+                        System.out.println(m.getDescription());
+                    }
                 }
             }
         }
