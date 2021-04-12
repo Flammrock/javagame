@@ -36,4 +36,6 @@ public interface Drawable {
     
     public void applyMove();
     
+    public void cancelMove();
+    
 }
