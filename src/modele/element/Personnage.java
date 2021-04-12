@@ -481,5 +481,10 @@ public class Personnage extends Element implements Generable, Collisionable {
     public void setCollisionBox(CollisionBox b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ArrayList<Drawable> getDrawables() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
