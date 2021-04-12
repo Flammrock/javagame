@@ -58,25 +58,12 @@ public abstract class Element implements Serializable, Drawable {
     public void setY(int y) {}
     
     
-    @Override
-    public int getNewX() {return 0;}
-    
-    @Override
-    public int getNewY() {return 0;}
-    
-    
     
     @Override
     public void MoveTo(int x, int y) {}
     
     @Override
     public void MoveBy(int x, int y) {}
-    
-    @Override
-    public void applyMove() {}
-    
-    @Override
-    public void cancelMove() {}
     
     
     @Override
