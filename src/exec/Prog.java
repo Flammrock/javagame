@@ -192,7 +192,7 @@ public class Prog {
             
         });
         
-        
+        joueur.setSprite(s);
         
         // on créé une aventure
         Aventure a = new Aventure(joueur);
