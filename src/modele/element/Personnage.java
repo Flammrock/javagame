@@ -442,7 +442,7 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     @Override
     public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.sprite.getX();
     }
 
     @Override
@@ -452,7 +452,7 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     @Override
     public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.sprite.getY();
     }
 
     @Override
