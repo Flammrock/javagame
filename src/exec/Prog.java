@@ -152,6 +152,7 @@ public class Prog {
         // on créé le sprite pour le joueur
         SpriteSheet s = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*3,64*3);
         s.loadImage();
+        s.setDecal(28,25,36,38);
         s.ajouterAnimation(new Animation("Idle-Left",new int[] {0, 1, 2, 3}));
         s.ajouterAnimation(new Animation("Idle-Up",new int[] {4, 5, 6, 7}));
         s.ajouterAnimation(new Animation("Idle-Right",new int[] {8, 9, 10, 11}));
@@ -204,8 +205,8 @@ public class Prog {
         // test pour la collision
         SpriteSheet srock = new SpriteSheet("/testcollision.png",0,0,465,420,465/3,420/3);
         srock.loadImage();
-        srock.setX(500);
-        srock.setY(300);
+        //srock.setX(500);
+        //srock.setY(300);
         rock.setSprite(srock);
         
         
@@ -214,7 +215,7 @@ public class Prog {
         Aventure a = new Aventure(joueur);
         
         
-        a.ajouterDrawable(rock);
+        //a.ajouterDrawable(rock);
         
         // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
