@@ -38,7 +38,7 @@ public class Personnage extends Element implements Generable {
         this.inventaire = new ArrayList<>();
         this.main = null;
         this.armure = null;
-        this.poidsMax = force;
+        this.poidsMax = force*3;
         this.effetCourant = new ArrayList<>();
         this.sprite = null;
     }
