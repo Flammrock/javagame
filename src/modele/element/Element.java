@@ -35,7 +35,7 @@ public abstract class Element implements Serializable, Drawable {
 
     @Override
     public String toString() {
-        return this.getDescription(); //To change body of generated methods, choose Tools | Templates.
+        return this.getDescription();
     }
     
     
