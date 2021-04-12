@@ -150,9 +150,9 @@ public class Prog {
         
         
         // on créé le sprite pour le joueur
-        SpriteSheet s = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*3,64*3);
+        SpriteSheet s = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64,64);
         s.loadImage();
-        s.setDecal(28,25,64-36,64-38);
+        s.setDecal(25,23,64-36,64-38);
         s.ajouterAnimation(new Animation("Idle-Left",new int[] {0, 1, 2, 3}));
         s.ajouterAnimation(new Animation("Idle-Up",new int[] {4, 5, 6, 7}));
         s.ajouterAnimation(new Animation("Idle-Right",new int[] {8, 9, 10, 11}));
