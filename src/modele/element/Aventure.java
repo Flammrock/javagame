@@ -24,6 +24,8 @@ public class Aventure extends Element {
     
     public Aventure(Personnage joueur) {
         
+        this.description = "mon aventure";
+        
         this.drawables = new ArrayList<>();
         
         // on créé le perso ici
