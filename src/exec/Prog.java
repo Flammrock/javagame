@@ -142,6 +142,7 @@ public class Prog {
         joueur.ajouter(hommeDeFer);
         joueur.ajouter(new Effet("Homme de fer","augmente la force",false,false,3,5,0,0,0,0,0,new Lieu("Rien")));
         joueur.ajouter(potion);
+        joueur.setCollisionBox(new CollisionBox(0,0,64,64));
         
         
         // on créé le sprite pour le joueur
