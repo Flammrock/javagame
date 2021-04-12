@@ -47,6 +47,16 @@ public class Sprite implements Drawable {
         this.y = y;
     }
 
+    public int getMx() {
+        return mx;
+    }
+
+    public int getMy() {
+        return my;
+    }
+
+    
+    
     public int getX() {
         return x;
     }
