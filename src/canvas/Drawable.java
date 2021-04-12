@@ -6,6 +6,7 @@
 package canvas;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +15,10 @@ import java.awt.Graphics;
 public interface Drawable {
     
     void draw(Canvas c, Graphics g);
+    
+    
+    public ArrayList<Drawable> getDrawables();
+    
     
     public int getX();
 
