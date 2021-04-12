@@ -495,4 +495,12 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.sprite.cancelMove();
     }
     
+    public int getMx() {
+        return this.sprite.getMx();
+    }
+
+    public int getMy() {
+        return this.sprite.getMy();
+    }
+    
 }
