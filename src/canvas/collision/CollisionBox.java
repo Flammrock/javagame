@@ -28,6 +28,16 @@ public class CollisionBox {
         this.sy = 0;
     }
 
+    public int getSx() {
+        return sx;
+    }
+
+    public int getSy() {
+        return sy;
+    }
+    
+    
+
     public int getX() {
         return x;
     }
@@ -63,22 +73,12 @@ public class CollisionBox {
     
     
     public boolean isCollide(CollisionBox b) {
-        return this.x > b.getX() && this.x < b.getX() + b.getWidth() && this.y > b.getY() && this.y < b.getY() + this.getHeight();
-    }
-
-    public void save() {
-         this.sx = this.x;
-         this.sy = this.x;
+        return this.sx + this.x > b.getSx() + b.getX() && this.sy + this.x < b.getSx() + b.getX() + b.getWidth() && this.sy + this.y > b.getSy() + b.getY() && this.sy + this.y < b.getSy() + b.getY() + this.getHeight();
     }
 
     public void apply(int x, int y) {
-        this.x += x;
-        this.y += y;
-    }
-
-    public void restaure() {
-        this.x = this.sx;
-        this.y = this.sy;
+        this.sx = x;
+        this.sy = y;
     }
     
     public String toString() {
