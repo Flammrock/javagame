@@ -88,8 +88,8 @@ public class Canvas extends JPanel {
                             
                             Collisionable c2 = (Collisionable) item2;
                             
-                            c1.getCollisionBox().apply(item.getX(),item.getY());
-                            c2.getCollisionBox().apply(item2.getX(),item2.getY());
+                            c1.getCollisionBox().apply(item.getMx(),item.getMy());
+                            c2.getCollisionBox().apply(item2.getMx(),item2.getMy());
                             
                             System.out.println(c1.getCollisionBox());
                             System.out.println(c2.getCollisionBox());
@@ -105,7 +105,7 @@ public class Canvas extends JPanel {
                 }
                 
                 if (canMove) {
-                   item.applyMove();
+                    item.applyMove();
                 } else {
                     item.cancelMove();
                 }
