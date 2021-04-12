@@ -5,6 +5,7 @@
  */
 package canvas;
 
+import canvas.collision.Collisionable;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -46,6 +47,51 @@ public class Canvas extends JPanel {
         //Sprite s = new Sprite("/spritetest.png",-100,-100);
         //s.load();
         //s.draw(this, g);
+        
+        for (Drawable item : this.itemsdrawable) {
+            
+            if (item instanceof Collisionable) {
+                
+                System.out.println("??????");
+                
+                Collisionable c1 = (Collisionable) item;
+                
+                boolean canMove = true;
+                
+                for (Drawable item2 : this.itemsdrawable) {
+                    if (item2 instanceof Collisionable) {
+                        
+                        if (item != item2) {
+                            
+                            Collisionable c2 = (Collisionable) item2;
+                            
+                            c1.getCollisionBox().save();
+                            c1.getCollisionBox().apply(item.getX(),item.getY());
+                            
+                            c2.getCollisionBox().save();
+                            c2.getCollisionBox().apply(item2.getX(),item2.getY());
+                            
+                            if (c1.getCollisionBox().isCollide(c2.getCollisionBox())) {
+                                canMove = false;
+                                break;
+                            }
+                            
+                            c1.getCollisionBox().restaure();
+                            c2.getCollisionBox().restaure();
+                            
+                        }
+                        
+                    }
+                }
+                
+                if (canMove) {
+                   item.applyMove();
+                }
+                
+                
+            }
+        }
+        
         
         for (Drawable item : this.itemsdrawable) {
             item.draw(this,g);
