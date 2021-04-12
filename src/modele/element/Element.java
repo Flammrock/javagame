@@ -60,10 +60,10 @@ public abstract class Element implements Serializable, Drawable {
     
     
     @Override
-    public void MoveTo(int x, int y) {}
+    public void moveTo(int x, int y) {}
     
     @Override
-    public void MoveBy(int x, int y) {}
+    public void moveBy(int x, int y) {}
     
     
     @Override
