@@ -52,6 +52,7 @@ package exec;
 
 import canvas.Animation;
 import canvas.SpriteSheet;
+import canvas.collision.CollisionBox;
 import java.util.ArrayList;
 import modele.element.*;
 
