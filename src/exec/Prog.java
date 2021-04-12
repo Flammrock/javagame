@@ -132,6 +132,8 @@ public class Prog {
         monstre.ajouter(armureBadass);
         monstre.equip(1);
         
+        Personnage rock = new Personnage("rock", "inofensif", 5, 10, 15, 20);
+        
         /********************************************************/
         
         
@@ -196,8 +198,20 @@ public class Prog {
         
         joueur.setSprite(s);
         
+        
+        
+        // test pour la collision
+        SpriteSheet srock = new SpriteSheet("/testcollision.png",0,0,465,420,465/3,420/3);
+        srock.loadImage();
+        rock.setSprite(srock);
+        
+        
+        
         // on créé une aventure
         Aventure a = new Aventure(joueur);
+        
+        
+        a.ajouterDrawable(rock);
         
         // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
