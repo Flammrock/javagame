@@ -3,6 +3,7 @@ package modele.element;
 
 import canvas.Drawable;
 import java.io.*;
+import java.util.ArrayList;
 
 
 public abstract class Element implements Serializable, Drawable {
@@ -35,7 +36,32 @@ public abstract class Element implements Serializable, Drawable {
         return this.getDescription(); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public ArrayList<Drawable> getDrawables() {
+        return null;
+    }
+    
+    
+    public int getX() {
+        return 0;
+    }
 
+    public void setX(int x) {}
+
+    public int getY() {
+        return 0;
+    }
+
+    public void setY(int y) {}
+    
+    
+    
+    public void MoveTo(int x, int y) {}
+    
+    public void MoveBy(int x, int y) {}
+    
+    public void applyMove() {}
+    
+    public void cancelMove() {}
     
     
 }
