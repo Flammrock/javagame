@@ -29,4 +29,6 @@ public interface Drawable {
     
     public void MoveBy(int x, int y);
     
+    public void applyMove();
+    
 }
