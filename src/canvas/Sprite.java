@@ -81,6 +81,12 @@ public class Sprite implements Drawable {
         this.want2Move = true;
     }
     
+    public void cancelMove() {
+        this.mx = 0;
+        this.my = 0;
+        this.want2Move = false;
+    }
+    
     public void applyMove() {
         if (this.want2Move) {
             this.want2Move = false;
