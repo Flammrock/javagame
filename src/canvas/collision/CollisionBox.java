@@ -79,7 +79,7 @@ public class CollisionBox implements Drawable {
     public boolean isCollide(CollisionBox b) {
         return this.getAbsoluteX() < b.getAbsoluteX() + b.getWidth() &&
                this.getAbsoluteX() + this.width > b.getAbsoluteX() &&
-               this.getAbsoluteY() < b.getAbsoluteX() + b.getHeight() &&
+               this.getAbsoluteY() < b.getAbsoluteY() + b.getHeight() &&
                this.getAbsoluteY() + this.height > b.getAbsoluteY();
     }
 
