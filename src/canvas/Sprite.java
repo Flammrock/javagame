@@ -76,6 +76,13 @@ public class Sprite implements Drawable {
         this.my = this.y + y;
     }
     
+    public void applyMove() {
+        this.x = this.mx;
+        this.y = this.my;
+        this.mx = 0;
+        this.my = 0;
+    }
+    
     public boolean isLoaded() {
         return this.image != null;
     }
