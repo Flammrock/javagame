@@ -114,7 +114,7 @@ public class Canvas extends JPanel {
         }
         
         
-        for (Drawable item : this.itemsdrawable) {
+        for (Drawable item : items) {
             item.draw(this,g);
         }
         
