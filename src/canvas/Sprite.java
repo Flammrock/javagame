@@ -48,11 +48,19 @@ public class Sprite implements Drawable {
     }
 
     public int getMx() {
-        return mx;
+        if (this.want2Move) {
+            return mx;
+        } else {
+            return x;
+        }
     }
 
     public int getMy() {
-        return my;
+        if (this.want2Move) {
+            return my;
+        } else {
+            return y;
+        }
     }
 
     
