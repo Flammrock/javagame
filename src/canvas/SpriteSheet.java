@@ -5,6 +5,7 @@
  */
 package canvas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -176,23 +177,29 @@ public class SpriteSheet extends Sprite {
         if (!this.isLoaded()) return;
         //g.drawImage(this.image, this.x, this.y, null);
         
+        int w = this.x+this.width - (int)(((double)this.width/(double)this.spriteWidth)*(double)(this.decalW+this.decalX));
+        int h = this.y+this.height - (int)(((double)this.height/(double)this.spriteHeight)*(double)(this.decalH+this.decalY));
+        
         g.drawImage(
                 this.image,
                 
                 // dest
                 this.x,
                 this.y,
-                this.x+this.width,
-                this.y+this.height,
+                w,
+                h,
                 
                 // src
                 this.getSpriteX()+this.decalX,
                 this.getSpriteY()+this.decalY,
-                this.getSpriteX()+this.decalX+this.spriteWidth-this.decalW,
-                this.getSpriteY()+this.decalY+this.spriteHeight-this.decalH,
+                this.getSpriteX()+this.spriteWidth-this.decalW,
+                this.getSpriteY()+this.spriteHeight-this.decalH,
                 
                 null
         );
+        
+        g.setColor(Color.cyan);
+        g.drawRect(x, y, w-x, h-y);
         
         this.nextKeyAnimation();
         if (this.ondraw!=null) this.ondraw.accept(c);
