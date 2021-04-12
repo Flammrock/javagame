@@ -133,6 +133,7 @@ public class Prog {
         monstre.equip(1);
         
         Personnage rock = new Personnage("rock", "inofensif", 5, 10, 15, 20);
+        rock.setCollisionBox(new CollisionBox(0,0,465/3,420/3));
         
         /********************************************************/
         
@@ -203,6 +204,8 @@ public class Prog {
         // test pour la collision
         SpriteSheet srock = new SpriteSheet("/testcollision.png",0,0,465,420,465/3,420/3);
         srock.loadImage();
+        srock.setX(500);
+        srock.setY(300);
         rock.setSprite(srock);
         
         
