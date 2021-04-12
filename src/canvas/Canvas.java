@@ -11,9 +11,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -48,11 +51,29 @@ public class Canvas extends JPanel {
         //s.load();
         //s.draw(this, g);
         
+        // générer la liste de les items
+        ArrayList<Drawable> items = new ArrayList<>();
+        ArrayDeque<Drawable> pile = new ArrayDeque<>();
         for (Drawable item : this.itemsdrawable) {
+            if (!items.contains(item)) {
+                items.add(item);
+                pile.add(item);
+            }
+        }
+        while (!pile.isEmpty()) {
+            Drawable item = pile.removeFirst();
+            if (!items.contains(item)) {
+                items.add(item);
+                ArrayList<Drawable> itemss = item.getDrawables();
+                if (itemss != null) {
+                    pile.addAll(itemss);
+                }
+            }
+        }
+        
+        for (Drawable item : items) {
             
             if (item instanceof Collisionable) {
-                
-                System.out.println("??????");
                 
                 Collisionable c1 = (Collisionable) item;
                 
