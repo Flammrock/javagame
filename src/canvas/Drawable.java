@@ -74,7 +74,7 @@ public interface Drawable {
      * @param x La nouvelle position X de l'objet
      * @param y La nouvelle position Y de l'objet
      */
-    public void MoveTo(int x, int y);
+    public void moveTo(int x, int y);
     
     /**
      * Chaque Drawable est censé pouvoir être dessiner dans le canvas,
@@ -83,6 +83,6 @@ public interface Drawable {
      * @param x La nouvelle position X relative de l'objet
      * @param y La nouvelle position Y relative de l'objet
      */
-    public void MoveBy(int x, int y);
+    public void moveBy(int x, int y);
     
 }
