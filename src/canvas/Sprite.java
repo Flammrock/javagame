@@ -47,7 +47,7 @@ public class Sprite implements Drawable {
         this.y = y;
     }
 
-    public int getMx() {
+    public int getNewX() {
         if (this.want2Move) {
             return mx;
         } else {
@@ -55,7 +55,7 @@ public class Sprite implements Drawable {
         }
     }
 
-    public int getMy() {
+    public int getNewY() {
         if (this.want2Move) {
             return my;
         } else {
