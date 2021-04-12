@@ -166,22 +166,22 @@ public class Prog {
             
             // LEFT
             if (canvas.isAppuyer(37)) {
-                s.MoveBy(-2, 0);
+                s.moveBy(-2, 0);
                 s.setAnimationIfNot("Walk-Left");
                 
             // UP
             } else if (canvas.isAppuyer(38)) {
-                s.MoveBy(0, -2);
+                s.moveBy(0, -2);
                 s.setAnimationIfNot("Walk-Up");
             
             // RIGHT
             } else if (canvas.isAppuyer(39)) {
-                s.MoveBy(2, 0);
+                s.moveBy(2, 0);
                 s.setAnimationIfNot("Walk-Right");
                 
             // DOWN
             } else if (canvas.isAppuyer(40)) {
-                s.MoveBy(0, 2);
+                s.moveBy(0, 2);
                 s.setAnimationIfNot("Walk-Down");
                 
             } else {
