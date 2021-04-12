@@ -168,4 +168,8 @@ public class Aventure extends Element {
     public ArrayList<Drawable> getDrawables() {
         return this.drawables;
     }
+
+    public void ajouterDrawable(Drawable d) {
+        this.drawables.add(d);
+    }
 }
