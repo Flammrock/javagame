@@ -91,9 +91,6 @@ public class Canvas extends JPanel {
                             c1.getCollisionBox().apply(item.getMx(),item.getMy());
                             c2.getCollisionBox().apply(item2.getMx(),item2.getMy());
                             
-                            //System.out.println(c1.getCollisionBox());
-                            //System.out.println(c2.getCollisionBox());
-                            
                             if (c1.getCollisionBox().isCollide(c2.getCollisionBox())) {
                                 canMove = false;
                                 break;
