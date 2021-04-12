@@ -81,4 +81,8 @@ public class CollisionBox {
         this.y = this.sy;
     }
     
+    public String toString() {
+        return "(" this.x + "," + this.y + "," + this.width + "," + this.height + ")";
+    }
+    
 }
