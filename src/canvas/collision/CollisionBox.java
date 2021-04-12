@@ -79,11 +79,10 @@ public class CollisionBox implements Drawable {
     
     
     public boolean isCollide(CollisionBox b) {
-        return
-                this.sx + this.x >= b.getSx() + b.getX() &&
-                this.sx + this.x <= b.getSx() + b.getX() + b.getWidth() &&
-                this.sy + this.y >= b.getSy() + b.getY() &&
-                this.sy + this.y <= b.getSy() + b.getY() + b.getHeight();
+        return this.sx + this.x < b.getSx() + b.getX() + b.getWidth() &&
+               this.sx + this.x + this.width > b.getSx() + b.getX() &&
+               this.sy + this.y < b.getSy() + b.getY() + b.getHeight() &&
+               this.sy + this.y + this.height > b.getSy() + b.getY();
     }
 
     public void apply(int x, int y) {
