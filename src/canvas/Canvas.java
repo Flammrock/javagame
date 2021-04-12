@@ -44,15 +44,7 @@ public class Canvas extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        //Graphics2D graphic2d = (Graphics2D) g;
-        //graphic2d.setColor(Color.BLUE);
-        //graphic2d.fillRect(230, 110, 60, 80);
-        
-        //Sprite s = new Sprite("/spritetest.png",-100,-100);
-        //s.load();
-        //s.draw(this, g);
-        
-        // générer la liste de les items
+        // générer la liste de les items en O(n)
         ArrayList<Drawable> items = new ArrayList<>();
         ArrayDeque<Drawable> pile = new ArrayDeque<>();
         for (Drawable item : this.itemsdrawable) {
@@ -73,28 +65,43 @@ public class Canvas extends JPanel {
             }
         }
         
+        
+        // en O(n*n)
         for (Drawable item : items) {
             
+            // on veut vérifier uniquement les items qui sont "collisionable"
             if (item instanceof Collisionable) {
                 
+                // on cast en "collisionable"
                 Collisionable c1 = (Collisionable) item;
                 
+                // petite variable temporaire pour savoir si cet item "peut bouger"
                 boolean canMove = true;
                 
+                // on vérifie cet item avec tout les autres items
                 for (Drawable item2 : items) {
+                    
+                    // pour la même raison que précédemment, on vérifie que pour les "collisionable"
                     if (item2 instanceof Collisionable) {
                         
+                        // les objets doivent être différents (pas la même adresse)
+                        // (un item est toujours en collision avec lui-même)
                         if (item != item2) {
                             
+                            // on cast le 2ème item
                             Collisionable c2 = (Collisionable) item2;
                             
-                            // on place la boite aux nouvelles coordonnées
+                            // on place les boites de collisions aux nouvelles coordonnées à tester
                             c1.getCollisionBox().apply(item.getNewX(),item.getNewY());
                             c2.getCollisionBox().apply(item2.getNewX(),item2.getNewY());
                             
+                            // on check s'il y a une collision
                             if (c1.getCollisionBox().isCollide(c2.getCollisionBox())) {
+                                
+                                // si oui, alors cet item ne peut pas bouger, on peut quitter cette boucle
                                 canMove = false;
                                 break;
+                                
                             }
                             
                         }
@@ -102,6 +109,8 @@ public class Canvas extends JPanel {
                     }
                 }
                 
+                // on applique le mouvement si on peut bouger (i.e. aucune collision)
+                // sinon on annule le mouvement
                 if (canMove) {
                     item.applyMove();
                 } else {
@@ -112,7 +121,7 @@ public class Canvas extends JPanel {
             }
         }
         
-        
+        // en O(n)
         for (Drawable item : items) {
             item.draw(this,g);
         }
