@@ -34,12 +34,12 @@ public class CollisionBox implements Drawable {
         this.sy = 0;
     }
 
-    public int getSx() {
-        return sx;
+    public int getAbsoluteX() {
+        return this.x + this.sx;
     }
 
-    public int getSy() {
-        return sy;
+    public int getAbsoluteY() {
+        return this.y + this.sy;
     }
     
     
@@ -76,13 +76,11 @@ public class CollisionBox implements Drawable {
         this.height = height;
     }
     
-    
-    
     public boolean isCollide(CollisionBox b) {
-        return this.sx + this.x < b.getSx() + b.getX() + b.getWidth() &&
-               this.sx + this.x + this.width > b.getSx() + b.getX() &&
-               this.sy + this.y < b.getSy() + b.getY() + b.getHeight() &&
-               this.sy + this.y + this.height > b.getSy() + b.getY();
+        return this.getAbsoluteX() < b.getAbsoluteX() + b.getWidth() &&
+               this.getAbsoluteX() + this.width > b.getAbsoluteX() &&
+               this.getAbsoluteY() < b.getAbsoluteX() + b.getHeight() &&
+               this.getAbsoluteY() + this.height > b.getAbsoluteY();
     }
 
     public void apply(int x, int y) {
