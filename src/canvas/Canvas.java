@@ -57,14 +57,13 @@ public class Canvas extends JPanel {
         ArrayDeque<Drawable> pile = new ArrayDeque<>();
         for (Drawable item : this.itemsdrawable) {
             if (!items.contains(item)) {
-                items.add(item);
                 pile.add(item);
             }
         }
         while (!pile.isEmpty()) {
             Drawable item = pile.removeFirst();
-            Element h = (Element) item;
-            System.out.println(h.getDescription());
+            //Element h = (Element) item;
+            //System.out.println(h.getDescription());
             if (!items.contains(item)) {
                 items.add(item);
                 ArrayList<Drawable> itemss = item.getDrawables();
@@ -72,8 +71,8 @@ public class Canvas extends JPanel {
                     //pile.addAll(itemss);
                     for (Drawable titem : itemss) {
                         pile.add(titem);
-                        Element m = (Element) item;
-                        System.out.println(m.getDescription());
+                        //Element m = (Element) item;
+                        //System.out.println(m.getDescription());
                     }
                 }
             }
