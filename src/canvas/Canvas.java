@@ -92,8 +92,8 @@ public class Canvas extends JPanel {
                             Collisionable c2 = (Collisionable) item2;
                             
                             // on place les boites de collisions aux nouvelles coordonnées à tester
-                            c1.getCollisionBox().apply(item.getNewX(),item.getNewY());
-                            c2.getCollisionBox().apply(item2.getNewX(),item2.getNewY());
+                            c1.getCollisionBox().apply(c1.getNewX(),c1.getNewY());
+                            c2.getCollisionBox().apply(c2.getNewX(),c2.getNewY());
                             
                             // on check s'il y a une collision
                             if (c1.getCollisionBox().isCollide(c2.getCollisionBox())) {
@@ -112,9 +112,9 @@ public class Canvas extends JPanel {
                 // on applique le mouvement si on peut bouger (i.e. aucune collision)
                 // sinon on annule le mouvement
                 if (canMove) {
-                    item.applyMove();
+                    c1.applyMove();
                 } else {
-                    item.cancelMove();
+                    c1.cancelMove();
                 }
                 
                 
