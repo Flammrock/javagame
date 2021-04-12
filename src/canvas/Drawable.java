@@ -29,6 +29,11 @@ public interface Drawable {
     public void setY(int y);
     
     
+    public int getMx();
+    
+    public int getMy();
+    
+    
     
     public void MoveTo(int x, int y);
     
