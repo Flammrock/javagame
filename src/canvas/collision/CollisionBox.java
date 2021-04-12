@@ -104,12 +104,12 @@ public class CollisionBox implements Drawable {
     }
 
     @Override
-    public int getMx() {
+    public int getNewX() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int getMy() {
+    public int getNewY() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
