@@ -438,6 +438,8 @@ public class Personnage extends Element implements Generable, Collisionable {
         
         this.sprite.draw(c, g);
         
+        this.collisionBox.draw(c, g);
+        
     }
 
     @Override
