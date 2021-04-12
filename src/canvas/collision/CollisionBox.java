@@ -82,7 +82,7 @@ public class CollisionBox {
     }
     
     public String toString() {
-        return "(" + this.x + "," + this.y + "," + this.width + "," + this.height + ")";
+        return "(" + (this.sx+this.x) + "," + (this.sy+this.y) + "," + this.width + "," + this.height + ")";
     }
     
 }
