@@ -30,7 +30,7 @@ JavaGame is a roguelike game.
 - [ ] customisation du perso
 - [ ] barre de faim, de soif,...
 - [ ] rajouter des modes de difficulté
-- [~] charte graphique
+- [ ] charte graphique
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
