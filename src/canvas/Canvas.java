@@ -68,12 +68,7 @@ public class Canvas extends JPanel {
                 items.add(item);
                 ArrayList<Drawable> itemss = item.getDrawables();
                 if (itemss != null) {
-                    //pile.addAll(itemss);
-                    for (Drawable titem : itemss) {
-                        pile.add(titem);
-                        //Element m = (Element) item;
-                        //System.out.println(m.getDescription());
-                    }
+                    pile.addAll(itemss);
                 }
             }
         }
