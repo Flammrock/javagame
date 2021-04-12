@@ -109,8 +109,6 @@ public class Aventure extends Element {
         return this.ajouter(niveau.getNom(), lieu, e);
     }
 
-    
-
     /**
      * Permet d'ajouter un niveau dans le donjon
      * @param niveau le niveau à ajouter
@@ -120,46 +118,6 @@ public class Aventure extends Element {
         return this.donjon.ajouterNiveau(niveau);
     }
 
-    @Override
-    public void draw(Canvas c, Graphics g) {
-        
-        
-    }
-
-    @Override
-    public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setX(int x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setY(int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void MoveTo(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void MoveBy(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void applyMove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public ArrayList<Drawable> getDrawables() {
