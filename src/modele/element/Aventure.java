@@ -35,9 +35,6 @@ public class Aventure extends Element {
         // on créé le donjon ici
         this.donjon = new Donjon();
         
-        
-        this.drawables.add(this.joueur);
-        
     }
 
     public Personnage getJoueur() {
