@@ -6,6 +6,7 @@
 package modele.element;
 
 import canvas.Canvas;
+import canvas.Drawable;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,11 @@ public class Aventure extends Element {
     private Personnage joueur;
     private Donjon donjon;
     
+    private ArrayList<Drawable> drawables;
+    
     public Aventure(Personnage joueur) {
+        
+        this.drawables = new ArrayList<>();
         
         // on créé le perso ici
         this.joueur = joueur;
@@ -27,6 +32,9 @@ public class Aventure extends Element {
         
         // on créé le donjon ici
         this.donjon = new Donjon();
+        
+        
+        this.drawables.add(this.joueur);
         
     }
 
@@ -116,8 +124,6 @@ public class Aventure extends Element {
     @Override
     public void draw(Canvas c, Graphics g) {
         
-        // pour l'instant, on dessine que le joueur
-        this.joueur.draw(c, g);
         
     }
 
@@ -154,5 +160,10 @@ public class Aventure extends Element {
     @Override
     public void applyMove() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Drawable> getDrawables() {
+        return this.drawables;
     }
 }
