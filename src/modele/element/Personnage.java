@@ -26,6 +26,8 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     private SpriteSheet sprite;
     
+    private CollisionBox collisionBox;
+    
     
 
     public Personnage(String nom, String description, int age, double force, double agilite, double pv) {
@@ -43,6 +45,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.poidsMax = force*3;
         this.effetCourant = new ArrayList<>();
         this.sprite = null;
+        this.collisionBox = null;
     }
 
     public SpriteSheet getSprite() {
@@ -469,17 +472,17 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     @Override
     public void applyMove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.sprite.applyMove();
     }
 
     @Override
     public CollisionBox getCollisionBox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.collisionBox;
     }
 
     @Override
     public void setCollisionBox(CollisionBox b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         this.collisionBox = b;
     }
 
     @Override
