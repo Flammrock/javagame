@@ -445,37 +445,32 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     @Override
     public int getX() {
-        return this.sprite.getX();
+        return this.sprite.getX(); // pour l'instant, on propage ça dans le sprite
     }
 
     @Override
     public void setX(int x) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.sprite.setX(x); // pour l'instant, on propage ça dans le sprite
     }
 
     @Override
     public int getY() {
-        return this.sprite.getY();
+        return this.sprite.getY(); // pour l'instant, on propage ça dans le sprite
     }
 
     @Override
     public void setY(int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.sprite.setY(y); // pour l'instant, on propage ça dans le sprite
     }
 
     @Override
-    public void MoveTo(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void moveTo(int x, int y) {
+        this.sprite.moveTo(x,y); // pour l'instant, on propage ça dans le sprite
     }
 
     @Override
-    public void MoveBy(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void applyMove() {
-        this.sprite.applyMove();
+    public void moveBy(int x, int y) {
+        this.sprite.moveBy(x,y); // pour l'instant, on propage ça dans le sprite
     }
 
     @Override
@@ -490,20 +485,29 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     @Override
     public ArrayList<Drawable> getDrawables() {
+        // pas de sous-ensemble de sprite
+        // (peut-être que lorsque l'on pourra dessiner des habits différents, ou bien des épées..)
         return null;
     }
 
     @Override
     public void cancelMove() {
-        this.sprite.cancelMove();
+        this.sprite.cancelMove(); // pour l'instant, on propage ça dans le sprite
     }
     
+        @Override
+    public void applyMove() {
+        this.sprite.applyMove(); // pour l'instant, on propage ça dans le sprite
+    }
+    
+    @Override
     public int getNewX() {
-        return this.sprite.getNewX();
+        return this.sprite.getNewX();  // pour l'instant, on propage ça dans le sprite
     }
 
+    @Override
     public int getNewY() {
-        return this.sprite.getNewY();
+        return this.sprite.getNewY(); // pour l'instant, on propage ça dans le sprite
     }
     
 }
