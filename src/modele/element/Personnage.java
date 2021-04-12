@@ -438,6 +438,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         
         this.sprite.draw(c, g);
         
+        this.collisionBox.apply(this.getX(),this.getY());
         this.collisionBox.draw(c, g);
         
     }
