@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.function.Consumer;
 import javax.imageio.ImageIO;
 
@@ -104,6 +105,11 @@ public class Sprite implements Drawable {
     
     public void setOnDraw(Consumer<Canvas> fn) {
         this.ondraw = fn;
+    }
+
+    @Override
+    public ArrayList<Drawable> getDrawables() {
+        return null;
     }
     
 }
