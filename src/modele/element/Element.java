@@ -1,7 +1,9 @@
 
 package modele.element;
 
+import canvas.Canvas;
 import canvas.Drawable;
+import java.awt.Graphics;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -39,31 +41,45 @@ public abstract class Element implements Serializable, Drawable {
     
     
     
+    @Override
     public ArrayList<Drawable> getDrawables() {return null;}
     
     
+    @Override
     public int getX() {return 0;}
 
+    @Override
     public void setX(int x) {}
 
+    @Override
     public int getY() {return 0;}
 
+    @Override
     public void setY(int y) {}
     
     
+    @Override
     public int getNewX() {return 0;}
     
+    @Override
     public int getNewY() {return 0;}
     
     
     
+    @Override
     public void MoveTo(int x, int y) {}
     
+    @Override
     public void MoveBy(int x, int y) {}
     
+    @Override
     public void applyMove() {}
     
+    @Override
     public void cancelMove() {}
     
+    
+    @Override
+    public void draw(Canvas c, Graphics g) {}
     
 }
