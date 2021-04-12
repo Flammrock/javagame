@@ -5,11 +5,17 @@
  */
 package canvas.collision;
 
+import canvas.Canvas;
+import canvas.Drawable;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.ArrayList;
+
 /**
  *
  * @author User
  */
-public class CollisionBox {
+public class CollisionBox implements Drawable {
     
     int x;
     int y;
@@ -87,6 +93,47 @@ public class CollisionBox {
     
     public String toString() {
         return "(" + (this.sx+this.x) + "," + (this.sy+this.y) + "," + this.width + "," + this.height + ")";
+    }
+
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        g.setColor(Color.RED);
+        g.fillRect(this.x,this.y,this.width,this.height);
+    }
+
+    @Override
+    public ArrayList<Drawable> getDrawables() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getMx() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getMy() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void MoveTo(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void MoveBy(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void applyMove() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void cancelMove() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
