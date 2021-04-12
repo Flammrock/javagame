@@ -106,6 +106,8 @@ public class Canvas extends JPanel {
                 
                 if (canMove) {
                    item.applyMove();
+                } else {
+                    item.cancelMove();
                 }
                 
                 
