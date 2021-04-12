@@ -63,7 +63,7 @@ public class SpriteSheet extends Sprite {
         this.decalH = 0;
     }
     
-    void setDecal(int x, int y, int w, int h) {
+    public void setDecal(int x, int y, int w, int h) {
         this.decalX = x;
         this.decalY = y;
         this.decalW = w;
