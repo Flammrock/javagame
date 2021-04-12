@@ -81,7 +81,7 @@ public class Canvas extends JPanel {
                 
                 boolean canMove = true;
                 
-                for (Drawable item2 : this.itemsdrawable) {
+                for (Drawable item2 : items) {
                     if (item2 instanceof Collisionable) {
                         
                         if (item != item2) {
