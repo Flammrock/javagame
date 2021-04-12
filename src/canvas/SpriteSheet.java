@@ -26,6 +26,11 @@ public class SpriteSheet extends Sprite {
     int nx; // nombre d'image en x
     int ny; // nombre d'image en y
     
+    int decalX;
+    int decalY;
+    int decalW;
+    int decalH;
+    
     HashMap<String, Animation> animations; // liste des animations
     String animationCourrante; // nom de l'animation courrante
     
@@ -52,6 +57,17 @@ public class SpriteSheet extends Sprite {
         this.animations = new HashMap<>();
         this.savedSpriteX = 0;
         this.savedSpriteY = 0;
+        this.decalX = 0;
+        this.decalY = 0;
+        this.decalW = 0;
+        this.decalH = 0;
+    }
+    
+    void setDecal(int x, int y, int w, int h) {
+        this.decalX = x;
+        this.decalY = y;
+        this.decalW = w;
+        this.decalH = h;
     }
     
     /**
@@ -158,6 +174,7 @@ public class SpriteSheet extends Sprite {
     @Override
     public void draw(Canvas c, Graphics g) {
         if (!this.isLoaded()) return;
+        //g.drawImage(this.image, this.x, this.y, null);
         g.drawImage(this.image, this.x, this.y, this.x+this.width, this.y+this.height, this.getSpriteX(), this.getSpriteY(), this.getSpriteX()+this.spriteWidth, this.getSpriteY()+this.spriteHeight, null);
         this.nextKeyAnimation();
         if (this.ondraw!=null) this.ondraw.accept(c);
