@@ -63,5 +63,12 @@ public abstract class Element implements Serializable, Drawable {
     
     public void cancelMove() {}
     
+    public int getMx() {
+        return 0;
+    }
+    
+    public int getMy() {
+        return 0;
+    }
     
 }
