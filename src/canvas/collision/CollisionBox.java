@@ -179,13 +179,13 @@ public class CollisionBox implements Drawable {
     }
 
     @Override
-    public void MoveTo(int x, int y) {
+    public void moveTo(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public void MoveBy(int x, int y) {
+    public void moveBy(int x, int y) {
         this.x += x;
         this.y += y;
     }
