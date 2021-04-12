@@ -88,8 +88,9 @@ public class Canvas extends JPanel {
                             
                             Collisionable c2 = (Collisionable) item2;
                             
-                            c1.getCollisionBox().apply(item.getMx(),item.getMy());
-                            c2.getCollisionBox().apply(item2.getMx(),item2.getMy());
+                            // on place la boite aux nouvelles coordonnées
+                            c1.getCollisionBox().apply(item.getNewX(),item.getNewY());
+                            c2.getCollisionBox().apply(item2.getNewX(),item2.getNewY());
                             
                             if (c1.getCollisionBox().isCollide(c2.getCollisionBox())) {
                                 canMove = false;
