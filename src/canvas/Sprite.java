@@ -20,6 +20,8 @@ public class Sprite implements Drawable {
     
     int x;
     int y;
+    int mx;
+    int my;
     
     String spritefile;
     BufferedImage image;
@@ -30,6 +32,8 @@ public class Sprite implements Drawable {
         this.image = null;
         this.x = 0;
         this.y = 0;
+        this.mx = 0;
+        this.my = 0;
         this.ondraw = null;
     }
     
@@ -59,13 +63,17 @@ public class Sprite implements Drawable {
     
     
     public void MoveTo(int x, int y) {
-        this.x = x;
-        this.y = y;
+        //this.x = x;
+        //this.y = y;
+        this.mx = x;
+        this.my = y;
     }
     
     public void MoveBy(int x, int y) {
-        this.x += x;
-        this.y += y;
+        //this.x += x;
+        //this.y += y;
+        this.mx = this.x + x;
+        this.my = this.y + y;
     }
     
     public boolean isLoaded() {
