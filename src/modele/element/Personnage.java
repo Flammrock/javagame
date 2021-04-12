@@ -489,5 +489,10 @@ public class Personnage extends Element implements Generable, Collisionable {
     public ArrayList<Drawable> getDrawables() {
         return null;
     }
+
+    @Override
+    public void cancelMove() {
+        this.sprite.cancelMove();
+    }
     
 }
