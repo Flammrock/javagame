@@ -23,6 +23,7 @@ public class Sprite implements Drawable {
     int y;
     int mx;
     int my;
+    boolean want2Move;
     
     String spritefile;
     BufferedImage image;
@@ -36,6 +37,7 @@ public class Sprite implements Drawable {
         this.mx = 0;
         this.my = 0;
         this.ondraw = null;
+        this.want2Move = true;
     }
     
     public Sprite(String spritefile, int x, int y) {
@@ -68,6 +70,7 @@ public class Sprite implements Drawable {
         //this.y = y;
         this.mx = x;
         this.my = y;
+        this.want2Move = true;
     }
     
     public void MoveBy(int x, int y) {
@@ -75,13 +78,17 @@ public class Sprite implements Drawable {
         //this.y += y;
         this.mx = this.x + x;
         this.my = this.y + y;
+        this.want2Move = true;
     }
     
     public void applyMove() {
-        this.x = this.mx;
-        this.y = this.my;
-        this.mx = 0;
-        this.my = 0;
+        if (this.want2Move) {
+            this.want2Move = false;
+            this.x = this.mx;
+            this.y = this.my;
+            this.mx = 0;
+            this.my = 0;
+        }
     }
     
     public boolean isLoaded() {
