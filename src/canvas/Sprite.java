@@ -83,7 +83,7 @@ public class Sprite implements Drawable {
     
     
     
-    public void MoveTo(int x, int y) {
+    public void moveTo(int x, int y) {
         //this.x = x;
         //this.y = y;
         this.mx = x;
@@ -91,7 +91,7 @@ public class Sprite implements Drawable {
         this.want2Move = true;
     }
     
-    public void MoveBy(int x, int y) {
+    public void moveBy(int x, int y) {
         //this.x += x;
         //this.y += y;
         this.mx = this.x + x;
