@@ -73,7 +73,11 @@ public class CollisionBox {
     
     
     public boolean isCollide(CollisionBox b) {
-        return this.sx + this.x > b.getSx() + b.getX() && this.sy + this.x < b.getSx() + b.getX() + b.getWidth() && this.sy + this.y > b.getSy() + b.getY() && this.sy + this.y < b.getSy() + b.getY() + this.getHeight();
+        return
+                this.sx + this.x >= b.getSx() + b.getX() &&
+                this.sx + this.x <= b.getSx() + b.getX() + b.getWidth() &&
+                this.sy + this.y >= b.getSy() + b.getY() &&
+                this.sy + this.y <= b.getSy() + b.getY() + b.getHeight();
     }
 
     public void apply(int x, int y) {
