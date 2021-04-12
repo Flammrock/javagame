@@ -36,22 +36,24 @@ public abstract class Element implements Serializable, Drawable {
         return this.getDescription(); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public ArrayList<Drawable> getDrawables() {
-        return null;
-    }
     
     
-    public int getX() {
-        return 0;
-    }
+    
+    public ArrayList<Drawable> getDrawables() {return null;}
+    
+    
+    public int getX() {return 0;}
 
     public void setX(int x) {}
 
-    public int getY() {
-        return 0;
-    }
+    public int getY() {return 0;}
 
     public void setY(int y) {}
+    
+    
+    public int getNewX() {return 0;}
+    
+    public int getNewY() {return 0;}
     
     
     
@@ -63,12 +65,5 @@ public abstract class Element implements Serializable, Drawable {
     
     public void cancelMove() {}
     
-    public int getNewX() {
-        return 0;
-    }
-    
-    public int getNewY() {
-        return 0;
-    }
     
 }
