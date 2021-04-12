@@ -14,33 +14,75 @@ import java.util.ArrayList;
  */
 public interface Drawable {
     
+    /**
+     * Propagation de l'Appel draw() (cet appel est d'origine de Canvas et est appelé à 60FPS)
+     * @param c Le Canvas
+     * @param g L'objet Graphics
+     */
     void draw(Canvas c, Graphics g);
     
-    
+    /**
+     * Un Drawable peut être un sous-ensemble de Drawable
+     * Cette méthode permet de retourner ce sous-ensemble
+     * (fonction appelé par Canvas pour récupérer la liste de tout les Drawable du jeu)
+     * 
+     * Néanmoins, ce "sous-ensemble" peut être entièrement gérer par l'objet lui-même,
+     * pour cela, il suffit de renvoyer null ici et que l'objet dessine soi-même ce sous-ensemble
+     * lui même à l'aide de la méthode draw(Canvas c, Graphics g)
+     * 
+     * @return retourne la liste du sous-ensemble
+     */
     public ArrayList<Drawable> getDrawables();
     
-    
+    /**
+     * Chaque Drawable est censé pouvoir être dessiner dans le canvas,
+     * par conséquent, l'objet qui implémente cette interface doit pouvoir être capable de
+     * retourner une coordonnée X qui définit sa position dans le canvas
+     * @return retourne la position X de l'objet
+     */
     public int getX();
 
+    /**
+     * Chaque Drawable est censé pouvoir être dessiner dans le canvas,
+     * par conséquent, l'objet qui implémente cette interface doit pouvoir être capable de
+     * définir sa coordonnée X qui définit sa position dans le canvas
+     * @param x La nouvelle position X de l'objet
+     */
     public void setX(int x);
 
+    /**
+     * Chaque Drawable est censé pouvoir être dessiner dans le canvas,
+     * par conséquent, l'objet qui implémente cette interface doit pouvoir être capable de
+     * retourner une coordonnée Y qui définit sa position dans le canvas
+     * @return retourne la position Y de l'objet
+     */
     public int getY();
 
+    /**
+     * Chaque Drawable est censé pouvoir être dessiner dans le canvas,
+     * par conséquent, l'objet qui implémente cette interface doit pouvoir être capable de
+     * définir sa coordonnée Y qui définit sa position dans le canvas
+     * @param y La nouvelle position Y de l'objet
+     */
     public void setY(int y);
     
     
-    public int getNewX();
-    
-    public int getNewY();
-    
-    
-    
+    /**
+     * Chaque Drawable est censé pouvoir être dessiner dans le canvas,
+     * par conséquent, l'objet qui implémente cette interface doit pouvoir être capable de
+     * définir sa coordonnée X et Y
+     * @param x La nouvelle position X de l'objet
+     * @param y La nouvelle position Y de l'objet
+     */
     public void MoveTo(int x, int y);
     
+    /**
+     * Chaque Drawable est censé pouvoir être dessiner dans le canvas,
+     * par conséquent, l'objet qui implémente cette interface doit pouvoir être capable de
+     * définir sa coordonnée X et Y de manière relative
+     * @param x La nouvelle position X relative de l'objet
+     * @param y La nouvelle position Y relative de l'objet
+     */
     public void MoveBy(int x, int y);
-    
-    public void applyMove();
-    
-    public void cancelMove();
     
 }
