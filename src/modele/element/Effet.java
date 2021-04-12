@@ -6,6 +6,7 @@
 package modele.element;
 
 import canvas.Canvas;
+import canvas.Drawable;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -213,6 +214,11 @@ public class Effet extends Element {
 
     @Override
     public void applyMove() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Drawable> getDrawables() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
