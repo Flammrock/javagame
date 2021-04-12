@@ -175,7 +175,25 @@ public class SpriteSheet extends Sprite {
     public void draw(Canvas c, Graphics g) {
         if (!this.isLoaded()) return;
         //g.drawImage(this.image, this.x, this.y, null);
-        g.drawImage(this.image, this.x, this.y, this.x+this.width, this.y+this.height, this.getSpriteX(), this.getSpriteY(), this.getSpriteX()+this.spriteWidth, this.getSpriteY()+this.spriteHeight, null);
+        
+        g.drawImage(
+                this.image,
+                
+                // dest
+                this.x,
+                this.y,
+                this.x+this.width,
+                this.y+this.height,
+                
+                // src
+                this.getSpriteX()+this.decalX,
+                this.getSpriteY()+this.decalY,
+                this.getSpriteX()+this.decalX+this.spriteWidth-this.decalW,
+                this.getSpriteY()+this.decalY+this.spriteHeight-this.decalH,
+                
+                null
+        );
+        
         this.nextKeyAnimation();
         if (this.ondraw!=null) this.ondraw.accept(c);
     }
