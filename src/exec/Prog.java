@@ -55,6 +55,7 @@ import canvas.SpriteSheet;
 import canvas.collision.CollisionBox;
 import java.util.ArrayList;
 import modele.element.*;
+import eventsystem.*;
 
 public class Prog {
 
@@ -111,6 +112,58 @@ public class Prog {
     }
 
     public static void main(String[] args) {
+        
+        
+        /***************** EVENT SYSTEM TEST *****************/
+        
+        
+        // un dispatcher qui contiendra différent listener pour différent event
+        Dispatcher dispatcher = new Dispatcher();
+        
+        // on ajoute un listener pour l'event EventTest<String>
+        // la méthode onEvent sera appelé dès qu'on envoie un event EventTest<String> dans le dispatcher
+        dispatcher.addListener(new SimpleListener("onBonjour"){
+            
+            @Override
+            public void onEvent(Object sender, SimpleEvent e) {
+                System.out.println("Bonjour : "+e.getData());
+            }
+            
+        });
+        
+        // on ajoute un listener pour l'event EventTest2<Integer>
+        // la méthode onEvent sera appelé dès qu'on envoie un event EventTest2<Integer> dans le dispatcher
+        dispatcher.addListener(new SimpleListener("onAurevoir"){
+            
+            @Override
+            public void onEvent(Object sender, SimpleEvent e) {
+                System.out.println("Au revoir : "+e.getData());
+            }
+            
+        });
+        
+        
+        // on envoie nos 2 events (et on observe sur la console ce qu'il se passe)
+        //dispatcher.fireEvent("onBonjour",null, new SimpleEvent("bonjour"));
+        dispatcher.fireEvent("onAurevoir",null, new SimpleEvent(3));
+        
+        
+        
+        
+        /*****************************************************/
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         // tout les objets on les met ici :
         
