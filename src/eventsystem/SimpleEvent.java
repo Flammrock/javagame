@@ -15,7 +15,7 @@ public class SimpleEvent<T> implements Serializable {
     
     private T data;
     
-    T getData() {
+    public T getData() {
         return this.data;
     }
     
