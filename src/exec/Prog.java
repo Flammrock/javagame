@@ -120,8 +120,8 @@ public class Prog {
         // un dispatcher qui contiendra différent listener pour différent event
         Dispatcher dispatcher = new Dispatcher();
         
-        // on ajoute un listener pour l'event EventTest<String>
-        // la méthode onEvent sera appelé dès qu'on envoie un event EventTest<String> dans le dispatcher
+        // on ajoute un listener pour l'event "onBonjour"
+        // la méthode onEvent sera appelé dès qu'on envoie un event "onBonjour" dans le dispatcher
         dispatcher.addListener(new SimpleListener("onBonjour"){
             
             @Override
@@ -131,8 +131,8 @@ public class Prog {
             
         });
         
-        // on ajoute un listener pour l'event EventTest2<Integer>
-        // la méthode onEvent sera appelé dès qu'on envoie un event EventTest2<Integer> dans le dispatcher
+        // on ajoute un listener pour l'event "onAurevoir"
+        // la méthode onEvent sera appelé dès qu'on envoie un event "onAurevoir" dans le dispatcher
         dispatcher.addListener(new SimpleListener("onAurevoir"){
             
             @Override
@@ -144,7 +144,7 @@ public class Prog {
         
         
         // on envoie nos 2 events (et on observe sur la console ce qu'il se passe)
-        //dispatcher.fireEvent("onBonjour",null, new SimpleEvent("bonjour"));
+        dispatcher.fireEvent("onBonjour",null, new SimpleEvent("bonjour"));
         dispatcher.fireEvent("onAurevoir",null, new SimpleEvent(3));
         
         
