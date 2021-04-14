@@ -61,7 +61,23 @@ public class Canvas extends JPanel {
                 items.add(item);
                 ArrayList<Drawable> itemss = item.getDrawables();
                 if (itemss != null) {
+                    for (Drawable dt : itemss) {
+                        if (dt.isDraw()) {
+                            pile.add(dt);
+                        }
+                    }
                     pile.addAll(itemss);
+                }
+                if (item instanceof Collisionable) {
+                    Collisionable b = (Collisionable)item;
+                    ArrayList<CollisionBox> itemss2 = b.getCollisionBoxList();
+                    if (itemss2 != null) {
+                        for (CollisionBox bt : itemss2) {
+                            if (bt.isDraw()) {
+                                pile.add(bt);
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -205,5 +205,10 @@ public class Sprite implements Collisionable {
     public void addCollisionBox(CollisionBox b) {
         // un sprite n'a pas de collision box
     }
+
+    @Override
+    public boolean isDraw() {
+        return true;
+    }
     
 }

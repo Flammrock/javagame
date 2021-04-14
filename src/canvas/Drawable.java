@@ -85,4 +85,8 @@ public interface Drawable {
      */
     public void moveBy(int x, int y);
     
+    
+    
+    public boolean isDraw();
+    
 }
