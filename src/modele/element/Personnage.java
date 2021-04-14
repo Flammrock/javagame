@@ -13,14 +13,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     private String nom;
     private double probaDeGeneration;
-    
-    private int age;
-    private double force;
-    private double agilite;
-    private double pv;
-    private double pvMax;
-    private double poidsMax;
-    
+
     private ArrayList<Property> listproperties;
     
     private ArrayList<Objet> inventaire;
@@ -43,7 +36,6 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.inventaire = new ArrayList<>();
         this.main = null;
         this.armure = null;
-        this.poidsMax = force*3;
         this.effetCourant = new ArrayList<>();
         this.sprite = null;
         this.collisionBoxList = new ArrayList<>();
@@ -51,7 +43,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.setProperty(PropertyList.FORCE,force);
         this.setProperty(PropertyList.AGILITE,agilite);
         this.setProperty(PropertyList.PV,pv);
-        this.setProperty(PropertyList.PVMAX,pvMax);
+        this.setProperty(PropertyList.PVMAX,pv);
         this.setProperty(PropertyList.POIDSMAX,force*3);
     }
 
@@ -72,16 +64,12 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.nom = nom;
     }
 
-    public double getPv() {
-        return pv;
-    }
-
     public void setPv(double pv) {
-        if (pv > this.pvMax) {
-            this.pv = this.pvMax;
+        if (pv > this.getAjoute(PropertyList.PVMAX)) {
+            setProperty(PropertyList.PV, getAjoute(PropertyList.PVMAX));
             return;
         }
-        this.pv = pv;
+        setProperty(PropertyList.PV, pv);
     }
 
     public ArrayList<Objet> getInventaire() {
@@ -108,30 +96,6 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.armure = armure;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public double getForce() {
-        return force;
-    }
-
-    public void setForce(double force) {
-        this.force = force;
-    }
-
-    public double getAgilite() {
-        return this.agilite;
-    }
-
-    public void setAgilite(double agilite) {
-        this.agilite = agilite;
-    }
-
     public ArrayList<Effet> getEffetCourant() {
         return effetCourant;
     }
@@ -142,10 +106,6 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     public void setPieceActuel(Lieu pieceActuel) {
         this.pieceActuel = pieceActuel;
-    }
-
-    public double getPoidsMax() {
-        return poidsMax;
     }
     
     public void setProperty(String nom, double valeur){
@@ -178,11 +138,11 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
     public void ajoutePointVie(double valeur) {
-        if (this.pv + valeur > this.pvMax) {
-            this.pv = this.pvMax;
+        if (this.getAjoute(PropertyList.PV) + valeur > this.getAjoute(PropertyList.PVMAX)) {
+            setProperty(PropertyList.PV,this.getAjoute(PropertyList.PVMAX));
             return;
         }
-        this.pv += valeur;
+        setProperty(PropertyList.PV,this.getAjoute(PropertyList.PV)+valeur);
     }
     
     public double getEffet(String nom){
@@ -233,7 +193,7 @@ public class Personnage extends Element implements Generable, Collisionable {
             bonusArmure = this.getArmure().getModificateurAgilite();
         }
         double bonusEffet = this.getEffet(PropertyList.AGILITE);
-        double valeurCombat = this.agilite+bonusArmure+bonusEffet;
+        double valeurCombat = this.getAjoute(PropertyList.AGILITE)+bonusArmure+bonusEffet;
         return valeurCombat;
     }
     
@@ -265,7 +225,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
 
     private double blesse(Personnage ennemie) {
-        double pointdevie = ennemie.getPv();
+        double pointdevie = ennemie.getAjoute(PropertyList.PV);
         double degats = caluleDegatsBrut() - ennemie.getArmureTotal();
         pointdevie -= degats;
         if(pointdevie>0){
@@ -283,7 +243,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         }else{
             bonusArme = this.getMain().getModificateurForce();
         }
-        double bonusForce = this.force;
+        double bonusForce = this.getAjoute(PropertyList.FORCE);
         double bonusEffet = this.getEffet(PropertyList.FORCE);
         double degats = bonusArme + bonusForce + bonusEffet;
         return degats;
@@ -335,7 +295,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
     public boolean ajouterObjet(Objet o){
-        if(o.getPoids()+ this.getPoidsInventaire()<=(this.poidsMax + this.getEffet(PropertyList.POIDS))){
+        if(o.getPoids()+ this.getPoidsInventaire()<=(this.getAjoute(PropertyList.POIDSMAX) + this.getEffet(PropertyList.POIDS))){
             return this.inventaire.add(o);
         }else{
             return false;
@@ -353,7 +313,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         int[] effetASupp = new int[this.effetCourant.size()];
         int i = 0;
         for(Effet effet : this.effetCourant){
-            this.pv += getEffet(PropertyList.PV);
+            setProperty(PropertyList.PV, getEffet(PropertyList.PV)+getAjoute(PropertyList.PV));
             if(effet.tourPasse()==false){
                 effetASupp[i] = this.effetCourant.indexOf(effet);
                 i++;
@@ -371,11 +331,11 @@ public class Personnage extends Element implements Generable, Collisionable {
         for(Effet effet : this.effetCourant){
             if(effet.isConsomable()){
                 if(effet.tourPasse()==false){
-                    this.force += effet.getAjoute(PropertyList.FORCE);
-                    this.agilite += effet.getAjoute(PropertyList.AGILITE);
-                    this.pv += effet.getAjoute(PropertyList.PV);
-                    this.pvMax += effet.getAjoute(PropertyList.PVMAX);
-                    this.poidsMax += effet.getAjoute(PropertyList.POIDS);
+                    setProperty(PropertyList.FORCE, getAjoute(PropertyList.FORCE) + effet.getAjoute(PropertyList.FORCE));
+                    setProperty(PropertyList.AGILITE, getAjoute(PropertyList.AGILITE) + effet.getAjoute(PropertyList.AGILITE));
+                    setProperty(PropertyList.PV, getAjoute(PropertyList.PV) + effet.getAjoute(PropertyList.PV));
+                    setProperty(PropertyList.PVMAX, getAjoute(PropertyList.PVMAX) + effet.getAjoute(PropertyList.PVMAX));
+                    setProperty(PropertyList.POIDS, getAjoute(PropertyList.POIDS) + effet.getAjoute(PropertyList.POIDS));
                     effetASupp[i] = this.effetCourant.indexOf(effet);
                     i++;
                 }
@@ -393,7 +353,7 @@ public class Personnage extends Element implements Generable, Collisionable {
             return this.nom;
         }
         
-        return this.nom + " (" + this.description + ") " + this.pv + "PV";
+        return this.nom + " (" + this.description + ") " + getAjoute(PropertyList.PV) + "PV";
         
     }
     
