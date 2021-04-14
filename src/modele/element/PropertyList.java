@@ -20,4 +20,6 @@ public interface PropertyList extends Serializable {
     String PVMAX = "pv max";
     String ARMURE = "armure";
     String POIDS = "poids";
+    String POIDSMAX = "poids";
+    String AGE = "age";
 }
