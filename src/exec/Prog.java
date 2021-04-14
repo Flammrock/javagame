@@ -126,8 +126,8 @@ public class Prog {
             
             @Override
             public void onEvent(Object sender, SimpleEvent e) {
-                if (e.getData() instanceof String) {
-                    System.out.println("oui c'est bien un String !");
+                if (e.getData() instanceof ArrayList) {
+                    System.out.println("oui c'est bien un ArrayList<Integer> !");
                 }
                 System.out.println("Bonjour : "+e.getData());
             }
@@ -147,7 +147,10 @@ public class Prog {
         
         
         // on envoie nos 2 events (et on observe sur la console ce qu'il se passe)
-        dispatcher.fireEvent("onBonjour",null, new SimpleEvent<String>("bonjour"));
+        ArrayList<Integer> data = new ArrayList<>();
+        data.add(1);
+        data.add(3);
+        dispatcher.fireEvent("onBonjour",null, new SimpleEvent(data));
         dispatcher.fireEvent("onAurevoir",null, new SimpleEvent(3));
         
         
