@@ -39,6 +39,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.effetCourant = new ArrayList<>();
         this.sprite = null;
         this.collisionBoxList = new ArrayList<>();
+        this.listproperties = new ArrayList<>();
     }
     
     public void init(double age, double force, double agilite, double pv) {
