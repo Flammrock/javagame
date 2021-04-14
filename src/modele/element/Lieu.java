@@ -2,6 +2,7 @@ package modele.element;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,11 @@ public class Lieu extends Element implements Generable {
     List<Porte> listePorte;
     List<Objet> objets;
     List<Personnage> monstres;
+    
+    int x;
+    int y;
+    int width;
+    int height;
 
     public String getNom() {
         return nom;
@@ -133,6 +139,12 @@ public class Lieu extends Element implements Generable {
     @Override
     public boolean generate(GenerableParametre s) {
         
+        // on génère la taille ainsi que la position
+        this.width = (int) (Math.random() * (500 - 200 + 1) + 200);
+        this.height = (int) (Math.random() * (500 - 200 + 1) + 200);
+        this.x = 200;
+        this.y = 200;
+        
         // on cast pour récupérer les paramètres
         GenerableLieuParametre p = (GenerableLieuParametre)s;
         
@@ -165,6 +177,12 @@ public class Lieu extends Element implements Generable {
     @Override
     public void setProbabilite(double proba) {
         this.probaDeGeneration = proba;
+    }
+    
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        g.setColor(Color.orange);
+        g.drawRect(this.x, this.y, this.width, this.height);
     }
 
 }
