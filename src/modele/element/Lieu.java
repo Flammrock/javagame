@@ -2,12 +2,14 @@ package modele.element;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import canvas.collision.CollisionBox;
+import canvas.collision.Collisionable;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lieu extends Element implements Generable {
+public class Lieu extends Element implements Generable, Collisionable {
     
     String nom;
     double probaDeGeneration;
@@ -20,6 +22,9 @@ public class Lieu extends Element implements Generable {
     int y;
     int width;
     int height;
+    ArrayList<Drawable> drawables;
+    
+    ArrayList<CollisionBox> collisionBoxList;
 
     public String getNom() {
         return nom;
@@ -60,6 +65,8 @@ public class Lieu extends Element implements Generable {
         this.objets = new ArrayList<>();
         this.monstres = new ArrayList<>();
         this.probaDeGeneration = 1.0;
+        this.drawables = new ArrayList<>();
+        this.collisionBoxList = new ArrayList<>();
     }
     
     /**
@@ -145,6 +152,15 @@ public class Lieu extends Element implements Generable {
         this.x = 200;
         this.y = 200;
         
+        int epaisseur = 10;
+        
+        // on ajoute 4 collisionsBox
+        this.collisionBoxList.clear();
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,width+epaisseur*2,epaisseur*2));
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur+height,width+epaisseur*2,epaisseur*2));
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,epaisseur*2,epaisseur*2+height));
+        this.addCollisionBox(new CollisionBox(-epaisseur+width,-epaisseur,epaisseur*2,epaisseur*2+height));
+        
         // on cast pour récupérer les paramètres
         GenerableLieuParametre p = (GenerableLieuParametre)s;
         
@@ -183,6 +199,42 @@ public class Lieu extends Element implements Generable {
     public void draw(Canvas c, Graphics g) {
         g.setColor(Color.orange);
         g.drawRect(this.x, this.y, this.width, this.height);
+    }
+    
+    @Override
+    public ArrayList<Drawable> getDrawables() {
+        return this.drawables;
+    }
+
+    @Override
+    public ArrayList<CollisionBox> getCollisionBoxList() {
+        return this.collisionBoxList;
+    }
+
+    @Override
+    public void addCollisionBox(CollisionBox b) {
+        if (b == null) return;
+        this.collisionBoxList.add(b);
+    }
+
+    @Override
+    public int getNewX() {
+        return this.x;
+    }
+
+    @Override
+    public int getNewY() {
+         return this.y;
+    }
+
+    @Override
+    public void applyMove() {
+        
+    }
+
+    @Override
+    public void cancelMove() {
+        
     }
 
 }
