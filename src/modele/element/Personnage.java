@@ -6,22 +6,28 @@ import canvas.collision.CollisionBox;
 import canvas.collision.Collisionable;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import javax.swing.SpringLayout;
 
 
 public class Personnage extends Element implements Generable, Collisionable {
     
     private String nom;
     private double probaDeGeneration;
+    
     private int age;
     private double force;
     private double agilite;
     private double pv;
     private double pvMax;
+    private double poidsMax;
+    
+    private ArrayList<Property> listproperties;
+    
     private ArrayList<Objet> inventaire;
     private Equipement main;
     private Equipement armure;
     private Lieu pieceActuel;
-    private double poidsMax;
+    
     private ArrayList<Effet> effetCourant;
     
     private SpriteSheet sprite;
@@ -30,15 +36,10 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     
 
-    public Personnage(String nom, String description, int age, double force, double agilite, double pv) {
+    public Personnage(String nom, String description, double age, double force, double agilite, double pv) {
         this.nom = nom;
         this.probaDeGeneration = 1.0;
         this.description = description;
-        this.age = age;
-        this.force = force;
-        this.agilite = agilite;
-        this.pv = pv;
-        this.pvMax = pv;
         this.inventaire = new ArrayList<>();
         this.main = null;
         this.armure = null;
@@ -46,6 +47,12 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.effetCourant = new ArrayList<>();
         this.sprite = null;
         this.collisionBoxList = new ArrayList<>();
+        this.setProperty(PropertyList.AGE,age);
+        this.setProperty(PropertyList.FORCE,force);
+        this.setProperty(PropertyList.AGILITE,agilite);
+        this.setProperty(PropertyList.PV,pv);
+        this.setProperty(PropertyList.PVMAX,pvMax);
+        this.setProperty(PropertyList.POIDSMAX,force*3);
     }
 
     public SpriteSheet getSprite() {
@@ -140,8 +147,36 @@ public class Personnage extends Element implements Generable, Collisionable {
     public double getPoidsMax() {
         return poidsMax;
     }
-
-
+    
+    public void setProperty(String nom, double valeur){
+        for (Property p : this.listproperties) {
+            if(p.getNom().equals(nom)){
+                p.setValeur(valeur);
+                return;
+            }
+        }
+        this.listproperties.add(new Property(nom,valeur));
+    }
+    
+    public void removeProperty(String nom){
+        for (Property p : this.listproperties) {
+            if(p.getNom().equals(nom)){
+                listproperties.remove(p);
+                return;
+            }
+        }
+    }
+    
+    public double getAjoute(String nom){
+        double r = 0.0;
+        for (Property p : this.listproperties) {
+            if (p.getNom().equals(nom)) {
+                r += p.getValeur();
+            }
+        }
+        return r;
+    }
+    
     public void ajoutePointVie(double valeur) {
         if (this.pv + valeur > this.pvMax) {
             this.pv = this.pvMax;
@@ -197,7 +232,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         }else{
             bonusArmure = this.getArmure().getModificateurAgilite();
         }
-        double bonusEffet = 0/*this.getEffetAgilite()*/;
+        double bonusEffet = this.getEffet(PropertyList.AGILITE);
         double valeurCombat = this.agilite+bonusArmure+bonusEffet;
         return valeurCombat;
     }
@@ -357,7 +392,9 @@ public class Personnage extends Element implements Generable, Collisionable {
         if (this.description.trim().equals("")) {
             return this.nom;
         }
+        
         return this.nom + " (" + this.description + ") " + this.pv + "PV";
+        
     }
     
     
