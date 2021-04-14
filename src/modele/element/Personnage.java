@@ -26,7 +26,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     private SpriteSheet sprite;
     
-    private CollisionBox collisionBox;
+    private ArrayList<CollisionBox> collisionBoxList;
     
     
 
@@ -45,7 +45,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.poidsMax = force*3;
         this.effetCourant = new ArrayList<>();
         this.sprite = null;
-        this.collisionBox = null;
+        this.collisionBoxList = new ArrayList<>();
     }
 
     public SpriteSheet getSprite() {
@@ -243,7 +243,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         }else{
             bonusArmure = this.getArmure().getModificateurAgilite();
         }
-        double bonusEffet = this.getEffetAgilite();
+        double bonusEffet = 0/*this.getEffetAgilite()*/;
         double valeurCombat = this.agilite+bonusArmure+bonusEffet;
         return valeurCombat;
     }
@@ -436,8 +436,10 @@ public class Personnage extends Element implements Generable, Collisionable {
         // pour l'instant, on dessine juste le sprite
         if (this.sprite == null) return;
         
-        this.collisionBox.apply(this.getX(),this.getY());
-        this.collisionBox.draw(c, g);
+        for (CollisionBox b : this.collisionBoxList) {
+            b.apply(this.getX(),this.getY());
+            b.draw(c, g);
+        }
         
         this.sprite.draw(c, g);
         
@@ -472,15 +474,16 @@ public class Personnage extends Element implements Generable, Collisionable {
     public void moveBy(int x, int y) {
         this.sprite.moveBy(x,y); // pour l'instant, on propage ça dans le sprite
     }
-
+    
     @Override
-    public CollisionBox getCollisionBox() {
-        return this.collisionBox;
+    public ArrayList<CollisionBox> getCollisionBoxList() {
+        return this.collisionBoxList;
     }
 
     @Override
-    public void setCollisionBox(CollisionBox b) {
-         this.collisionBox = b;
+    public void addCollisionBox(CollisionBox b) {
+        if (b == null) return;
+        this.collisionBoxList.add(b);
     }
 
     @Override
@@ -495,7 +498,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.sprite.cancelMove(); // pour l'instant, on propage ça dans le sprite
     }
     
-        @Override
+    @Override
     public void applyMove() {
         this.sprite.applyMove(); // pour l'instant, on propage ça dans le sprite
     }
