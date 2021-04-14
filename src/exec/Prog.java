@@ -192,19 +192,22 @@ public class Prog {
         /********************************************************/
         
         /***************** BIBLIOTHEQUE MONSTRE *****************/
-        Personnage monstre = new Personnage("Goblin", "monstre de la mort", 5, 10, 15, 20);
+        Personnage monstre = new Personnage("Goblin", "monstre de la mort");
+        monstre.init(5, 10, 15, 20);
         monstre.ajouter(banane);
         monstre.ajouter(armureBadass);
         monstre.equip(1);
         
-        Personnage rock = new Personnage("rock", "inofensif", 5, 10, 15, 20);
+        Personnage rock = new Personnage("rock", "inofensif");
+        rock.init(5, 10, 15, 20);
         rock.addCollisionBox(new CollisionBox(10,20,465/3-25,420/3-40));
         
         /********************************************************/
         
         
         // on créé un joueur
-        Personnage joueur = new Personnage("Héros","perso lambda nul", 20, 15, 15, 100);
+        Personnage joueur = new Personnage("Héros","perso lambda nul");
+        joueur.init(20, 15, 15, 100);
         joueur.ajouter(epeeCasser);
         joueur.ajouter(pomme);
         joueur.ajouter(regeneration);
