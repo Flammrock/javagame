@@ -27,6 +27,7 @@ public class Effet extends Element {
     private double poidsAjoute;
     private double armureAjoute;
     private Lieu tpSalle;
+    private ArrayList<Property> listproperties; 
 
     public Effet(String Nom,String description, boolean permanant, boolean consomable, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, double pvMaxAjoute, double poidsAjoute, double armureAjoute, Lieu tpSalle) {
         this.Nom = Nom;
@@ -41,6 +42,17 @@ public class Effet extends Element {
         this.poidsAjoute = poidsAjoute;
         this.armureAjoute = armureAjoute;
         this.tpSalle = tpSalle;
+    }
+
+    public Effet(String Nom,String description , boolean permanant, boolean consomable) {
+        this.Nom = Nom;
+        this.description = description;
+        this.permanant = permanant;
+        this.consomable = consomable;
+    }
+    
+    public void addProperty(String nom,double valeur){
+        listproperties.add(new Property(nom,valeur));
     }
     
     public String getNom() {
