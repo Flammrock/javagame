@@ -175,12 +175,18 @@ public class Prog {
         
         /****************** BIBLIOTHEQUE OBJET ******************/
         Arme epeeCasser = new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0);
-        Effet effetPomme = new Effet("","",false,true,0, 0, 0, 10,0,0,0, new Lieu("Rien"));
-        Effet regeneration = new Effet("régeneration","augmente la vie dans le temmps",true,false,0,0,0,3,0,0,0,new Lieu("Rien"));
+        Effet effetPomme = new Effet("","",false,true,0);
+        effetPomme.setProperty(PropertyList.PV,10);
+        Effet regeneration = new Effet("régeneration","augmente la vie dans le temmps",true,false,0);
+        regeneration.setProperty(PropertyList.PV,3);
         Nourriture pomme = new Nourriture("Pomme","Une bonne petite pomme",2.0,effetPomme);
-        Effet hommeDeFer = new Effet("Homme de fer","augmente la force",false,false,3,5,0,0,0,0,0,new Lieu("Rien"));
-        Nourriture potion = new Nourriture("Potion de regen","regen la vie",1,new Effet("régeneration","augmente la vie dans le temmps",false,false,3,0,0,3,0,0,0,new Lieu("Rien")));
-        Effet effetBanane = new Effet("","",false,true,0, 0, 0, 15,0,0,0, new Lieu("Rien"));
+        Effet hommeDeFer = new Effet("Homme de fer","augmente la force",false,false,3);
+        hommeDeFer.setProperty(PropertyList.FORCE, 5);
+        Effet popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
+        popo.setProperty(PropertyList.PV, 3);
+        Nourriture potion = new Nourriture("Potion de regen","regen la vie",1,popo);
+        Effet effetBanane = new Effet("","",false,true,0);
+        effetBanane.setProperty(PropertyList.PV, 15);
         Nourriture banane = new Nourriture("banane","Une grosse banane",2.0,effetBanane);
         Armure armureBadass = new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10);
         /********************************************************/
@@ -203,7 +209,9 @@ public class Prog {
         joueur.ajouter(pomme);
         joueur.ajouter(regeneration);
         joueur.ajouter(hommeDeFer);
-        joueur.ajouter(new Effet("Homme de fer","augmente la force",false,false,3,5,0,0,0,0,0,new Lieu("Rien")));
+        hommeDeFer.setProperty(PropertyList.FORCE, 5);
+        popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
+        joueur.ajouter(popo);
         joueur.ajouter(potion);
         joueur.addCollisionBox(new CollisionBox(0,35,28,14));
         
