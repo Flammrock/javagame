@@ -69,4 +69,9 @@ public abstract class Element implements Serializable, Drawable {
     @Override
     public void draw(Canvas c, Graphics g) {}
     
+    @Override
+    public boolean isDraw() {
+        return true;
+    }
+    
 }
