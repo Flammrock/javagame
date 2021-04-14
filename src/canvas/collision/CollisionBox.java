@@ -210,5 +210,10 @@ public class CollisionBox implements Serializable, Drawable {
         this.x += x;
         this.y += y;
     }
+
+    @Override
+    public boolean isDraw() {
+        return this.isdraw;
+    }
     
 }
