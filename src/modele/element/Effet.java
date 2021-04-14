@@ -91,9 +91,16 @@ public class Effet extends Element {
         return consomable;
     }
     
-    public double getAjoute(){
+    public double getAjoute(String nom){
         
-        return
+        double r = 0.0;
+        for (Property p : this.listproperties) {
+            if (p.getNom().equals(nom)) {
+                r += p.getValeur();
+            }
+        }
+        
+        return r;
     }
     
     /**
