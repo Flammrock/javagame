@@ -31,6 +31,22 @@ public class Effet extends Element {
         this.listproperties = new ArrayList<>();
     }
     
+    public String getNom() {
+        return Nom;
+    }
+
+    public boolean isPermanant() {
+        return permanant;
+    }
+
+    public boolean isConsomable() {
+        return consomable;
+    }
+
+    public double getDuréeDeLEffet() {
+        return duréeDeLEffet;
+    }
+    
     public void setProperty(String nom, double valeur){
         for (Property p : this.listproperties) {
             if(p.getNom().equals(nom)){
@@ -48,22 +64,6 @@ public class Effet extends Element {
                 return;
             }
         }
-    }
-    
-    public String getNom() {
-        return Nom;
-    }
-
-    public boolean isPermanant() {
-        return permanant;
-    }
-
-    public boolean isConsomable() {
-        return consomable;
-    }
-
-    public double getDuréeDeLEffet() {
-        return duréeDeLEffet;
     }
     
     public double getAjoute(String nom){
