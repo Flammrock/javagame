@@ -13,6 +13,8 @@ public interface PropertyList {
     
     String FORCE = "force";
     String AGILITE = "agilite";
-    String PV = "pv";  
-    
+    String PV = "pv";
+    String PVMAX = "pv max";
+    String ARMURE = "armure";
+    String POIDS = "poids";
 }
