@@ -5,6 +5,7 @@
  */
 package canvas;
 
+import canvas.collision.CollisionBox;
 import canvas.collision.Collisionable;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -91,18 +92,31 @@ public class Canvas extends JPanel {
                             // on cast le 2ème item
                             Collisionable c2 = (Collisionable) item2;
                             
-                            // on place les boites de collisions aux nouvelles coordonnées à tester
-                            c1.getCollisionBox().apply(c1.getNewX(),c1.getNewY());
-                            c2.getCollisionBox().apply(c2.getNewX(),c2.getNewY());
+                            // on récupère les ensembles de box
+                            ArrayList<CollisionBox> list1 = c1.getCollisionBoxList();
+                            ArrayList<CollisionBox> list2 = c2.getCollisionBoxList();
+                            
+                            // on les places au bon endroit pour le test
+                            for (CollisionBox b : list1) b.apply(c1.getNewX(),c1.getNewY());
+                            for (CollisionBox b : list2) b.apply(c2.getNewX(),c2.getNewY());
                             
                             // on check s'il y a une collision
-                            if (c1.getCollisionBox().isCollide(c2.getCollisionBox())) {
+                            for (CollisionBox b1 : list1) {
                                 
-                                // si oui, alors cet item ne peut pas bouger, on peut quitter cette boucle
-                                canMove = false;
-                                break;
+                                for (CollisionBox b2 : list2) {
+                                
+                                    if (b1.isCollide(b2)) {
+                                
+                                        // si oui, alors cet item ne peut pas bouger, on peut quitter cette boucle
+                                        canMove = false;
+                                        break;
+
+                                    }
+                                
+                                }
                                 
                             }
+                            
                             
                         }
                         
