@@ -87,7 +87,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         int[] monstresMort = new int[monstres.size()];
         int i=0;
         for (Personnage monstre : monstres) {
-            if(monstre.getPv()!=0){
+            if(monstre.getAjoute(PropertyList.PV)!=0){
                 logs += monstre.attaque(this.aventure.getJoueur());
             }else{
                 monstresMort[i] = monstres.indexOf(monstre);
@@ -158,9 +158,9 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     private void mettreAJourAgilite(){
         if(this.aventure.getJoueur().getEffet(PropertyList.AGILITE)!= 0){
-            jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+" + "+this.aventure.getJoueur().getEffet(PropertyList.AGILITE));
+            jTextPaneAgilite.setText(this.aventure.getJoueur().getAjoute(PropertyList.AGILITE)+" + "+this.aventure.getJoueur().getEffet(PropertyList.AGILITE));
         }else{
-            jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+"");
+            jTextPaneAgilite.setText(this.aventure.getJoueur().getAjoute(PropertyList.AGILITE)+"");
         }
     }
     
@@ -183,7 +183,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     private void mettreAJourPv(){
-        jTextPanePv.setText(this.aventure.getJoueur().getPv()+"");
+        jTextPanePv.setText(this.aventure.getJoueur().getAjoute(PropertyList.PV)+"");
     }
     
     private void mettreAJourNom(){
@@ -191,11 +191,11 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     private void mettreAJourForce(){
-        jTextPaneForce.setText(this.aventure.getJoueur().getForce()+"");
+        jTextPaneForce.setText(this.aventure.getJoueur().getAjoute(PropertyList.FORCE)+"");
         if(this.aventure.getJoueur().getEffet(PropertyList.FORCE)!= 0){
-            jTextPaneForce.setText(this.aventure.getJoueur().getForce()+" + "+this.aventure.getJoueur().getEffet(PropertyList.FORCE));
+            jTextPaneForce.setText(this.aventure.getJoueur().getAjoute(PropertyList.FORCE)+" + "+this.aventure.getJoueur().getEffet(PropertyList.FORCE));
         }else{
-            jTextPaneForce.setText(this.aventure.getJoueur().getForce()+"");
+            jTextPaneForce.setText(this.aventure.getJoueur().getAjoute(PropertyList.FORCE)+"");
         }
     }
     
@@ -203,7 +203,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         DefaultListModel<Objet> g = new DefaultListModel<>();
         g.addAll(this.aventure.getJoueur().getInventaire());
         listeObjetInventaire.setModel(g);
-        jTextPaneInventaire.setText("Inventaire (" + this.aventure.getJoueur().getPoidsInventaire() + "/" + this.aventure.getJoueur().getPoidsMax()+")");
+        jTextPaneInventaire.setText("Inventaire (" + this.aventure.getJoueur().getPoidsInventaire() + "/" + this.aventure.getJoueur().getAjoute(PropertyList.POIDSMAX)+")");
     }
     
     private void onSelectObjetInventaire() {
