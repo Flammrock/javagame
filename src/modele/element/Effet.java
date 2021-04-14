@@ -49,9 +49,20 @@ public class Effet extends Element {
         this.description = description;
         this.permanant = permanant;
         this.consomable = consomable;
+        this.listproperties = new ArrayList<>();
     }
     
-    public void addProperty(String nom,double valeur){
+    public void setProperty(String nom, double valeur){
+        for (Property p : this.listproperties) {
+            if(p.getNom().equals(nom)){
+                p.setValeur(valeur);
+                return;
+            }
+        }
+        listproperties.add(new Property(nom,valeur));
+    }
+    
+    public void removeProperty(String nom,double valeur){
         listproperties.add(new Property(nom,valeur));
     }
     
