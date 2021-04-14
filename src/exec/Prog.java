@@ -192,7 +192,7 @@ public class Prog {
         monstre.equip(1);
         
         Personnage rock = new Personnage("rock", "inofensif", 5, 10, 15, 20);
-        rock.setCollisionBox(new CollisionBox(10,20,465/3-25,420/3-40));
+        rock.addCollisionBox(new CollisionBox(10,20,465/3-25,420/3-40));
         
         /********************************************************/
         
@@ -205,7 +205,7 @@ public class Prog {
         joueur.ajouter(hommeDeFer);
         joueur.ajouter(new Effet("Homme de fer","augmente la force",false,false,3,5,0,0,0,0,0,new Lieu("Rien")));
         joueur.ajouter(potion);
-        joueur.setCollisionBox(new CollisionBox(0,35,28,14));
+        joueur.addCollisionBox(new CollisionBox(0,35,28,14));
         
         
         // on créé le sprite pour le joueur
