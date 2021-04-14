@@ -5,11 +5,13 @@
  */
 package modele.element;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Utilisateur
  */
-public class Property {
+public class Property implements Serializable {
     private String nom;
     private double valeur;
 
