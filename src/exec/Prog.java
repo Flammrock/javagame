@@ -279,7 +279,7 @@ public class Prog {
         
         // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
-        
+        a.ajouterDrawable(niveau1);
         
         // on créé les paramètres de génération
         GenerableLieuParametre lieup = new GenerableLieuParametre();
