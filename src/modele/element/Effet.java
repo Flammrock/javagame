@@ -82,23 +82,14 @@ public class Effet extends Element {
      */
     public boolean tourPasse(){
         if(permanant){//effet permanant (l'effet restera actif pour toujours)
-            tpSalle = null;
             return true;
         }
         if(consomable){//effet instantané (l'effet se detruira)
             return false;
         }
         if(duréeDeLEffet>=0){//effet a durée limité dans le temps(premiere fois que on utilise cette effet)
-            tpSalle = null;
         }
         if(duréeDeLEffet == 1 ){//fin de l'effet a durée limité
-            forceAjoute = 0;
-            agiliteAjoute = 0;
-            pvAjoute = 0;
-            pvMaxAjoute = 0;
-            tpSalle = null;
-            poidsAjoute = 0;
-            armureAjoute = 0;
             duréeDeLEffet = 0;
             return false;
         }
