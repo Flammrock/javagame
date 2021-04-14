@@ -163,12 +163,12 @@ public class Personnage extends Element implements Generable, Collisionable {
         return null;
     }
     
-    public double getEffetAgilite(){
-        double agilite = 0;
+    public double getEffet(String nom){
+        double r = 0;
         for(Effet effet : this.effetCourant){
-            agilite += effet.getAgiliteAjoute();
+            r += effet.getAjoute(nom);
         }
-        return agilite;
+        return r;
     }
     
     private double getEffetPv(){
