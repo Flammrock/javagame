@@ -157,11 +157,11 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     private void mettreAJourAgilite(){
-        /*if(this.aventure.getJoueur().getEffetAgilite()!= 0){
-            jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+" + "+this.aventure.getJoueur().getEffetAgilite());
+        if(this.aventure.getJoueur().getEffet(PropertyList.AGILITE)!= 0){
+            jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+" + "+this.aventure.getJoueur().getEffet(PropertyList.AGILITE));
         }else{
             jTextPaneAgilite.setText(this.aventure.getJoueur().getAgilite()+"");
-        }*/
+        }
     }
     
     private void mettreAJourArmeEnMain(){
