@@ -55,8 +55,6 @@ public class Personnage extends Element implements Generable, Collisionable {
     public void setSprite(SpriteSheet sprite) {
         this.sprite = sprite;
     }
-    
-    
 
     
     public String getNom() {
