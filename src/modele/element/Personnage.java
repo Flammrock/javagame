@@ -29,7 +29,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     
 
-    public Personnage(String nom, String description, double age, double force, double agilite, double pv) {
+    public Personnage(String nom, String description) {
         this.nom = nom;
         this.probaDeGeneration = 1.0;
         this.description = description;
@@ -39,6 +39,9 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.effetCourant = new ArrayList<>();
         this.sprite = null;
         this.collisionBoxList = new ArrayList<>();
+    }
+    
+    public void init(double age, double force, double agilite, double pv) {
         this.setProperty(PropertyList.AGE,age);
         this.setProperty(PropertyList.FORCE,force);
         this.setProperty(PropertyList.AGILITE,agilite);
