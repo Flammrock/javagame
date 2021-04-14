@@ -151,17 +151,6 @@ public class Personnage extends Element implements Generable, Collisionable {
         }
         this.pv += valeur;
     }
-    public double getEffetForce(){
-        double force = 0;
-        for(Effet effet : this.effetCourant){
-            force += effet.getForceAjoute();
-        }
-        return force;
-    }
-    
-    private Lieu getEffetTeleportation(){//TODO implementer la methode
-        return null;
-    }
     
     public double getEffet(String nom){
         double r = 0;
@@ -170,39 +159,6 @@ public class Personnage extends Element implements Generable, Collisionable {
         }
         return r;
     }
-    
-    private double getEffetPv(){
-        double pv = 0;
-        for(Effet effet : this.effetCourant){
-            pv += effet.getPvAjoute();
-        }
-        return pv;
-    }
-    
-    private double getEffetPvMax(){
-        double pvMax = 0;
-        for(Effet effet : this.effetCourant){
-            pvMax += effet.getPvMaxAjoute();
-        }
-        return pvMax;
-    }
-    
-    private double getEffetPoids(){
-        double poids = 0;
-        for(Effet effet : this.effetCourant){
-            poids += effet.getPoidsAjoute();
-        }
-        return poids;
-    }
-    
-    private double getEffetArmure(){
-        double Armure = 0;
-        for(Effet effet : this.effetCourant){
-            Armure += effet.getArmureAjoute();
-        }
-        return Armure;
-    }
-    
     
     public boolean equip(int index) {
         if (index < 0 || index > this.inventaire.size()) return false;
@@ -295,7 +251,7 @@ public class Personnage extends Element implements Generable, Collisionable {
             bonusArme = this.getMain().getModificateurForce();
         }
         double bonusForce = this.force;
-        double bonusEffet = this.getEffetForce();
+        double bonusEffet = this.getEffet(PropertyList.FORCE);
         double degats = bonusArme + bonusForce + bonusEffet;
         return degats;
     }
@@ -311,7 +267,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         }else{
             bonusArmure = this.getArmure().getModificateurProtection();
         }
-        double bonusEffet = this.getEffetArmure();
+        double bonusEffet = this.getEffet(PropertyList.ARMURE);
         double armureTotal = bonusArmure + bonusEffet;
         return armureTotal;
     }
@@ -346,7 +302,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
     public boolean ajouterObjet(Objet o){
-        if(o.getPoids()+ this.getPoidsInventaire()<=(this.poidsMax + this.getEffetPoids())){
+        if(o.getPoids()+ this.getPoidsInventaire()<=(this.poidsMax + this.getEffet(PropertyList.POIDS))){
             return this.inventaire.add(o);
         }else{
             return false;
@@ -364,7 +320,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         int[] effetASupp = new int[this.effetCourant.size()];
         int i = 0;
         for(Effet effet : this.effetCourant){
-            this.pv += getEffetPv();
+            this.pv += getEffet(PropertyList.PV);
             if(effet.tourPasse()==false){
                 effetASupp[i] = this.effetCourant.indexOf(effet);
                 i++;
@@ -382,11 +338,11 @@ public class Personnage extends Element implements Generable, Collisionable {
         for(Effet effet : this.effetCourant){
             if(effet.isConsomable()){
                 if(effet.tourPasse()==false){
-                    this.force += effet.getForceAjoute();
-                    this.agilite += effet.getAgiliteAjoute();
-                    this.pv += effet.getPvAjoute();
-                    this.pvMax += effet.getPvMaxAjoute();
-                    this.poidsMax += effet.getPoidsAjoute();
+                    this.force += effet.getAjoute(PropertyList.FORCE);
+                    this.agilite += effet.getAjoute(PropertyList.AGILITE);
+                    this.pv += effet.getAjoute(PropertyList.PV);
+                    this.pvMax += effet.getAjoute(PropertyList.PVMAX);
+                    this.poidsMax += effet.getAjoute(PropertyList.POIDS);
                     effetASupp[i] = this.effetCourant.indexOf(effet);
                     i++;
                 }
