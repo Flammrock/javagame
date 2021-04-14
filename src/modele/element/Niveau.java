@@ -23,11 +23,14 @@ public class Niveau extends Element implements Generable {
     Lieu entree;
     Lieu sortie;
     
+    ArrayList<Drawable> drawables;
+    
     public Niveau(String nom,String description) {
         this.nom = nom;
         this.probaDeGeneration = 1.0;
         this.description = description;
         this.salles = new ArrayList<>();
+        this.drawables = new ArrayList<>();
     }
 
     /**
@@ -55,7 +58,15 @@ public class Niveau extends Element implements Generable {
     }
     
     
-    
+    public void setCurrentLieu(String nom) {
+        this.drawables.clear();
+        for (Lieu l : salles) {
+            if (l.getNom().equals(nom)) {
+                this.drawables.add(l);
+                return;
+            }
+        }
+    }
 
     /**
      * Permet d'ajouter un lieu
@@ -164,7 +175,7 @@ public class Niveau extends Element implements Generable {
             
         }
         
-        
+        this.setCurrentLieu(this.entree.getNom());
         
         return true;
     }
@@ -181,5 +192,9 @@ public class Niveau extends Element implements Generable {
         this.probaDeGeneration = proba;
     }
     
+    @Override
+    public ArrayList<Drawable> getDrawables() {
+        return this.drawables;
+    }
     
 }
