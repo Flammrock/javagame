@@ -5,11 +5,14 @@
  */
 package modele.element;
 
+import java.io.Serializable;
+
+
 /**
  *
  * @author User
  */
-public interface PropertyList {
+public interface PropertyList extends Serializable {
     
     String FORCE = "force";
     String AGILITE = "agilite";
