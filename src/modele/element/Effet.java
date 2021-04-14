@@ -91,6 +91,11 @@ public class Effet extends Element {
         return consomable;
     }
     
+    public double getAjoute(){
+        
+        return
+    }
+    
     /**
      *fonction a appeler a la fin du tour lorque l'on a deja getter les effets
      * @return retourn true si l'effet doit rester actif et false si l'effet est fini est doit etre detruit
