@@ -20,35 +20,14 @@ public class Effet extends Element {
     private boolean permanant;
     private boolean consomable;
     private double duréeDeLEffet;
-    private double forceAjoute;
-    private double agiliteAjoute ;
-    private double pvAjoute;
-    private double pvMaxAjoute;
-    private double poidsAjoute;
-    private double armureAjoute;
-    private Lieu tpSalle;
     private ArrayList<Property> listproperties; 
 
-    public Effet(String Nom,String description, boolean permanant, boolean consomable, double duréeDeLEffet, double forceAjoute, double agiliteAjoute, double pvAjoute, double pvMaxAjoute, double poidsAjoute, double armureAjoute, Lieu tpSalle) {
+    public Effet(String Nom,String description , boolean permanant, boolean consomable, double duréeDeLEffet) {
         this.Nom = Nom;
         this.description = description;
         this.permanant = permanant;
         this.consomable = consomable;
         this.duréeDeLEffet = duréeDeLEffet;
-        this.forceAjoute = forceAjoute;
-        this.agiliteAjoute = agiliteAjoute;
-        this.pvAjoute = pvAjoute;
-        this.pvMaxAjoute = pvMaxAjoute;
-        this.poidsAjoute = poidsAjoute;
-        this.armureAjoute = armureAjoute;
-        this.tpSalle = tpSalle;
-    }
-
-    public Effet(String Nom,String description , boolean permanant, boolean consomable) {
-        this.Nom = Nom;
-        this.description = description;
-        this.permanant = permanant;
-        this.consomable = consomable;
         this.listproperties = new ArrayList<>();
     }
     
@@ -75,48 +54,16 @@ public class Effet extends Element {
         return Nom;
     }
 
-    public double getDuréeDeLEffet() {
-        return duréeDeLEffet;
-    }
-
-    public double getForceAjoute() {
-        return forceAjoute;
-    }
-
-    public double getAgiliteAjoute() {
-        return agiliteAjoute;
-    }
-
-    public double getPvAjoute() {
-        return pvAjoute;
-    }
-
-    public Lieu getTpSalle() {
-        return tpSalle;
-    }
-
-    public void setTpSalle(Lieu tpSalle) {
-        this.tpSalle = tpSalle;
-    }
-
-    public double getPoidsAjoute() {
-        return poidsAjoute;
-    }
-    
-    public double getPvMaxAjoute() {
-        return pvMaxAjoute;
-    }
-    
-    public double getArmureAjoute() {
-        return armureAjoute;
-    }
-
     public boolean isPermanant() {
         return permanant;
     }
 
     public boolean isConsomable() {
         return consomable;
+    }
+
+    public double getDuréeDeLEffet() {
+        return duréeDeLEffet;
     }
     
     public double getAjoute(String nom){
@@ -165,52 +112,14 @@ public class Effet extends Element {
     @Override
     public String toString(){
         String listesEffets = getNom()+": \n";
-        if(getDuréeDeLEffet()>0){
-            listesEffets += "Durée "+(int)getDuréeDeLEffet() + " Tours: \n"; 
-        }else{
+        if(permanant){
             listesEffets += "Effet passif: \n"; 
         }
-        if(getPvAjoute()!=0){
-            if(getPvAjoute()>0){
-                listesEffets += "PV : +"+getPvAjoute()+" \n";
-            }else{
-                listesEffets += "PV : "+getPvAjoute()+" \n";
-            }
+        if(duréeDeLEffet>0){
+            listesEffets += "Durée "+(int)getDuréeDeLEffet() + " Tours: \n"; 
         }
-        if(getPvMaxAjoute()!=0){
-            if(getPvMaxAjoute()>0){
-                listesEffets += "PV max : +"+getPvMaxAjoute()+" \n";
-            }else{
-                listesEffets += "PV max : "+getPvMaxAjoute()+" \n";
-            }
-        }
-        if(getForceAjoute()!=0){
-            if(getForceAjoute()>0){
-                listesEffets += "Force : +"+getForceAjoute()+" \n";
-            }else{
-                listesEffets += "Force : "+getForceAjoute()+" \n";
-            }
-        }
-        if(getAgiliteAjoute()!=0){
-            if(getAgiliteAjoute()>0){
-                listesEffets += "Agilité : +"+getAgiliteAjoute()+" \n";
-            }else{
-                listesEffets += "Agilité : "+getAgiliteAjoute()+" \n";
-            }
-        }
-        if(getPoidsAjoute()!=0){
-            if(getPoidsAjoute()>0){
-                listesEffets += "Poids : +"+getPoidsAjoute()+" \n";
-            }else{
-                listesEffets += "Poids : "+getPoidsAjoute()+" \n";
-            }
-        }
-        if(getArmureAjoute()!=0){
-            if(getArmureAjoute()>0){
-                listesEffets += "Armure : +"+getArmureAjoute()+" \n";
-            }else{
-                listesEffets += "Armure : "+getArmureAjoute()+" \n";
-            }
+        for (Property p : this.listproperties) {
+            listesEffets += p.getNom()+ " " + p.getValeur();
         }
         return listesEffets;
     }
