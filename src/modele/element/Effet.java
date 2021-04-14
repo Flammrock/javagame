@@ -59,11 +59,16 @@ public class Effet extends Element {
                 return;
             }
         }
-        listproperties.add(new Property(nom,valeur));
+        this.listproperties.add(new Property(nom,valeur));
     }
     
-    public void removeProperty(String nom,double valeur){
-        listproperties.add(new Property(nom,valeur));
+    public void removeProperty(String nom){
+        for (Property p : this.listproperties) {
+            if(p.getNom().equals(nom)){
+                listproperties.remove(p);
+                return;
+            }
+        }
     }
     
     public String getNom() {
@@ -115,14 +120,12 @@ public class Effet extends Element {
     }
     
     public double getAjoute(String nom){
-        
         double r = 0.0;
         for (Property p : this.listproperties) {
             if (p.getNom().equals(nom)) {
                 r += p.getValeur();
             }
         }
-        
         return r;
     }
     
