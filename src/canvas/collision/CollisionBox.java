@@ -31,6 +31,8 @@ public class CollisionBox implements Serializable, Drawable {
     int sx;
     int sy;
     
+    boolean isdraw;
+    
     /**
      * Constuire une boite de collision à l'aide de coordonnées relatives
      * c'est-à-dire, si x = 0 et y = 0, alors la boite aura la même position absolue
@@ -52,6 +54,24 @@ public class CollisionBox implements Serializable, Drawable {
         // pour l'instant, l'objet parent n'a pas encore appelé apply(int x, int y)
         this.sx = 0;
         this.sy = 0;
+        
+        this.isdraw = false;
+    }
+    
+    
+    public CollisionBox(int x, int y, int width, int height, boolean isdraw) {
+        
+        // on enregistre les valeurs
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        
+        // pour l'instant, l'objet parent n'a pas encore appelé apply(int x, int y)
+        this.sx = 0;
+        this.sy = 0;
+        
+        this.isdraw = isdraw;
     }
 
     /**
