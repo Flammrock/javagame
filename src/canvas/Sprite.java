@@ -197,12 +197,12 @@ public class Sprite implements Collisionable {
     }
 
     @Override
-    public CollisionBox getCollisionBox() {
+    public ArrayList<CollisionBox> getCollisionBoxList() {
          return null; // un sprite n'a pas de collision box
     }
 
     @Override
-    public void setCollisionBox(CollisionBox b) {
+    public void addCollisionBox(CollisionBox b) {
         // un sprite n'a pas de collision box
     }
     
