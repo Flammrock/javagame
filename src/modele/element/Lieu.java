@@ -123,9 +123,9 @@ public class Lieu extends Element implements Generable {
     public boolean ajouterPlusieurs(ArrayList<Element> os) {
         for (Element o : os) {
             if (o instanceof Objet) {
-                this.objets.add((Objet)o);
+                this.objets.add((Objet)o.copie());
             } else if (o instanceof Personnage) {
-                this.monstres.add((Personnage)o);
+                this.monstres.add((Personnage)o.copie());
             }
         }
         return true;
