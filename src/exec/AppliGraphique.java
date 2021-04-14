@@ -192,8 +192,8 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     private void mettreAJourForce(){
         jTextPaneForce.setText(this.aventure.getJoueur().getForce()+"");
-        if(this.aventure.getJoueur().getEffetForce()!= 0){
-            jTextPaneForce.setText(this.aventure.getJoueur().getForce()+" + "+this.aventure.getJoueur().getEffetForce());
+        if(this.aventure.getJoueur().getEffet(PropertyList.FORCE)!= 0){
+            jTextPaneForce.setText(this.aventure.getJoueur().getForce()+" + "+this.aventure.getJoueur().getEffet(PropertyList.FORCE));
         }else{
             jTextPaneForce.setText(this.aventure.getJoueur().getForce()+"");
         }
