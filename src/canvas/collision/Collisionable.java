@@ -6,6 +6,7 @@
 package canvas.collision;
 
 import canvas.Drawable;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,16 +15,16 @@ import canvas.Drawable;
 public interface Collisionable extends Drawable {
     
     /**
-     * Un Collisionable possède une CollisionBox et doit être capable d'en retourner une
-     * @return retourne la collision box associé à l'objet (peut retourner null)
+     * Un Collisionable possède une liste de CollisionBox et doit être capable d'en retourner une
+     * @return retourne la liste collision box associé à l'objet (peut retourner null)
      */
-    CollisionBox getCollisionBox();
+    ArrayList<CollisionBox> getCollisionBoxList();
     
      /**
-     * Un Collisionable possède une CollisionBox et doit être capable de la définir
-     * @param b La nouvelle collision box
+     * Un Collisionable possède une liste de CollisionBox et doit être capable de la définir
+     * @param b La nouvelle box à ajouter
      */
-    void setCollisionBox(CollisionBox b);
+    void addCollisionBox(CollisionBox b);
     
     /**
      * Pour le Teste de collisions, la nouvelle coordonnée de l'objet doit être accepter par le testeur de collisions
