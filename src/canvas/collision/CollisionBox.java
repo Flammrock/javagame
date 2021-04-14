@@ -9,13 +9,14 @@ import canvas.Canvas;
 import canvas.Drawable;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author User
  */
-public class CollisionBox implements Drawable {
+public class CollisionBox implements Serializable, Drawable {
     
     
     // les coordonnées relatives de la boite de collision
