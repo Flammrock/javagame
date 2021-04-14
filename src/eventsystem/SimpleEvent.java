@@ -11,15 +11,15 @@ import java.io.Serializable;
  *
  * @author User
  */
-public class SimpleEvent<T> implements Serializable {
+public class SimpleEvent implements Serializable {
     
-    private T data;
+    private Object data;
     
-    public T getData() {
+    public Object getData() {
         return this.data;
     }
     
-    public SimpleEvent(T data) {
+    public SimpleEvent(Object data) {
         this.data = data;
     }
     
