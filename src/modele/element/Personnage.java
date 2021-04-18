@@ -317,7 +317,11 @@ public class Personnage extends Element implements Generable, Collisionable {
         int[] effetASupp = new int[this.effetCourant.size()];
         int i = 0;
         for(Effet effet : this.effetCourant){
-            setProperty(PropertyList.PV, getEffet(PropertyList.PV)+getAjoute(PropertyList.PV));
+            if(getAjoute(PropertyList.PV)+ getEffet(PropertyList.PV)>= getAjoute(PropertyList.PVMAX)){
+                setProperty(PropertyList.PV, getAjoute(PropertyList.PVMAX));
+            }else{
+                setProperty(PropertyList.PV, getEffet(PropertyList.PV)+getAjoute(PropertyList.PV));
+            }
             if(effet.tourPasse()==false){
                 effetASupp[i] = this.effetCourant.indexOf(effet);
                 i++;
@@ -337,7 +341,13 @@ public class Personnage extends Element implements Generable, Collisionable {
                 if(effet.tourPasse()==false){
                     setProperty(PropertyList.FORCE, getAjoute(PropertyList.FORCE) + effet.getAjoute(PropertyList.FORCE));
                     setProperty(PropertyList.AGILITE, getAjoute(PropertyList.AGILITE) + effet.getAjoute(PropertyList.AGILITE));
-                    setProperty(PropertyList.PV, getAjoute(PropertyList.PV) + effet.getAjoute(PropertyList.PV));
+                    
+                    if(getAjoute(PropertyList.PV)+ getEffet(PropertyList.PV)>= getAjoute(PropertyList.PVMAX)){
+                        setProperty(PropertyList.PV, getAjoute(PropertyList.PVMAX));
+                    }else{
+                        setProperty(PropertyList.PV, getEffet(PropertyList.PV)+getAjoute(PropertyList.PV));
+                    }
+                    
                     setProperty(PropertyList.PVMAX, getAjoute(PropertyList.PVMAX) + effet.getAjoute(PropertyList.PVMAX));
                     setProperty(PropertyList.POIDS, getAjoute(PropertyList.POIDS) + effet.getAjoute(PropertyList.POIDS));
                     effetASupp[i] = this.effetCourant.indexOf(effet);
