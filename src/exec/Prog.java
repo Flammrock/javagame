@@ -279,7 +279,7 @@ public class Prog {
         srock.setY(300);
         rock.setSprite(srock);
         
-        // test23
+        // test23654
         
         // on créé une aventure
         Aventure a = new Aventure(joueur);
