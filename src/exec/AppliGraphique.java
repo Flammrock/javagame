@@ -70,6 +70,62 @@ public class AppliGraphique extends javax.swing.JFrame {
         
 
         mettreAJourTout();
+        
+        
+        Combattre.setVisible(false);
+        allerDansPorte.setVisible(false);
+        //canvas1.setVisible(false);
+        jPanel1.setVisible(false);
+        jPanel2.setVisible(false);
+        jPanel3.setVisible(false);
+        jPanel4.setVisible(false);
+        jPanel5.setVisible(false);
+        jPanel6.setVisible(false);
+        jScrollPane1.setVisible(false);
+        jScrollPane10.setVisible(false);
+        jScrollPane11.setVisible(false);
+        jScrollPane12.setVisible(false);
+        jScrollPane13.setVisible(false);
+        jScrollPane14.setVisible(false);
+        jScrollPane15.setVisible(false);
+        jScrollPane16.setVisible(false);
+        jScrollPane19.setVisible(false);
+        jScrollPane2.setVisible(false);
+        jScrollPane20.setVisible(false);
+        jScrollPane21.setVisible(false);
+        jScrollPane22.setVisible(false);
+        jScrollPane23.setVisible(false);
+        jScrollPane3.setVisible(false);
+        jScrollPane4.setVisible(false);
+        jScrollPane5.setVisible(false);
+        jScrollPane6.setVisible(false);
+        jScrollPane7.setVisible(false);
+        jScrollPane8.setVisible(false);
+        jScrollPane9.setVisible(false);
+        jTextPane1.setVisible(false);
+        jTextPane2.setVisible(false);
+        jTextPaneAgilite.setVisible(false);
+        jTextPaneAgiliteFixe.setVisible(false);
+        jTextPaneArmeEnMainFixe.setVisible(false);
+        jTextPaneArmureFixe.setVisible(false);
+        jTextPaneForce.setVisible(false);
+        jTextPaneForceFixe.setVisible(false);
+        jTextPaneInventaire.setVisible(false);
+        jTextPaneNom.setVisible(false);
+        jTextPaneNomFixe.setVisible(false);
+        jTextPanePv.setVisible(false);
+        jTextPanePvFixe.setVisible(false);
+        jeterBouton.setVisible(false);
+        listeEffetJoueur.setVisible(false);
+        listeMonstre.setVisible(false);
+        listeObjet.setVisible(false);
+        listeObjetInventaire.setVisible(false);
+        listePortes.setVisible(false);
+        logger.setVisible(false);
+        ramasser.setVisible(false);
+        textArmeEnMain.setVisible(false);
+        textArmure.setVisible(false);
+        utiliserBouton.setVisible(false);
     }
     
     public String onActionJoueur(String action,Personnage ennemie) {
