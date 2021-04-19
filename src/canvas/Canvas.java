@@ -31,15 +31,109 @@ public class Canvas extends JPanel {
     ArrayList<Drawable> itemsdrawable;
     HashMap<Integer, Boolean> keyMap;
     
+    double scale;
+    
+    // world position
+    int wx;
+    int wy;
+    
+    // screen position
+    int sx;
+    int sy;
+    
+    // temp position
+    int tx;
+    int ty;
+    
     public Canvas() {
         super();
         this.itemsdrawable = new ArrayList<>();
         this.keyMap = new HashMap<>();
+        scale = 1;
+        wx = 0;
+        wy = 0;
+        sx = this.getWidth()/2;
+        sy = this.getHeight()/2;
+        tx = 0;
+        ty = 0;
     }
     
     public void ajouterItem(Drawable item) {
         this.itemsdrawable.add(item);
     }
+    
+    
+    
+    
+    public int getTempX() {
+        return tx;
+    }
+    
+    public int getTempY() {
+        return ty;
+    }
+    
+    public void setTempX(int tx) {
+        this.tx = tx;
+    }
+    
+    public void setTempY(int ty) {
+        this.ty = ty;
+    }
+    
+    
+    
+    
+    public int getWorldX() {
+        return wx;
+    }
+    
+    public int getWorldY() {
+        return wy;
+    }
+    
+    public void setWorldX(int wx) {
+        this.wx = wx;
+    }
+    
+    public void setWorldY(int wy) {
+        this.wy = wy;
+    }
+    
+    public int getScreenX() {
+        return wx;
+    }
+    
+    public int getScreenY() {
+        return wy;
+    }
+    
+    public void setScreenX(int sx) {
+        this.sx = sx;
+    }
+    
+    public void setScreenY(int sy) {
+        this.sy = sy;
+    }
+    
+    
+    public int toWorldX(int x) {
+        return (int)(((double)(x-wx))*scale + (double)sx)+this.getWidth()/2;
+    }
+    
+    public int toWorldY(int y) {
+        return (int)(((double)(y-wy))*scale + (double)sy)+this.getHeight()/2;
+    }
+    
+    
+    public double getScale() {
+        return scale;
+    }
+    
+    public int toScale(int v) {
+        return (int)(v*scale);
+    }
+    
     
     @Override
     public void paintComponent(Graphics g) {
@@ -154,6 +248,25 @@ public class Canvas extends JPanel {
         // en O(n)
         for (Drawable item : items) {
             item.draw(this,g);
+        }
+        
+        if (this.isAppuyer(90)) {
+            tx = (int)((tx-sx) / scale + wx);
+            ty = (int)((ty-sy) / scale + wy);
+            this.scale = Math.min(5, this.scale*1.1);
+            /*wx = (int)((double)(tx - sx) * (1 / scale)) + wx;
+            wy = (int)((double)(ty - sy) * (1 / scale)) + wy;
+            sx = tx;
+            sy = ty;*/
+        }
+        if (this.isAppuyer(65)) {
+            tx = (int)((tx-sx) / scale + wx);
+            ty = (int)((ty-sy) / scale + wy);
+            this.scale = Math.max(0.01, this.scale/1.1);
+            /*wx = (int)((double)(tx - sx) * (1 / scale)) + wx;
+            wy = (int)((double)(ty - sy) * (1 / scale)) + wy;
+            sx = tx;
+            sy = ty;*/
         }
         
     }

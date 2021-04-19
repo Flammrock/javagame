@@ -198,7 +198,7 @@ public class Lieu extends Element implements Generable, Collisionable {
     @Override
     public void draw(Canvas c, Graphics g) {
         g.setColor(Color.orange);
-        g.drawRect(this.x, this.y, this.width, this.height);
+        g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
     }
     
     @Override

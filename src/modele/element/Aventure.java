@@ -128,4 +128,11 @@ public class Aventure extends Element {
         this.drawables.add(d);
     }
     
+    
+    @Override
+    public void draw(Canvas c, Graphics g) {
+        c.setTempX(this.joueur.getX());
+        c.setTempY(this.joueur.getY());
+    }
+    
 }

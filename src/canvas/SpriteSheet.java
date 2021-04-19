@@ -184,10 +184,10 @@ public class SpriteSheet extends Sprite {
                 this.image,
                 
                 // dest
-                this.x,
-                this.y,
-                w,
-                h,
+                c.toWorldX(this.x),
+                c.toWorldY(this.y),
+                c.toWorldX(w),
+                c.toWorldY(h),
                 
                 // src
                 this.getSpriteX()+this.decalX,
@@ -199,7 +199,7 @@ public class SpriteSheet extends Sprite {
         );
         
         g.setColor(Color.cyan);
-        g.drawRect(x, y, w-x, h-y);
+        g.drawRect(c.toWorldX(x), c.toWorldY(y), c.toScale(w-x), c.toScale(h-y));
         
         this.nextKeyAnimation();
         if (this.ondraw!=null) this.ondraw.accept(c);

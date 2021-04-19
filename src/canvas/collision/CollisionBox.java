@@ -191,7 +191,7 @@ public class CollisionBox implements Serializable, Drawable {
     @Override
     public void draw(Canvas c, Graphics g) {
         g.setColor(Color.RED);
-        g.fillRect(this.sx+this.x,this.sy+this.y,this.width,this.height);
+        g.fillRect(c.toWorldX(this.sx+this.x),c.toWorldY(this.sy+this.y),c.toScale(this.width),c.toScale(this.height));
     }
 
     @Override
