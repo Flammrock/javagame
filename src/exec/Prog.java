@@ -294,7 +294,10 @@ public class Prog {
         
         // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
-        a.ajouterDrawable(niveau1);
+        a.ajouterDrawable(niveau1); // on l'ajoute dans les items à dessiner
+        
+        
+        // on passe un squelette de don
         
         // on créé les paramètres de génération
         GenerableLieuParametre lieup = new GenerableLieuParametre();
@@ -305,8 +308,8 @@ public class Prog {
         
         
         
-        // on génère le niveau avec ces paramètres
-        niveau1.generate(new GenerableNiveauParametre(5,lieup));
+        // on génère le niveau à partir d'un squelette
+        niveau1.generate(squeleton);
         
         
         // on ajoute le niveau dans le donjon
