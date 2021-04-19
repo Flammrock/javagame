@@ -279,14 +279,18 @@ public class Prog {
         srock.setY(300);
         rock.setSprite(srock);
         
-        // test23654
-        
         // on créé une aventure
         Aventure a = new Aventure(joueur);
         
         
+        ///////////////////////////////////// TEMP
+        Squeleton squeleton = new Squeleton(100);
+        squeleton.generate(0,0);
+        ///////////////////////////////////// TEMP
+        
         a.ajouterDrawable(rock);
         a.ajouterDrawable(joueur);
+        a.ajouterDrawable(squeleton);
         
         // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
