@@ -262,7 +262,7 @@ public class Canvas extends JPanel {
         if (this.isAppuyer(65)) {
             tx = (int)((tx-sx) / scale + wx);
             ty = (int)((ty-sy) / scale + wy);
-            this.scale = Math.max(0.01, this.scale/1.1);
+            this.scale = Math.max(0.001, this.scale/1.1);
             /*wx = (int)((double)(tx - sx) * (1 / scale)) + wx;
             wy = (int)((double)(ty - sy) * (1 / scale)) + wy;
             sx = tx;
