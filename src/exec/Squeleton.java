@@ -218,7 +218,7 @@ public class Squeleton extends Data implements Drawable {
             //int wy = (local_direction.isUp()||local_direction.isDown()) ? dist : (int)Math.floor(Math.random()*(maxy-miny+1)+miny);
             Box b = new Box(new Point(current.x-wx/2,current.y-wy/2),new Point(wx,wy));
             //System.out.println("" + b.position.x + "," + b.position.y + "," + b.size.x + "," + b.size.y);
-            System.out.println("  -> "+local_direction.d+","+wx+","+wy);
+            //System.out.println("  -> "+local_direction.d+","+wx+","+wy);
             
             // on regarde s'il y a une collision (si oui on quitte) (équivalent à un raycast)
             if (entropie.size() > 0) {
@@ -234,7 +234,7 @@ public class Squeleton extends Data implements Drawable {
                         file.add(newcurrent.copy());
                         file_direction.add(local_direction.copy());
                         file_dist.add(new Point(vx,vy));
-                        System.out.println(local_direction.d+","+vx+","+vy);
+                        //System.out.println(local_direction.d+","+vx+","+vy);
                     }
                     
                     continue;
@@ -250,10 +250,11 @@ public class Squeleton extends Data implements Drawable {
             
             ArrayDeque<Direction> d = new ArrayDeque<>();
             
-            
+            double mlkj = 1;
+            local_direction = new Direction();
             for (int j = 0; j < 4; j++) {
-                //if (Math.random() >= 0.5) {
-                if (1==1) {
+                if (Math.random() < mlkj) {
+                //if (1==1) {
                     // on se déplace dans la direction courrante
                     int vx = (int)Math.floor(Math.random()*(maxx-minx+1)+minx);
                     int vy = (int)Math.floor(Math.random()*(maxy-miny+1)+miny);
@@ -262,7 +263,8 @@ public class Squeleton extends Data implements Drawable {
                     file.add(newcurrent.copy());
                     file_direction.add(local_direction.copy());
                     file_dist.add(new Point(vx,vy));
-                    System.out.println(local_direction.d+","+vx+","+vy);
+                    //System.out.println(local_direction.d+","+vx+","+vy);
+                    //mlkj -= 0.1;
                 }
                 local_direction.rotate();
             }
