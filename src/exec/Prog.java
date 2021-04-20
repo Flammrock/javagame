@@ -343,5 +343,4 @@ public class Prog {
         
         a.debutCombat();
     }
-
 }

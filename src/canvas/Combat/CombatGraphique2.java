@@ -29,7 +29,7 @@ private Personnage Ennemi;
      */
     public CombatGraphique2(){
         initComponents();
-        SpriteSheet sprite = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*3,64*3);
+        SpriteSheet sprite = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*4,64*4);
         sprite.loadImage();
         DessinHero.ajouterItem(sprite);
         jPanel3.setVisible(false);
