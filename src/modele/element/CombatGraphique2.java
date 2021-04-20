@@ -26,7 +26,7 @@ private Aventure aventure;
         //miseAJourComposants();
     }
     public void bindAventure(Aventure a) {
-        this.aventure = aventure;
+        this.aventure = a;
     }
 
     /**
