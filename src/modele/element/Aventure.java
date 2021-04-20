@@ -55,6 +55,12 @@ public class Aventure extends Element {
         
         //this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());
     }
+    
+    public void finCombat(Personnage Hero, Personnage Monstre){
+        this.joueur = Hero;
+        
+        this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());
+    }
 
     /**
      * Permet d'ajouter un lieu
