@@ -21,6 +21,7 @@ public class Squeleton implements Drawable {
     ArrayList<Point> articulations;
     ArrayList<Box> bones;
     ArrayList<Box> ligaments;
+    ArrayList<ArrayList<Integer>> ligaments_connections;
     
     // taille des salles
     int maxx;
@@ -34,6 +35,7 @@ public class Squeleton implements Drawable {
         this.articulations = new ArrayList<>();
         this.bones = new ArrayList<>();
         this.ligaments = new ArrayList<>();
+        this.ligaments_connections = new ArrayList<>();
         
         this.maxnode = maxnode;
         
@@ -53,6 +55,10 @@ public class Squeleton implements Drawable {
         return ligaments;
     }
     
+    public ArrayList<ArrayList<Integer>> getLigamentConnections() {
+        return ligaments_connections;
+    }
+    
     public void generate(int x, int y) {
         Direction local_direction = new Direction();
         
@@ -63,6 +69,7 @@ public class Squeleton implements Drawable {
         ArrayDeque<Direction> file_direction = new ArrayDeque<>();
         ArrayDeque<Point> file_dist = new ArrayDeque<>();
         ArrayDeque<Box> file_pred = new ArrayDeque<>();
+        ArrayDeque<Integer> file_index = new ArrayDeque<>();
         
         int i = 0;
         
@@ -71,8 +78,7 @@ public class Squeleton implements Drawable {
         file_direction.add(local_direction.copy());
         file_dist.add(new Point(300,300));
         
-        int zertyhbvdfghj = 0;
-        
+
         // tant que la file n'est pas vide et que le nombre max de noeud n'est pas dépassé
         while (!file.isEmpty() && i < this.maxnode) {
         
@@ -81,8 +87,10 @@ public class Squeleton implements Drawable {
             local_direction = file_direction.removeFirst();
             Point w = file_dist.removeFirst();
             Box pred = null;
+            int pred_index = 0;
             if (!file_pred.isEmpty()) {
                 pred = file_pred.removeFirst();
+                pred_index = file_index.removeFirst();
             }
             
             int wx = w.x;
@@ -141,6 +149,7 @@ public class Squeleton implements Drawable {
                         file_direction.add(local_direction.copy());
                         file_dist.add(new Point(vx,vy));
                         file_pred.add(pred);
+                        file_index.add(pred_index);
                         //System.out.println(local_direction.d+","+vx+","+vy);
                     }
                     
@@ -153,8 +162,11 @@ public class Squeleton implements Drawable {
             this.bones.add(b);
             if (ligament != null) {
                 this.ligaments.add(ligament);
+                if (pred_index > this.ligaments_connections.size()-1) {
+                    this.ligaments_connections.add(new ArrayList<>());
+                }
+                this.ligaments_connections.get(pred_index).add(i+1);
             }
-            zertyhbvdfghj++;
             i++;
             
             // on ajoute des points à explorer --->
@@ -175,6 +187,7 @@ public class Squeleton implements Drawable {
                     file_direction.add(local_direction.copy());
                     file_dist.add(new Point(vx,vy));
                     file_pred.add(b);
+                    file_index.add(i-1);
                     //System.out.println(local_direction.d+","+vx+","+vy);
                     //mlkj -= 0.1;
                 }

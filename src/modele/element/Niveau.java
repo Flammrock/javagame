@@ -126,6 +126,8 @@ public class Niveau extends Element implements Generable {
         this.drawables.add(s);
         
         ArrayList<Box> bones = s.getBones();
+        ArrayList<Box> ligaments = s.getLigaments();
+        ArrayList<ArrayList<Integer>> ligaments_connections = s.getLigamentConnections();
         
         this.salles.clear();
         
@@ -143,8 +145,16 @@ public class Niveau extends Element implements Generable {
             if (i == bones.size()-1) {
                 this.sortie = lieu;
             }
+            i++;
         }
         
+        int k = 0;
+        for (ArrayList<Integer> connections : ligaments_connections) {
+            for (Integer j : connections) {
+                this.salles.get(k).ajoutePorteVers("Porte", this.salles.get(j));
+            }
+            k++;
+        }
         
         /*
         // on cast pour récupérer les paramètres
