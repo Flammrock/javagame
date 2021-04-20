@@ -58,7 +58,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         Camera cam = new Camera(this.aventure.getJoueur());
         canvas1.setCamera(cam);
         
-        combatGraphique21.bindAventure(this.aventure);
+        combatGraphique22.bindAventure(this.aventure);
         canvas1.ajouterItem(this.aventure);
         
         
