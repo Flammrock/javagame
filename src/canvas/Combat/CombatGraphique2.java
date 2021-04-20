@@ -320,6 +320,8 @@ private Personnage Ennemi;
         }else{
             Ennemi.attaque(this.Moi);
         }
+        this.Moi.actionEffetFinDuTour();
+        this.Ennemi.actionEffetFinDuTour();
         miseAJourComposants();
     }//GEN-LAST:event_FuiteBouttonActionPerformed
 
