@@ -53,6 +53,8 @@ package exec;
 import canvas.Animation;
 import canvas.SpriteSheet;
 import canvas.collision.CollisionBox;
+import canvas.collision.CollisionEvent;
+import canvas.collision.Collisionable;
 import java.util.ArrayList;
 import modele.element.*;
 import eventsystem.*;
@@ -285,7 +287,7 @@ public class Prog {
         
         
         ///////////////////////////////////// TEMP
-        Squeleton squeleton = new Squeleton(100);
+        Squeleton squeleton = new Squeleton(5);
         squeleton.generate(0,0);
         ///////////////////////////////////// TEMP
         
@@ -296,6 +298,16 @@ public class Prog {
         // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
         a.ajouterDrawable(niveau1); // on l'ajoute dans les items à dessiner
+        
+        niveau1.onCollide(new SimpleListener("onCollide") {
+            @Override
+            public void onEvent(Object sender, SimpleEvent event) {
+                CollisionEvent e = (CollisionEvent) event;
+                if (e.getCollider2() instanceof Personnage) {
+                    System.out.println("[COLLISION] "+e.getCollider1()+" ---> "+e.getCollider2());
+                }
+            }
+        });
         
         
         // on passe un squelette de don
