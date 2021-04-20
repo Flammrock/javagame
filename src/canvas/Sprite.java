@@ -25,13 +25,23 @@ import javax.imageio.ImageIO;
  */
 public class Sprite implements Collisionable {
     
-    // les coordonnées x et y du sprite
+    // les coordonnées du sprite (Destination)
     int x;
     int y;
+    int width;
+    int height;
+    
+    // les coordonnées du sprite (Source)
+    int sx;
+    int sy;
+    int swidth;
+    int sheight;
     
     // les nouvelles coordonnées
     int mx;
     int my;
+    
+    
     
     // si le sprite a définit les nouvelles coordonnées mx et my
     boolean want2Move;
@@ -59,6 +69,12 @@ public class Sprite implements Collisionable {
         this.y = 0;
         this.mx = 0;
         this.my = 0;
+        this.width = -1;
+        this.height = -1;
+        this.sx = -1;
+        this.sy = -1;
+        this.swidth = -1;
+        this.sheight = -1;
         this.ondraw = null;
         this.want2Move = true;
         this.dispatcher = new Dispatcher();
@@ -71,11 +87,23 @@ public class Sprite implements Collisionable {
      * @param y
      */
     public Sprite(String spritefile, int x, int y) {
-        this.spritefile = spritefile;
-        this.image = null;
+        this(spritefile);
         this.x = x;
         this.y = y;
-        this.dispatcher = new Dispatcher();
+    }
+    
+    /**
+     * Permet de créer un Sprite à partir d'un fichier image
+     * @param spritefile le nom du fichier
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    public Sprite(String spritefile, int x, int y, int width, int height) {
+        this(spritefile,x,y);
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -192,7 +220,39 @@ public class Sprite implements Collisionable {
     @Override
     public void draw(Canvas c, Graphics g) {
         if (!this.isLoaded()) return;
-        g.drawImage(this.image, this.x, this.y, null);
+        //g.drawImage(this.image, this.x, this.y, null);
+        
+        int w = this.x + (this.width < 0 ? this.image.getWidth() : this.width);
+        int h = this.y + (this.height < 0 ? this.image.getHeight() : this.height);
+        
+        int nsx = 0;
+        int nsy = 0;
+        int nsw = this.image.getWidth();
+        int nsh = this.image.getHeight();
+        
+        if (this.sx >= 0) nsx = this.sx;
+        if (this.sy >= 0) nsy = this.sy;
+        if (this.swidth >= 0) nsw = nsx + this.swidth;
+        if (this.sheight >= 0) nsh = nsy + this.sheight;
+        
+        g.drawImage(
+                this.image,
+                
+                // dest
+                c.toWorldX(this.x),
+                c.toWorldY(this.y),
+                c.toWorldX(w),
+                c.toWorldY(h),
+                
+                // src
+                nsx,
+                nsy,
+                nsw,
+                nsh,
+                
+                null
+        );
+        
         if (this.ondraw!=null) this.ondraw.accept(c);
     }
     
@@ -234,6 +294,37 @@ public class Sprite implements Collisionable {
     public void onCollide(SimpleListener l) {
         l.setType("onCollide"); // on force le type
         this.dispatcher.addListener(l);
+    }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    public void setSource(int sx, int sy, int swidth, int sheight) {
+        this.sx = sx;
+        this.sy = sy;
+        this.swidth = swidth;
+        this.sheight = sheight;
+    }
+
+    public String getFileName() {
+        return this.spritefile;
+    }
+    
+    public int getSourceX() {
+        return this.sx;
+    }
+    
+    public int getSourceY() {
+        return this.sy;
+    }
+    
+    public int getSourceWidth() {
+        return this.swidth;
+    }
+    
+    public int getSourceHeight() {
+        return this.sheight;
     }
     
 }
