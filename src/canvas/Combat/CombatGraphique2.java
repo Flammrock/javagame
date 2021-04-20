@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.DefaultListModel;
 import modele.element.Aventure;
+import modele.element.Effet;
 import modele.element.Equipement;
 import modele.element.Objet;
 import modele.element.Personnage;
@@ -59,6 +60,8 @@ private Personnage Ennemi;
         InventaireBoutton = new javax.swing.JButton();
         AttaqueBoutton = new javax.swing.JButton();
         FuiteBoutton = new javax.swing.JButton();
+        jScrollPane23 = new javax.swing.JScrollPane();
+        listeEffetJoueur = new javax.swing.JList<>();
         DessinEnnemi = new canvas.Canvas();
         DessinHero = new canvas.Canvas();
         jPanel3 = new javax.swing.JPanel();
@@ -148,6 +151,8 @@ private Personnage Ennemi;
             }
         });
 
+        jScrollPane23.setViewportView(listeEffetJoueur);
+
         javax.swing.GroupLayout PanelOptionsHeroLayout = new javax.swing.GroupLayout(PanelOptionsHero);
         PanelOptionsHero.setLayout(PanelOptionsHeroLayout);
         PanelOptionsHeroLayout.setHorizontalGroup(
@@ -159,7 +164,9 @@ private Personnage Ennemi;
                 .addComponent(InventaireBoutton)
                 .addGap(18, 18, 18)
                 .addComponent(FuiteBoutton)
-                .addContainerGap(603, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
+                .addComponent(jScrollPane23, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addGap(240, 240, 240))
         );
         PanelOptionsHeroLayout.setVerticalGroup(
             PanelOptionsHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,6 +177,9 @@ private Personnage Ennemi;
                     .addComponent(AttaqueBoutton)
                     .addComponent(InventaireBoutton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelOptionsHeroLayout.createSequentialGroup()
+                .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout DessinEnnemiLayout = new javax.swing.GroupLayout(DessinEnnemi);
@@ -294,8 +304,8 @@ private Personnage Ennemi;
     }//GEN-LAST:event_InventaireBouttonActionPerformed
 
     private void AttaqueBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttaqueBouttonActionPerformed
-        this.Moi.attaque(this.Ennemi);
-        Ennemi.attaque(this.Moi);
+        System.out.println(this.Moi.attaque(this.Ennemi));
+        System.out.println(Ennemi.attaque(this.Moi));
         this.Moi.actionEffetFinDuTour();
         this.Ennemi.actionEffetFinDuTour();
         if(this.Moi.getAjoute("pv") == 0 || this.Ennemi.getAjoute("pv") == 0){
@@ -359,7 +369,9 @@ private Personnage Ennemi;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane20;
+    private javax.swing.JScrollPane jScrollPane23;
     private javax.swing.JTextPane jTextPaneInventaire;
+    private javax.swing.JList<Effet> listeEffetJoueur;
     private javax.swing.JList<Objet> listeObjetInventaire;
     private javax.swing.JButton utiliserBouton;
     // End of variables declaration//GEN-END:variables
@@ -377,6 +389,7 @@ private Personnage Ennemi;
         //DessinHero.(s);
         
         mettreAJourListeInventaire();
+        mettreAJourListeEffet();
     }
 
     public void mettreAJourCanvas() {
@@ -396,5 +409,10 @@ private Personnage Ennemi;
         g.addAll(this.aventure.getJoueur().getInventaire());
         listeObjetInventaire.setModel(g);
         jTextPaneInventaire.setText("Inventaire (" + this.aventure.getJoueur().getPoidsInventaire() + "/" + this.aventure.getJoueur().getAjoute(PropertyList.POIDSMAX)+")");
+    }
+    private void mettreAJourListeEffet(){
+        DefaultListModel<Effet> g = new DefaultListModel<>();
+        g.addAll(this.aventure.getJoueur().getEffetCourant());
+        listeEffetJoueur.setModel(g);
     }
 }
