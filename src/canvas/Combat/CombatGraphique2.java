@@ -17,6 +17,8 @@ import modele.element.Personnage;
  */
 public class CombatGraphique2 extends javax.swing.JPanel {
 private Aventure aventure;
+private Personnage Moi;
+private Personnage Ennemi;
     /**
      * Creates new form CombatGraphique2
      */
@@ -29,7 +31,7 @@ private Aventure aventure;
     }
     public void bindAventure(Aventure a) {
         this.aventure = a;
-        miseAJourComposants();
+        
     }
 
     /**
@@ -217,7 +219,8 @@ private Aventure aventure;
     }//GEN-LAST:event_InventaireBouttonActionPerformed
 
     private void AttaqueBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttaqueBouttonActionPerformed
-        aventure.getJoueur().setProperty("pv", 50);
+        this.Moi.attaque(Ennemi);
+        Ennemi.attaque(this.Moi);
         miseAJourComposants();
     }//GEN-LAST:event_AttaqueBouttonActionPerformed
 
@@ -242,16 +245,13 @@ private Aventure aventure;
     // End of variables declaration//GEN-END:variables
 
      private void miseAJourComposants() {
-        VieHeroBar.setMaximum((int)this.aventure.getJoueur().getAjoute("pv max"));
-        VieHeroBar.setValue((int)this.aventure.getJoueur().getAjoute("pv"));
-        VieHeroText.setText(this.aventure.getJoueur().getAjoute("pv") + "/" + this.aventure.getJoueur().getAjoute("pv max"));
+        VieHeroBar.setMaximum((int)this.Moi.getAjoute("pv max"));
+        VieHeroBar.setValue((int)this.Moi.getAjoute("pv"));
+        VieHeroText.setText(this.Moi.getAjoute("pv") + "/" + this.Moi.getAjoute("pv max"));
         
-        VieEnnemiBar.setMaximum((int)this.aventure.getJoueur().getAjoute("pv max"));
-        VieEnnemiBar.setValue((int)this.aventure.getJoueur().getAjoute("pv"));
-        VieEnnemiText.setText(this.aventure.getJoueur().getAjoute("pv") + "/" + this.aventure.getJoueur().getAjoute("pv max"));
-        
-        
-        
+        VieEnnemiBar.setMaximum((int)this.Ennemi.getAjoute("pv max"));
+        VieEnnemiBar.setValue((int)this.Ennemi.getAjoute("pv"));
+        VieEnnemiText.setText(this.Ennemi.getAjoute("pv") + "/" + this.Ennemi.getAjoute("pv max"));
         //DessinHero.(s);
         
         
@@ -263,7 +263,10 @@ private Aventure aventure;
      }
 
     public void lancerCombat(Personnage perso1, Personnage perso2) {
-        System.out.println(perso1+ "versus" + perso2);
+        System.out.println(perso1+ " versus " + perso2);
+        this.Moi = perso1;
+        this.Ennemi = perso2;
+        miseAJourComposants();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
