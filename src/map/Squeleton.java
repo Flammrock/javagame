@@ -20,6 +20,7 @@ public class Squeleton implements Drawable {
     
     ArrayList<Point> articulations;
     ArrayList<Box> bones;
+    ArrayList<Box> ligaments;
     
     // taille des salles
     int maxx;
@@ -32,18 +33,24 @@ public class Squeleton implements Drawable {
     public Squeleton(int maxnode) {
         this.articulations = new ArrayList<>();
         this.bones = new ArrayList<>();
+        this.ligaments = new ArrayList<>();
+        
         this.maxnode = maxnode;
         
         maxx = 1000;
-        minx = 400;
+        minx = 500;
         
         maxy = 1000;
-        miny = 400;
+        miny = 500;
         
     }
     
     public ArrayList<Box> getBones() {
         return bones;
+    }
+    
+    public ArrayList<Box> getLigaments() {
+        return ligaments;
     }
     
     public void generate(int x, int y) {
@@ -55,13 +62,16 @@ public class Squeleton implements Drawable {
         ArrayDeque<Point> file = new ArrayDeque<>();
         ArrayDeque<Direction> file_direction = new ArrayDeque<>();
         ArrayDeque<Point> file_dist = new ArrayDeque<>();
+        ArrayDeque<Box> file_pred = new ArrayDeque<>();
         
         int i = 0;
         
         // on ajoute le point de départ dans la file
         file.add(start.copy());
         file_direction.add(local_direction.copy());
-        file_dist.add(new Point(200,200));
+        file_dist.add(new Point(300,300));
+        
+        int zertyhbvdfghj = 0;
         
         // tant que la file n'est pas vide et que le nombre max de noeud n'est pas dépassé
         while (!file.isEmpty() && i < this.maxnode) {
@@ -70,16 +80,51 @@ public class Squeleton implements Drawable {
             Point current = file.removeFirst();
             local_direction = file_direction.removeFirst();
             Point w = file_dist.removeFirst();
+            Box pred = null;
+            if (!file_pred.isEmpty()) {
+                pred = file_pred.removeFirst();
+            }
+            
             int wx = w.x;
             int wy = w.y;
             
+            int margin = 50;
+            int ligament_size = margin;
             
             // on regarde s'il est compatible
             //int wx = (local_direction.isLeft()||local_direction.isRight()) ? dist : (int)Math.floor(Math.random()*(maxx-minx+1)+minx);
             //int wy = (local_direction.isUp()||local_direction.isDown()) ? dist : (int)Math.floor(Math.random()*(maxy-miny+1)+miny);
-            Box b = new Box(new Point(current.x-wx/2,current.y-wy/2),new Point(wx,wy));
+            Box b = new Box(new Point(current.x-wx/2+margin,current.y-wy/2+margin),new Point(wx-margin*2,wy-margin*2));
             //System.out.println("" + b.position.x + "," + b.position.y + "," + b.size.x + "," + b.size.y);
             //System.out.println("  -> "+local_direction.d+","+wx+","+wy);
+            
+            Box ligament = null;
+            if (pred != null) {
+                Point pos_start = new Point(pred.position.x,pred.position.y);
+                pos_start.append(pred.size.x/2, pred.size.y/2);
+                pos_start.append(local_direction, pred.size.x/2, pred.size.y/2);
+                Point pos_end = current.copy();
+                pos_end.append(local_direction, -wx/2+margin, -wy/2+margin);
+                if (local_direction.isUp()||local_direction.isLeft()) {
+                    Point tmp = pos_start.copy();
+                    pos_start = pos_end;
+                    pos_end = tmp;
+                }
+                int w_lig = (int)Math.abs(pos_end.x-pos_start.x);
+                int h_lig = (int)Math.abs(pos_end.y-pos_start.y);
+                if (w_lig == 0) {
+                    w_lig = ligament_size;
+                    pos_start.append(-w_lig/2,0);
+                    pos_end.append(-w_lig/2,0);
+                }
+                if (h_lig == 0) {
+                    h_lig = ligament_size;
+                    pos_start.append(0,-h_lig/2);
+                    pos_end.append(0,-h_lig/2);
+                }
+                ligament = new Box(pos_start,new Point(w_lig,h_lig));
+                //ligament = new Box(pos_end,new Point(20,20));
+            }
             
             // on regarde s'il y a une collision (si oui on quitte) (équivalent à un raycast)
             if (bones.size() > 0) {
@@ -95,6 +140,7 @@ public class Squeleton implements Drawable {
                         file.add(newcurrent.copy());
                         file_direction.add(local_direction.copy());
                         file_dist.add(new Point(vx,vy));
+                        file_pred.add(pred);
                         //System.out.println(local_direction.d+","+vx+","+vy);
                     }
                     
@@ -105,6 +151,10 @@ public class Squeleton implements Drawable {
             // on l'ajoute dans le squelette
             this.articulations.add(current.copy());
             this.bones.add(b);
+            if (ligament != null) {
+                this.ligaments.add(ligament);
+            }
+            zertyhbvdfghj++;
             i++;
             
             // on ajoute des points à explorer --->
@@ -124,6 +174,7 @@ public class Squeleton implements Drawable {
                     file.add(newcurrent.copy());
                     file_direction.add(local_direction.copy());
                     file_dist.add(new Point(vx,vy));
+                    file_pred.add(b);
                     //System.out.println(local_direction.d+","+vx+","+vy);
                     //mlkj -= 0.1;
                 }
@@ -149,6 +200,10 @@ public class Squeleton implements Drawable {
         for (Point p : articulations) {
             g.setColor(Color.YELLOW);
             g.fillArc(c.toWorldX(p.x-50/2),c.toWorldY(p.y-50/2),c.toScale(50),c.toScale(50),0,360);
+        }
+        for (Box b : ligaments) {
+            g.setColor(Color.GREEN);
+            g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
         }
     }
 
