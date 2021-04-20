@@ -30,7 +30,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                              <Component id="canvas1" min="-2" pref="297" max="-2" attributes="0"/>
+                              <Component id="DessinHero" min="-2" pref="297" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                               <Component id="PanelEnnemi" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -41,7 +41,7 @@
                   <Group type="102" attributes="0">
                       <Component id="PanelHero" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="canvas2" min="-2" pref="275" max="-2" attributes="0"/>
+                      <Component id="DessinEnnemi" min="-2" pref="275" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -56,11 +56,11 @@
                   <Group type="102" attributes="0">
                       <Component id="PanelHero" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="canvas1" min="-2" pref="211" max="-2" attributes="0"/>
+                      <Component id="DessinHero" min="-2" pref="211" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="canvas2" min="-2" pref="192" max="-2" attributes="0"/>
+                      <Component id="DessinEnnemi" min="-2" pref="192" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="PanelEnnemi" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -73,9 +73,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="java.awt.Canvas" name="canvas1">
+    <Component class="java.awt.Canvas" name="DessinHero">
     </Component>
-    <Component class="java.awt.Canvas" name="canvas2">
+    <Component class="java.awt.Canvas" name="DessinEnnemi">
     </Component>
     <Container class="javax.swing.JPanel" name="PanelEnnemi">
 

@@ -5,17 +5,24 @@
  */
 package modele.element;
 
+import canvas.Canvas;
+import canvas.SpriteSheet;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  *
  * @author ssj-m_000
  */
 public class CombatGraphique extends javax.swing.JFrame {
 private Aventure aventure;
+private canvas.Canvas canvas1;
     /**
      * Creates new form CombatGraphique
      */
     public CombatGraphique(Aventure aventure) {
         this.aventure = aventure;
+        this.canvas1 = new canvas.Canvas();
         initComponents();
         miseAJourComposants();
     }
@@ -30,8 +37,8 @@ private Aventure aventure;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        canvas1 = new java.awt.Canvas();
-        canvas2 = new java.awt.Canvas();
+        DessinHero = new java.awt.Canvas();
+        DessinEnnemi = new java.awt.Canvas();
         PanelEnnemi = new javax.swing.JPanel();
         VieHeroBar = new javax.swing.JProgressBar();
         VieHeroText = new javax.swing.JTextField();
@@ -149,7 +156,7 @@ private Aventure aventure;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
-                                .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(DessinHero, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(77, 77, 77)
                                 .addComponent(PanelEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(PanelOptionsHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,7 +164,7 @@ private Aventure aventure;
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DessinEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(153, 153, 153))))
         );
         layout.setVerticalGroup(
@@ -168,10 +175,10 @@ private Aventure aventure;
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PanelHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
-                        .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DessinHero, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(canvas2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DessinEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(PanelEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)))
@@ -232,6 +239,8 @@ private Aventure aventure;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AttaqueBoutton;
+    private java.awt.Canvas DessinEnnemi;
+    private java.awt.Canvas DessinHero;
     private javax.swing.JButton FuiteBoutton;
     private javax.swing.JButton InventaireBoutton;
     private javax.swing.JPanel PanelEnnemi;
@@ -241,8 +250,6 @@ private Aventure aventure;
     private javax.swing.JTextField VieEnnemiText;
     private javax.swing.JProgressBar VieHeroBar;
     private javax.swing.JTextField VieHeroText;
-    private java.awt.Canvas canvas1;
-    private java.awt.Canvas canvas2;
     // End of variables declaration//GEN-END:variables
 
     private void miseAJourComposants() {
@@ -253,6 +260,30 @@ private Aventure aventure;
         VieEnnemiBar.setMaximum((int)this.aventure.getJoueur().getAjoute("pv max"));
         VieEnnemiBar.setValue((int)this.aventure.getJoueur().getAjoute("pv"));
         VieEnnemiText.setText(this.aventure.getJoueur().getAjoute("pv") + "/" + this.aventure.getJoueur().getAjoute("pv max"));
-                
+        
+        
+        SpriteSheet sprite = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64);
+        sprite.loadImage();
+        //DessinHero.ajouterItem(sprite);
+        //DessinHero.(s);
+        
+        canvas1.ajouterItem(this.aventure);
+        
+        
+        new Timer("Drawer", true).scheduleAtFixedRate( new TimerTask(){
+            public void run(){
+               canvas1.repaint();
+               
+               DessinEnnemi.repaint();
+               DessinHero.repaint();
+               //DessinEnnemi.ajouterItem(sprite);
+               //DessinHero.ajouterItem(sprite);
+
+            }
+        }, 
+        100, // Start in 100 ms
+        (int)(1000 / 60));
+        
+        
     }
 }
