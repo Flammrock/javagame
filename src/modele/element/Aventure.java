@@ -6,9 +6,14 @@
 package modele.element;
 
 import canvas.Canvas;
+import canvas.Combat.DebutCombatEvent;
 import canvas.Drawable;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleEvent;
+import eventsystem.SimpleListener;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 
 /**
@@ -21,9 +26,10 @@ public class Aventure extends Element {
     private Donjon donjon;
     
     private ArrayList<Drawable> drawables;
+    Dispatcher dispatcher;
     
     public Aventure(Personnage joueur) {
-        
+        this.dispatcher = new Dispatcher();
         this.description = "mon aventure";
         
         this.drawables = new ArrayList<>();
@@ -39,6 +45,14 @@ public class Aventure extends Element {
 
     public Personnage getJoueur() {
         return joueur;
+    }
+    
+    public void debutCombat(){
+        Personnage monstre = this.joueur.getPieceActuel().getMonstres().get(0);
+        this.dispatcher.fireEvent("onCombatCommence",this, new DebutCombatEvent(this.joueur,monstre));
+        
+        
+        this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());
     }
 
     /**
@@ -131,6 +145,10 @@ public class Aventure extends Element {
     
     @Override
     public void draw(Canvas c, Graphics g) {
+    }
+
+    public void addListerner(SimpleListener simpleListener) {
+        dispatcher.addListener(simpleListener);
     }
     
 }
