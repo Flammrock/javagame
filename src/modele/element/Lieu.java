@@ -3,7 +3,10 @@ package modele.element;
 import canvas.Canvas;
 import canvas.Drawable;
 import canvas.collision.CollisionBox;
+import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleListener;
 import geometry.Box;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -27,6 +30,9 @@ public class Lieu extends Element implements Generable, Collisionable {
     ArrayList<Drawable> drawables;
     
     ArrayList<CollisionBox> collisionBoxList;
+    
+    // un dispatcher d'events
+    Dispatcher dispatcher;
 
     public String getNom() {
         return nom;
@@ -269,6 +275,28 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.addCollisionBox(new CollisionBox(-epaisseur+width,-epaisseur,epaisseur*2,epaisseur*2+height,true));
         
         return true;
+    }
+    
+    @Override
+    public Dispatcher getDispatcher() {
+        // on fait comme si les lieux n'avaient pas de Dispatcher pour gérer des events
+        return null;
+        //return this.dispatcher;
+    }
+
+    @Override
+    public void collide(Collisionable c) {
+        // rien ne se passe
+        //dispatcher.fireEvent("onCollide", this, new CollisionEvent(this,c));
+    }
+
+    @Override
+    public void onCollide(SimpleListener l) {
+        
+        // pour l'instant rien ne se passe quand on se cogne dans les murs (ou que quelque chose heure un mur)
+        
+        //l.setType("onCollide"); // on force le type
+        //this.dispatcher.addListener(l);
     }
 
 }
