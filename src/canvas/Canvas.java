@@ -219,6 +219,11 @@ public class Canvas extends JPanel {
                                 
                                         // si oui, alors cet item ne peut pas bouger, on peut quitter cette boucle
                                         canMove = false;
+                                        
+                                        // on envoie un event de collisions vers les deux objets
+                                        c1.collide(c2);
+                                        c2.collide(c1);
+                                        
                                         break;
 
                                     }
