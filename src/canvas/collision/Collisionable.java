@@ -6,6 +6,8 @@
 package canvas.collision;
 
 import canvas.Drawable;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleListener;
 import java.util.ArrayList;
 
 /**
@@ -68,4 +70,29 @@ public interface Collisionable extends Drawable {
      */
     public void cancelMove();
     
+    /**
+     * Un Collisionable possède un Dispatcher (lui permettant de propager des
+     * Events comme des Events de Collision par exemple)
+     * Par conséquent, un Collisionable doit pouvoir renvoyer un Dispatcher
+     * (il peut renvoyer null si aucun Dispatcher n'est connecté)
+     * @return retourne le Dispatcher
+     */
+    Dispatcher getDispatcher();
+    
+    /**
+     * Un Collisionable doit posséder une méthode lui permettant de propager
+     * un Event de Collision via son Dispatcher
+     * (ceci est automatiquement gérer par la classe Canvas)
+     * (Canvas appelera cette méthode si les deux Collisionable possèdent
+     * des CollisionBox)
+     * @param c l'autre collisionable
+     */
+    void collide(Collisionable c);
+    
+    /**
+     * Un Collisionable doit pouvoir avoir une méthode permettant d'ajouter directement des écouteurs
+     * pour les collisions
+     * @param l l'écouteur qui écoutera les collisions
+     */
+    void onCollide(SimpleListener l);
 }
