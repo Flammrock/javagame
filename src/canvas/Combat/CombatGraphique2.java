@@ -8,8 +8,12 @@ package canvas.Combat;
 import canvas.SpriteSheet;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.DefaultListModel;
 import modele.element.Aventure;
+import modele.element.Equipement;
+import modele.element.Objet;
 import modele.element.Personnage;
+import modele.element.PropertyList;
 
 /**
  *
@@ -27,7 +31,7 @@ private Personnage Ennemi;
         SpriteSheet sprite = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*3,64*3);
         sprite.loadImage();
         DessinHero.ajouterItem(sprite);
-        
+        jPanel3.setVisible(false);
     }
     public void bindAventure(Aventure a) {
         this.aventure = a;
@@ -57,6 +61,13 @@ private Personnage Ennemi;
         FuiteBoutton = new javax.swing.JButton();
         DessinEnnemi = new canvas.Canvas();
         DessinHero = new canvas.Canvas();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        jTextPaneInventaire = new javax.swing.JTextPane();
+        jScrollPane20 = new javax.swing.JScrollPane();
+        listeObjetInventaire = new javax.swing.JList<>();
+        utiliserBouton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         VieHeroText.setText("jTextField2");
 
@@ -165,22 +176,73 @@ private Personnage Ennemi;
         DessinEnnemi.setLayout(DessinEnnemiLayout);
         DessinEnnemiLayout.setHorizontalGroup(
             DessinEnnemiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 397, Short.MAX_VALUE)
+            .addGap(0, 665, Short.MAX_VALUE)
         );
         DessinEnnemiLayout.setVerticalGroup(
             DessinEnnemiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 236, Short.MAX_VALUE)
+            .addGap(0, 363, Short.MAX_VALUE)
+        );
+
+        jTextPaneInventaire.setEditable(false);
+        jTextPaneInventaire.setText("Inventaire:");
+        jScrollPane19.setViewportView(jTextPaneInventaire);
+
+        jScrollPane20.setViewportView(listeObjetInventaire);
+
+        utiliserBouton.setText("Utiliser");
+        utiliserBouton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                utiliserBoutonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("X");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane19)
+            .addComponent(jScrollPane20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(utiliserBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(utiliserBouton)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(121, 121, 121))
         );
 
         javax.swing.GroupLayout DessinHeroLayout = new javax.swing.GroupLayout(DessinHero);
         DessinHero.setLayout(DessinHeroLayout);
         DessinHeroLayout.setHorizontalGroup(
             DessinHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
+            .addGroup(DessinHeroLayout.createSequentialGroup()
+                .addGap(204, 204, 204)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(226, Short.MAX_VALUE))
         );
         DessinHeroLayout.setVerticalGroup(
             DessinHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGroup(DessinHeroLayout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -198,13 +260,13 @@ private Personnage Ennemi;
                             .addComponent(PanelHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(117, 117, 117)
+                                .addGap(18, 18, 18)
                                 .addComponent(DessinEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(261, 261, 261)
                                 .addComponent(PanelEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(PanelOptionsHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,12 +290,14 @@ private Personnage Ennemi;
     }// </editor-fold>//GEN-END:initComponents
 
     private void InventaireBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InventaireBouttonActionPerformed
-        // TODO add your handling code here:
+        jPanel3.setVisible(true);
     }//GEN-LAST:event_InventaireBouttonActionPerformed
 
     private void AttaqueBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttaqueBouttonActionPerformed
-        this.Moi.attaque(Ennemi);
+        this.Moi.attaque(this.Ennemi);
         Ennemi.attaque(this.Moi);
+        this.Moi.actionEffetFinDuTour();
+        this.Ennemi.actionEffetFinDuTour();
         if(this.Moi.getAjoute("pv") == 0 || this.Ennemi.getAjoute("pv") == 0){
             this.aventure.finCombat(Moi,Ennemi);
         }
@@ -241,8 +305,39 @@ private Personnage Ennemi;
     }//GEN-LAST:event_AttaqueBouttonActionPerformed
 
     private void FuiteBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FuiteBouttonActionPerformed
-        // TODO add your handling code here:
+        if(this.Moi.essaiEnfuir(this.Ennemi)){
+            this.aventure.finCombat(Moi,Ennemi);
+        }else{
+            Ennemi.attaque(this.Moi);
+        }
+        miseAJourComposants();
     }//GEN-LAST:event_FuiteBouttonActionPerformed
+
+    private void utiliserBoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utiliserBoutonActionPerformed
+        int selected = listeObjetInventaire.getSelectedIndex();
+        Objet obj = listeObjetInventaire.getSelectedValue();
+        if (obj == null) return;
+
+        boolean needUpdate = false;
+
+        if (obj instanceof Equipement) {
+            if (this.aventure.getJoueur().getMain()==obj) {
+                needUpdate = this.aventure.getJoueur().desequip(selected);
+            } else {
+                needUpdate = this.aventure.getJoueur().equip(selected);
+            }
+        } else if (obj.peutUtiliser()) {
+            needUpdate = this.aventure.getJoueur().utiliserObjet(selected);
+        }
+
+        if (needUpdate) {
+            miseAJourComposants();
+        }
+    }//GEN-LAST:event_utiliserBoutonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jPanel3.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -260,9 +355,16 @@ private Personnage Ennemi;
     private javax.swing.JTextField VieEnnemiText;
     private javax.swing.JProgressBar VieHeroBar;
     private javax.swing.JTextField VieHeroText;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane19;
+    private javax.swing.JScrollPane jScrollPane20;
+    private javax.swing.JTextPane jTextPaneInventaire;
+    private javax.swing.JList<Objet> listeObjetInventaire;
+    private javax.swing.JButton utiliserBouton;
     // End of variables declaration//GEN-END:variables
 
-     private void miseAJourComposants() {
+    private void miseAJourComposants() {
         VieHeroBar.setMaximum((int)this.Moi.getAjoute("pv max"));
         VieHeroBar.setValue((int)this.Moi.getAjoute("pv"));
         VieHeroText.setText(this.Moi.getAjoute("pv") + "/" + this.Moi.getAjoute("pv max"));
@@ -274,18 +376,25 @@ private Personnage Ennemi;
         NomEnnemiText.setText(this.Ennemi.getNom());
         //DessinHero.(s);
         
-        
+        mettreAJourListeInventaire();
     }
 
-     public void mettreAJourCanvas() {
+    public void mettreAJourCanvas() {
         DessinEnnemi.repaint();
         DessinHero.repaint();
-     }
+    }
 
     public void lancerCombat(Personnage perso1, Personnage perso2) {
         System.out.println(perso1+ " versus " + perso2);
         this.Moi = perso1;
         this.Ennemi = perso2;
         miseAJourComposants();
+    }
+    
+    private void mettreAJourListeInventaire(){
+        DefaultListModel<Objet> g = new DefaultListModel<>();
+        g.addAll(this.aventure.getJoueur().getInventaire());
+        listeObjetInventaire.setModel(g);
+        jTextPaneInventaire.setText("Inventaire (" + this.aventure.getJoueur().getPoidsInventaire() + "/" + this.aventure.getJoueur().getAjoute(PropertyList.POIDSMAX)+")");
     }
 }
