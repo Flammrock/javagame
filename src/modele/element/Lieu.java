@@ -105,6 +105,9 @@ public class Lieu extends Element implements Generable, Collisionable {
         Porte p1 = new Porte(nom, this, lieu2);
         Porte p2 = new Porte(nom, lieu2, this);
         
+        p1.connect(p2);
+        p2.connect(p1);
+        
         Lieu _this = this;
         
         // on propage l'events de collisions dans le dispatcher de ce lieu

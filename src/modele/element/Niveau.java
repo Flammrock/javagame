@@ -11,6 +11,7 @@ import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import geometry.Box;
+import geometry.Direction;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +141,8 @@ public class Niveau extends Element implements Generable {
         ArrayList<Box> bones = s.getBones();
         ArrayList<Box> ligaments = s.getLigaments();
         ArrayList<ArrayList<Integer>> ligaments_connections = s.getLigamentConnections();
-        ArrayList<Box> ligaments_bounds = s.getLigamentBounds();
+        ArrayList<ArrayList<Box>> ligaments_bounds = s.getLigamentBounds();
+        ArrayList<ArrayList<Direction>> ligaments_directions = s.getLigamentsDirections();
         
         this.salles.clear();
         
@@ -173,16 +175,25 @@ public class Niveau extends Element implements Generable {
         }
         
         int k = 0;
-        int h = 0;
         for (ArrayList<Integer> connections : ligaments_connections) {
+            ArrayList<Box> bounds = ligaments_bounds.get(k);
+            ArrayList<Direction> directions = ligaments_directions.get(k);
+            int h = 0;
+            int v = 0;
             for (Integer j : connections) {
                 if (this.salles.get(k).ajoutePorteVers("Porte", this.salles.get(j-1))) {
-                    this.salles.get(k).getLastPorte().setSize(ligaments_bounds.get(h));
-                    this.salles.get(j-1).getLastPorte().setSize(ligaments_bounds.get(h+1));
+                    this.salles.get(k).getLastPorte().setSize(bounds.get(h));
+                    this.salles.get(j-1).getLastPorte().setSize(bounds.get(h+1));
+                    this.salles.get(k).getLastPorte().setDirection(directions.get(v));
+                    Direction m = directions.get(v).copy();
+                    m.rotate();
+                    m.rotate();
+                    this.salles.get(j-1).getLastPorte().setDirection(m);
                 }
+                h+=2;
+                v++;
             }
             k++;
-            h+=2;
         }
         
         /*

@@ -22,7 +22,8 @@ public class Squeleton implements Drawable {
     ArrayList<Box> bones;
     ArrayList<Box> ligaments;
     ArrayList<ArrayList<Integer>> ligaments_connections;
-    ArrayList<Box> ligaments_bounds;
+    ArrayList<ArrayList<Box>> ligaments_bounds;
+    ArrayList<ArrayList<Direction>> ligaments_directions;
     
     // taille des salles
     int maxx;
@@ -38,6 +39,7 @@ public class Squeleton implements Drawable {
         this.ligaments = new ArrayList<>();
         this.ligaments_connections = new ArrayList<>();
         this.ligaments_bounds = new ArrayList<>();
+        this.ligaments_directions = new ArrayList<>();
         
         this.maxnode = maxnode;
         
@@ -61,8 +63,12 @@ public class Squeleton implements Drawable {
         return ligaments_connections;
     }
     
-    public ArrayList<Box> getLigamentBounds() {
+    public ArrayList<ArrayList<Box>> getLigamentBounds() {
         return ligaments_bounds;
+    }
+    
+    public ArrayList<ArrayList<Direction>> getLigamentsDirections() {
+        return ligaments_directions;
     }
     
     public void generate(int x, int y) {
@@ -156,8 +162,13 @@ public class Squeleton implements Drawable {
                 if (local_direction.isDown()) {
                     bpos_start.append(0, -h_bind);
                 }
-                bound1 = new Box(bpos_start,new Point(w_bind,h_bind));
-                bound2 = new Box(bpos_end,new Point(w_bind,h_bind));
+                if (local_direction.isUp()||local_direction.isLeft()) {
+                    bound2 = new Box(bpos_start,new Point(w_bind,h_bind));
+                    bound1 = new Box(bpos_end,new Point(w_bind,h_bind));
+                } else {
+                    bound1 = new Box(bpos_start,new Point(w_bind,h_bind));
+                    bound2 = new Box(bpos_end,new Point(w_bind,h_bind));
+                }
             }
             
             // on regarde s'il y a une collision (si oui on quitte) (équivalent à un raycast)
@@ -188,12 +199,23 @@ public class Squeleton implements Drawable {
             this.bones.add(b);
             if (ligament != null) {
                 this.ligaments.add(ligament);
-                this.ligaments_bounds.add(bound1);
-                this.ligaments_bounds.add(bound2);
+                //this.ligaments_bounds.add(bound1);
+                //this.ligaments_bounds.add(bound2);
                 while (pred_index > this.ligaments_connections.size()-1) {
                     this.ligaments_connections.add(new ArrayList<>());
                 }
                 this.ligaments_connections.get(pred_index).add(i+1);
+                
+                while (pred_index > this.ligaments_bounds.size()-1) {
+                    this.ligaments_bounds.add(new ArrayList<>());
+                }
+                this.ligaments_bounds.get(pred_index).add(bound1);
+                this.ligaments_bounds.get(pred_index).add(bound2);
+                
+                while (pred_index > this.ligaments_directions.size()-1) {
+                    this.ligaments_directions.add(new ArrayList<>());
+                }
+                this.ligaments_directions.get(pred_index).add(local_direction);
                 
             }
             i++;
@@ -248,10 +270,10 @@ public class Squeleton implements Drawable {
             g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
         }
         
-        for (Box b : ligaments_bounds) {
+        /*for (Box b : ligaments_bounds) {
             g.setColor(Color.magenta);
             g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
-        }
+        }*/
     }
 
     @Override
