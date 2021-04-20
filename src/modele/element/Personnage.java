@@ -3,7 +3,10 @@ package modele.element;
 
 import canvas.*;
 import canvas.collision.CollisionBox;
+import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleListener;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.SpringLayout;
@@ -28,6 +31,9 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     private ArrayList<CollisionBox> collisionBoxList;
     
+    // un dispatcher d'events
+    Dispatcher dispatcher;
+    
     
 
     public Personnage(String nom, String description) {
@@ -41,6 +47,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.sprite = null;
         this.collisionBoxList = new ArrayList<>();
         this.listproperties = new ArrayList<>();
+        this.dispatcher = new Dispatcher();
     }
     
     public void init(double age, double force, double agilite, double pv) {
@@ -477,6 +484,22 @@ public class Personnage extends Element implements Generable, Collisionable {
     @Override
     public int getNewY() {
         return this.sprite.getNewY(); // pour l'instant, on propage ça dans le sprite
+    }
+
+    @Override
+    public Dispatcher getDispatcher() {
+        return this.dispatcher;
+    }
+
+    @Override
+    public void collide(Collisionable c) {
+        dispatcher.fireEvent("onCollide", this, new CollisionEvent(this,c));
+    }
+
+    @Override
+    public void onCollide(SimpleListener l) {
+        l.setType("onCollide"); // on force le type
+        this.dispatcher.addListener(l);
     }
     
 }
