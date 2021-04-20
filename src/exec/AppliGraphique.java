@@ -6,9 +6,13 @@
 package exec;
 
 import canvas.Animation;
+import canvas.Combat.DebutCombatEvent;
 import canvas.Drawable;
 import canvas.Sprite;
 import canvas.SpriteSheet;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleEvent;
+import eventsystem.SimpleListener;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
@@ -31,13 +35,11 @@ import modele.element.*;
 public class AppliGraphique extends javax.swing.JFrame {
 
     private Aventure aventure;
-    
     /**
      * Creates new form AppliGraphique
      * @param aventure
      */
     public AppliGraphique(Aventure aventure) {
-        
         this.aventure = aventure;
         initComponents();
         
@@ -74,6 +76,26 @@ public class AppliGraphique extends javax.swing.JFrame {
 
         mettreAJourTout();
         
+        this.aventure.addListerner(new SimpleListener("onCombatCommence"){
+            //@override
+            public void onEvent(Object sender, SimpleEvent e) {
+                Aventure aventure = (Aventure) sender;
+                DebutCombatEvent p = (DebutCombatEvent)e;
+                Personnage perso1 = p.getPerso1();
+                Personnage perso2 = p.getPerso2();
+                combatGraphique22.bindAventure(aventure);
+                combatGraphique22.lancerCombat(perso1,perso2);
+                combatGraphique22.setVisible(true);
+                
+            }
+        });
+    
+        this.aventure.addListerner(new SimpleListener("onCombatTermine"){
+            //@override
+            public void onEvent(Object sender, SimpleEvent e) {
+                combatGraphique22.setVisible(false);
+            }
+        });
         
         Combattre.setVisible(false);
         allerDansPorte.setVisible(false);
@@ -130,6 +152,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         textArmure.setVisible(false);
         utiliserBouton.setVisible(false);
     }
+    
+    
     
     public String onActionJoueur(String action,Personnage ennemie) {
         String logs = "";
@@ -347,7 +371,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         listeEffetJoueur = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         logger = new javax.swing.JTextArea();
-        combatGraphique22 = new modele.element.CombatGraphique2();
+        combatGraphique22 = new canvas.Combat.CombatGraphique2();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -797,7 +821,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JButton Combattre;
     private javax.swing.JButton allerDansPorte;
     private canvas.Canvas canvas1;
-    private modele.element.CombatGraphique2 combatGraphique22;
+    private canvas.Combat.CombatGraphique2 combatGraphique22;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

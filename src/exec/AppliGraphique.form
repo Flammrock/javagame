@@ -686,7 +686,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="modele.element.CombatGraphique2" name="combatGraphique22">
+        <Component class="canvas.Combat.CombatGraphique2" name="combatGraphique22">
         </Component>
       </SubComponents>
     </Container>
