@@ -42,6 +42,9 @@ public class Sprite implements Collisionable {
     int my;
     
     
+    boolean repeatX;
+    boolean repeatY;
+    
     
     // si le sprite a définit les nouvelles coordonnées mx et my
     boolean want2Move;
@@ -77,6 +80,8 @@ public class Sprite implements Collisionable {
         this.sheight = -1;
         this.ondraw = null;
         this.want2Move = true;
+        this.repeatX = true;
+        this.repeatY = true;
         this.dispatcher = new Dispatcher();
     }
     
@@ -147,6 +152,22 @@ public class Sprite implements Collisionable {
         } else {
             return y;
         }
+    }
+
+    public boolean isRepeatX() {
+        return repeatX;
+    }
+
+    public void setRepeatX(boolean repeatX) {
+        this.repeatX = repeatX;
+    }
+
+    public boolean isRepeatY() {
+        return repeatY;
+    }
+
+    public void setRepeatY(boolean repeatY) {
+        this.repeatY = repeatY;
     }
 
     
@@ -238,8 +259,7 @@ public class Sprite implements Collisionable {
         if (!this.isLoaded()) return;
         //g.drawImage(this.image, this.x, this.y, null);
         
-        int w = this.x + (this.width < 0 ? this.image.getWidth() : this.width);
-        int h = this.y + (this.height < 0 ? this.image.getHeight() : this.height);
+        
         
         int nsx = 0;
         int nsy = 0;
@@ -250,6 +270,14 @@ public class Sprite implements Collisionable {
         if (this.sy >= 0) nsy = this.sy;
         if (this.swidth >= 0) nsw = nsx + this.swidth;
         if (this.sheight >= 0) nsh = nsy + this.sheight;
+        
+        double ratio = (double)this.swidth / (double)this.sheight;
+        
+        int ww = this.width;
+        int hh = this.height;
+        
+        int w = this.x + (this.width < 0 ? this.image.getWidth() : ww);
+        int h = this.y + (this.height < 0 ? this.image.getHeight() : hh);
         
         g.drawImage(
                 this.image,
