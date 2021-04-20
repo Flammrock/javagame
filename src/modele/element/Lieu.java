@@ -4,6 +4,7 @@ import canvas.Canvas;
 import canvas.Drawable;
 import canvas.collision.CollisionBox;
 import canvas.collision.Collisionable;
+import geometry.Box;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -185,6 +186,13 @@ public class Lieu extends Element implements Generable, Collisionable {
         return true;
         
     }*/
+    
+    public void setSize(Box b) {
+        x = b.getX();
+        y = b.getY();
+        width = b.getWidth();
+        height = b.getHeight();
+    }
 
     @Override
     public double getProbabilite() {
