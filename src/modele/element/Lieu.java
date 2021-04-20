@@ -248,7 +248,17 @@ public class Lieu extends Element implements Generable, Collisionable {
 
     @Override
     public boolean generate(Object p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        int epaisseur = 10;
+        
+        // on ajoute 4 collisionsBox
+        this.collisionBoxList.clear();
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,width+epaisseur*2,epaisseur*2,true));
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur+height,width+epaisseur*2,epaisseur*2,true));
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,epaisseur*2,epaisseur*2+height,true));
+        this.addCollisionBox(new CollisionBox(-epaisseur+width,-epaisseur,epaisseur*2,epaisseur*2+height,true));
+        
+        return true;
     }
 
 }
