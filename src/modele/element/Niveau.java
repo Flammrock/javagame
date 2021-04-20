@@ -7,6 +7,7 @@ package modele.element;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import geometry.Box;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +124,26 @@ public class Niveau extends Element implements Generable {
         Squeleton s = (Squeleton) o;
         
         this.drawables.add(s);
+        
+        ArrayList<Box> bones = s.getBones();
+        
+        this.salles.clear();
+        
+        // on construit les salles à partir du squelette de la map
+        int i = 0;
+        for (Box bone : bones) {
+            Lieu lieu = new Lieu("Lieu "+i);
+            lieu.setSize(bone);
+            //lieu.generate() // @TODO
+            this.salles.add(lieu);
+            this.drawables.add(lieu);
+            if (i == 0) {
+                this.entree = lieu;
+            }
+            if (i == bones.size()-1) {
+                this.sortie = lieu;
+            }
+        }
         
         
         /*
