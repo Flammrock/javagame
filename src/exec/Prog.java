@@ -302,7 +302,7 @@ public class Prog {
         // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
         a.ajouterDrawable(niveau1); // on l'ajoute dans les items à dessiner
-        
+        niveau1.setTileSet(tileset);
         niveau1.onCollide(new SimpleListener("onCollide") {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
@@ -342,7 +342,7 @@ public class Prog {
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
         
-        a.debutCombat();
+        //a.debutCombat();
     }
 
 }
