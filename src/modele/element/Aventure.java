@@ -48,11 +48,12 @@ public class Aventure extends Element {
     }
     
     public void debutCombat(){
-        Personnage monstre = this.joueur.getPieceActuel().getMonstres().get(0);
+        Personnage monstre = new Personnage("Goblin", "monstre de la mort");
+        monstre.init(5, 10, 15, 20);
         this.dispatcher.fireEvent("onCombatCommence",this, new DebutCombatEvent(this.joueur,monstre));
         
         
-        this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());
+        //this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());
     }
 
     /**
