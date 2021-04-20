@@ -52,6 +52,7 @@ package exec;
 
 import canvas.Animation;
 import canvas.SpriteSheet;
+import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
@@ -165,7 +166,10 @@ public class Prog {
         
         
         
-        
+        /////////////////////// TILESET TEST ////////////////////////////
+        TileSet tileset = new TileSet("16x16DungeonTileset.v4");
+        tileset.loadImage();
+        tileset.setSprite("wall", 0, 12, 48, 25);
         
         
         
