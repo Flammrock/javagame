@@ -110,13 +110,13 @@ public class Lieu extends Element implements Generable, Collisionable {
         p1.onCollide(new SimpleListener("onCollide"){
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
-                _this.getDispatcher().fireEvent("onCollide", sender, event);
+                _this.getDispatcher().fireEvent("onCollide", _this, event);
             }
         });
         p2.onCollide(new SimpleListener("onCollide"){
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
-                _this.getDispatcher().fireEvent("onCollide", sender, event);
+                _this.getDispatcher().fireEvent("onCollide", _this, event);
             }
         });
         

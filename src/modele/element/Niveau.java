@@ -164,7 +164,7 @@ public class Niveau extends Element implements Generable {
             lieu.onCollide(new SimpleListener("onCollide"){
                 @Override
                 public void onEvent(Object sender, SimpleEvent event) {
-                    _this.getDispatcher().fireEvent("onCollide", sender, event);
+                    _this.getDispatcher().fireEvent("onCollide", _this, event);
                 }
             });
             
