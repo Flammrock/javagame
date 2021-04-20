@@ -337,8 +337,6 @@ public class Prog {
         
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
-        CombatGraphique2 Arene = new CombatGraphique2(a);
-        Arene.setVisible(true);
     }
 
 }

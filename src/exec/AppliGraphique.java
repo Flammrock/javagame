@@ -58,7 +58,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         Camera cam = new Camera(this.aventure.getJoueur());
         canvas1.setCamera(cam);
         
-        
+        combatGraphique21.bindAventure(this.aventure);
         canvas1.ajouterItem(this.aventure);
         
         
@@ -346,6 +346,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         listeEffetJoueur = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         logger = new javax.swing.JTextArea();
+        combatGraphique21 = new modele.element.CombatGraphique2();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -627,6 +628,17 @@ public class AppliGraphique extends javax.swing.JFrame {
         logger.setRows(5);
         jScrollPane1.setViewportView(logger);
 
+        javax.swing.GroupLayout combatGraphique21Layout = new javax.swing.GroupLayout(combatGraphique21);
+        combatGraphique21.setLayout(combatGraphique21Layout);
+        combatGraphique21Layout.setHorizontalGroup(
+            combatGraphique21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 341, Short.MAX_VALUE)
+        );
+        combatGraphique21Layout.setVerticalGroup(
+            combatGraphique21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 274, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout canvas1Layout = new javax.swing.GroupLayout(canvas1);
         canvas1.setLayout(canvas1Layout);
         canvas1Layout.setHorizontalGroup(
@@ -646,17 +658,24 @@ public class AppliGraphique extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, canvas1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(canvas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, canvas1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(canvas1Layout.createSequentialGroup()
+                .addGap(185, 185, 185)
+                .addComponent(combatGraphique21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         canvas1Layout.setVerticalGroup(
             canvas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, canvas1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(combatGraphique21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(256, 256, 256)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -790,6 +809,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private javax.swing.JButton Combattre;
     private javax.swing.JButton allerDansPorte;
     private canvas.Canvas canvas1;
+    private modele.element.CombatGraphique2 combatGraphique21;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -15,17 +15,16 @@ import java.util.TimerTask;
  */
 public class CombatGraphique2 extends javax.swing.JPanel {
 private Aventure aventure;
-private canvas.Canvas canvas1;
     /**
      * Creates new form CombatGraphique2
      */
-    public CombatGraphique2(Aventure aventure) {
-        this.aventure = aventure;
-        this.canvas1 = new canvas.Canvas();
+    public CombatGraphique2(){
         initComponents();
         miseAJourComposants();
     }
-    public CombatGraphique2(){}
+    public void bindAventure(Aventure a) {
+        this.aventure = aventure;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -251,12 +250,9 @@ private canvas.Canvas canvas1;
         DessinHero.ajouterItem(sprite);
         //DessinHero.(s);
         
-        canvas1.ajouterItem(this.aventure);
-        
         
         new Timer("Drawer", true).scheduleAtFixedRate( new TimerTask(){
             public void run(){
-               canvas1.repaint();
                
                DessinEnnemi.repaint();
                DessinHero.repaint();
