@@ -20,6 +20,43 @@ public class Box {
         this.position = pos;
         this.size = size;
     }
+    
+    
+    
+    
+    public int getX() {
+        return this.position.x;
+    }
+    
+    public int getY() {
+        return this.position.y;
+    }
+    
+    public int getWidth() {
+        return this.size.x;
+    }
+    
+    public int getHeight() {
+        return this.size.y;
+    }
+    
+    public void setX(int v) {
+        this.position.x = v;
+    }
+    
+    public void setY(int v) {
+        this.position.y = v;
+    }
+    
+    public void setWidth(int v) {
+        this.size.x = v;
+    }
+    
+    public void setHeight(int v) {
+        this.size.y = v;
+    }
+    
+    
 
     /**
      * permet de faire un raycast mais avec des rectangles :)
