@@ -7,6 +7,11 @@ package modele.element;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import canvas.collision.CollisionBox;
+import canvas.collision.CollisionEvent;
+import canvas.collision.Collisionable;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleListener;
 import geometry.Box;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author Utilisateur
  */
-public class Porte extends Element {
+public class Porte extends Element implements Collisionable {
     
     private Lieu lieu1;
     private Lieu lieu2;
@@ -27,6 +32,11 @@ public class Porte extends Element {
     int width;
     int height;
     
+    // un dispatcher d'events
+    Dispatcher dispatcher;
+    
+    ArrayList<CollisionBox> collisionBoxList;
+    
     public Porte(String nom, Lieu lieu1, Lieu lieu2) {
         this.nom = nom;
         this.lieu1 = lieu1;
@@ -35,6 +45,8 @@ public class Porte extends Element {
         y = 0;
         width = 0;
         height = 0;
+        this.collisionBoxList = new ArrayList<>();
+        this.dispatcher = new Dispatcher();
     }
 
     public String getNom() {
@@ -66,6 +78,9 @@ public class Porte extends Element {
         y = b.getY();
         width = b.getWidth();
         height = b.getHeight();
+        this.collisionBoxList.clear();
+        CollisionBox c = new CollisionBox(x, y, width, height);
+        this.addCollisionBox(c);
     }
     
     @Override
@@ -74,6 +89,53 @@ public class Porte extends Element {
         g.setColor(Color.blue);
         g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
     
+    }
+
+    @Override
+    public ArrayList<CollisionBox> getCollisionBoxList() {
+        return this.collisionBoxList;
+    }
+
+    @Override
+    public void addCollisionBox(CollisionBox b) {
+        if (b == null) return;
+        this.collisionBoxList.add(b);
+    }
+
+    @Override
+    public int getNewX() {
+        return x;
+    }
+
+    @Override
+    public int getNewY() {
+        return y;
+    }
+
+    @Override
+    public void applyMove() {
+        // les portes ne peuvent pas bouger
+    }
+
+    @Override
+    public void cancelMove() {
+        // les portes ne peuvent pas bouger
+    }
+
+    @Override
+    public Dispatcher getDispatcher() {
+        return this.dispatcher;
+    }
+
+    @Override
+    public void collide(Collisionable c) {
+        dispatcher.fireEvent("onCollide", this, new CollisionEvent(this,c));
+    }
+
+    @Override
+    public void onCollide(SimpleListener l) {
+        l.setType("onCollide"); // on force le type
+        this.dispatcher.addListener(l);
     }
     
 }
