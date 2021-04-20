@@ -7,160 +7,19 @@ package map;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import geometry.Box;
+import geometry.Direction;
+import geometry.Point;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 
-/**
- * @TODO:
- *   - ajouter class Box
- *   - dans la classe Box mettre un méthode collideWith(ArrayList<Box> list)
- *   - 
- */
-
-enum Enum_Direction {
-   UP,
-   RIGHT,
-   DOWN,
-   LEFT
-}
-
-class Direction {
-    Enum_Direction d;
-    public Direction(Enum_Direction d) {
-        this.d = d;
-    }
-    public Direction() {
-        int d = (int)Math.floor(Math.random()*4);
-        switch (d) {
-            case 0:
-                this.d = Enum_Direction.UP;
-                break;
-            case 1:
-                this.d = Enum_Direction.RIGHT;
-                break;
-            case 2:
-                this.d = Enum_Direction.DOWN;
-                break;
-            case 3:
-                this.d = Enum_Direction.LEFT;
-                break;
-            default:
-                break;
-        }
-    }
-    public boolean isUp() {
-        return this.d == Enum_Direction.UP;
-    }
-    public boolean isRight() {
-        return this.d == Enum_Direction.RIGHT;
-    }
-    public boolean isDown() {
-        return this.d == Enum_Direction.DOWN;
-    }
-    public boolean isLeft() {
-        return this.d == Enum_Direction.LEFT;
-    }
-    public void rotate() {
-        if (this.isUp()) this.d = Enum_Direction.RIGHT;
-        else if (this.isRight()) this.d = Enum_Direction.DOWN;
-        else if (this.isDown()) this.d = Enum_Direction.LEFT;
-        else if (this.isLeft()) this.d = Enum_Direction.UP;
-    }
-    public Direction copy() {
-        return new Direction(this.d);
-    }
-}
-
-class Data {
-    String type;
-    String getType(){return this.type;}
-}
-
-class Point extends Data {
-
-    public int x;
-    public int y;
-    
-    public Point(int x, int y) {
-        this.type = "Point";
-        this.x = x;
-        this.y = y;
-    }
-    
-    public Point copy() {
-        return new Point(this.x,this.y);
-    }
-    
-    public void append(int x, int y) {
-        this.x += x;
-        this.y += y;
-    }
-    
-    public void append(Direction d, int vx, int vy) {
-        if (d.isLeft()) {
-            this.x -= vx;
-        } else if (d.isRight()) {
-            this.x += vx;
-        } else if (d.isUp()) {
-            this.y -= vy;
-        } else if (d.isDown()) {
-            this.y += vy;
-        }
-    }
-
-}
-
-class Line extends Data  {
-
-    public Point p1;
-    public Point p2;
-    
-    public Line(Point p1, Point p2) {
-        this.type = "Line";
-        this.p1 = p1;
-        this.p2 = p2;
-    }
-    
-}
-
-class Box extends Data {
-
-    public Point position;
-    public Point size;
-    
-    public Box(Point pos, Point size) {
-        this.type = "Box";
-        this.position = pos;
-        this.size = size;
-    }
-
-    /**
-     * permet de faire un raycast mais avec des rectangles :)
-     * @param list
-     * @return retourne true s'il y a une collision, false sinon
-     */
-    public boolean isCollide(ArrayList<Box> list) {
-        for (Box b : list) {
-            if (this.position.x < b.position.x + b.size.x &&
-               this.position.x + this.size.x > b.position.x &&
-               this.position.y < b.position.y + b.size.y &&
-               this.position.y + this.size.y > b.position.y) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-}
-
-public class Squeleton extends Data implements Drawable {
+public class Squeleton implements Drawable {
     
     ArrayList<Point> articulations;
-    ArrayList<Line> bones;
-    ArrayList<Box> entropie;
+    ArrayList<Box> bones;
     
     // taille des salles
     int maxx;
@@ -171,9 +30,8 @@ public class Squeleton extends Data implements Drawable {
     int maxnode;
     
     public Squeleton(int maxnode) {
-        this.type = "Squeleton";
         this.articulations = new ArrayList<>();
-        this.entropie = new ArrayList<>();
+        this.bones = new ArrayList<>();
         this.maxnode = maxnode;
         
         maxx = 1000;
@@ -184,6 +42,9 @@ public class Squeleton extends Data implements Drawable {
         
     }
     
+    public ArrayList<Box> getBones() {
+        return bones;
+    }
     
     public void generate(int x, int y) {
         Direction local_direction = new Direction();
@@ -221,9 +82,9 @@ public class Squeleton extends Data implements Drawable {
             //System.out.println("  -> "+local_direction.d+","+wx+","+wy);
             
             // on regarde s'il y a une collision (si oui on quitte) (équivalent à un raycast)
-            if (entropie.size() > 0) {
+            if (bones.size() > 0) {
                 // @TODO: s'il n'y a qu'une seule collision, simplement ajuster la taille de la boite
-                if (b.isCollide(entropie)) {
+                if (b.isCollide(bones)) {
                     
                     if (wx - 5 > minx || wy - 5 > miny) {
                         int vx = (int)Math.floor(Math.random()*(wx-minx+1)+minx);
@@ -243,7 +104,7 @@ public class Squeleton extends Data implements Drawable {
             
             // on l'ajoute dans le squelette
             this.articulations.add(current.copy());
-            this.entropie.add(b);
+            this.bones.add(b);
             i++;
             
             // on ajoute des points à explorer --->
@@ -281,7 +142,7 @@ public class Squeleton extends Data implements Drawable {
         //g.setColor(Color.RED);
         //g.fillRect(c.toWorldX(0), c.toWorldY(0), c.toScale(200), c.toScale(200));
         
-        for (Box b : entropie) {
+        for (Box b : bones) {
             g.setColor(Color.BLUE);
             g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
         }
