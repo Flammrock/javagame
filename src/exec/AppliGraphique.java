@@ -6,6 +6,7 @@
 package exec;
 
 import canvas.Animation;
+import canvas.Drawable;
 import canvas.Sprite;
 import canvas.SpriteSheet;
 import java.awt.KeyEventDispatcher;
@@ -19,6 +20,7 @@ import java.util.TimerTask;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import map.Camera;
 import modele.element.*;
 
 
@@ -53,8 +55,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventDispatcher(new MyDispatcher());
         
-
-        
+        Camera cam = new Camera(this.aventure.getJoueur());
+        canvas1.setCamera(cam);
         
         
         canvas1.ajouterItem(this.aventure);
