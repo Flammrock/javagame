@@ -6,6 +6,7 @@ import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
 import eventsystem.Dispatcher;
+import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import geometry.Box;
 import java.awt.Color;
@@ -102,6 +103,23 @@ public class Lieu extends Element implements Generable, Collisionable {
 
         Porte p1 = new Porte(nom, this, lieu2);
         Porte p2 = new Porte(nom, lieu2, this);
+        
+        Lieu _this = this;
+        
+        // on propage l'events de collisions dans le dispatcher de ce lieu
+        p1.onCollide(new SimpleListener("onCollide"){
+            @Override
+            public void onEvent(Object sender, SimpleEvent event) {
+                _this.getDispatcher().fireEvent("onCollide", sender, event);
+            }
+        });
+        p2.onCollide(new SimpleListener("onCollide"){
+            @Override
+            public void onEvent(Object sender, SimpleEvent event) {
+                _this.getDispatcher().fireEvent("onCollide", sender, event);
+            }
+        });
+        
 
         this.listePorte.add(p1);
         this.addDrawable(p1);
@@ -279,9 +297,7 @@ public class Lieu extends Element implements Generable, Collisionable {
     
     @Override
     public Dispatcher getDispatcher() {
-        // on fait comme si les lieux n'avaient pas de Dispatcher pour gérer des events
-        return null;
-        //return this.dispatcher;
+        return this.dispatcher;
     }
 
     @Override
@@ -292,11 +308,8 @@ public class Lieu extends Element implements Generable, Collisionable {
 
     @Override
     public void onCollide(SimpleListener l) {
-        
-        // pour l'instant rien ne se passe quand on se cogne dans les murs (ou que quelque chose heure un mur)
-        
-        //l.setType("onCollide"); // on force le type
-        //this.dispatcher.addListener(l);
+        l.setType("onCollide"); // on force le type
+        this.dispatcher.addListener(l);
     }
 
 }
