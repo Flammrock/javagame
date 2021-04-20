@@ -305,6 +305,10 @@ public class Prog {
                 CollisionEvent e = (CollisionEvent) event;
                 if (e.getCollider2() == joueur) {
                     System.out.println("[COLLISION] "+e.getCollider1()+" ---> "+e.getCollider2());
+                    if (e.getCollider1() instanceof Porte) {
+                        Porte p = (Porte) e.getCollider1();
+                        p.teleport(joueur);
+                    }
                 }
             }
         });
