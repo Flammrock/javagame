@@ -301,11 +301,11 @@ public class Prog {
         // on passe un squelette de don
         
         // on créé les paramètres de génération
-        GenerableLieuParametre lieup = new GenerableLieuParametre();
+        /*GenerableLieuParametre lieup = new GenerableLieuParametre();
         ArrayList<Generable> generables = new ArrayList<>();
         generables.add(pomme);
         generables.add(monstre);
-        lieup.setGenerables(generables);
+        lieup.setGenerables(generables);*/
         
         
         
