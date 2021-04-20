@@ -23,6 +23,10 @@ public abstract class SimpleListener implements Serializable {
         return this.type;
     }
     
+    public void setType(String type) {
+        this.type = type;
+    }
+    
     public abstract void onEvent(Object sender, SimpleEvent e);
     
 }
