@@ -7,6 +7,9 @@ package modele.element;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleEvent;
+import eventsystem.SimpleListener;
 import geometry.Box;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -27,6 +30,9 @@ public class Niveau extends Element implements Generable {
     Lieu sortie;
     
     ArrayList<Drawable> drawables;
+    
+    // un dispatcher d'events
+    Dispatcher dispatcher;
     
     public Niveau(String nom,String description) {
         this.nom = nom;
@@ -58,6 +64,11 @@ public class Niveau extends Element implements Generable {
      */
     public Lieu getSortie() {
         return sortie;
+    }
+    
+    
+    public Dispatcher getDispatcher() {
+        return this.dispatcher;
     }
     
     
@@ -132,6 +143,8 @@ public class Niveau extends Element implements Generable {
         
         this.salles.clear();
         
+        Niveau _this = this;
+        
         // on construit les salles à partir du squelette de la map
         int i = 0;
         for (Box bone : bones) {
@@ -146,6 +159,15 @@ public class Niveau extends Element implements Generable {
             if (i == bones.size()-1) {
                 this.sortie = lieu;
             }
+            
+            // on propage l'events de collisions dans le dispatcher de ce niveau
+            lieu.onCollide(new SimpleListener("onCollide"){
+                @Override
+                public void onEvent(Object sender, SimpleEvent event) {
+                    _this.getDispatcher().fireEvent("onCollide", sender, event);
+                }
+            });
+            
             i++;
         }
         
@@ -240,6 +262,12 @@ public class Niveau extends Element implements Generable {
     @Override
     public ArrayList<Drawable> getDrawables() {
         return this.drawables;
+    }
+    
+    
+    public void onCollide(SimpleListener l) {
+        l.setType("onCollide"); // on force le type
+        this.dispatcher.addListener(l);
     }
 
 }
