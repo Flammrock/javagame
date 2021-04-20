@@ -303,7 +303,7 @@ public class Prog {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
                 CollisionEvent e = (CollisionEvent) event;
-                if (e.getCollider2() instanceof Personnage) {
+                if (e.getCollider2() == joueur) {
                     System.out.println("[COLLISION] "+e.getCollider1()+" ---> "+e.getCollider2());
                 }
             }
