@@ -167,7 +167,7 @@ public class Prog {
         
         
         /////////////////////// TILESET TEST ////////////////////////////
-        TileSet tileset = new TileSet("16x16DungeonTileset.v4");
+        TileSet tileset = new TileSet("/16x16DungeonTileset.v4.png");
         tileset.loadImage();
         tileset.setSprite("wall", 0, 12, 48, 25);
         
