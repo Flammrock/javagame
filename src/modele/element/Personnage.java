@@ -501,5 +501,10 @@ public class Personnage extends Element implements Generable, Collisionable {
         l.setType("onCollide"); // on force le type
         this.dispatcher.addListener(l);
     }
+
+    public boolean essaiEnfuir(Personnage Ennemi) {
+        double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+Ennemi.valeurCombat());
+        return aToucher(probabiliteDeToucher);
+    }
     
 }
