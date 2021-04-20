@@ -346,14 +346,6 @@ public class AppliGraphique extends javax.swing.JFrame {
         logger = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                formKeyTyped(evt);
-            }
-        });
 
         canvas1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -756,16 +748,6 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jeterBoutonActionPerformed
-
-    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
-        // TODO add your handling code here:
-        System.out.println("keyTyped: "+evt);
-    }//GEN-LAST:event_formKeyTyped
-
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        // TODO add your handling code here:
-        System.out.println("keyPressed: "+evt);
-    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
