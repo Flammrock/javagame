@@ -79,7 +79,8 @@ public class Porte extends Element implements Collisionable {
         width = b.getWidth();
         height = b.getHeight();
         this.collisionBoxList.clear();
-        CollisionBox c = new CollisionBox(x, y, width, height);
+        CollisionBox c = new CollisionBox(0,0, width, height, true);
+        c.apply(x,y);
         this.addCollisionBox(c);
     }
     

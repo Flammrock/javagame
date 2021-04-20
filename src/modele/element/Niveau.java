@@ -40,6 +40,7 @@ public class Niveau extends Element implements Generable {
         this.description = description;
         this.salles = new ArrayList<>();
         this.drawables = new ArrayList<>();
+        this.dispatcher = new Dispatcher();
     }
 
     /**

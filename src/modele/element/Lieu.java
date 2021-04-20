@@ -80,6 +80,7 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.probaDeGeneration = 1.0;
         this.drawables = new ArrayList<>();
         this.collisionBoxList = new ArrayList<>();
+        this.dispatcher = new Dispatcher();
     }
     
     /**
