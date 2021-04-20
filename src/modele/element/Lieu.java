@@ -333,6 +333,8 @@ public class Lieu extends Element implements Generable, Collisionable {
             this.sprite_wall = tileset.getSprite("wall");
             this.sprite_wall.setX(this.x);
             this.sprite_wall.setY(this.y);
+            this.sprite_wall.setWidth(this.width);
+            this.sprite_wall.setHeight(60);
         }
     }
 

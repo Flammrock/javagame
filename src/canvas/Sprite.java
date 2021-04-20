@@ -170,6 +170,22 @@ public class Sprite implements Collisionable {
     public void setY(int y) {
         this.y = y;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
     
     
     
@@ -234,8 +250,6 @@ public class Sprite implements Collisionable {
         if (this.sy >= 0) nsy = this.sy;
         if (this.swidth >= 0) nsw = nsx + this.swidth;
         if (this.sheight >= 0) nsh = nsy + this.sheight;
-        
-        System.out.println(""+this.x+","+this.y+","+w+","+h);
         
         g.drawImage(
                 this.image,
