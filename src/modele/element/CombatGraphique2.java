@@ -20,7 +20,7 @@ private Aventure aventure;
      */
     public CombatGraphique2(){
         initComponents();
-        miseAJourComposants();
+        //miseAJourComposants();
     }
     public void bindAventure(Aventure a) {
         this.aventure = aventure;
