@@ -25,6 +25,7 @@ public class TileSet extends Sprite {
      */
     public TileSet(String spritefile) {
         super(spritefile);
+        this.sprites = new HashMap<>();
         
     }
     
