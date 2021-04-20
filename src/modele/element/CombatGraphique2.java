@@ -23,10 +23,11 @@ private Aventure aventure;
         SpriteSheet sprite = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*3,64*3);
         sprite.loadImage();
         DessinHero.ajouterItem(sprite);
-        //miseAJourComposants();
+        
     }
     public void bindAventure(Aventure a) {
         this.aventure = a;
+        miseAJourComposants();
     }
 
     /**
@@ -239,13 +240,13 @@ private Aventure aventure;
     // End of variables declaration//GEN-END:variables
 
      private void miseAJourComposants() {
-        /*VieHeroBar.setMaximum((int)this.aventure.getJoueur().getAjoute("pv max"));
+        VieHeroBar.setMaximum((int)this.aventure.getJoueur().getAjoute("pv max"));
         VieHeroBar.setValue((int)this.aventure.getJoueur().getAjoute("pv"));
         VieHeroText.setText(this.aventure.getJoueur().getAjoute("pv") + "/" + this.aventure.getJoueur().getAjoute("pv max"));
         
         VieEnnemiBar.setMaximum((int)this.aventure.getJoueur().getAjoute("pv max"));
         VieEnnemiBar.setValue((int)this.aventure.getJoueur().getAjoute("pv"));
-        VieEnnemiText.setText(this.aventure.getJoueur().getAjoute("pv") + "/" + this.aventure.getJoueur().getAjoute("pv max"));*/
+        VieEnnemiText.setText(this.aventure.getJoueur().getAjoute("pv") + "/" + this.aventure.getJoueur().getAjoute("pv max"));
         
         
         
