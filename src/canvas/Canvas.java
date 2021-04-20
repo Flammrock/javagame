@@ -21,6 +21,7 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import modele.element.Element;
+import modele.element.Personnage;
 
 /**
  *
@@ -201,6 +202,8 @@ public class Canvas extends JPanel {
                             
                             // on cast le 2ème item
                             Collisionable c2 = (Collisionable) item2;
+                            
+                            if (c1 == c2) continue;
                             
                             // on récupère les ensembles de box
                             ArrayList<CollisionBox> list1 = c1.getCollisionBoxList();
