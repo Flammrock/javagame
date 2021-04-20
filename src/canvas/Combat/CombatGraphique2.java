@@ -221,6 +221,9 @@ private Personnage Ennemi;
     private void AttaqueBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AttaqueBouttonActionPerformed
         this.Moi.attaque(Ennemi);
         Ennemi.attaque(this.Moi);
+        if(this.Moi.getAjoute("pv") == 0 || this.Ennemi.getAjoute("pv") == 0){
+            this.aventure.finCombat(Moi,Ennemi);
+        }
         miseAJourComposants();
     }//GEN-LAST:event_AttaqueBouttonActionPerformed
 
@@ -267,6 +270,5 @@ private Personnage Ennemi;
         this.Moi = perso1;
         this.Ennemi = perso2;
         miseAJourComposants();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
