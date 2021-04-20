@@ -2,6 +2,8 @@ package modele.element;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import canvas.Sprite;
+import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
@@ -34,6 +36,9 @@ public class Lieu extends Element implements Generable, Collisionable {
     
     // un dispatcher d'events
     Dispatcher dispatcher;
+    
+    TileSet tileset;
+    Sprite sprite_wall;
 
     public String getNom() {
         return nom;
@@ -81,6 +86,8 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.drawables = new ArrayList<>();
         this.collisionBoxList = new ArrayList<>();
         this.dispatcher = new Dispatcher();
+        this.tileset = null;
+        this.sprite_wall = null;
     }
     
     /**
@@ -242,6 +249,10 @@ public class Lieu extends Element implements Generable, Collisionable {
     public void draw(Canvas c, Graphics g) {
         g.setColor(Color.orange);
         g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
+        
+        if (this.sprite_wall != null) {
+            this.sprite_wall.draw(c, g);
+        }
     }
     
     @Override
@@ -314,6 +325,15 @@ public class Lieu extends Element implements Generable, Collisionable {
     public void onCollide(SimpleListener l) {
         l.setType("onCollide"); // on force le type
         this.dispatcher.addListener(l);
+    }
+
+    public void setTileSet(TileSet tileset) {
+        this.tileset = tileset;
+        if (tileset != null) {
+            this.sprite_wall = tileset.getSprite("wall");
+            this.sprite_wall.setX(this.x);
+            this.sprite_wall.setY(this.y);
+        }
     }
 
 }

@@ -52,6 +52,7 @@ package exec;
 
 import canvas.Animation;
 import canvas.SpriteSheet;
+import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
@@ -165,7 +166,10 @@ public class Prog {
         
         
         
-        
+        /////////////////////// TILESET TEST ////////////////////////////
+        TileSet tileset = new TileSet("/16x16DungeonTileset.v4.png");
+        tileset.loadImage();
+        tileset.setSprite("wall", 0, 12, 48, 25);
         
         
         
@@ -297,7 +301,7 @@ public class Prog {
         // on créé un niveau 1
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
         a.ajouterDrawable(niveau1); // on l'ajoute dans les items à dessiner
-        
+        niveau1.setTileSet(tileset);
         niveau1.onCollide(new SimpleListener("onCollide") {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
@@ -337,7 +341,7 @@ public class Prog {
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
         
-        a.debutCombat();
+        //a.debutCombat();
     }
 
 }

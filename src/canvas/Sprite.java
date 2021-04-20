@@ -235,6 +235,8 @@ public class Sprite implements Collisionable {
         if (this.swidth >= 0) nsw = nsx + this.swidth;
         if (this.sheight >= 0) nsh = nsy + this.sheight;
         
+        System.out.println(""+this.x+","+this.y+","+w+","+h);
+        
         g.drawImage(
                 this.image,
                 

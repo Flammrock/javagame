@@ -7,6 +7,7 @@ package modele.element;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import canvas.TileSet;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
@@ -35,6 +36,8 @@ public class Niveau extends Element implements Generable {
     // un dispatcher d'events
     Dispatcher dispatcher;
     
+    TileSet tileset;
+    
     public Niveau(String nom,String description) {
         this.nom = nom;
         this.probaDeGeneration = 1.0;
@@ -42,6 +45,7 @@ public class Niveau extends Element implements Generable {
         this.salles = new ArrayList<>();
         this.drawables = new ArrayList<>();
         this.dispatcher = new Dispatcher();
+        this.tileset = null;
     }
 
     /**
@@ -154,6 +158,7 @@ public class Niveau extends Element implements Generable {
             Lieu lieu = new Lieu("Lieu "+i);
             lieu.setSize(bone);
             lieu.generate(null); // @TODO
+            lieu.setTileSet(this.tileset);
             this.salles.add(lieu);
             this.drawables.add(lieu);
             if (i == 0) {
@@ -280,6 +285,13 @@ public class Niveau extends Element implements Generable {
     public void onCollide(SimpleListener l) {
         l.setType("onCollide"); // on force le type
         this.dispatcher.addListener(l);
+    }
+
+    public void setTileSet(TileSet tileset) {
+        this.tileset = tileset;
+        for (Lieu l : this.salles) {
+            l.setTileSet(tileset);
+        }
     }
 
 }

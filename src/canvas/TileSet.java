@@ -25,6 +25,7 @@ public class TileSet extends Sprite {
      */
     public TileSet(String spritefile) {
         super(spritefile);
+        this.sprites = new HashMap<>();
         
     }
     
@@ -52,6 +53,7 @@ public class TileSet extends Sprite {
         if (sprites.get(name)==null) return null;
         Sprite s = sprites.get(name);
         Sprite d = new Sprite(s.getFileName());
+        d.setImage(this.image);
         d.setSource(s.getSourceX(), s.getSourceY(), s.getSourceWidth(), s.getSourceHeight());
         return d;
     }
