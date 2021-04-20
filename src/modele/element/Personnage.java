@@ -121,6 +121,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
     public void setProperty(String nom, double valeur){
+        System.out.println(nom + " "+ valeur);
         for (Property p : this.listproperties) {
             if(p.getNom().equals(nom)){
                 p.setValeur(valeur);
@@ -324,12 +325,12 @@ public class Personnage extends Element implements Generable, Collisionable {
     public boolean actionEffetFinDuTour(){
         int[] effetASupp = new int[this.effetCourant.size()];
         int i = 0;
-        for(Effet effet : this.effetCourant){
-            if(getAjoute(PropertyList.PV)+ getEffet(PropertyList.PV)>= getAjoute(PropertyList.PVMAX)){
+        if(getAjoute(PropertyList.PV)+ getEffet(PropertyList.PV)>= getAjoute(PropertyList.PVMAX)){
                 setProperty(PropertyList.PV, getAjoute(PropertyList.PVMAX));
             }else{
                 setProperty(PropertyList.PV, getEffet(PropertyList.PV)+getAjoute(PropertyList.PV));
             }
+        for(Effet effet : this.effetCourant){
             if(effet.tourPasse()==false){
                 effetASupp[i] = this.effetCourant.indexOf(effet);
                 i++;
