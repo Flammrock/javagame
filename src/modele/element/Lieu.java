@@ -35,6 +35,10 @@ public class Lieu extends Element implements Generable, Collisionable {
     public List<Porte> getListePorte() {
         return listePorte;
     }
+    
+    public Porte getLastPorte() {
+        return listePorte.get(listePorte.size()-1);
+    }
 
     public void setListePorte(List<Porte> listePorte) {
         this.listePorte = listePorte;
@@ -94,7 +98,9 @@ public class Lieu extends Element implements Generable, Collisionable {
         Porte p2 = new Porte(nom, lieu2, this);
 
         this.listePorte.add(p1);
+        this.addDrawable(p1);
         lieu2.getListePorte().add(p2);
+        lieu2.addDrawable(p2);
         
         return true;
     }
@@ -213,6 +219,10 @@ public class Lieu extends Element implements Generable, Collisionable {
     @Override
     public ArrayList<Drawable> getDrawables() {
         return this.drawables;
+    }
+    
+    public void addDrawable(Drawable d) {
+        this.drawables.add(d);
     }
 
     @Override

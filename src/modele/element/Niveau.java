@@ -128,6 +128,7 @@ public class Niveau extends Element implements Generable {
         ArrayList<Box> bones = s.getBones();
         ArrayList<Box> ligaments = s.getLigaments();
         ArrayList<ArrayList<Integer>> ligaments_connections = s.getLigamentConnections();
+        ArrayList<Box> ligaments_bounds = s.getLigamentBounds();
         
         this.salles.clear();
         
@@ -149,11 +150,16 @@ public class Niveau extends Element implements Generable {
         }
         
         int k = 0;
+        int h = 0;
         for (ArrayList<Integer> connections : ligaments_connections) {
             for (Integer j : connections) {
-                this.salles.get(k).ajoutePorteVers("Porte", this.salles.get(j));
+                if (this.salles.get(k).ajoutePorteVers("Porte", this.salles.get(j-1))) {
+                    this.salles.get(k).getLastPorte().setSize(ligaments_bounds.get(h));
+                    this.salles.get(j-1).getLastPorte().setSize(ligaments_bounds.get(h+1));
+                }
             }
             k++;
+            h+=2;
         }
         
         /*
