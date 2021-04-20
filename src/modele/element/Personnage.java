@@ -7,6 +7,7 @@ import canvas.collision.Collisionable;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.SpringLayout;
+import map.Generable;
 
 
 public class Personnage extends Element implements Generable, Collisionable {
@@ -383,7 +384,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
 
     @Override
-    public boolean generate(GenerableParametre p) {
+    public boolean generate(Object p) {
         return false; // pas générable pour l'instant
     }
 

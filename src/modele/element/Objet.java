@@ -1,6 +1,8 @@
 
 package modele.element;
 
+import map.Generable;
+
 public abstract class Objet extends Element implements Generable {
     
     String nom;
@@ -71,7 +73,7 @@ public abstract class Objet extends Element implements Generable {
     }
 
     @Override
-    public boolean generate(GenerableParametre p) {
+    public boolean generate(Object p) {
         return false; // pas générable pour l'instant
     }
     

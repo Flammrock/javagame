@@ -10,6 +10,8 @@ import canvas.Drawable;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import map.Generable;
+import map.Squeleton;
 
 /**
  * Un niveau contient un début et une fin
@@ -116,8 +118,14 @@ public class Niveau extends Element implements Generable {
     }
 
     @Override
-    public boolean generate(GenerableParametre s) {
+    public boolean generate(Object o) {
         
+        Squeleton s = (Squeleton) o;
+        
+        this.drawables.add(s);
+        
+        
+        /*
         // on cast pour récupérer les paramètres
         GenerableNiveauParametre p = (GenerableNiveauParametre)s;
         
@@ -175,7 +183,7 @@ public class Niveau extends Element implements Generable {
             
         }
         
-        this.setCurrentLieu(this.entree.getNom());
+        this.setCurrentLieu(this.entree.getNom());*/
         
         return true;
     }
@@ -196,5 +204,5 @@ public class Niveau extends Element implements Generable {
     public ArrayList<Drawable> getDrawables() {
         return this.drawables;
     }
-    
+
 }

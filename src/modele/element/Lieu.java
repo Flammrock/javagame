@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import map.Generable;
 
 public class Lieu extends Element implements Generable, Collisionable {
     
@@ -143,7 +144,7 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.objets.clear();
     }
 
-    @Override
+    /*@Override
     public boolean generate(GenerableParametre s) {
         
         // on génère la taille ainsi que la position
@@ -183,7 +184,7 @@ public class Lieu extends Element implements Generable, Collisionable {
         // la génération s'est bien passé
         return true;
         
-    }
+    }*/
 
     @Override
     public double getProbabilite() {
@@ -235,6 +236,11 @@ public class Lieu extends Element implements Generable, Collisionable {
     @Override
     public void cancelMove() {
         
+    }
+
+    @Override
+    public boolean generate(Object p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -6,6 +6,7 @@
 package modele.element;
 
 import java.util.ArrayList;
+import map.Generable;
 
 /**
  *
