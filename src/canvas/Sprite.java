@@ -6,7 +6,11 @@
 package canvas;
 
 import canvas.collision.CollisionBox;
+import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleEvent;
+import eventsystem.SimpleListener;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -41,6 +45,9 @@ public class Sprite implements Collisionable {
     // event ondraw
     Consumer<Canvas> ondraw;
     
+    // un dispatcher d'events
+    Dispatcher dispatcher;
+    
     /**
      * Permet de créer un Sprite à partir d'un fichier image
      * @param spritefile le nom du fichier
@@ -54,6 +61,7 @@ public class Sprite implements Collisionable {
         this.my = 0;
         this.ondraw = null;
         this.want2Move = true;
+        this.dispatcher = new Dispatcher();
     }
     
     /**
@@ -67,6 +75,7 @@ public class Sprite implements Collisionable {
         this.image = null;
         this.x = x;
         this.y = y;
+        this.dispatcher = new Dispatcher();
     }
 
     /**
@@ -209,6 +218,22 @@ public class Sprite implements Collisionable {
     @Override
     public boolean isDraw() {
         return true;
+    }
+
+    @Override
+    public Dispatcher getDispatcher() {
+        return this.dispatcher;
+    }
+
+    @Override
+    public void collide(Collisionable c) {
+        dispatcher.fireEvent("onCollide", this, new CollisionEvent(this,c));
+    }
+
+    @Override
+    public void onCollide(SimpleListener l) {
+        l.setType("onCollide"); // on force le type
+        this.dispatcher.addListener(l);
     }
     
 }
