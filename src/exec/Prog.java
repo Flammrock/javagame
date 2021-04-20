@@ -56,6 +56,7 @@ import canvas.collision.CollisionBox;
 import java.util.ArrayList;
 import modele.element.*;
 import eventsystem.*;
+import map.Squeleton;
 
 public class Prog {
 
