@@ -263,6 +263,7 @@ private Aventure aventure;
      }
 
     public void lancerCombat(Personnage perso1, Personnage perso2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(perso1+ "versus" + perso2);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
