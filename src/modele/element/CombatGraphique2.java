@@ -246,7 +246,7 @@ private canvas.Canvas canvas1;
         VieEnnemiText.setText(this.aventure.getJoueur().getAjoute("pv") + "/" + this.aventure.getJoueur().getAjoute("pv max"));
         
         
-        SpriteSheet sprite = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64);
+        SpriteSheet sprite = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*3,64*3);
         sprite.loadImage();
         DessinHero.ajouterItem(sprite);
         //DessinHero.(s);
