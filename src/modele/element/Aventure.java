@@ -49,7 +49,7 @@ public class Aventure extends Element {
     
     public void debutCombat(){
         Personnage monstre = new Personnage("Goblin", "monstre de la mort");
-        monstre.init(5, 10, 15, 60);
+        monstre.init(5, 20, 15, 60);
         this.dispatcher.fireEvent("onCombatCommence",this, new DebutCombatEvent(this.joueur,monstre));
         
         
