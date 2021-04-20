@@ -217,7 +217,6 @@ public class Prog {
         joueur.ajouter(hommeDeFer);
         hommeDeFer.setProperty(PropertyList.FORCE, 5);
         popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
-        joueur.ajouter(popo);
         joueur.ajouter(potion);
         joueur.addCollisionBox(new CollisionBox(0,35,28,14));
         
