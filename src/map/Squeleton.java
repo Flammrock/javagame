@@ -43,11 +43,11 @@ public class Squeleton implements Drawable {
         
         this.maxnode = maxnode;
         
-        maxx = 1000;
-        minx = 500;
+        maxx = 800;
+        minx = 400;
         
-        maxy = 1000;
-        miny = 500;
+        maxy = 800;
+        miny = 400;
         
     }
     
