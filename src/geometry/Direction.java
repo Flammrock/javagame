@@ -55,4 +55,7 @@ public class Direction {
     public Direction copy() {
         return new Direction(this.d);
     }
+    public String toString() {
+        return ""+this.d;
+    }
 }
