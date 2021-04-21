@@ -56,6 +56,8 @@ import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
+import embellishment.Embellishment;
+import embellishment.TypeEmbellishment;
 import java.util.ArrayList;
 import modele.element.*;
 import eventsystem.*;
@@ -171,9 +173,10 @@ public class Prog {
         tileset.loadImage();
         tileset.setSprite("wall", 2, 12, 45, 25);
         tileset.setSprite("ground", 0, 38, 14, 10);
+        tileset.setSprite("embellishment_ground",5,93,55,44);
         
         
-        
+        Embellishment e_ground = new Embellishment(TypeEmbellishment.GROUND, tileset.getSprite("embellishment_ground"));
         
         
         
@@ -303,6 +306,7 @@ public class Prog {
         Niveau niveau1 = new Niveau("Niveau 1","Le début de l'Aventure commence");
         a.ajouterDrawable(niveau1); // on l'ajoute dans les items à dessiner
         niveau1.setTileSet(tileset);
+        niveau1.addEmbellishment(e_ground);
         niveau1.onCollide(new SimpleListener("onCollide") {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {

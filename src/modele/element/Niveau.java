@@ -8,6 +8,7 @@ package modele.element;
 import canvas.Canvas;
 import canvas.Drawable;
 import canvas.TileSet;
+import embellishment.Embellishment;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
@@ -36,6 +37,8 @@ public class Niveau extends Element implements Generable {
     // un dispatcher d'events
     Dispatcher dispatcher;
     
+    ArrayList<Embellishment> embellishmentsList;
+    
     TileSet tileset;
     
     public Niveau(String nom,String description) {
@@ -46,6 +49,7 @@ public class Niveau extends Element implements Generable {
         this.drawables = new ArrayList<>();
         this.dispatcher = new Dispatcher();
         this.tileset = null;
+        this.embellishmentsList = new ArrayList<>();
     }
 
     /**
@@ -157,6 +161,7 @@ public class Niveau extends Element implements Generable {
         for (Box bone : bones) {
             Lieu lieu = new Lieu("Lieu "+i);
             lieu.setSize(bone);
+            lieu.setEmbellishments(embellishmentsList);
             lieu.setTileSet(this.tileset);
             lieu.generate(null); // @TODO
             this.salles.add(lieu);
@@ -297,6 +302,18 @@ public class Niveau extends Element implements Generable {
         for (Lieu l : this.salles) {
             l.setTileSet(tileset);
         }
+    }
+
+    public void addEmbellishment(Embellishment e) {
+        this.embellishmentsList.add(e);
+    }
+    
+    public void setEmbellishments(ArrayList<Embellishment> l) {
+        this.embellishmentsList = l;
+    }
+    
+    public ArrayList<Embellishment> getEmbellishments() {
+        return this.embellishmentsList;
     }
 
 }

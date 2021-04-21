@@ -7,6 +7,7 @@ import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
+import embellishment.Embellishment;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
@@ -33,6 +34,8 @@ public class Lieu extends Element implements Generable, Collisionable {
     ArrayList<Drawable> drawables;
     
     ArrayList<CollisionBox> collisionBoxList;
+    
+    ArrayList<Embellishment> embellishmentsList;
     
     boolean isVisible;
     
@@ -102,6 +105,7 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.tileset = null;
         this.sprite_wall = null;
         this.isVisible = false;
+        this.embellishmentsList = new ArrayList<>();
     }
 
     public boolean isVisible() {
@@ -536,6 +540,19 @@ public class Lieu extends Element implements Generable, Collisionable {
                 this.sprite_ground.setScaleSize(this.width, this.height-dh);
             }
         }
+    }
+    
+    
+    public void addEmbellishment(Embellishment e) {
+        this.embellishmentsList.add(e);
+    }
+    
+    public void setEmbellishments(ArrayList<Embellishment> l) {
+        this.embellishmentsList = l;
+    }
+    
+    public ArrayList<Embellishment> getEmbellishments() {
+        return this.embellishmentsList;
     }
     
     
