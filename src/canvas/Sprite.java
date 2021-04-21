@@ -262,6 +262,14 @@ public class Sprite implements Collisionable {
         } catch (IOException e) {}
         return false;
     }
+    
+    public double getRatio() {
+        int nsw = this.image.getWidth();
+        int nsh = this.image.getHeight();
+        if (this.swidth >= 0) nsw = this.swidth;
+        if (this.sheight >= 0) nsh = this.sheight;
+        return (double)nsw / (double)nsh;
+    }
 
     @Override
     public void draw(Canvas c, Graphics g) {

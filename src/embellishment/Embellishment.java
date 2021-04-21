@@ -13,7 +13,14 @@ import canvas.collision.Collisionable;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import modele.element.Element;
 
 /**
  *
@@ -25,10 +32,28 @@ public class Embellishment implements Collisionable {
     Sprite sprite;
     ArrayList<CollisionBox> collisionboxlist;
     
+    int x;
+    int y;
+    int width;
+    int height;
+    
     public Embellishment(String type, Sprite sprite) {
         this.type = type;
         this.sprite = sprite;
         this.collisionboxlist = new ArrayList<>();
+        this.x = 0;
+        this.y = 0;
+        this.width = 0;
+        this.height = 0;
+    }
+    
+    public Embellishment(Embellishment e) {
+        this.type = e.getType();
+        this.sprite = e.getSprite();
+        this.x = e.getX();
+        this.y = e.getY();
+        this.width = e.getWidth();
+        this.height = e.getHeight();
     }
 
     public String getType() {
@@ -71,14 +96,12 @@ public class Embellishment implements Collisionable {
 
     @Override
     public int getNewX() {
-        if (this.sprite==null) return 0;
-        return this.sprite.getX();
+        return x;
     }
 
     @Override
     public int getNewY() {
-        if (this.sprite==null) return 0;
-        return this.sprite.getY();
+        return y;
     }
 
     @Override
@@ -109,6 +132,11 @@ public class Embellishment implements Collisionable {
     @Override
     public void draw(Canvas c, Graphics g) {
         if (this.sprite==null) return;
+        this.sprite.setX(x);
+        this.sprite.setY(y);
+        this.sprite.setScaleSize(width, height);
+        this.sprite.setWidth(width);
+        this.sprite.setHeight(height);
         this.sprite.draw(c,g);
     }
 
@@ -119,26 +147,22 @@ public class Embellishment implements Collisionable {
 
     @Override
     public int getX() {
-        if (this.sprite==null) return 0;
-        return this.sprite.getX();
+        return x;
     }
 
     @Override
     public void setX(int x) {
-        if (this.sprite==null) return;
-        this.sprite.setX(x);
+        this.x = x;
     }
 
     @Override
     public int getY() {
-        if (this.sprite==null) return 0;
-        return this.sprite.getY();
+        return y;
     }
 
     @Override
     public void setY(int y) {
-        if (this.sprite==null) return;
-         this.sprite.setY(y);
+        this.y = y;
     }
 
     @Override
@@ -157,6 +181,23 @@ public class Embellishment implements Collisionable {
     public boolean isDraw() {
         return true;
     }
+    
+    public void setWidth(int w) {
+        this.width = w;
+    }
+    
+    public void setHeight(int h) {
+        this.height = h;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
     
     
 }

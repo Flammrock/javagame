@@ -6,13 +6,14 @@
 package canvas;
 
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author User
  */
-public interface Drawable {
+public interface Drawable extends Serializable {
     
     /**
      * Propagation de l'Appel draw() (cet appel est d'origine de Canvas et est appelé à 60FPS)

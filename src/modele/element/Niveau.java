@@ -163,7 +163,6 @@ public class Niveau extends Element implements Generable {
             lieu.setSize(bone);
             lieu.setEmbellishments(embellishmentsList);
             lieu.setTileSet(this.tileset);
-            lieu.generate(null); // @TODO
             this.salles.add(lieu);
             this.drawables.add(lieu);
             if (i == 0) {
@@ -208,7 +207,7 @@ public class Niveau extends Element implements Generable {
         
         // on calcul les nouvelles collisions box
         for (Lieu l : this.salles) {
-            l.computeCollisonBox();
+            l.generate(null); // @TODO
         }
         
         /*

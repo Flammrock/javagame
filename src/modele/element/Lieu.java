@@ -8,12 +8,15 @@ import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
 import embellishment.Embellishment;
+import embellishment.TypeEmbellishment;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import geometry.Box;
 import geometry.Enum_Direction;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 import map.Generable;
@@ -36,6 +39,7 @@ public class Lieu extends Element implements Generable, Collisionable {
     ArrayList<CollisionBox> collisionBoxList;
     
     ArrayList<Embellishment> embellishmentsList;
+    ArrayList<Embellishment> embellishmentsListDrawed;
     
     boolean isVisible;
     
@@ -106,6 +110,7 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.sprite_wall = null;
         this.isVisible = false;
         this.embellishmentsList = new ArrayList<>();
+        this.embellishmentsListDrawed = new ArrayList<>();
     }
 
     public boolean isVisible() {
@@ -275,16 +280,16 @@ public class Lieu extends Element implements Generable, Collisionable {
     
     @Override
     public void draw(Canvas c, Graphics g) {
-        //g.setColor(Color.orange);
-        //g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
         
-        if (this.sprite_wall != null) {
-            this.sprite_wall.draw(c, g);
-        }
+        
         
         
         if (this.sprite_ground != null) {
             this.sprite_ground.draw(c, g);
+        }
+        
+        if (this.sprite_wall != null) {
+            this.sprite_wall.draw(c, g);
         }
         
         if (this.sprite_wall != null) {
@@ -325,20 +330,19 @@ public class Lieu extends Element implements Generable, Collisionable {
                 }
             }
         }
-
         
+        int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
+        Graphics2D g2 = (Graphics2D)g.create();
+        g2.clipRect(c.toWorldX(x), c.toWorldY(y+dh), c.toScale(width), c.toScale(height-dh));
+        for (Embellishment e : this.embellishmentsListDrawed) {
+            e.draw(c, g2);
+        }
+        g2.dispose();
+        //g.setClip(null);
         
-        /*for (Porte p : this.listePorte) {
-            if (p.getDirection().isUp()) {
-                up = p;
-            } else if (p.getDirection().isRight()) {
-                right = p;
-            } else if (p.getDirection().isDown()) {
-                down = p;
-            } else if (p.getDirection().isLeft()) {
-                left = p;
-            }
-        }*/
+        //g.setColor(Color.orange);
+        //g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
+        
         
     }
     
@@ -496,6 +500,34 @@ public class Lieu extends Element implements Generable, Collisionable {
     public boolean generate(Object p) {
         
         this.computeCollisonBox();
+        
+        if (this.embellishmentsList.size()==0) return true;
+        
+        // on génère des éléments de décors un peu à la random de tel sorte qu'il n'y est pas de collisions
+        ArrayList<Embellishment> list = new ArrayList<>();
+        
+        double proba = 1;
+        
+        int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
+        
+        while (Math.random() < proba) {
+            Embellishment temp = this.embellishmentsList.get((int)(Math.random()*this.embellishmentsList.size()));
+            Embellishment e = new Embellishment(temp);
+            
+            // en fonction du type, on le place différemment
+            if (e.getType().contains(TypeEmbellishment.GROUND)) {
+                int w = (int)(Math.random()*(100-50+1)+50);
+                int h = (int)(w*(1.0/e.getSprite().getRatio()));
+                int x = this.x + (int)(Math.random()*(this.width-w));
+                int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
+                e.setX(x);
+                e.setY(y);
+                e.setWidth(w);
+                e.setHeight(h);
+                this.embellishmentsListDrawed.add(e);
+            }
+            proba -= 0.1;
+        }
         
         return true;
     }
