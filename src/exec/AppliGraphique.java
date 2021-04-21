@@ -13,6 +13,7 @@ import canvas.SpriteSheet;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
+import java.awt.Color;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
@@ -59,6 +60,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         
         Camera cam = new Camera(this.aventure.getJoueur());
         canvas1.setCamera(cam);
+        canvas1.setColor(new Color(28,17,23));
         
         combatGraphique22.bindAventure(this.aventure);
         combatGraphique22.setVisible(false);
