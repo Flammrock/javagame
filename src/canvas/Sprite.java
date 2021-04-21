@@ -86,7 +86,7 @@ public class Sprite implements Collisionable {
         this.scalewidth = -1;
         this.scaleheight = -1;
         this.ondraw = null;
-        this.want2Move = true;
+        this.want2Move = false;
         this.repeatX = true;
         this.repeatY = true;
         this.dispatcher = new Dispatcher();

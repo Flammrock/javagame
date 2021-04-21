@@ -44,6 +44,16 @@ public class Lieu extends Element implements Generable, Collisionable {
         return nom;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+    
+    
+
     public List<Porte> getListePorte() {
         return listePorte;
     }
@@ -346,6 +356,7 @@ public class Lieu extends Element implements Generable, Collisionable {
             this.sprite_wall.setWidth(this.width);
             this.sprite_wall.setScaleSize(180, null);
             this.sprite_wall.setHeight(this.sprite_wall.getScaleHeight());
+            //this.drawables.add(this.sprite_wall);
         }
     }
 

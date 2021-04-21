@@ -283,7 +283,7 @@ public class Squeleton implements Drawable {
 
     @Override
     public int getX() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 0;
     }
 
     @Override
@@ -293,7 +293,7 @@ public class Squeleton implements Drawable {
 
     @Override
     public int getY() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return 0;
     }
 
     @Override
