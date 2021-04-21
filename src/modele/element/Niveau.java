@@ -187,18 +187,23 @@ public class Niveau extends Element implements Generable {
             int v = 0;
             for (Integer j : connections) {
                 if (this.salles.get(k).ajoutePorteVers("Porte", this.salles.get(j-1))) {
-                    this.salles.get(k).getLastPorte().setSize(bounds.get(h));
-                    this.salles.get(j-1).getLastPorte().setSize(bounds.get(h+1));
                     this.salles.get(k).getLastPorte().setDirection(directions.get(v));
                     Direction m = directions.get(v).copy();
                     m.rotate();
                     m.rotate();
                     this.salles.get(j-1).getLastPorte().setDirection(m);
+                    this.salles.get(k).getLastPorte().setSize(bounds.get(h));
+                    this.salles.get(j-1).getLastPorte().setSize(bounds.get(h+1));
                 }
                 h+=2;
                 v++;
             }
             k++;
+        }
+        
+        // on calcul les nouvelles collisions box
+        for (Lieu l : this.salles) {
+            l.computeCollisonBox();
         }
         
         /*

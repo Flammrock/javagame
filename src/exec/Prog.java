@@ -206,9 +206,9 @@ public class Prog {
         monstre.ajouter(armureBadass);
         monstre.equip(1);
         
-        Personnage rock = new Personnage("rock", "inofensif");
-        rock.init(5, 10, 15, 20);
-        rock.addCollisionBox(new CollisionBox(10,20,465/3-25,420/3-40));
+        //Personnage rock = new Personnage("rock", "inofensif");
+        //rock.init(5, 10, 15, 20);
+        //rock.addCollisionBox(new CollisionBox(10,20,465/3-25,420/3-40));
         
         /********************************************************/
         
@@ -280,22 +280,22 @@ public class Prog {
         
         
         // test pour la collision
-        SpriteSheet srock = new SpriteSheet("/testcollision.png",0,0,465,420,465/3,420/3);
-        srock.loadImage();
-        srock.setX(500);
-        srock.setY(300);
-        rock.setSprite(srock);
+        //SpriteSheet srock = new SpriteSheet("/testcollision.png",0,0,465,420,465/3,420/3);
+        //srock.loadImage();
+        //srock.setX(500);
+        //srock.setY(300);
+        //rock.setSprite(srock);
         
         // on créé une aventure
         Aventure a = new Aventure(joueur);
         
         
         ///////////////////////////////////// TEMP
-        Squeleton squeleton = new Squeleton(5);
+        Squeleton squeleton = new Squeleton(7);
         squeleton.generate(0,0);
         ///////////////////////////////////// TEMP
         
-        a.ajouterDrawable(rock);
+        //a.ajouterDrawable(rock);
         a.ajouterDrawable(joueur);
         a.ajouterDrawable(squeleton);
         

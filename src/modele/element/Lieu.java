@@ -11,7 +11,7 @@ import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import geometry.Box;
-import java.awt.Color;
+import geometry.Enum_Direction;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -264,9 +264,175 @@ public class Lieu extends Element implements Generable, Collisionable {
         if (this.sprite_wall != null) {
             this.sprite_wall.draw(c, g);
         }
+        
+        
         if (this.sprite_ground != null) {
             this.sprite_ground.draw(c, g);
         }
+        
+        if (this.sprite_wall != null) {
+            Sprite temp = tileset.getSprite("ground");
+            if (temp != null) {
+                for (Porte p : this.listePorte) {
+                    if (p.getDirection().isUp()) {
+                        g.setColor(c.getColor());
+                        g.fillRect(c.toWorldX(p.getX()), c.toWorldY(this.y), c.toScale(p.getWidth()), c.toScale(this.sprite_wall.getHeight()));
+                        temp.setX(p.getX());
+                        temp.setY(this.y+this.sprite_wall.getHeight()-20);
+                        temp.setWidth(p.getWidth());
+                        temp.setHeight(20);
+                        temp.setScaleSize(p.getWidth(),20);
+                        temp.draw(c, g);
+                    } else if (p.getDirection().isRight()) {
+                        temp.setX(p.getX()-50);
+                        temp.setY(p.getY());
+                        temp.setWidth(p.getWidth());
+                        temp.setHeight(p.getHeight());
+                        temp.setScaleSize(p.getWidth(),p.getHeight());
+                        temp.draw(c, g);
+                    } else if (p.getDirection().isDown()) {
+                        temp.setX(p.getX());
+                        temp.setY(p.getY()-50);
+                        temp.setWidth(p.getWidth());
+                        temp.setHeight(p.getHeight());
+                        temp.setScaleSize(p.getWidth(),p.getHeight());
+                        temp.draw(c, g);
+                    } else if (p.getDirection().isLeft()) {
+                        temp.setX(p.getX()+50);
+                        temp.setY(p.getY());
+                        temp.setWidth(p.getWidth());
+                        temp.setHeight(p.getHeight());
+                        temp.setScaleSize(p.getWidth(),p.getHeight());
+                        temp.draw(c, g);
+                    }
+                }
+            }
+        }
+
+        
+        
+        /*for (Porte p : this.listePorte) {
+            if (p.getDirection().isUp()) {
+                up = p;
+            } else if (p.getDirection().isRight()) {
+                right = p;
+            } else if (p.getDirection().isDown()) {
+                down = p;
+            } else if (p.getDirection().isLeft()) {
+                left = p;
+            }
+        }*/
+        
+    }
+    
+    public void computeCollisonBox() {
+    
+        int epaisseur = 10;
+        boolean display = false;
+        
+        // on ajoute 4 collisionsBox
+        this.collisionBoxList.clear();
+        
+        int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight()-epaisseur*2-12;
+        
+        
+        Porte up = null;
+        Porte right = null;
+        Porte down = null;
+        Porte left = null;
+        
+        for (Porte p : this.listePorte) {
+            if (p.getDirection().isUp()) {
+                up = p;
+            } else if (p.getDirection().isRight()) {
+                right = p;
+            } else if (p.getDirection().isDown()) {
+                down = p;
+            } else if (p.getDirection().isLeft()) {
+                left = p;
+            }
+        }
+        
+        // top
+        if (up==null) {
+            this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur+dh,width+epaisseur*2,epaisseur*2,display));
+        } else {
+            this.addCollisionBox(new CollisionBox(
+                    -epaisseur,
+                    -epaisseur+dh,
+                    up.getX()-x+epaisseur,
+                    epaisseur*2,
+                    display
+            ));
+            this.addCollisionBox(new CollisionBox(
+                    up.getX()-x+up.getWidth(),
+                    -epaisseur+dh,
+                    x+width-(up.getX()+up.getWidth()),
+                    epaisseur*2,
+                    display
+            ));
+        }
+        
+        // bottom
+        if (down == null) {
+            this.addCollisionBox(new CollisionBox(-epaisseur,height,width+epaisseur*2,epaisseur*2,display));
+        } else {
+            this.addCollisionBox(new CollisionBox(
+                    -epaisseur,
+                    height,
+                    down.getX()-x+epaisseur,
+                    epaisseur*2,
+                    display
+            ));
+            this.addCollisionBox(new CollisionBox(
+                    down.getX()-x+down.getWidth(),
+                    height,
+                    x+width-(down.getX()+down.getWidth()),
+                    epaisseur*2,
+                    display
+            ));
+        }
+        
+        // left
+        if (left == null) {
+            this.addCollisionBox(new CollisionBox(-epaisseur*2,-epaisseur,epaisseur*2,epaisseur*2+height,display));
+        } else {
+            this.addCollisionBox(new CollisionBox(
+                    -epaisseur*2,
+                    -epaisseur,
+                    epaisseur*2,
+                    left.getY()-y+epaisseur,
+                    display
+            ));
+            this.addCollisionBox(new CollisionBox(
+                    -epaisseur*2,
+                    left.getY()-y+left.getHeight(),
+                    epaisseur*2,
+                    y+height-(left.getY()+left.getHeight()),
+                    display
+            ));
+        }
+        
+        // right
+        if (right == null) {
+            this.addCollisionBox(new CollisionBox(width,-epaisseur,epaisseur*2,epaisseur*2+height,display));
+        } else {
+            this.addCollisionBox(new CollisionBox(
+                    width,
+                    -epaisseur,
+                    epaisseur*2,
+                    right.getY()-y+epaisseur,
+                    display
+            ));
+            this.addCollisionBox(new CollisionBox(
+                    width,
+                    right.getY()-y+right.getHeight(),
+                    epaisseur*2,
+                    y+height-(right.getY()+right.getHeight()),
+                    display
+            ));
+        }
+    
     }
     
     @Override
@@ -312,24 +478,7 @@ public class Lieu extends Element implements Generable, Collisionable {
     @Override
     public boolean generate(Object p) {
         
-        int epaisseur = 10;
-        
-        // on ajoute 4 collisionsBox
-        this.collisionBoxList.clear();
-        
-        int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight()-epaisseur*2-12;
-        
-        // top
-        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur+dh,width+epaisseur*2,epaisseur*2));
-        
-        // bottom
-        this.addCollisionBox(new CollisionBox(-epaisseur,height,width+epaisseur*2,epaisseur*2));
-        
-        // left
-        this.addCollisionBox(new CollisionBox(-epaisseur*2,-epaisseur,epaisseur*2,epaisseur*2+height));
-        
-        // right
-        this.addCollisionBox(new CollisionBox(width,-epaisseur,epaisseur*2,epaisseur*2+height));
+        this.computeCollisonBox();
         
         return true;
     }

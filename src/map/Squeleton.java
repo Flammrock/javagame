@@ -43,11 +43,11 @@ public class Squeleton implements Drawable {
         
         this.maxnode = maxnode;
         
-        maxx = 800;
-        minx = 400;
+        maxx = 900;
+        minx = 500;
         
-        maxy = 800;
-        miny = 400;
+        maxy = 900;
+        miny = 500;
         
     }
     
@@ -88,7 +88,7 @@ public class Squeleton implements Drawable {
         // on ajoute le point de départ dans la file
         file.add(start.copy());
         file_direction.add(local_direction.copy());
-        file_dist.add(new Point(300,300));
+        file_dist.add(new Point(400,400));
         
 
         // tant que la file n'est pas vide et que le nombre max de noeud n'est pas dépassé
@@ -108,8 +108,8 @@ public class Squeleton implements Drawable {
             int wx = w.x;
             int wy = w.y;
             
-            int margin = 50;
-            int ligament_size = margin;
+            int margin = 100;
+            int ligament_size = 60;
             
             // on regarde s'il est compatible
             //int wx = (local_direction.isLeft()||local_direction.isRight()) ? dist : (int)Math.floor(Math.random()*(maxx-minx+1)+minx);
@@ -265,10 +265,10 @@ public class Squeleton implements Drawable {
             g.setColor(Color.YELLOW);
             g.fillArc(c.toWorldX(p.x-50/2),c.toWorldY(p.y-50/2),c.toScale(50),c.toScale(50),0,360);
         }*/
-        for (Box b : ligaments) {
+        /*for (Box b : ligaments) {
             g.setColor(Color.GREEN);
             g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
-        }
+        }*/
         
         /*for (Box b : ligaments_bounds) {
             g.setColor(Color.magenta);

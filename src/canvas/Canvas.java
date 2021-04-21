@@ -35,6 +35,7 @@ public class Canvas extends JPanel {
     ArrayList<Drawable> itemsdrawable;
     HashMap<Integer, Boolean> keyMap;
     
+    Color background;
     
     // caméra courante
     Camera camera;
@@ -49,11 +50,17 @@ public class Canvas extends JPanel {
         sx = this.getWidth()/2;
         sy = this.getHeight()/2;*/
         this.camera = new Camera();
+        background = Color.black;
     }
     
     public void setColor(Color c) {
         this.setOpaque(true);
         this.setBackground(c);
+        background = c;
+    }
+    
+    public Color getColor() {
+        return background;
     }
     
     public void ajouterItem(Drawable item) {

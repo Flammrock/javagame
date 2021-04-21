@@ -62,6 +62,10 @@ public class Porte extends Element implements Collisionable {
     public String getNom() {
         return nom;
     }
+    
+    public Direction getDirection() {
+        return d;
+    }
 
     public Lieu getLieu1() {
         return lieu1;
@@ -83,13 +87,27 @@ public class Porte extends Element implements Collisionable {
         return this.nom + " (vers "+this.lieu2.getNom()+")";
     }
     
+    public String toStringVers() {
+        return "(vers "+this.lieu2.getNom()+")";
+    }
+    
     public void setSize(Box b) {
         x = b.getX();
         y = b.getY();
         width = b.getWidth();
         height = b.getHeight();
+        int sp = 30;
+        if (this.d.isLeft()) {
+            x += - width - sp;
+            y += 40;
+        } else if (this.d.isRight()) {
+            x += width + sp;
+            y += 40;
+        } else if (this.d.isDown()) {
+            y += height + sp;
+        }
         this.collisionBoxList.clear();
-        CollisionBox c = new CollisionBox(0,0, width, height);
+        CollisionBox c = new CollisionBox(0,0, width, height, false);
         c.apply(x,y);
         this.addCollisionBox(c);
     }
@@ -110,13 +128,17 @@ public class Porte extends Element implements Collisionable {
     @Override
     public void draw(Canvas c, Graphics g) {
     
-        g.setColor(Color.blue);
-        g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
+        //g.setColor(Color.blue);
+        //g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
+        
+        int dy = 0;
+        if (this.d.isRight()) dy = this.height+10;
+        if (this.d.isDown()) dy = this.height/2;
         
         g.setColor(Color.white);
         g.setFont(new Font("Verdana", Font.PLAIN, c.toScale(17)));
-        int widthtext = g.getFontMetrics().stringWidth(toString());
-        g.drawString(toString(), c.toWorldX(x)+c.toScale(width/2)-widthtext/2, c.toWorldY(y)-c.toScale(10));
+        int widthtext = g.getFontMetrics().stringWidth(toStringVers());
+        g.drawString(toStringVers(), c.toWorldX(x)+c.toScale(width/2)-widthtext/2, c.toWorldY(y+dy)-(dy==0?c.toScale(10):-c.toScale(10)));
     
     }
 
@@ -140,6 +162,16 @@ public class Porte extends Element implements Collisionable {
     public int getY() {
         return y;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
+    
 
     @Override
     public int getNewX() {
