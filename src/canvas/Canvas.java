@@ -14,6 +14,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
@@ -185,6 +187,9 @@ public class Canvas extends JPanel {
                             ArrayList<CollisionBox> list1 = c1.getCollisionBoxList();
                             ArrayList<CollisionBox> list2 = c2.getCollisionBoxList();
                             
+                            if (list1 == null) continue;
+                            if (list2 == null) continue;
+                            
                             // on les places au bon endroit pour le test
                             for (CollisionBox b : list1) b.apply(c1.getNewX(),c1.getNewY());
                             for (CollisionBox b : list2) b.apply(c2.getNewX(),c2.getNewY());
@@ -228,6 +233,13 @@ public class Canvas extends JPanel {
                 
             }
         }
+        
+        // en O(nlog(n))
+        Collections.sort(items, new Comparator<Drawable>() {
+            public int compare(Drawable a, Drawable b) {
+                return b.getY() < a.getY() ? 1 : b.getY() > a.getY() ? -1 : 0;
+            }
+        });
         
         // en O(n)
         for (Drawable item : items) {
