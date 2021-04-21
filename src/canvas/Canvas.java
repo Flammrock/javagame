@@ -151,7 +151,7 @@ public class Canvas extends JPanel {
                             pile.add(dt);
                         }
                     }
-                    pile.addAll(itemss);
+                    //pile.addAll(itemss);
                 }
                 if (item instanceof Collisionable) {
                     Collisionable b = (Collisionable)item;

@@ -118,6 +118,7 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     public void setPieceActuel(Lieu pieceActuel) {
         this.pieceActuel = pieceActuel;
+        pieceActuel.setVisible(true);
     }
     
     public void setProperty(String nom, double valeur){

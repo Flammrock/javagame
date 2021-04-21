@@ -34,6 +34,8 @@ public class Lieu extends Element implements Generable, Collisionable {
     
     ArrayList<CollisionBox> collisionBoxList;
     
+    boolean isVisible;
+    
     // un dispatcher d'events
     Dispatcher dispatcher;
     
@@ -99,7 +101,18 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.dispatcher = new Dispatcher();
         this.tileset = null;
         this.sprite_wall = null;
+        this.isVisible = false;
     }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+    
+    
     
     /**
      * Permet de connecter deux lieux avec un porte
@@ -523,6 +536,12 @@ public class Lieu extends Element implements Generable, Collisionable {
                 this.sprite_ground.setScaleSize(this.width, this.height-dh);
             }
         }
+    }
+    
+    
+    @Override
+    public boolean isDraw() {
+        return this.isVisible;
     }
 
 }

@@ -121,6 +121,8 @@ public class Porte extends Element implements Collisionable {
         Point s = new Point(porte2.getX(),porte2.getY());
         s.append(d, width+2, height+2);
         
+        p.setPieceActuel(lieu2);
+        
         p.setX(s.x);
         p.setY(s.y);
     }
