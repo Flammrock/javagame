@@ -261,10 +261,10 @@ public class Squeleton implements Drawable {
             g.setColor(Color.BLUE);
             g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
         }*/
-        for (Point p : articulations) {
+        /*for (Point p : articulations) {
             g.setColor(Color.YELLOW);
             g.fillArc(c.toWorldX(p.x-50/2),c.toWorldY(p.y-50/2),c.toScale(50),c.toScale(50),0,360);
-        }
+        }*/
         for (Box b : ligaments) {
             g.setColor(Color.GREEN);
             g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
