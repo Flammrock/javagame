@@ -39,6 +39,7 @@ public class Lieu extends Element implements Generable, Collisionable {
     
     TileSet tileset;
     Sprite sprite_wall;
+    Sprite sprite_ground;
 
     public String getNom() {
         return nom;
@@ -263,6 +264,9 @@ public class Lieu extends Element implements Generable, Collisionable {
         if (this.sprite_wall != null) {
             this.sprite_wall.draw(c, g);
         }
+        if (this.sprite_ground != null) {
+            this.sprite_ground.draw(c, g);
+        }
     }
     
     @Override
@@ -351,12 +355,24 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.tileset = tileset;
         if (tileset != null) {
             this.sprite_wall = tileset.getSprite("wall");
-            this.sprite_wall.setX(this.x);
-            this.sprite_wall.setY(this.y);
-            this.sprite_wall.setWidth(this.width);
-            this.sprite_wall.setScaleSize(180, null);
-            this.sprite_wall.setHeight(this.sprite_wall.getScaleHeight());
-            //this.drawables.add(this.sprite_wall);
+            if (this.sprite_wall != null) {
+                this.sprite_wall.setX(this.x);
+                this.sprite_wall.setY(this.y);
+                this.sprite_wall.setWidth(this.width);
+                this.sprite_wall.setScaleSize(180, null);
+                this.sprite_wall.setHeight(this.sprite_wall.getScaleHeight());
+            }
+            
+            
+            this.sprite_ground = tileset.getSprite("ground");
+            if (this.sprite_ground != null) {
+                int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
+                this.sprite_ground.setX(this.x);
+                this.sprite_ground.setY(this.y+dh);
+                this.sprite_ground.setWidth(this.width);
+                this.sprite_ground.setHeight(this.height-dh);
+                this.sprite_ground.setScaleSize(this.width, this.height-dh);
+            }
         }
     }
 
