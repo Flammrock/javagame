@@ -51,6 +51,11 @@ public class Canvas extends JPanel {
         this.camera = new Camera();
     }
     
+    public void setColor(Color c) {
+        this.setOpaque(true);
+        this.setBackground(c);
+    }
+    
     public void ajouterItem(Drawable item) {
         this.itemsdrawable.add(item);
     }
