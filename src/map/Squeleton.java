@@ -313,7 +313,7 @@ public class Squeleton implements Drawable {
 
     @Override
     public boolean isDraw() {
-        return true;
+        return false;
     }
     
 }
