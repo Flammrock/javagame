@@ -169,7 +169,7 @@ public class Prog {
         /////////////////////// TILESET TEST ////////////////////////////
         TileSet tileset = new TileSet("/16x16DungeonTileset.v4.png");
         tileset.loadImage();
-        tileset.setSprite("wall", 0, 12, 48, 25);
+        tileset.setSprite("wall", 2, 12, 45, 25);
         
         
         
@@ -341,6 +341,6 @@ public class Prog {
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
         
-        a.debutCombat();
+        //a.debutCombat();
     }
 }

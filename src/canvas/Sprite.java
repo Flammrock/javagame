@@ -11,6 +11,7 @@ import canvas.collision.Collisionable;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,6 +46,10 @@ public class Sprite implements Collisionable {
     boolean repeatX;
     boolean repeatY;
     
+    // taille de scale
+    int scalewidth;
+    int scaleheight;
+    
     
     // si le sprite a définit les nouvelles coordonnées mx et my
     boolean want2Move;
@@ -78,6 +83,8 @@ public class Sprite implements Collisionable {
         this.sy = -1;
         this.swidth = -1;
         this.sheight = -1;
+        this.scalewidth = -1;
+        this.scaleheight = -1;
         this.ondraw = null;
         this.want2Move = true;
         this.repeatX = true;
@@ -109,6 +116,8 @@ public class Sprite implements Collisionable {
         this(spritefile,x,y);
         this.width = width;
         this.height = height;
+        this.scalewidth = width;
+        this.scaleheight = height;
     }
 
     /**
@@ -268,34 +277,73 @@ public class Sprite implements Collisionable {
         
         if (this.sx >= 0) nsx = this.sx;
         if (this.sy >= 0) nsy = this.sy;
-        if (this.swidth >= 0) nsw = nsx + this.swidth;
-        if (this.sheight >= 0) nsh = nsy + this.sheight;
+        if (this.swidth >= 0) nsw = this.swidth;
+        if (this.sheight >= 0) nsh = this.sheight;
         
-        double ratio = (double)this.swidth / (double)this.sheight;
+        double ratio = (double)nsw / (double)nsh;
         
-        int ww = this.width;
-        int hh = this.height;
+        int ww = (this.width < 0 ? this.image.getWidth() : this.width);
+        int hh = (this.height < 0 ? this.image.getHeight() : this.height);
         
-        int w = this.x + (this.width < 0 ? this.image.getWidth() : ww);
-        int h = this.y + (this.height < 0 ? this.image.getHeight() : hh);
+        int w2 = this.scalewidth < 0 ? nsw : this.scalewidth;
+        int h2 = this.scaleheight < 0 ? nsh : this.scaleheight;
+        /*if ((int)(hh * (1.0/ratio)) > ww) {
+            h2 = (int)(ww * (1.0/ratio));
+        } else {
+            w2 = (int)(hh * ratio);
+        }*/
         
-        g.drawImage(
-                this.image,
-                
-                // dest
-                c.toWorldX(this.x),
-                c.toWorldY(this.y),
-                c.toWorldX(w),
-                c.toWorldY(h),
-                
-                // src
-                nsx,
-                nsy,
-                nsw,
-                nsh,
-                
-                null
-        );
+        //g.setColor(Color.cyan);
+        //g.drawRect(c.toWorldX(x), c.toWorldY(y), c.toScale(ww), c.toScale(hh));
+        
+        
+        int w = this.x + w2;
+        int h = this.y + h2;
+        
+        int xi = 0;
+        int yi = 0;
+        
+        int cutw = 0;
+        int cuth = 0;
+        
+        while (true) {
+            
+            // on coupe si ça dépasse
+            if (xi + w2 > ww) cutw = xi + w2 - ww;
+            else cutw = 0;
+            if (yi + h2 > hh) cuth = yi + h2 - hh;
+            else cuth = 0;
+            int cutwp = (int)((double)cutw * (double)nsw / (double)w2);
+            int cuthp = (int)((double)cuth * (double)nsh / (double)h2);
+            
+            // on dessine
+            g.drawImage(
+                    this.image,
+
+                    // dest
+                    c.toWorldX(this.x+xi),
+                    c.toWorldY(this.y+yi),
+                    c.toWorldX(w+xi-cutw),
+                    c.toWorldY(h+yi-cuth),
+
+                    // src
+                    nsx,
+                    nsy,
+                    nsx+nsw-cutwp,
+                    nsy+nsh-cuthp,
+
+                    null
+            );
+            
+            // on calcul les nouveaux indices
+            xi += w2;
+            if (xi >= ww) {
+                yi += h2;
+            }
+            if (xi >= ww && yi >= hh) break;
+            if (!this.repeatX && !this.repeatY) break;
+            if (xi >= ww) xi = 0;
+        }
         
         if (this.ondraw!=null) this.ondraw.accept(c);
     }
@@ -349,6 +397,44 @@ public class Sprite implements Collisionable {
         this.sy = sy;
         this.swidth = swidth;
         this.sheight = sheight;
+    }
+    
+    public void setScaleSize(Integer w, Integer h) {
+        if (w == null && h == null) return;
+        if (w == null && this.isLoaded()) {
+            int nsw = this.image.getWidth();
+            int nsh = this.image.getHeight();
+            if (this.swidth >= 0) nsw = this.swidth;
+            if (this.sheight >= 0) nsh = this.sheight;
+            this.scalewidth = (int)((double)h * (double)nsw / (double)nsh);
+        } else {
+            this.scalewidth = w;
+        }
+        if (h == null && this.isLoaded()) {
+            int nsw = this.image.getWidth();
+            int nsh = this.image.getHeight();
+            if (this.swidth >= 0) nsw = this.swidth;
+            if (this.sheight >= 0) nsh = this.sheight;
+            this.scaleheight = (int)((double)w * (double)nsh / (double)nsw);
+        } else {
+            this.scaleheight = h;
+        }
+    }
+    
+    public void setScaleWidth(int w) {
+        this.scalewidth = w;
+    }
+    
+    public void setScaleHeight(int h) {
+        this.scaleheight = h;
+    }
+    
+    public int getScaleWidth() {
+        return this.scalewidth;
+    }
+    
+    public int getScaleHeight() {
+        return this.scaleheight;
     }
 
     public String getFileName() {
