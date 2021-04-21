@@ -257,10 +257,10 @@ public class Squeleton implements Drawable {
         //g.setColor(Color.RED);
         //g.fillRect(c.toWorldX(0), c.toWorldY(0), c.toScale(200), c.toScale(200));
         
-        for (Box b : bones) {
+        /*for (Box b : bones) {
             g.setColor(Color.BLUE);
             g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
-        }
+        }*/
         for (Point p : articulations) {
             g.setColor(Color.YELLOW);
             g.fillArc(c.toWorldX(p.x-50/2),c.toWorldY(p.y-50/2),c.toScale(50),c.toScale(50),0,360);
@@ -313,7 +313,7 @@ public class Squeleton implements Drawable {
 
     @Override
     public boolean isDraw() {
-        return false;
+        return true;
     }
     
 }
