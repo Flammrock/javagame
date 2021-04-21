@@ -157,8 +157,8 @@ public class Niveau extends Element implements Generable {
         for (Box bone : bones) {
             Lieu lieu = new Lieu("Lieu "+i);
             lieu.setSize(bone);
-            lieu.generate(null); // @TODO
             lieu.setTileSet(this.tileset);
+            lieu.generate(null); // @TODO
             this.salles.add(lieu);
             this.drawables.add(lieu);
             if (i == 0) {

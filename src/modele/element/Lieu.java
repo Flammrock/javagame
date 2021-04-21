@@ -302,10 +302,20 @@ public class Lieu extends Element implements Generable, Collisionable {
         
         // on ajoute 4 collisionsBox
         this.collisionBoxList.clear();
-        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,width+epaisseur*2,epaisseur*2,true));
-        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur+height,width+epaisseur*2,epaisseur*2,true));
-        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,epaisseur*2,epaisseur*2+height,true));
-        this.addCollisionBox(new CollisionBox(-epaisseur+width,-epaisseur,epaisseur*2,epaisseur*2+height,true));
+        
+        int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight()-epaisseur*2-12;
+        
+        // top
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur+dh,width+epaisseur*2,epaisseur*2));
+        
+        // bottom
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur+height,width+epaisseur*2,epaisseur*2));
+        
+        // left
+        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,epaisseur*2,epaisseur*2+height));
+        
+        // right
+        this.addCollisionBox(new CollisionBox(-epaisseur+width,-epaisseur,epaisseur*2,epaisseur*2+height));
         
         return true;
     }
