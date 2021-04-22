@@ -35,11 +35,6 @@ public class Canvas extends JPanel {
     ArrayList<Drawable> itemsdrawable;
     HashMap<Integer, Boolean> keyMap;
     
-    BufferedImage buffImg;
-    BufferedImage buffImg2;
-    Graphics2D gbi;
-    Graphics2D gbi2;
-    
     Color background;
     
     // caméra courante
@@ -51,11 +46,6 @@ public class Canvas extends JPanel {
         this.keyMap = new HashMap<>();
         this.camera = new Camera();
         this.background = Color.black;
-        
-        this.buffImg = null;
-        this.buffImg2 = null;
-        this.gbi = null;
-        this.gbi2 = null;
     }
     
     public void setColor(Color c) {
@@ -242,37 +232,33 @@ public class Canvas extends JPanel {
         
         Graphics2D g2d = (Graphics2D) g;
         
-        //if (this.buffImg == null || this.buffImg.getWidth() != w || this.buffImg.getHeight() != h) {
-            this.buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-            this.buffImg2 = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-            this.gbi = this.buffImg.createGraphics();
-            this.gbi2 = this.buffImg2.createGraphics();
-        //}
-        
-
-        // Clears the previously drawn image.
-        //g2d.setColor(this.getColor());
-        //g2d.fillRect(0, 0, d.width, d.height);
-        gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
-        
-        for (Light light : lights) {
+        BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D gbi = buffImg.createGraphics();
+        gbi.setColor(new Color(0,0,0,255));
+        gbi.fillRect(0, 0, w, h);
+        gbi.setComposite(AlphaComposite.DstOut);
+         for (Light light : lights) {
             light.draw(this,gbi);
         }
-        
-        
+         gbi.dispose();
+         
         for (Drawable item : items) {
-            item.draw(this,gbi2);
+            item.draw(this,g2d);
         }
         
+        //g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OUT, 1.0f));
+        
+        
         // on dessine l'obscurité ambiante
-        gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
-        gbi.drawImage(buffImg2, 0, 0, null);
+        //gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        //gbi.drawImage(buffImg2, 0, 0, null);
         
         // on dessine les lights
-        gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
-        gbi.drawImage(buffImg2, 0, 0, null);
+        //gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
+        //gbi.drawImage(buffImg2, 0, 0, null);
         
         g2d.drawImage(buffImg, 0, 0, null);
+        
         
         
         if (this.isAppuyer(90)) {
