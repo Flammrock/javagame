@@ -213,7 +213,6 @@ public class Embellishment implements Collisionable {
     public void computeCollisonBox() {
         if (this.collisionboxlist==null) this.collisionboxlist = new ArrayList<>();
         this.collisionboxlist.clear();
-        System.out.println("??????");
         CollisionBox b = new CollisionBox(0,0, width, height);
         b.apply(x, y);
         this.collisionboxlist.add(b);
