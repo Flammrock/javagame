@@ -10,6 +10,7 @@ import canvas.Combat.DebutCombatEvent;
 import canvas.Drawable;
 import canvas.Sprite;
 import canvas.SpriteSheet;
+import canvas.light.Light;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
@@ -65,6 +66,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         combatGraphique22.bindAventure(this.aventure);
         combatGraphique22.setVisible(false);
         canvas1.ajouterItem(this.aventure);
+        
+        canvas1.ajouterItem(new Light(0,0,300));
         
         
         new Timer("Drawer", true).scheduleAtFixedRate( new TimerTask(){
