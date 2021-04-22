@@ -95,4 +95,60 @@ public interface Collisionable extends Drawable {
      * @param l l'écouteur qui écoutera les collisions
      */
     void onCollide(SimpleListener l);
+    
+    /**
+     * Permet de savoir si deux Collisionable sont en collisions.
+     * Pour que ce soit plus pratique, cette méthode n'est pas à implémenter
+     * sauf dans des cas très spécifique.
+     * @param other l'autre Collisionable
+     * @return retourne null si la collision est invalide (pas de collisionBox, même objet en mémoire..),
+     *         sinon renvoie true s'il y a collision sinon false
+     */
+    default Boolean isCollide(Collisionable other) {
+        
+        // évidemment, on veut que les Collisionable soient bien deux objets distincts
+        if (this == other) {
+            return null;
+        }
+
+        // on récupère les ensembles de box
+        ArrayList<CollisionBox> list1 = this.getCollisionBoxList();
+        ArrayList<CollisionBox> list2 = other.getCollisionBoxList();
+
+        if (list1 == null) {
+            return null;
+        }
+        if (list2 == null) {
+            return null;
+        }
+
+        // on les places au bon endroit pour le test
+        for (CollisionBox b : list1) {
+            b.apply(this.getNewX(), this.getNewY());
+        }
+        for (CollisionBox b : list2) {
+            b.apply(other.getNewX(), other.getNewY());
+        }
+
+        // on check s'il y a une collision
+        for (CollisionBox b1 : list1) {
+
+            for (CollisionBox b2 : list2) {
+
+                if (b1.isCollide(b2)) {
+
+                    // on envoie un event de collisions vers les deux objets
+                    this.collide(other);
+                    other.collide(this);
+
+                    return true;
+
+                }
+
+            }
+
+        }
+        
+        return false;
+    }
 }

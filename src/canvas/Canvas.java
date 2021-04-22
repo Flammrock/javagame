@@ -193,40 +193,10 @@ public class Canvas extends JPanel {
                             // on cast le 2ème item
                             Collisionable c2 = (Collisionable) item2;
                             
-                            if (c1 == c2) continue;
+                            Boolean r = c1.isCollide(c2);
+                            if (r == null) continue;
                             
-                            // on récupère les ensembles de box
-                            ArrayList<CollisionBox> list1 = c1.getCollisionBoxList();
-                            ArrayList<CollisionBox> list2 = c2.getCollisionBoxList();
-                            
-                            if (list1 == null) continue;
-                            if (list2 == null) continue;
-                            
-                            // on les places au bon endroit pour le test
-                            for (CollisionBox b : list1) b.apply(c1.getNewX(),c1.getNewY());
-                            for (CollisionBox b : list2) b.apply(c2.getNewX(),c2.getNewY());
-                            
-                            // on check s'il y a une collision
-                            for (CollisionBox b1 : list1) {
-                                
-                                for (CollisionBox b2 : list2) {
-                                
-                                    if (b1.isCollide(b2)) {
-                                
-                                        // si oui, alors cet item ne peut pas bouger, on peut quitter cette boucle
-                                        canMove = false;
-                                        
-                                        // on envoie un event de collisions vers les deux objets
-                                        c1.collide(c2);
-                                        c2.collide(c1);
-                                        
-                                        break;
-
-                                    }
-                                
-                                }
-                                
-                            }
+                            if (r) canMove = false;
                             
                             
                         }
