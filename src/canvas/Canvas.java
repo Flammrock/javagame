@@ -32,11 +32,13 @@ import modele.element.Personnage;
  */
 public class Canvas extends JPanel {
     
-    AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC);  
-    float alpha = 1.0f;
-    
     ArrayList<Drawable> itemsdrawable;
     HashMap<Integer, Boolean> keyMap;
+    
+    BufferedImage buffImg;
+    BufferedImage buffImg2;
+    Graphics2D gbi;
+    Graphics2D gbi2;
     
     Color background;
     
@@ -47,13 +49,13 @@ public class Canvas extends JPanel {
         super();
         this.itemsdrawable = new ArrayList<>();
         this.keyMap = new HashMap<>();
-        /*scale = 1;
-        wx = 0;
-        wy = 0;
-        sx = this.getWidth()/2;
-        sy = this.getHeight()/2;*/
         this.camera = new Camera();
-        background = Color.black;
+        this.background = Color.black;
+        
+        this.buffImg = null;
+        this.buffImg2 = null;
+        this.gbi = null;
+        this.gbi2 = null;
     }
     
     public void setColor(Color c) {
@@ -132,64 +134,6 @@ public class Canvas extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-        /*alpha = 1.0f;
-        ac = AlphaComposite.getInstance(AlphaComposite.SRC_IN, alpha);
-        
-Graphics2D g2 = (Graphics2D) g;
-
-        Dimension d = getSize();
-        int w = d.width;
-        int h = d.height; 
-
-        // Creates the buffered image.
-        BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D gbi = buffImg.createGraphics();
-
-        // Clears the previously drawn image.
-        g2.setColor(Color.white);
-        g2.fillRect(0, 0, d.width, d.height);
-
-        int rectx = 50;
-        int recty = 50;
-
-        // Draws the rectangle and ellipse into the buffered image.
-        gbi.setColor(new Color(0.0f, 0.0f, 1.0f, 1.0f));
-        gbi.fill(new Rectangle2D.Double(rectx, recty, 150, 100));
-        
-        
-        gbi.setColor(new Color(1.0f, 0.0f, 0.0f, 1.0f));    
-        gbi.setComposite(ac);
-        gbi.fill(new Ellipse2D.Double(rectx+rectx/2,recty+recty/2,150,100));
-
-        // Draws the buffered image.
-        g2.drawImage(buffImg, null, 0, 0);
-
-        /*int radius = 40;
-        
-        Graphics2D g3d = (Graphics2D) g.create();
-        //g2d.setComposite(AlphaComposite.DstIn);
-        RadialGradientPaint rgp = new RadialGradientPaint(
-                (float)(60),(float)(60),
-                (float)(radius/2),
-                new float[]{0f, 1f},
-                new Color[]{new Color(255, 255, 255, 255),new Color(255, 255, 255, 255)}
-        );
-        g3d.setPaint(rgp);
-        g3d.fill(new Arc2D.Float(60-radius/2, 60-radius/2, radius, radius, 0, 360, Arc2D.PIE));
-        
-        
-        g3d.setComposite(AlphaComposite.DstOver);
-        g3d.setColor(Color.red);
-        g3d.fillRect(50, 50, 100, 200);
-        
-        
-        g3d.dispose();*/
-        
-        
-        
-        
-        //if (1==1) return;
         
         // générer la liste de les items en O(n)
         ArrayList<Light> lights = new ArrayList<>();
@@ -298,15 +242,18 @@ Graphics2D g2 = (Graphics2D) g;
         
         Graphics2D g2d = (Graphics2D) g;
         
-        BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        BufferedImage buffImg2 = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D gbi = buffImg.createGraphics();
-        Graphics2D gbi2 = buffImg2.createGraphics();
+        //if (this.buffImg == null || this.buffImg.getWidth() != w || this.buffImg.getHeight() != h) {
+            this.buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            this.buffImg2 = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+            this.gbi = this.buffImg.createGraphics();
+            this.gbi2 = this.buffImg2.createGraphics();
+        //}
+        
 
         // Clears the previously drawn image.
-        g2d.setColor(this.getColor());
-        g2d.fillRect(0, 0, d.width, d.height);
-
+        //g2d.setColor(this.getColor());
+        //g2d.fillRect(0, 0, d.width, d.height);
+        gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
         
         for (Light light : lights) {
             light.draw(this,gbi);
@@ -317,15 +264,15 @@ Graphics2D g2 = (Graphics2D) g;
             item.draw(this,gbi2);
         }
         
-        gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, alpha));
-        // Clears the previously drawn image.
-        //gbi.setColor(this.getColor());
-        //gbi.fillRect(0, 0, d.width, d.height);
-        gbi.drawImage(buffImg2, null, 0, 0);
+        // on dessine l'obscurité ambiante
+        gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        gbi.drawImage(buffImg2, 0, 0, null);
         
-        //g2d.dispose();
+        // on dessine les lights
+        gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
+        gbi.drawImage(buffImg2, 0, 0, null);
         
-        g2d.drawImage(buffImg, null, 0, 0);
+        g2d.drawImage(buffImg, 0, 0, null);
         
         
         if (this.isAppuyer(90)) {

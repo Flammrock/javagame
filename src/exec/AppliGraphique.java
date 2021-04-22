@@ -67,7 +67,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         combatGraphique22.setVisible(false);
         canvas1.ajouterItem(this.aventure);
         
-        canvas1.ajouterItem(new Light(0,0,300));
+        canvas1.ajouterItem(new Light(0,0,200));
         
         
         new Timer("Drawer", true).scheduleAtFixedRate( new TimerTask(){

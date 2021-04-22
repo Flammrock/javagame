@@ -13,6 +13,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 import java.awt.geom.Arc2D;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -25,33 +26,34 @@ public class Light implements Drawable {
     int y;
     int radius;
     
+    BufferedImage image;
+    
     public Light(int x, int y, int radius) {
         this.x = x;
         this.y = y;
         this.radius = radius;
+        this.image = null;
     }
 
     @Override
     public void draw(Canvas c, Graphics g) {
-        //Graphics2D g2d = (Graphics2D) g;
-        Graphics2D g2d = (Graphics2D) g;
-        //g2d.setComposite(AlphaComposite.DstIn);
-        RadialGradientPaint rgp = new RadialGradientPaint(
-                (float)(c.toWorldX(x)), (float)(c.toWorldY(y)),
-                (float)c.toScale(radius/2),
-                new float[]{0f, 1f},
-                new Color[]{new Color(255, 255, 255, 255),new Color(255, 255, 255, 0)}
-        );
-        g2d.setPaint(rgp);
-        g2d.fill(new Arc2D.Float(c.toWorldX(x-radius/2), c.toWorldY(y-radius/2), c.toScale(radius), c.toScale(radius), 0, 360, Arc2D.PIE));
-        /*RadialGradientPaint rgp = new RadialGradientPaint(
-                (float)(c.toWorldX(x)), (float)(c.toWorldY(y)),
+        // pré-render image into buffer
+        if (this.image == null) {
+            this.image = new BufferedImage(radius, radius, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = this.image.createGraphics();
+            RadialGradientPaint rgp = new RadialGradientPaint(
+                (float)(radius/2), (float)(radius/2),
                 (float)(radius/2),
-                new float[]{0f, 1f},
-                new Color[]{new Color(255, 255, 255, 255),new Color(255, 255, 255, 255)}
-        );
-        g2d.setPaint(rgp);
-        g2d.fill(new Arc2D.Float(c.toWorldX(x-radius/2), c.toWorldY(y-radius/2), c.toScale(radius), c.toScale(radius), 0, 360, Arc2D.PIE));*/
+                new float[]{0.8f, 1f},
+                new Color[]{new Color(255, 255, 255, 255),new Color(255, 255, 255, 0)}
+            );
+            g2d.setPaint(rgp);
+            g2d.fill(new Arc2D.Float(0, 0, radius, radius, 0, 360, Arc2D.PIE));
+        }
+        
+        // draw light
+        g.drawImage(this.image, c.toWorldX(x-radius/2), c.toWorldY(y-radius/2), c.toScale(radius), c.toScale(radius), null);
+        
     }
 
     @Override
