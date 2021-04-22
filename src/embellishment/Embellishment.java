@@ -37,6 +37,8 @@ public class Embellishment implements Collisionable {
     int width;
     int height;
     
+    boolean collideEmbellishment;
+    
     public Embellishment(String type, Sprite sprite) {
         this.type = type;
         this.sprite = sprite;
@@ -45,6 +47,7 @@ public class Embellishment implements Collisionable {
         this.y = 0;
         this.width = 0;
         this.height = 0;
+        this.collideEmbellishment = true;
     }
     
     public Embellishment(Embellishment e) {
@@ -54,6 +57,7 @@ public class Embellishment implements Collisionable {
         this.y = e.getY();
         this.width = e.getWidth();
         this.height = e.getHeight();
+        this.collideEmbellishment = e.getCollideEmbellishment();
     }
 
     public String getType() {
@@ -198,6 +202,36 @@ public class Embellishment implements Collisionable {
         return height;
     }
     
+    public void setBox(int x, int y, int width, int height) {
+        this.setX(x);
+        this.setY(y);
+        this.setWidth(width);
+        this.setHeight(height);
+        if (this.collideEmbellishment) this.computeCollisonBox();
+    }
+    
+    public void computeCollisonBox() {
+        if (this.collisionboxlist==null) this.collisionboxlist = new ArrayList<>();
+        this.collisionboxlist.clear();
+        System.out.println("??????");
+        CollisionBox b = new CollisionBox(0,0, width, height);
+        b.apply(x, y);
+        this.collisionboxlist.add(b);
+    }
+    
+    /**
+     * Permet de faire en sorte que cet Embellishment ne soit pas en collision avec
+     * d'autres Embellishment lors de la génération
+     * @default true
+     * @param v la nouvelle valeur
+     */
+    public void setCollideEmbellishment(boolean v) {
+        this.collideEmbellishment = v;
+    }
+    
+    public boolean getCollideEmbellishment() {
+        return this.collideEmbellishment;
+    }
     
     
 }

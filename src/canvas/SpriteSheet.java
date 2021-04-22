@@ -198,8 +198,8 @@ public class SpriteSheet extends Sprite {
                 null
         );
         
-        g.setColor(Color.cyan);
-        g.drawRect(c.toWorldX(x), c.toWorldY(y), c.toScale(w-x), c.toScale(h-y));
+        //g.setColor(Color.cyan);
+        //g.drawRect(c.toWorldX(x), c.toWorldY(y), c.toScale(w-x), c.toScale(h-y));
         
         this.nextKeyAnimation();
         if (this.ondraw!=null) this.ondraw.accept(c);

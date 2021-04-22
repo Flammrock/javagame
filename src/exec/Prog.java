@@ -174,12 +174,11 @@ public class Prog {
         tileset.setSprite("wall", 2, 12, 45, 25);
         tileset.setSprite("ground", 0, 38, 14, 10);
         tileset.setSprite("embellishment_ground",5,93,55,44);
+        tileset.setSprite("embellishment_wall_1",96,53,16,33);
         
         
         Embellishment e_ground = new Embellishment(TypeEmbellishment.GROUND, tileset.getSprite("embellishment_ground"));
-        
-        
-        
+        Embellishment e_wall_1 = new Embellishment(TypeEmbellishment.WALL, tileset.getSprite("embellishment_wall_1"));
         
         
         // tout les objets on les met ici :
@@ -307,6 +306,7 @@ public class Prog {
         a.ajouterDrawable(niveau1); // on l'ajoute dans les items à dessiner
         niveau1.setTileSet(tileset);
         niveau1.addEmbellishment(e_ground);
+        niveau1.addEmbellishment(e_wall_1);
         niveau1.onCollide(new SimpleListener("onCollide") {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
