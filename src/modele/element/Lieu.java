@@ -332,12 +332,12 @@ public class Lieu extends Element implements Generable, Collisionable {
         }
         
         int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
-        Graphics2D g2 = (Graphics2D)g.create();
-        g2.clipRect(c.toWorldX(x), c.toWorldY(y+dh), c.toScale(width), c.toScale(height-dh));
+        //Graphics2D g2 = (Graphics2D)g.create();
+        //g2.clipRect(c.toWorldX(x), c.toWorldY(y+dh), c.toScale(width), c.toScale(height-dh));
         for (Embellishment e : this.embellishmentsListDrawed) {
-            e.draw(c, g2);
+            e.draw(c, g);
         }
-        g2.dispose();
+        //g2.dispose();
         //g.setClip(null);
         
         //g.setColor(Color.orange);
@@ -501,7 +501,7 @@ public class Lieu extends Element implements Generable, Collisionable {
         
         this.computeCollisonBox();
         
-        if (this.embellishmentsList.size()==0) return true;
+        if (this.embellishmentsList.isEmpty()) return true;
         
         // on génère des éléments de décors un peu à la random de tel sorte qu'il n'y est pas de collisions
         ArrayList<Embellishment> list = new ArrayList<>();
@@ -511,22 +511,45 @@ public class Lieu extends Element implements Generable, Collisionable {
         int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
         
         while (Math.random() < proba) {
+            
             Embellishment temp = this.embellishmentsList.get((int)(Math.random()*this.embellishmentsList.size()));
             Embellishment e = new Embellishment(temp);
             
             // en fonction du type, on le place différemment
-            if (e.getType().contains(TypeEmbellishment.GROUND)) {
+            if (e.getType().equals(TypeEmbellishment.GROUND)) {
                 int w = (int)(Math.random()*(100-50+1)+50);
                 int h = (int)(w*(1.0/e.getSprite().getRatio()));
                 int x = this.x + (int)(Math.random()*(this.width-w));
                 int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
-                e.setX(x);
-                e.setY(y);
-                e.setWidth(w);
-                e.setHeight(h);
-                this.embellishmentsListDrawed.add(e);
+                e.setBox(x,y,w,h);
+            } else if (e.getType().equals(TypeEmbellishment.WALL)) {
+                int w = 50;
+                int h = (int)(w*(1.0/e.getSprite().getRatio()));
+                int x = this.x + (int)(Math.random()*(this.width-w));
+                int y = this.y + dh - h;
+                e.setBox(x,y,w,h);
             }
+            
+            
+            
+            Boolean r = false;
+            for (Porte porte : this.listePorte) {
+                r = porte.isCollide(e);
+                if (r!=null && r) break;
+            }
+            if (r!=null && r) {proba -= 0.01;continue;}
+            for (Embellishment et : this.embellishmentsListDrawed) {
+                r = et.isCollide(e);
+                if (r!=null && r) break;
+            }
+            if (r!=null && r) {proba -= 0.01;continue;}
+            
             proba -= 0.1;
+            
+            this.embellishmentsListDrawed.add(e);
+            
+            
+            
         }
         
         return true;
