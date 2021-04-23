@@ -83,7 +83,6 @@ public class SpriteSheet extends Sprite {
      */
     public SpriteSheet(String spritefile, int x, int y, int spriteWidth, int spriteHeight, int width, int height) {
         this(spritefile,x,y,width,height);
-        System.out.println("??????????????????????:"+this.getWidth());
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
     }
