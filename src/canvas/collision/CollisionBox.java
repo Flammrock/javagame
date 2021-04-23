@@ -7,8 +7,14 @@ package canvas.collision;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import canvas.TileSet;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -16,7 +22,7 @@ import java.util.ArrayList;
  *
  * @author User
  */
-public class CollisionBox implements Serializable, Drawable {
+public class CollisionBox implements Drawable {
     
     
     // les coordonnées relatives de la boite de collision
@@ -214,6 +220,20 @@ public class CollisionBox implements Serializable, Drawable {
     @Override
     public boolean isDraw() {
         return this.isdraw;
+    }
+    
+    public CollisionBox copie() {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (CollisionBox) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
     
 }
