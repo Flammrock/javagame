@@ -55,7 +55,6 @@ import canvas.SpriteSheet;
 import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
-import canvas.collision.Collisionable;
 import canvas.light.Light;
 import embellishment.Embellishment;
 import embellishment.TypeEmbellishment;

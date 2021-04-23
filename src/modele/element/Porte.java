@@ -6,7 +6,6 @@
 package modele.element;
 
 import canvas.Canvas;
-import canvas.Drawable;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;

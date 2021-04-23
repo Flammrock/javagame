@@ -9,7 +9,6 @@ import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import javax.swing.SpringLayout;
 import map.Generable;
 
 

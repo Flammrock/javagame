@@ -16,14 +16,7 @@ import canvas.light.Light;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import modele.element.Element;
 
 /**
  *

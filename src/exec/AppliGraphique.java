@@ -5,14 +5,7 @@
  */
 package exec;
 
-import canvas.Animation;
 import canvas.Combat.DebutCombatEvent;
-import canvas.Drawable;
-import canvas.Sprite;
-import canvas.SpriteSheet;
-import canvas.collision.CollisionBox;
-import canvas.light.Light;
-import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import java.awt.BufferCapabilities;
@@ -21,10 +14,8 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;

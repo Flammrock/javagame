@@ -5,7 +5,6 @@
  */
 package canvas;
 
-import canvas.light.Light;
 import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.ArrayList;

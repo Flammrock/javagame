@@ -5,12 +5,8 @@
  */
 package modele.element;
 
-import canvas.Canvas;
-import canvas.Drawable;
-import java.awt.Graphics;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 
 /**
  *

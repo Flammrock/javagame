@@ -9,12 +9,9 @@ import canvas.Canvas;
 import canvas.Combat.DebutCombatEvent;
 import canvas.Drawable;
 import eventsystem.Dispatcher;
-import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.List;
 
 /**
  *

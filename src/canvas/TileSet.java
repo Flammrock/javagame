@@ -5,7 +5,6 @@
  */
 package canvas;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.HashMap;

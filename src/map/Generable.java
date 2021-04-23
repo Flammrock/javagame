@@ -5,7 +5,6 @@
  */
 package map;
 
-import modele.element.GenerableParametre;
 
 /**
  *

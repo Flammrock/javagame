@@ -11,8 +11,6 @@ import canvas.light.BlendComposite;
 import canvas.light.Light;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.geom.*;
-import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayDeque;
@@ -20,19 +18,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import map.Camera;
-import modele.element.Element;
-import modele.element.Personnage;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.VolatileImage;
 
 /**
  *

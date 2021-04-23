@@ -10,7 +10,6 @@ import canvas.Drawable;
 import geometry.Box;
 import geometry.Direction;
 import geometry.Point;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayDeque;
 import java.util.ArrayList;

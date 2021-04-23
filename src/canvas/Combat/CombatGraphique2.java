@@ -6,8 +6,6 @@
 package canvas.Combat;
 
 import canvas.SpriteSheet;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.DefaultListModel;
 import modele.element.Aventure;
 import modele.element.Effet;

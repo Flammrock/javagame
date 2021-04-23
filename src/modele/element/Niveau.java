@@ -5,7 +5,6 @@
  */
 package modele.element;
 
-import canvas.Canvas;
 import canvas.Drawable;
 import canvas.TileSet;
 import embellishment.Embellishment;
@@ -14,7 +13,6 @@ import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import geometry.Box;
 import geometry.Direction;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import map.Generable;
