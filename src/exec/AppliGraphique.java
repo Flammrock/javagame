@@ -14,11 +14,15 @@ import canvas.light.Light;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
+import java.awt.BufferCapabilities;
 import java.awt.Color;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -36,6 +40,13 @@ import modele.element.*;
  */
 public class AppliGraphique extends javax.swing.JFrame {
 
+    
+    // use hardware acceleration
+    GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+    BufferCapabilities bufferCapabilities;
+    BufferStrategy bufferStrategy;
+    
+    
     private Aventure aventure;
     /**
      * Creates new form AppliGraphique
@@ -44,6 +55,16 @@ public class AppliGraphique extends javax.swing.JFrame {
     public AppliGraphique(Aventure aventure) {
         this.aventure = aventure;
         initComponents();
+        
+        // hardware acceleration
+        createBufferStrategy(2);
+        this.bufferStrategy = getBufferStrategy();
+        this.bufferCapabilities = this.gc.getBufferCapabilities();
+        
+        // hardware acceleration
+        canvas1.bindBufferStrategy(this.bufferStrategy);
+        canvas1.bindBufferCapabilitiest(this.bufferCapabilities);
+        canvas1.bindGraphicsConfiguration(this.gc);
         
         AppliGraphique _this = this;
         listeObjetInventaire.addListSelectionListener(new ListSelectionListener(){
@@ -67,7 +88,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         combatGraphique22.setVisible(false);
         canvas1.ajouterItem(this.aventure);
         
-        canvas1.ajouterItem(new Light(0,0,200));
+        //canvas1.ajouterItem(new Light(0,0,200));
         
         
         new Timer("Drawer", true).scheduleAtFixedRate( new TimerTask(){

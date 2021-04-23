@@ -38,21 +38,31 @@ public class Light implements Drawable {
     @Override
     public void draw(Canvas c, Graphics g) {
         // pré-render image into buffer
-        if (this.image == null) {
+        /*if (this.image == null) {
             this.image = new BufferedImage(radius, radius, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = this.image.createGraphics();
             RadialGradientPaint rgp = new RadialGradientPaint(
                 (float)(radius/2), (float)(radius/2),
                 (float)(radius/2),
-                new float[]{0.8f, 1f},
-                new Color[]{new Color(255, 255, 255, 255),new Color(255, 255, 255, 0)}
+                new float[]{0.5f, 1f},
+                new Color[]{new Color(255, 255, 255, 100),new Color(255, 255, 255, 0)}
             );
             g2d.setPaint(rgp);
             g2d.fill(new Arc2D.Float(0, 0, radius, radius, 0, 360, Arc2D.PIE));
-        }
+        }*/
         
         // draw light
-        g.drawImage(this.image, c.toWorldX(x-radius/2), c.toWorldY(y-radius/2), c.toScale(radius), c.toScale(radius), null);
+        //g.drawImage(this.image, c.toWorldX(x-radius/2), c.toWorldY(y-radius/2), c.toScale(radius), c.toScale(radius), null);
+        
+        Graphics2D g2d = (Graphics2D)g;
+        RadialGradientPaint rgp = new RadialGradientPaint(
+                c.toWorldX(x), c.toWorldY(y),
+                (float)(c.toScale(radius/2)),
+                new float[]{0.5f, 1f},
+                new Color[]{new Color(255, 255, 255, 255),new Color(255, 255, 255, 0)}
+            );
+            g2d.setPaint(rgp);
+            g2d.fill(new Arc2D.Float(c.toWorldX(x-radius/2), c.toWorldY(y-radius/2), c.toScale(radius), c.toScale(radius), 0, 360, Arc2D.PIE));
         
     }
 

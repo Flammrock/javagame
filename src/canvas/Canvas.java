@@ -7,11 +7,14 @@ package canvas;
 
 import canvas.collision.CollisionBox;
 import canvas.collision.Collisionable;
+import canvas.light.BlendComposite;
 import canvas.light.Light;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.*;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,11 +23,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import map.Camera;
 import modele.element.Element;
 import modele.element.Personnage;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.awt.image.VolatileImage;
 
 /**
  *
@@ -37,6 +45,11 @@ public class Canvas extends JPanel {
     
     Color background;
     
+    // use hardware acceleration
+    GraphicsConfiguration gc;
+    BufferCapabilities bufferCapabilities;
+    BufferStrategy bufferStrategy;
+    
     // caméra courante
     Camera camera;
     
@@ -46,6 +59,12 @@ public class Canvas extends JPanel {
         this.keyMap = new HashMap<>();
         this.camera = new Camera();
         this.background = Color.black;
+        
+        
+        // use hardware acceleration
+        this.gc = null;
+        this.bufferCapabilities = null;
+        this.bufferStrategy = null;
     }
     
     public void setColor(Color c) {
@@ -120,6 +139,34 @@ public class Canvas extends JPanel {
         return (int)(v*this.getScale());
     }
     
+    public BufferedImage loadImage(InputStream inputStream) {
+        //load the file
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(inputStream);
+        } catch (Exception exception) {
+            if (image == null) {
+                return null;
+            }
+        }
+
+        //NOTE: Use "copyImage" instead of "bufferImage" to keep alpha channel transparency
+        //that is stored in the file.
+        return copyImage(image);
+    }
+    
+    public BufferedImage copyImage(BufferedImage image) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+        return createImage(width, height, image.getType() != BufferedImage.OPAQUE);
+    }
+
+    public BufferedImage createImage(int width, int height, boolean shouldTransparencyBeAllowed) {
+        //this enables/disables transparency and makes the Image more likely to be managed
+        return this.gc.createCompatibleImage(width, height,
+                shouldTransparencyBeAllowed ? Transparency.TRANSLUCENT : Transparency.OPAQUE);
+    }
+    
     
     @Override
     public void paintComponent(Graphics g) {
@@ -141,6 +188,15 @@ public class Canvas extends JPanel {
             if (item instanceof Light) {
                 if (!lights.contains((Light)item)) {
                     lights.add((Light)item);
+                    ArrayList<Drawable> itemss = item.getDrawables();
+                    if (itemss != null) {
+                        for (Drawable dt : itemss) {
+                            if (dt.isDraw()) {
+                                pile.add(dt);
+                            }
+                        }
+                        //pile.addAll(itemss);
+                    }
                 }
                 continue;
             }
@@ -230,21 +286,41 @@ public class Canvas extends JPanel {
         int w = d.width;
         int h = d.height; 
         
-        Graphics2D g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D)g.create();
         
+        //if(!bufferCapabilities.isPageFlipping() || bufferCapabilities.isFullScreenRequired()) {
+            //System.out.println("Hardware Acceleration not active. Define J2D_D3D_NO_HWCHECK=true as Env variable.");
+            //double a = 1/0;
+        //}
+        
+        //BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        //BufferedImage buffImg = this.createImage(w, h, true);
+        //VolatileImage buffImg = createVolatileImage(w, h);
+        //Graphics2D gbi = buffImg.createGraphics();
+        //g2d.setColor(new Color(0,0,0,0));
+        //g2d.fillRect(0, 0, w, h);
+        //g2d.setComposite(AlphaComposite.DstOut);
+         
+         //gbi.dispose();
+         
         BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gbi = buffImg.createGraphics();
-        gbi.setColor(new Color(0,0,0,255));
-        gbi.fillRect(0, 0, w, h);
-        gbi.setComposite(AlphaComposite.DstOut);
-         for (Light light : lights) {
-            light.draw(this,gbi);
-        }
-         gbi.dispose();
-         
         for (Drawable item : items) {
-            item.draw(this,g2d);
+            item.draw(this,gbi);
         }
+        gbi.dispose();
+         
+        
+         
+        
+        g.drawImage(buffImg, 0, 0, null);
+        
+        g2d.setComposite(BlendComposite.Freeze);
+        for (Light light : lights) {
+            light.draw(this,g2d);
+        }
+        
+        
         
         //g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OUT, 1.0f));
         
@@ -257,9 +333,9 @@ public class Canvas extends JPanel {
         //gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
         //gbi.drawImage(buffImg2, 0, 0, null);
         
-        g2d.drawImage(buffImg, 0, 0, null);
+        //g2d.drawImage(buffImg, 0, 0, null);
         
-        
+        g2d.dispose();
         
         if (this.isAppuyer(90)) {
             camera.zoomIn(1.1);
@@ -283,6 +359,18 @@ public class Canvas extends JPanel {
     
     public void onRelacheTouche(KeyEvent e) {
         this.keyMap.put(e.getKeyCode(), Boolean.FALSE);
+    }
+
+    public void bindBufferStrategy(BufferStrategy bufferStrategy) {
+        this.bufferStrategy = bufferStrategy;
+    }
+
+    public void bindBufferCapabilitiest(BufferCapabilities bufferCapabilities) {
+        this.bufferCapabilities = bufferCapabilities;
+    }
+
+    public void bindGraphicsConfiguration(GraphicsConfiguration gc) {
+        this.gc = gc;
     }
     
 

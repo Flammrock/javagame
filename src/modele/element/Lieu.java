@@ -7,6 +7,7 @@ import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
+import canvas.light.Light;
 import embellishment.Embellishment;
 import embellishment.TypeEmbellishment;
 import eventsystem.Dispatcher;
@@ -500,6 +501,8 @@ public class Lieu extends Element implements Generable, Collisionable {
     public boolean generate(Object p) {
         
         this.computeCollisonBox();
+        
+        this.drawables.add(new Light(this.x + 200 + (int)(Math.random()*(this.width-400)),this.y + 200 + (int)(Math.random()*(this.height-400)),200));
         
         if (this.embellishmentsList.isEmpty()) return true;
         
