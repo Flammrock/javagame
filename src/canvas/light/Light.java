@@ -25,6 +25,9 @@ public class Light implements Drawable {
     int x;
     int y;
     int radius;
+    double v;
+    
+    int tick;
     
     BufferedImage image;
     
@@ -33,6 +36,8 @@ public class Light implements Drawable {
         this.y = y;
         this.radius = radius;
         this.image = null;
+        this.tick = 0;
+        this.v = 0;
     }
 
     @Override
@@ -55,14 +60,26 @@ public class Light implements Drawable {
         //g.drawImage(this.image, c.toWorldX(x-radius/2), c.toWorldY(y-radius/2), c.toScale(radius), c.toScale(radius), null);
         
         Graphics2D g2d = (Graphics2D)g;
-        RadialGradientPaint rgp = new RadialGradientPaint(
+        /*RadialGradientPaint rgp = new RadialGradientPaint(
                 c.toWorldX(x), c.toWorldY(y),
-                (float)(c.toScale(radius/2)),
-                new float[]{0.5f, 1f},
-                new Color[]{new Color(255, 255, 255, 255),new Color(255, 255, 255, 0)}
-            );
-            g2d.setPaint(rgp);
-            g2d.fill(new Arc2D.Float(c.toWorldX(x-radius/2), c.toWorldY(y-radius/2), c.toScale(radius), c.toScale(radius), 0, 360, Arc2D.PIE));
+                (float) (c.toScale(radius / 2)),
+                new float[]{0f, 1f},
+                new Color[]{new Color(255, 255, 255, 255), new Color(255, 255, 255, 0)}
+        );
+        g2d.setPaint(rgp);
+        g2d.fill(new Arc2D.Float(c.toWorldX(x - radius / 2), c.toWorldY(y - radius / 2), c.toScale(radius), c.toScale(radius), 0, 360, Arc2D.PIE));*/
+        
+        int r = radius - (int)(5*Math.sin(this.v));
+        
+        g2d.setColor(Color.WHITE);
+        g2d.fillArc(c.toWorldX(x - r / 2), c.toWorldY(y - r / 2), c.toScale(r), c.toScale(r), 0, 360);
+
+        if (this.tick > 10) {
+            this.tick = 0;
+            this.v += Math.PI/8;
+        }
+        
+        this.tick++;
         
     }
 

@@ -502,7 +502,8 @@ public class Lieu extends Element implements Generable, Collisionable {
         
         this.computeCollisonBox();
         
-        this.drawables.add(new Light(this.x + 200 + (int)(Math.random()*(this.width-400)),this.y + 200 + (int)(Math.random()*(this.height-400)),200));
+        int s = 200;
+        this.drawables.add(new Light(this.x + s/2 + (int)(Math.random()*(this.width-s/2)),this.y + s/2 + (int)(Math.random()*(this.height-s/2)),s));
         
         if (this.embellishmentsList.isEmpty()) return true;
         
