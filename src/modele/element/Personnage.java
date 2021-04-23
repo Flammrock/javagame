@@ -10,6 +10,8 @@ import eventsystem.SimpleListener;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import static java.lang.Math.random;
 import static java.lang.StrictMath.random;
 import java.util.ArrayList;
@@ -69,28 +71,29 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     public void initAleatoire(){
         String[] mots;
-        Scanner scan = null;
+        InputStream in = getClass().getResourceAsStream("/monstres");
+        try (Scanner scan = new Scanner(in)) {
+            int nbrLigne = 23;  //A modifier a chaque modification du fichier montres
+            Random random = new Random();
+            int LigneRdm = random.nextInt(nbrLigne) + 1;
+            for(int i = 0;i<LigneRdm;i++){
+                scan.nextLine();
+            }
+            String phrase = scan.nextLine();
+            mots = phrase.split("/");
+            this.nom = mots[1];
+            this.description = mots[2];
+            double age = 0;
+            double force = Double.parseDouble(mots[4]);
+            double agilite = Double.parseDouble(mots[5]);
+            double pvMax = Double.parseDouble(mots[6]);
+            double poids = Double.parseDouble(mots[3]);
+            init(age,force,agilite,pvMax);   
+        }
         try {
-            scan = new Scanner(new File("C:\\Users\\ssj-m_000\\Documents\\NetBeansProjects\\javagame\\build\\classes\\monstres")).useDelimiter("\\s*/\\s*");//j'ai mis des delimiteurs mais finalement je ne les utilisees pas
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Personnage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        int nbrLigne = 23;  //A modifier a chaque modification du fichier montres
-                Random random = new Random();
-        int LigneRdm = random.nextInt(nbrLigne + 1) + 1;
-        for(int i = 0;i<LigneRdm;i++){
-            scan.nextLine();
-        }
-        String phrase = scan.nextLine();
-        mots = phrase.split("/");
-        this.nom = mots[1];
-        this.description = mots[2];
-        double age = 0;
-        double force = Double.parseDouble(mots[4]);
-        double agilite = Double.parseDouble(mots[5]);
-        double pvMax = Double.parseDouble(mots[6]);
-        double poids = Double.parseDouble(mots[3]);
-        init(age,force,agilite,pvMax);   
+            in.close();
+        } catch (IOException ex) {}
+        
     }
     public SpriteSheet getSprite() {
         return sprite;
