@@ -6,6 +6,7 @@
 package canvas;
 
 import java.awt.Graphics;
+import java.awt.Shape;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public interface Drawable extends Serializable {
      * @param c Le Canvas
      * @param g L'objet Graphics
      */
-    void draw(Canvas c, Graphics g);
+    public void draw(Canvas c, Graphics g);
     
     /**
      * Un Drawable peut être un sous-ensemble de Drawable
@@ -99,4 +100,17 @@ public interface Drawable extends Serializable {
     }
     
     
+    /**
+     * Permet de récupérer la zone de clipping du Drawable.
+     * @return retourne le Shape qui sert de clip au Drawable
+     */
+    default public Shape getClip() {
+        return null;
+    }
+    
+    /**
+     * Permet de définir la zone de clipping du Drawable.
+     * @param shape Objet Shape qui servira de base pour le clip
+     */
+    default public void setClip(Shape shape) {}
 }
