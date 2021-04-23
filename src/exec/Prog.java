@@ -214,24 +214,26 @@ public class Prog {
         s.setAnimation("Idle-Left");
         s.setOnDraw((canvas) -> {
             
+            int speed = 6;
+            
             // LEFT
             if (canvas.isAppuyer(37)) {
-                s.moveBy(-4, 0);
+                s.moveBy(-speed, 0);
                 s.setAnimationIfNot("Walk-Left");
                 
             // UP
             } else if (canvas.isAppuyer(38)) {
-                s.moveBy(0, -4);
+                s.moveBy(0, -speed);
                 s.setAnimationIfNot("Walk-Up");
             
             // RIGHT
             } else if (canvas.isAppuyer(39)) {
-                s.moveBy(4, 0);
+                s.moveBy(speed, 0);
                 s.setAnimationIfNot("Walk-Right");
                 
             // DOWN
             } else if (canvas.isAppuyer(40)) {
-                s.moveBy(0, 4);
+                s.moveBy(0, speed);
                 s.setAnimationIfNot("Walk-Down");
                 
             } else {

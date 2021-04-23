@@ -68,7 +68,7 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         }, 
         100, // Start in 100 ms
-        (int)(1000 / 60));
+        (int)(1000 / 30));
         
 
         mettreAJourTout();
