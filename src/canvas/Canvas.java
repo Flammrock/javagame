@@ -240,21 +240,52 @@ public class Canvas extends JPanel {
         
         Graphics2D g2d = (Graphics2D)g.create();
          
-        BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D gbi = buffImg.createGraphics();
+        //BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        //Graphics2D gbi = buffImg.createGraphics();
         for (Drawable item : items) {
-            item.draw(this,gbi);
+            Shape shape = item.getClip(this);
+            if (shape == null) {
+                Drawable parent = item.getParent();
+                if (parent != null) {
+                    shape = parent.getClip(this);
+                }
+            }
+            if (shape == null) {
+                item.draw(this,g2d);
+            } else {
+                
+                Graphics2D g2d_clip = (Graphics2D)g.create();
+                g2d_clip.setClip(shape);
+                item.draw(this,g2d_clip);
+                g2d_clip.dispose();
+                
+                //g2d.draw(shape);
+            }
         }
-        gbi.dispose();
+        //gbi.dispose();
          
         
          
         
-        g.drawImage(buffImg, 0, 0, null);
+        //g.drawImage(buffImg, 0, 0, null);
         
         g2d.setComposite(BlendComposite.Freeze);
         for (Light light : lights) {
-            light.draw(this,g2d);
+            Shape shape = light.getClip(this);
+            if (shape == null) {
+                Drawable parent = light.getParent();
+                if (parent != null) {
+                    shape = parent.getClip(this);
+                }
+            }
+            if (shape == null) {
+                light.draw(this,g2d);
+            } else {
+                Graphics2D g2d_clip = (Graphics2D)g2d.create();
+                g2d_clip.setClip(shape);
+                light.draw(this,g2d_clip);
+                g2d_clip.dispose();
+            }
         }
         
         g2d.dispose();

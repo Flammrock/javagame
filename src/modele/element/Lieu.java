@@ -14,6 +14,10 @@ import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import geometry.Box;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import map.Generable;
@@ -289,6 +293,7 @@ public class Lieu extends Element implements Generable, Collisionable {
             this.sprite_wall.draw(c, g);
         }
         
+         
         if (this.sprite_wall != null) {
             Sprite temp = tileset.getSprite("ground");
             if (temp != null) {
@@ -352,7 +357,6 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.collisionBoxList.clear();
         
         int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight()-epaisseur*2-12;
-        
         
         Porte up = null;
         Porte right = null;
@@ -561,6 +565,7 @@ public class Lieu extends Element implements Generable, Collisionable {
             
             proba -= 0.1;
             
+            e.setParent(this);
             if (e.getType().equals(TypeEmbellishment.OBJECT)) {
                 this.drawables.add(e);
             } else {
@@ -633,6 +638,27 @@ public class Lieu extends Element implements Generable, Collisionable {
     @Override
     public boolean isDraw() {
         return this.isVisible;
+    }
+    
+    @Override
+    public Shape getClip(Canvas c) {
+        
+        Path2D clip_path = new Path2D.Double(Path2D.WIND_NON_ZERO);
+        clip_path.append(new Rectangle2D.Double(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height)), false);
+        
+        for (Porte p : this.listePorte) {
+            if (p.getDirection().isUp()) {
+                clip_path.append(new Rectangle2D.Double(c.toWorldX(p.getX()), c.toWorldY(this.y+this.sprite_wall.getHeight()-20), c.toScale(p.getWidth()), c.toScale(20)), false);
+            } else if (p.getDirection().isRight()) {
+                clip_path.append(new Rectangle2D.Double(c.toWorldX(p.getX()-50), c.toWorldY(p.getY()), c.toScale(p.getWidth()), c.toScale(p.getHeight())), false);
+            } else if (p.getDirection().isDown()) {
+                clip_path.append(new Rectangle2D.Double(c.toWorldX(p.getX()), c.toWorldY(p.getY()-50), c.toScale(p.getWidth()), c.toScale(p.getHeight())), false);
+            } else if (p.getDirection().isLeft()) {
+                clip_path.append(new Rectangle2D.Double(c.toWorldX(p.getX()+50), c.toWorldY(p.getY()), c.toScale(p.getWidth()), c.toScale(p.getHeight())), false);
+            }
+        }
+        
+        return (Shape)clip_path;
     }
 
 }
