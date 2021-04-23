@@ -71,12 +71,12 @@ public class Personnage extends Element implements Generable, Collisionable {
         String[] mots;
         Scanner scan = null;
         try {
-            scan = new Scanner(new File("C:\\Users\\ssj-m_000\\Documents\\NetBeansProjects\\javagame\\build\\classes\\monstres")).useDelimiter("\\s*/\\s*");
+            scan = new Scanner(new File("C:\\Users\\ssj-m_000\\Documents\\NetBeansProjects\\javagame\\build\\classes\\monstres")).useDelimiter("\\s*/\\s*");//j'ai mis des delimiteurs mais finalement je ne les utilisees pas
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Personnage.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int nbrLigne = 23;
-        Random random = new Random();
+        int nbrLigne = 23;  //A modifier a chaque modification du fichier montres
+                Random random = new Random();
         int LigneRdm = random.nextInt(nbrLigne + 1) + 1;
         for(int i = 0;i<LigneRdm;i++){
             scan.nextLine();
