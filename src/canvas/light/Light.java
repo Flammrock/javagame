@@ -32,6 +32,8 @@ public class Light implements Drawable {
     int radius;
     double v;
     
+    Drawable parent;
+    
     int tick;
     
     public Light(int x, int y, int radius) {
@@ -40,6 +42,7 @@ public class Light implements Drawable {
         this.radius = radius;
         this.tick = 0;
         this.v = 0;
+        this.parent = null;
     }
 
     @Override
@@ -105,6 +108,16 @@ public class Light implements Drawable {
         } catch (IOException | ClassNotFoundException e) {
             return null;
         }
+    }
+    
+    @Override
+    public void setParent(Drawable d) {
+        this.parent = d;
+    }
+    
+    @Override
+    public Drawable getParent() {
+        return this.parent;
     }
     
 }
