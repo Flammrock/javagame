@@ -183,6 +183,7 @@ public class Canvas extends JPanel {
         }
         while (!pile.isEmpty()) {
             Drawable item = pile.removeFirst();
+            if (!item.isDraw()) continue;
             //Element h = (Element) item;
             //System.out.println(h.getDescription());
             if (item instanceof Light) {

@@ -15,5 +15,6 @@ public interface TypeEmbellishment extends Serializable {
     
     String WALL = "wall";
     String GROUND = "ground";
+    String OBJECT = "object";
     
 }

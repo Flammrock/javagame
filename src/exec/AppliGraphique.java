@@ -10,6 +10,7 @@ import canvas.Combat.DebutCombatEvent;
 import canvas.Drawable;
 import canvas.Sprite;
 import canvas.SpriteSheet;
+import canvas.collision.CollisionBox;
 import canvas.light.Light;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
@@ -89,7 +90,6 @@ public class AppliGraphique extends javax.swing.JFrame {
         canvas1.ajouterItem(this.aventure);
         
         //canvas1.ajouterItem(new Light(0,0,200));
-        
         
         new Timer("Drawer", true).scheduleAtFixedRate( new TimerTask(){
             public void run(){

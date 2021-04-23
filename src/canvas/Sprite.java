@@ -66,6 +66,10 @@ public class Sprite implements Collisionable {
     // un dispatcher d'events
     Dispatcher dispatcher;
     
+    
+    ArrayList<CollisionBox> collisionBoxList;
+    ArrayList<Drawable> drawables;
+    
     /**
      * Permet de créer un Sprite à partir d'un fichier image
      * @param spritefile le nom du fichier
@@ -90,6 +94,8 @@ public class Sprite implements Collisionable {
         this.repeatX = true;
         this.repeatY = true;
         this.dispatcher = new Dispatcher();
+        this.collisionBoxList = new ArrayList<>();
+        this.drawables = new ArrayList<>();
     }
     
     /**
@@ -359,20 +365,24 @@ public class Sprite implements Collisionable {
     public void setOnDraw(Consumer<Canvas> fn) {
         this.ondraw = fn;
     }
+    
+    public void addDrawable(Drawable d) {
+        this.drawables.add(d);
+    }
 
     @Override
     public ArrayList<Drawable> getDrawables() {
-        return null; // un sprite peut posséder un sous-ensemble de sprite
+        return this.drawables;
     }
 
     @Override
     public ArrayList<CollisionBox> getCollisionBoxList() {
-         return null; // un sprite n'a pas de collision box
+         return this.collisionBoxList;
     }
 
     @Override
     public void addCollisionBox(CollisionBox b) {
-        // un sprite n'a pas de collision box
+        this.collisionBoxList.add(b);
     }
 
     @Override
@@ -463,6 +473,10 @@ public class Sprite implements Collisionable {
     
     public int getSourceHeight() {
         return this.sheight;
+    }
+
+    public BufferedImage getImage() {
+        return this.image;
     }
     
 }

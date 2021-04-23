@@ -5,11 +5,14 @@
  */
 package embellishment;
 
+import canvas.Animation;
 import canvas.Canvas;
 import canvas.Drawable;
 import canvas.Sprite;
+import canvas.SpriteSheet;
 import canvas.collision.CollisionBox;
 import canvas.collision.Collisionable;
+import canvas.light.LightData;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
@@ -31,11 +34,14 @@ public class Embellishment implements Collisionable {
     String type;
     Sprite sprite;
     ArrayList<CollisionBox> collisionboxlist;
+    ArrayList<LightData> lightdatalist;
     
     int x;
     int y;
     int width;
     int height;
+    
+    Animation animation;
     
     boolean collideEmbellishment;
     
@@ -43,11 +49,18 @@ public class Embellishment implements Collisionable {
         this.type = type;
         this.sprite = sprite;
         this.collisionboxlist = new ArrayList<>();
+        this.animation = null;
+        if (this.sprite != null && this.sprite instanceof SpriteSheet) {
+            SpriteSheet sp = (SpriteSheet)this.sprite;
+            this.animation = sp.getAnimationCourrante();
+            if (this.animation!=null) this.animation = this.animation.copie();
+        }
         this.x = 0;
         this.y = 0;
         this.width = 0;
         this.height = 0;
         this.collideEmbellishment = true;
+        this.lightdatalist = new ArrayList<>();
     }
     
     public Embellishment(Embellishment e) {
@@ -58,6 +71,21 @@ public class Embellishment implements Collisionable {
         this.width = e.getWidth();
         this.height = e.getHeight();
         this.collideEmbellishment = e.getCollideEmbellishment();
+        this.animation = null;
+        if (this.sprite != null && this.sprite instanceof SpriteSheet) {
+            SpriteSheet sp = (SpriteSheet)this.sprite;
+            this.animation = sp.getAnimationCourrante();
+            if (this.animation!=null) this.animation = this.animation.copie();
+        }
+        this.lightdatalist = new ArrayList<>();
+    }
+    
+    public void addLightData(LightData l) {
+        this.lightdatalist.add(l);
+    }
+    
+    public void clearLightData() {
+        this.lightdatalist.clear();
     }
 
     public String getType() {
@@ -141,7 +169,14 @@ public class Embellishment implements Collisionable {
         this.sprite.setScaleSize(width, height);
         this.sprite.setWidth(width);
         this.sprite.setHeight(height);
-        this.sprite.draw(c,g);
+        
+        if (this.sprite instanceof SpriteSheet) {
+            SpriteSheet sp = (SpriteSheet)this.sprite;
+            sp.setAnimationExternal(this.animation);
+            sp.draw(c,g);
+        } else {
+            this.sprite.draw(c,g);
+        }
     }
 
     @Override
@@ -216,6 +251,19 @@ public class Embellishment implements Collisionable {
         CollisionBox b = new CollisionBox(0,0, width, height);
         b.apply(x, y);
         this.collisionboxlist.add(b);
+    }
+    
+    public void setCollisionBoxList(ArrayList<CollisionBox> list, int original_w, int original_h) {
+        this.collisionboxlist.clear();
+        if (list == null) return;
+        for (CollisionBox box : list) {
+            int x = box.getX()*((int)((double)this.width/(double)original_w));
+            int y = box.getY()*((int)((double)this.height/(double)original_h));
+            int w = box.getWidth()*((int)((double)this.width/(double)original_w));
+            int h = box.getHeight()*((int)((double)this.height/(double)original_h));
+            box.apply(this.x,this.y);
+            this.collisionboxlist.add(new CollisionBox(x,y,w,h,box.isDraw()));
+        }
     }
     
     /**

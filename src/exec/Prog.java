@@ -169,6 +169,8 @@ public class Prog {
         
         
         /////////////////////// TILESET TEST ////////////////////////////
+        
+        // tileset de la map
         TileSet tileset = new TileSet("/16x16DungeonTileset.v4.png");
         tileset.loadImage();
         tileset.setSprite("wall", 2, 12, 45, 25);
@@ -176,9 +178,20 @@ public class Prog {
         tileset.setSprite("embellishment_ground",5,93,55,44);
         tileset.setSprite("embellishment_wall_1",96,53,16,33);
         
+        // spritesheet light
+        SpriteSheet lightsprite = new SpriteSheet("/light.png",0,0,16,26,16*3,26*3);
+        lightsprite.loadImage();
+        lightsprite.ajouterAnimation(new Animation("Lighting",new int[] {0, 1, 2, 3, 4, 5, 6, 7}));
+        lightsprite.addCollisionBox(new CollisionBox(4, 14, 8, 11));
+        lightsprite.setAnimation("Lighting");
+        //lightsprite.addDrawable(new Light(16/2,26/2,200));
         
         Embellishment e_ground = new Embellishment(TypeEmbellishment.GROUND, tileset.getSprite("embellishment_ground"));
         Embellishment e_wall_1 = new Embellishment(TypeEmbellishment.WALL, tileset.getSprite("embellishment_wall_1"));
+        Embellishment e_light = new Embellishment(TypeEmbellishment.OBJECT, lightsprite);
+        
+        
+        /////////////////////////////////////////////////////////////
         
         
         // tout les objets on les met ici :
@@ -307,6 +320,7 @@ public class Prog {
         niveau1.setTileSet(tileset);
         niveau1.addEmbellishment(e_ground);
         niveau1.addEmbellishment(e_wall_1);
+        niveau1.addEmbellishment(e_light);
         niveau1.onCollide(new SimpleListener("onCollide") {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {

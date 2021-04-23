@@ -3,6 +3,7 @@ package modele.element;
 import canvas.Canvas;
 import canvas.Drawable;
 import canvas.Sprite;
+import canvas.SpriteSheet;
 import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
@@ -502,8 +503,8 @@ public class Lieu extends Element implements Generable, Collisionable {
         
         this.computeCollisonBox();
         
-        int s = 200;
-        this.drawables.add(new Light(this.x + s/2 + (int)(Math.random()*(this.width-s/2)),this.y + s/2 + (int)(Math.random()*(this.height-s/2)),s));
+        //int s = 200;
+        //this.drawables.add(new Light(this.x + s/2 + (int)(Math.random()*(this.width-s/2)),this.y + s/2 + (int)(Math.random()*(this.height-s/2)),s));
         
         if (this.embellishmentsList.isEmpty()) return true;
         
@@ -532,6 +533,20 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int x = this.x + (int)(Math.random()*(this.width-w));
                 int y = this.y + dh - h;
                 e.setBox(x,y,w,h);
+            } else if (e.getType().equals(TypeEmbellishment.OBJECT)) {
+                int ow = e.getSprite().getWidth();
+                int oh = e.getSprite().getHeight();
+                if (e.getSprite() instanceof SpriteSheet) {
+                    SpriteSheet sp = (SpriteSheet)e.getSprite();
+                    ow = sp.getSpriteWidth();
+                    oh = sp.getSpriteHeight();
+                }
+                int w = e.getSprite().getWidth();
+                int h = (int)(w*(1.0/e.getSprite().getRatio()));
+                int x = this.x + (int)(Math.random()*(this.width-w));
+                int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
+                e.setBox(x,y,w,h);
+                e.setCollisionBoxList(e.getSprite().getCollisionBoxList(), ow, oh);
             }
             
             
@@ -550,7 +565,11 @@ public class Lieu extends Element implements Generable, Collisionable {
             
             proba -= 0.1;
             
-            this.embellishmentsListDrawed.add(e);
+            if (e.getType().equals(TypeEmbellishment.OBJECT)) {
+                this.drawables.add(e);
+            } else {
+                this.embellishmentsListDrawed.add(e);
+            }
             
             
             

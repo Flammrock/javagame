@@ -7,7 +7,11 @@ package canvas;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
@@ -34,6 +38,7 @@ public class SpriteSheet extends Sprite {
     
     HashMap<String, Animation> animations; // liste des animations
     String animationCourrante; // nom de l'animation courrante
+    Animation animationCourranteObj;
     
     int savedSpriteX;
     int savedSpriteY;
@@ -62,6 +67,7 @@ public class SpriteSheet extends Sprite {
         this.decalY = 0;
         this.decalW = 0;
         this.decalH = 0;
+        this.animationCourranteObj = null;
     }
     
     public void setDecal(int x, int y, int w, int h) {
@@ -86,6 +92,16 @@ public class SpriteSheet extends Sprite {
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
     }
+
+    public int getSpriteWidth() {
+        return spriteWidth;
+    }
+
+    public int getSpriteHeight() {
+        return spriteHeight;
+    }
+    
+    
 
     public HashMap<String, Animation> getAnimations() {
         return this.animations;
@@ -114,6 +130,7 @@ public class SpriteSheet extends Sprite {
         if (this.getAnimationParNom(nom)==null) return false;
         this.animationCourrante = nom;
         this.getAnimationParNom(nom).reset();
+        this.animationCourranteObj = this.getAnimationParNom(nom);
         return true;
     }
     
@@ -123,7 +140,14 @@ public class SpriteSheet extends Sprite {
         if (this.animationCourrante.equals(nom)) return false;
         this.animationCourrante = nom;
         this.getAnimationParNom(nom).reset();
+        this.animationCourranteObj = this.getAnimationParNom(nom);
         return true;
+    }
+    
+    public void clearAnimation() {
+        this.animations.clear();
+        this.animationCourranteObj = null;
+        this.animationCourrante = "";
     }
     
     
@@ -155,8 +179,8 @@ public class SpriteSheet extends Sprite {
     
     private int getSpriteX() {
         if (this.nx == 0) return this.savedSpriteX;
-        if (this.getAnimationCourrante()==null) return this.savedSpriteX;
-        int key = this.getAnimationCourrante().getKey();
+        if (this.animationCourranteObj==null) return this.savedSpriteX;
+        int key = this.animationCourranteObj.getKey();
         if (key > this.nx*this.ny-1) key = 0;
         this.savedSpriteX = (key % this.nx) * this.spriteWidth;
         return this.savedSpriteX;
@@ -164,8 +188,8 @@ public class SpriteSheet extends Sprite {
     
     private int getSpriteY() {
         if (this.ny == 0) return this.savedSpriteY;
-        if (this.getAnimationCourrante()==null) return this.savedSpriteY;
-        int key = this.getAnimationCourrante().getKey();
+        if (this.animationCourranteObj==null) return this.savedSpriteY;
+        int key = this.animationCourranteObj.getKey();
         if (key > this.nx*this.ny-1) key = 0;
         this.savedSpriteY = (key / this.nx) * this.spriteHeight;
         return this.savedSpriteY;
@@ -174,9 +198,9 @@ public class SpriteSheet extends Sprite {
     private void nextKeyAnimation() {
         
         if (this.animations.isEmpty()) return;
-        if (this.getAnimationCourrante()==null) return;
+        if (this.animationCourranteObj==null) return;
         
-        this.getAnimationCourrante().nextKey();
+        this.animationCourranteObj.nextKey();
         
     }
     
@@ -213,6 +237,17 @@ public class SpriteSheet extends Sprite {
         if (this.ondraw!=null) this.ondraw.accept(c);
     }
     
-    
+    @Override
+    public double getRatio() {
+        int nsw = this.image.getWidth();
+        int nsh = this.image.getHeight();
+        if (this.spriteWidth >= 0) nsw = this.spriteWidth;
+        if (this.spriteHeight >= 0) nsh = this.spriteHeight;
+        return (double)nsw / (double)nsh;
+    }
+
+    public void setAnimationExternal(Animation animation) {
+        this.animationCourranteObj = animation;
+    }
     
 }

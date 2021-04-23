@@ -5,13 +5,19 @@
  */
 package canvas;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author User
  */
-public class Animation {
+public class Animation implements Serializable {
     
     String nom;
     ArrayList<Integer> keyMap;
@@ -167,6 +173,21 @@ public class Animation {
         this.key = this.keyMap.get(this.index);
         
         if (this.key < 0) this.key = 0;
+    }
+    
+    
+    public Animation copie() {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (Animation) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
     
 }
