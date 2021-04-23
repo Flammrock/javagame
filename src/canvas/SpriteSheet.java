@@ -6,6 +6,12 @@
 package canvas;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 /**
@@ -162,10 +168,11 @@ public class SpriteSheet extends Sprite {
     public boolean loadImage() {
         boolean r = super.loadImage();
         if (!r) return false;
-        if (this.spriteWidth > this.image.getWidth()) this.spriteWidth = this.image.getWidth();
-        if (this.spriteHeight > this.image.getHeight()) this.spriteHeight = this.image.getHeight();
-        this.nx = (int)Math.floor(this.image.getWidth() / this.spriteWidth);
-        this.ny = (int)Math.floor(this.image.getHeight() / this.spriteHeight);
+        BufferedImage image = this.getImage();
+        if (this.spriteWidth > image.getWidth()) this.spriteWidth = image.getWidth();
+        if (this.spriteHeight > image.getHeight()) this.spriteHeight = image.getHeight();
+        this.nx = (int)Math.floor(image.getWidth() / this.spriteWidth);
+        this.ny = (int)Math.floor(image.getHeight() / this.spriteHeight);
         return true;
     }
     
@@ -201,11 +208,13 @@ public class SpriteSheet extends Sprite {
         if (!this.isLoaded()) return;
         //g.drawImage(this.image, this.x, this.y, null);
         
+        BufferedImage image = this.getImage();
+        
         int w = this.x+this.width - (int)(((double)this.width/(double)this.spriteWidth)*(double)(this.decalW+this.decalX));
         int h = this.y+this.height - (int)(((double)this.height/(double)this.spriteHeight)*(double)(this.decalH+this.decalY));
         
         g.drawImage(
-                this.image,
+                image,
                 
                 // dest
                 c.toWorldX(this.x),
@@ -231,8 +240,10 @@ public class SpriteSheet extends Sprite {
     
     @Override
     public double getRatio() {
-        int nsw = this.image.getWidth();
-        int nsh = this.image.getHeight();
+        if (!this.isLoaded()) return 1.0;
+        BufferedImage image = this.getImage();
+        int nsw = image.getWidth();
+        int nsh = image.getHeight();
         if (this.spriteWidth >= 0) nsw = this.spriteWidth;
         if (this.spriteHeight >= 0) nsh = this.spriteHeight;
         return (double)nsw / (double)nsh;
@@ -240,6 +251,20 @@ public class SpriteSheet extends Sprite {
 
     public void setAnimationExternal(Animation animation) {
         this.animationCourranteObj = animation;
+    }
+    
+    public SpriteSheet copie() {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (SpriteSheet) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
     
 }

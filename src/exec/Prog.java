@@ -16,6 +16,9 @@ import embellishment.TypeEmbellishment;
 import java.util.ArrayList;
 import modele.element.*;
 import eventsystem.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 import map.Squeleton;
 
 public class Prog {

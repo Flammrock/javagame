@@ -12,16 +12,26 @@ import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.function.Consumer;
 import javax.imageio.ImageIO;
+import modele.element.Element;
 
 /**
  *
  * @author User
  */
 public class Sprite implements Collisionable {
+    
+    // l'image une fois chargé
+    static public HashMap<String,BufferedImage> images = new HashMap<>();
     
     // les coordonnées du sprite (Destination)
     int x;
@@ -54,9 +64,6 @@ public class Sprite implements Collisionable {
     // le nom du fichier de l'image
     String spritefile;
     
-    // l'image une fois chargé
-    BufferedImage image;
-    
     // event ondraw
     Consumer<Canvas> ondraw;
     
@@ -73,7 +80,6 @@ public class Sprite implements Collisionable {
      */
     public Sprite(String spritefile) {
         this.spritefile = spritefile;
-        this.image = null;
         this.x = 0;
         this.y = 0;
         this.mx = 0;
@@ -255,20 +261,25 @@ public class Sprite implements Collisionable {
     }
     
     public boolean isLoaded() {
-        return this.image != null;
+        if (!Sprite.images.containsKey(this.spritefile)) return false;
+        if (Sprite.images.get(this.spritefile)==null) return false;
+        return true;
     }
     
     public boolean loadImage() {
+        if (this.isLoaded()) return true;
         try {
-            this.image = ImageIO.read(getClass().getResourceAsStream(this.spritefile));
+            Sprite.images.put(this.spritefile,ImageIO.read(getClass().getResourceAsStream(this.spritefile)));
             return true;
         } catch (IOException e) {}
         return false;
     }
     
     public double getRatio() {
-        int nsw = this.image.getWidth();
-        int nsh = this.image.getHeight();
+        if (!this.isLoaded()) return 1.0;
+        BufferedImage image = this.getImage();
+        int nsw = image.getWidth();
+        int nsh = image.getHeight();
         if (this.swidth >= 0) nsw = this.swidth;
         if (this.sheight >= 0) nsh = this.sheight;
         return (double)nsw / (double)nsh;
@@ -279,12 +290,12 @@ public class Sprite implements Collisionable {
         if (!this.isLoaded()) return;
         //g.drawImage(this.image, this.x, this.y, null);
         
-        
+        BufferedImage image = this.getImage();
         
         int nsx = 0;
         int nsy = 0;
-        int nsw = this.image.getWidth();
-        int nsh = this.image.getHeight();
+        int nsw = image.getWidth();
+        int nsh = image.getHeight();
         
         if (this.sx >= 0) nsx = this.sx;
         if (this.sy >= 0) nsy = this.sy;
@@ -293,8 +304,8 @@ public class Sprite implements Collisionable {
         
         double ratio = (double)nsw / (double)nsh;
         
-        int ww = (this.width < 0 ? this.image.getWidth() : this.width);
-        int hh = (this.height < 0 ? this.image.getHeight() : this.height);
+        int ww = (this.width < 0 ? image.getWidth() : this.width);
+        int hh = (this.height < 0 ? image.getHeight() : this.height);
         
         int w2 = this.scalewidth < 0 ? nsw : this.scalewidth;
         int h2 = this.scaleheight < 0 ? nsh : this.scaleheight;
@@ -329,7 +340,7 @@ public class Sprite implements Collisionable {
             
             // on dessine
             g.drawImage(
-                    this.image,
+                    image,
 
                     // dest
                     c.toWorldX(this.x+xi),
@@ -404,7 +415,20 @@ public class Sprite implements Collisionable {
     }
 
     public void setImage(BufferedImage image) {
-        this.image = image;
+        if (image == null) return;
+        if (Sprite.images.containsValue(image)) {
+            for (Entry<String, BufferedImage> entry : Sprite.images.entrySet()) {
+                if (entry.getValue().equals(image)) {
+                    this.spritefile = entry.getKey();
+                    break;
+                }
+            }
+        }
+    }
+    
+    public void setImage(String spritefile) {
+        this.spritefile = spritefile;
+        this.loadImage();
     }
 
     public void setSource(int sx, int sy, int swidth, int sheight) {
@@ -417,8 +441,8 @@ public class Sprite implements Collisionable {
     public void setScaleSize(Integer w, Integer h) {
         if (w == null && h == null) return;
         if (w == null && this.isLoaded()) {
-            int nsw = this.image.getWidth();
-            int nsh = this.image.getHeight();
+            int nsw = this.getImage().getWidth();
+            int nsh = this.getImage().getHeight();
             if (this.swidth >= 0) nsw = this.swidth;
             if (this.sheight >= 0) nsh = this.sheight;
             this.scalewidth = (int)((double)h * (double)nsw / (double)nsh);
@@ -426,8 +450,8 @@ public class Sprite implements Collisionable {
             this.scalewidth = w;
         }
         if (h == null && this.isLoaded()) {
-            int nsw = this.image.getWidth();
-            int nsh = this.image.getHeight();
+            int nsw = this.getImage().getWidth();
+            int nsh = this.getImage().getHeight();
             if (this.swidth >= 0) nsw = this.swidth;
             if (this.sheight >= 0) nsh = this.sheight;
             this.scaleheight = (int)((double)w * (double)nsh / (double)nsw);
@@ -473,7 +497,22 @@ public class Sprite implements Collisionable {
     }
 
     public BufferedImage getImage() {
-        return this.image;
+        return Sprite.images.get(this.spritefile);
+    }
+    
+    
+    public Sprite copie() {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (Sprite) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
     
 }

@@ -23,6 +23,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import map.Camera;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
+import java.util.Scanner;
 
 /**
  *
