@@ -16,6 +16,11 @@ import canvas.light.Light;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -31,48 +36,13 @@ public class Embellishment implements Collisionable {
     
     Drawable parent;
     
-    int x;
-    int y;
-    int width;
-    int height;
-    
-    Animation animation;
-    
     boolean collideEmbellishment;
     
     public Embellishment(String type, Sprite sprite) {
         this.type = type;
-        this.sprite = sprite;
+        this.sprite = sprite.copie();
         this.collisionboxlist = new ArrayList<>();
-        this.animation = null;
-        if (this.sprite != null && this.sprite instanceof SpriteSheet) {
-            SpriteSheet sp = (SpriteSheet)this.sprite;
-            this.animation = sp.getAnimationCourrante();
-            if (this.animation!=null) this.animation = this.animation.copie();
-        }
-        this.x = 0;
-        this.y = 0;
-        this.width = 0;
-        this.height = 0;
         this.collideEmbellishment = true;
-        this.drawables = new ArrayList<>();
-        this.parent = null;
-    }
-    
-    public Embellishment(Embellishment e) {
-        this.type = e.getType();
-        this.sprite = e.getSprite();
-        this.x = e.getX();
-        this.y = e.getY();
-        this.width = e.getWidth();
-        this.height = e.getHeight();
-        this.collideEmbellishment = e.getCollideEmbellishment();
-        this.animation = null;
-        if (this.sprite != null && this.sprite instanceof SpriteSheet) {
-            SpriteSheet sp = (SpriteSheet)this.sprite;
-            this.animation = sp.getAnimationCourrante();
-            if (this.animation!=null) this.animation = this.animation.copie();
-        }
         this.drawables = new ArrayList<>();
         this.parent = null;
     }
@@ -117,22 +87,26 @@ public class Embellishment implements Collisionable {
 
     @Override
     public int getNewX() {
-        return x;
+        if (this.sprite==null) return 0;
+        return this.sprite.getNewX();
     }
 
     @Override
     public int getNewY() {
-        return y;
+        if (this.sprite==null) return 0;
+        return this.sprite.getNewY();
     }
 
     @Override
     public void applyMove() {
-        
+        if (this.sprite==null) return;
+        this.sprite.applyMove();
     }
 
     @Override
     public void cancelMove() {
-        
+        if (this.sprite==null) return;
+        this.sprite.cancelMove();
     }
 
     @Override
@@ -153,19 +127,7 @@ public class Embellishment implements Collisionable {
     @Override
     public void draw(Canvas c, Graphics g) {
         if (this.sprite==null) return;
-        this.sprite.setX(x);
-        this.sprite.setY(y);
-        this.sprite.setScaleSize(width, height);
-        this.sprite.setWidth(width);
-        this.sprite.setHeight(height);
-        
-        if (this.sprite instanceof SpriteSheet) {
-            SpriteSheet sp = (SpriteSheet)this.sprite;
-            sp.setAnimationExternal(this.animation);
-            sp.draw(c,g);
-        } else {
-            this.sprite.draw(c,g);
-        }
+        this.sprite.draw(c,g);
     }
 
     @Override
@@ -179,22 +141,26 @@ public class Embellishment implements Collisionable {
 
     @Override
     public int getX() {
-        return x;
+        if (this.sprite==null) return 0;
+        return this.sprite.getX();
     }
 
     @Override
     public void setX(int x) {
-        this.x = x;
+        if (this.sprite==null) return;
+        this.sprite.setX(x);
     }
 
     @Override
     public int getY() {
-        return y;
+        if (this.sprite==null) return 0;
+        return this.sprite.getY();
     }
 
     @Override
     public void setY(int y) {
-        this.y = y;
+        if (this.sprite==null) return;
+        this.sprite.setY(y);
     }
 
     @Override
@@ -215,19 +181,25 @@ public class Embellishment implements Collisionable {
     }
     
     public void setWidth(int w) {
-        this.width = w;
+        if (this.sprite==null) return;
+        this.sprite.setScaleWidth(w);
+        this.sprite.setWidth(w);
     }
     
     public void setHeight(int h) {
-        this.height = h;
+        if (this.sprite==null) return;
+        this.sprite.setScaleHeight(h);
+        this.sprite.setHeight(h);
     }
 
     public int getWidth() {
-        return width;
+        if (this.sprite==null) return 0;
+        return this.sprite.getWidth();
     }
 
     public int getHeight() {
-        return height;
+        if (this.sprite==null) return 0;
+        return this.sprite.getHeight();
     }
     
     public void setBox(int x, int y, int width, int height) {
@@ -236,25 +208,34 @@ public class Embellishment implements Collisionable {
         this.setWidth(width);
         this.setHeight(height);
         if (this.collideEmbellishment) this.computeCollisonBox();
+        if (this.sprite==null) return;
+        if (this.sprite.getDrawables()==null) return;
+        for (Drawable d : this.sprite.getDrawables()) {
+            d.moveTo(this.getX()+this.sprite.getWidth()/2, this.getY()+this.sprite.getHeight()/2);
+            d.setParent(this.parent);
+            this.addDrawable(d);
+        }
     }
     
     public void computeCollisonBox() {
         if (this.collisionboxlist==null) this.collisionboxlist = new ArrayList<>();
         this.collisionboxlist.clear();
-        CollisionBox b = new CollisionBox(0,0, width, height);
-        b.apply(x, y);
+        CollisionBox b = new CollisionBox(0,0, this.getWidth(), this.getHeight());
+        b.apply(this.getX(), this.getY());
         this.collisionboxlist.add(b);
     }
     
     public void setCollisionBoxList(ArrayList<CollisionBox> list, int original_w, int original_h) {
         this.collisionboxlist.clear();
         if (list == null) return;
+        int ws = this.getWidth();
+        int hs = this.getHeight();
         for (CollisionBox box : list) {
-            int x = box.getX()*((int)((double)this.width/(double)original_w));
-            int y = box.getY()*((int)((double)this.height/(double)original_h));
-            int w = box.getWidth()*((int)((double)this.width/(double)original_w));
-            int h = box.getHeight()*((int)((double)this.height/(double)original_h));
-            box.apply(this.x,this.y);
+            int x = box.getX()*((int)((double)ws/(double)original_w));
+            int y = box.getY()*((int)((double)hs/(double)original_h));
+            int w = box.getWidth()*((int)((double)ws/(double)original_w));
+            int h = box.getHeight()*((int)((double)hs/(double)original_h));
+            box.apply(this.getX(),this.getY());
             this.collisionboxlist.add(new CollisionBox(x,y,w,h,box.isDraw()));
         }
     }
@@ -273,18 +254,18 @@ public class Embellishment implements Collisionable {
         return this.collideEmbellishment;
     }
     
-    public void copyLightFromSprite() {
+    /*public void copyLightFromSprite() {
         if (this.sprite==null) return;
         if (this.sprite.getDrawables()==null) return;
         for (Drawable d : this.sprite.getDrawables()) {
             if (d instanceof Light) {
                 Light l = ((Light)d).copie();
-                l.moveTo(this.x+this.sprite.getWidth()/2, this.y+this.sprite.getHeight()/2);
+                l.moveTo(this.getX()+this.sprite.getWidth()/2, this.getY()+this.sprite.getHeight()/2);
                 l.setParent(this.parent);
                 this.addDrawable(l);
             }
         }
-    }
+    }*/
     
     @Override
     public void setParent(Drawable d) {
@@ -297,6 +278,21 @@ public class Embellishment implements Collisionable {
     @Override
     public Drawable getParent() {
         return this.parent;
+    }
+    
+    
+    public Embellishment copie() {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (Embellishment) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
     
 }

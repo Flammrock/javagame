@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 
-public abstract class Element implements Serializable, Drawable {
+public abstract class Element implements Drawable {
     String description;
     
     public String getDescription() {

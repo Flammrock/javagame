@@ -517,7 +517,7 @@ public class Lieu extends Element implements Generable, Collisionable {
         while (Math.random() < proba) {
             
             Embellishment temp = this.embellishmentsList.get((int)(Math.random()*this.embellishmentsList.size()));
-            Embellishment e = new Embellishment(temp);
+            Embellishment e = temp.copie();
             
             // en fonction du type, on le place différemment
             if (e.getType().equals(TypeEmbellishment.GROUND)) {
@@ -546,7 +546,6 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
                 e.setBox(x,y,w,h);
                 e.setCollisionBoxList(e.getSprite().getCollisionBoxList(), ow, oh);
-                e.copyLightFromSprite();
             }
             
             
