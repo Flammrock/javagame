@@ -102,9 +102,10 @@ public interface Drawable extends Serializable {
     
     /**
      * Permet de récupérer la zone de clipping du Drawable.
+     * @param c
      * @return retourne le Shape qui sert de clip au Drawable
      */
-    default public Shape getClip() {
+    default public Shape getClip(Canvas c) {
         return null;
     }
     
@@ -113,4 +114,18 @@ public interface Drawable extends Serializable {
      * @param shape Objet Shape qui servira de base pour le clip
      */
     default public void setClip(Shape shape) {}
+    
+    /**
+     * Permet de définir le parent
+     * @param d Le parent de ce Drawable
+     */
+    default public void setParent(Drawable d) {}
+    
+    /**
+     * Permet de récupérer le parent de ce Drawable
+     * @return retourne le parent
+     */
+    default public Drawable getParent() {
+        return null;
+    }
 }
