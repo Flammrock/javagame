@@ -4,8 +4,7 @@ JavaGame is a roguelike game.
 
 
 ## TODO 
-- [ ] cycle jour/nuit
-- [ ] système de lumière
+- [X] système de lumière
 - [ ] malédiction du temple => les objets disparaissent au bout d'un certain moment
 - [ ] ajouter effet de salles
 - [X] génération de niveau aléaroire
@@ -30,7 +29,7 @@ JavaGame is a roguelike game.
 - [ ] customisation du perso
 - [ ] barre de faim, de soif,...
 - [ ] rajouter des modes de difficulté
-- [ ] charte graphique
+- [X] charte graphique
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
