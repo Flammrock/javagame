@@ -8,7 +8,15 @@ import canvas.collision.Collisionable;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.FileNotFoundException;
+import static java.lang.Math.random;
+import static java.lang.StrictMath.random;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import map.Generable;
 
 
@@ -57,7 +65,33 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.setProperty(PropertyList.PVMAX,pv);
         this.setProperty(PropertyList.POIDSMAX,force*3);
     }
-
+    
+    
+    public void initAleatoire(){
+        String[] mots;
+        Scanner scan = null;
+        try {
+            scan = new Scanner(new File("C:\\Users\\ssj-m_000\\Documents\\NetBeansProjects\\javagame\\build\\classes\\monstres")).useDelimiter("\\s*/\\s*");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Personnage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int nbrLigne = 23;
+        Random random = new Random();
+        int LigneRdm = random.nextInt(nbrLigne + 1) + 1;
+        for(int i = 0;i<LigneRdm;i++){
+            scan.nextLine();
+        }
+        String phrase = scan.nextLine();
+        mots = phrase.split("/");
+        this.nom = mots[1];
+        this.description = mots[2];
+        double age = 0;
+        double force = Double.parseDouble(mots[4]);
+        double agilite = Double.parseDouble(mots[5]);
+        double pvMax = Double.parseDouble(mots[6]);
+        double poids = Double.parseDouble(mots[3]);
+        init(age,force,agilite,pvMax);   
+    }
     public SpriteSheet getSprite() {
         return sprite;
     }
@@ -121,7 +155,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
     public void setProperty(String nom, double valeur){
-        System.out.println(nom + " "+ valeur);
+        //System.out.println(nom + " "+ valeur);
         for (Property p : this.listproperties) {
             if(p.getNom().equals(nom)){
                 p.setValeur(valeur);
