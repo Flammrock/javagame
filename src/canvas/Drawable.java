@@ -5,6 +5,7 @@
  */
 package canvas;
 
+import canvas.light.Light;
 import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,7 +34,9 @@ public interface Drawable extends Serializable {
      * 
      * @return retourne la liste du sous-ensemble
      */
-    public ArrayList<Drawable> getDrawables();
+    default public ArrayList<Drawable> getDrawables() {
+        return null;
+    }
     
     /**
      * Chaque Drawable est censé pouvoir être dessiner dans le canvas,
@@ -87,7 +90,14 @@ public interface Drawable extends Serializable {
     public void moveBy(int x, int y);
     
     
+    /**
+     * Permet de savoir si un Drawable doit être dessiner ou pas.
+     * Si cette méthode renvoie true, alors ce Drawable sera dessiné, sinon il ne sera pas dessiné.
+     * @return retourne true pour être dessiner, false sinon
+     */
+    default public boolean isDraw() {
+        return true;
+    }
     
-    public boolean isDraw();
     
 }

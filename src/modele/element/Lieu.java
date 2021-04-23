@@ -547,6 +547,7 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
                 e.setBox(x,y,w,h);
                 e.setCollisionBoxList(e.getSprite().getCollisionBoxList(), ow, oh);
+                e.copyLightFromSprite();
             }
             
             

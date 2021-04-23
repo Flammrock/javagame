@@ -12,7 +12,7 @@ import canvas.Sprite;
 import canvas.SpriteSheet;
 import canvas.collision.CollisionBox;
 import canvas.collision.Collisionable;
-import canvas.light.LightData;
+import canvas.light.Light;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
@@ -34,7 +34,7 @@ public class Embellishment implements Collisionable {
     String type;
     Sprite sprite;
     ArrayList<CollisionBox> collisionboxlist;
-    ArrayList<LightData> lightdatalist;
+    ArrayList<Drawable> drawables;
     
     int x;
     int y;
@@ -60,7 +60,7 @@ public class Embellishment implements Collisionable {
         this.width = 0;
         this.height = 0;
         this.collideEmbellishment = true;
-        this.lightdatalist = new ArrayList<>();
+        this.drawables = new ArrayList<>();
     }
     
     public Embellishment(Embellishment e) {
@@ -77,15 +77,7 @@ public class Embellishment implements Collisionable {
             this.animation = sp.getAnimationCourrante();
             if (this.animation!=null) this.animation = this.animation.copie();
         }
-        this.lightdatalist = new ArrayList<>();
-    }
-    
-    public void addLightData(LightData l) {
-        this.lightdatalist.add(l);
-    }
-    
-    public void clearLightData() {
-        this.lightdatalist.clear();
+        this.drawables = new ArrayList<>();
     }
 
     public String getType() {
@@ -181,7 +173,11 @@ public class Embellishment implements Collisionable {
 
     @Override
     public ArrayList<Drawable> getDrawables() {
-        return null;
+        return this.drawables;
+    }
+    
+    public void addDrawable(Drawable d) {
+        this.drawables.add(d);
     }
 
     @Override
@@ -280,5 +276,16 @@ public class Embellishment implements Collisionable {
         return this.collideEmbellishment;
     }
     
+    public void copyLightFromSprite() {
+        if (this.sprite==null) return;
+        if (this.sprite.getDrawables()==null) return;
+        for (Drawable d : this.sprite.getDrawables()) {
+            if (d instanceof Light) {
+                Light l = (Light)d;
+                l.moveTo(this.x+this.sprite.getWidth()/2, this.y+this.sprite.getHeight()/2);
+                this.addDrawable(l.copie());
+            }
+        }
+    }
     
 }

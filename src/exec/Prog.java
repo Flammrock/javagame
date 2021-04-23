@@ -56,6 +56,7 @@ import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
+import canvas.light.Light;
 import embellishment.Embellishment;
 import embellishment.TypeEmbellishment;
 import java.util.ArrayList;
@@ -184,7 +185,7 @@ public class Prog {
         lightsprite.ajouterAnimation(new Animation("Lighting",new int[] {0, 1, 2, 3, 4, 5, 6, 7}));
         lightsprite.addCollisionBox(new CollisionBox(4, 14, 8, 11));
         lightsprite.setAnimation("Lighting");
-        //lightsprite.addDrawable(new Light(16/2,26/2,200));
+        lightsprite.addDrawable(new Light(16/2,26/2,200));
         
         Embellishment e_ground = new Embellishment(TypeEmbellishment.GROUND, tileset.getSprite("embellishment_ground"));
         Embellishment e_wall_1 = new Embellishment(TypeEmbellishment.WALL, tileset.getSprite("embellishment_wall_1"));
