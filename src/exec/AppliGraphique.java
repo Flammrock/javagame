@@ -8,14 +8,10 @@ package exec;
 import canvas.Combat.DebutCombatEvent;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
-import java.awt.BufferCapabilities;
 import java.awt.Color;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsEnvironment;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferStrategy;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,13 +27,6 @@ import modele.element.*;
  * @author pierrecharbit
  */
 public class AppliGraphique extends javax.swing.JFrame {
-
-    
-    // use hardware acceleration
-    GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-    BufferCapabilities bufferCapabilities;
-    BufferStrategy bufferStrategy;
-    
     
     private Aventure aventure;
     /**
@@ -47,17 +36,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     public AppliGraphique(Aventure aventure) {
         this.aventure = aventure;
         initComponents();
-        
-        // hardware acceleration
-        createBufferStrategy(2);
-        this.bufferStrategy = getBufferStrategy();
-        this.bufferCapabilities = this.gc.getBufferCapabilities();
-        
-        // hardware acceleration
-        canvas1.bindBufferStrategy(this.bufferStrategy);
-        canvas1.bindBufferCapabilitiest(this.bufferCapabilities);
-        canvas1.bindGraphicsConfiguration(this.gc);
-        
+
         AppliGraphique _this = this;
         listeObjetInventaire.addListSelectionListener(new ListSelectionListener(){
             @Override

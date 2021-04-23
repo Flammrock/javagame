@@ -35,11 +35,6 @@ public class Canvas extends JPanel {
     
     Color background;
     
-    // use hardware acceleration
-    GraphicsConfiguration gc;
-    BufferCapabilities bufferCapabilities;
-    BufferStrategy bufferStrategy;
-    
     // caméra courante
     Camera camera;
     
@@ -49,12 +44,6 @@ public class Canvas extends JPanel {
         this.keyMap = new HashMap<>();
         this.camera = new Camera();
         this.background = Color.black;
-        
-        
-        // use hardware acceleration
-        this.gc = null;
-        this.bufferCapabilities = null;
-        this.bufferStrategy = null;
     }
     
     public void setColor(Color c) {
@@ -127,34 +116,6 @@ public class Canvas extends JPanel {
     
     public int toScale(int v) {
         return (int)(v*this.getScale());
-    }
-    
-    public BufferedImage loadImage(InputStream inputStream) {
-        //load the file
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(inputStream);
-        } catch (Exception exception) {
-            if (image == null) {
-                return null;
-            }
-        }
-
-        //NOTE: Use "copyImage" instead of "bufferImage" to keep alpha channel transparency
-        //that is stored in the file.
-        return copyImage(image);
-    }
-    
-    public BufferedImage copyImage(BufferedImage image) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-        return createImage(width, height, image.getType() != BufferedImage.OPAQUE);
-    }
-
-    public BufferedImage createImage(int width, int height, boolean shouldTransparencyBeAllowed) {
-        //this enables/disables transparency and makes the Image more likely to be managed
-        return this.gc.createCompatibleImage(width, height,
-                shouldTransparencyBeAllowed ? Transparency.TRANSLUCENT : Transparency.OPAQUE);
     }
     
     
@@ -278,21 +239,6 @@ public class Canvas extends JPanel {
         int h = d.height; 
         
         Graphics2D g2d = (Graphics2D)g.create();
-        
-        //if(!bufferCapabilities.isPageFlipping() || bufferCapabilities.isFullScreenRequired()) {
-            //System.out.println("Hardware Acceleration not active. Define J2D_D3D_NO_HWCHECK=true as Env variable.");
-            //double a = 1/0;
-        //}
-        
-        //BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        //BufferedImage buffImg = this.createImage(w, h, true);
-        //VolatileImage buffImg = createVolatileImage(w, h);
-        //Graphics2D gbi = buffImg.createGraphics();
-        //g2d.setColor(new Color(0,0,0,0));
-        //g2d.fillRect(0, 0, w, h);
-        //g2d.setComposite(AlphaComposite.DstOut);
-         
-         //gbi.dispose();
          
         BufferedImage buffImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gbi = buffImg.createGraphics();
@@ -310,21 +256,6 @@ public class Canvas extends JPanel {
         for (Light light : lights) {
             light.draw(this,g2d);
         }
-        
-        
-        
-        //g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OUT, 1.0f));
-        
-        
-        // on dessine l'obscurité ambiante
-        //gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
-        //gbi.drawImage(buffImg2, 0, 0, null);
-        
-        // on dessine les lights
-        //gbi.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, 1.0f));
-        //gbi.drawImage(buffImg2, 0, 0, null);
-        
-        //g2d.drawImage(buffImg, 0, 0, null);
         
         g2d.dispose();
         
@@ -350,18 +281,6 @@ public class Canvas extends JPanel {
     
     public void onRelacheTouche(KeyEvent e) {
         this.keyMap.put(e.getKeyCode(), Boolean.FALSE);
-    }
-
-    public void bindBufferStrategy(BufferStrategy bufferStrategy) {
-        this.bufferStrategy = bufferStrategy;
-    }
-
-    public void bindBufferCapabilitiest(BufferCapabilities bufferCapabilities) {
-        this.bufferCapabilities = bufferCapabilities;
-    }
-
-    public void bindGraphicsConfiguration(GraphicsConfiguration gc) {
-        this.gc = gc;
     }
     
 
