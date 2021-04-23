@@ -29,6 +29,8 @@ public class Embellishment implements Collisionable {
     ArrayList<CollisionBox> collisionboxlist;
     ArrayList<Drawable> drawables;
     
+    Drawable parent;
+    
     int x;
     int y;
     int width;
@@ -54,6 +56,7 @@ public class Embellishment implements Collisionable {
         this.height = 0;
         this.collideEmbellishment = true;
         this.drawables = new ArrayList<>();
+        this.parent = null;
     }
     
     public Embellishment(Embellishment e) {
@@ -71,6 +74,7 @@ public class Embellishment implements Collisionable {
             if (this.animation!=null) this.animation = this.animation.copie();
         }
         this.drawables = new ArrayList<>();
+        this.parent = null;
     }
 
     public String getType() {
@@ -274,11 +278,25 @@ public class Embellishment implements Collisionable {
         if (this.sprite.getDrawables()==null) return;
         for (Drawable d : this.sprite.getDrawables()) {
             if (d instanceof Light) {
-                Light l = (Light)d;
+                Light l = ((Light)d).copie();
                 l.moveTo(this.x+this.sprite.getWidth()/2, this.y+this.sprite.getHeight()/2);
-                this.addDrawable(l.copie());
+                l.setParent(this.parent);
+                this.addDrawable(l);
             }
         }
+    }
+    
+    @Override
+    public void setParent(Drawable d) {
+        this.parent = d;
+        for (Drawable l : this.drawables) {
+            l.setParent(d);
+        }
+    }
+    
+    @Override
+    public Drawable getParent() {
+        return this.parent;
     }
     
 }
