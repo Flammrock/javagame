@@ -6,6 +6,8 @@
 package exec;
 
 import canvas.Animation;
+import canvas.Canvas;
+import canvas.DrawListener;
 import canvas.SpriteSheet;
 import canvas.TileSet;
 import canvas.collision.CollisionBox;
@@ -14,13 +16,22 @@ import canvas.light.Light;
 import embellishment.Embellishment;
 import embellishment.TypeEmbellishment;
 import java.util.ArrayList;
-import modele.element.*;
 import eventsystem.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 import map.GenerateListener;
 import map.Squeleton;
+import modele.element.Arme;
+import modele.element.Armure;
+import modele.element.Aventure;
+import modele.element.Effet;
+import modele.element.Lieu;
+import modele.element.Niveau;
+import modele.element.Porte;
+import modele.element.Nourriture;
+import modele.element.Personnage;
+import modele.element.PropertyList;
 
 public class Prog {
 
@@ -198,6 +209,15 @@ public class Prog {
         popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
         joueur.ajouter(potion);
         joueur.addCollisionBox(new CollisionBox(0,35,28,14));
+        joueur.addListener(new SimpleListener("onEnterSalle") {
+            @Override
+            public void onEvent(Object sender, SimpleEvent e) {
+                if (sender instanceof Lieu) {
+                    Lieu l = (Lieu)sender;
+                    l.setVisible(true);
+                }
+            }
+        });
         
         
         // on créé le sprite pour le joueur
@@ -213,39 +233,42 @@ public class Prog {
         s.ajouterAnimation(new Animation("Walk-Right",new int[] {24, 25, 26, 27}));
         s.ajouterAnimation(new Animation("Walk-Down",new int[] {28, 29, 30, 31}));
         s.setAnimation("Idle-Left");
-        s.setOnDraw((canvas) -> {
+        s.setOnDraw(new DrawListener(){
+            @Override
+            public void onDraw(Canvas canvas) {
             
-            int speed = 6;
-            
-            // LEFT
-            if (canvas.isAppuyer(37)) {
-                s.moveBy(-speed, 0);
-                s.setAnimationIfNot("Walk-Left");
-                
-            // UP
-            } else if (canvas.isAppuyer(38)) {
-                s.moveBy(0, -speed);
-                s.setAnimationIfNot("Walk-Up");
-            
-            // RIGHT
-            } else if (canvas.isAppuyer(39)) {
-                s.moveBy(speed, 0);
-                s.setAnimationIfNot("Walk-Right");
-                
-            // DOWN
-            } else if (canvas.isAppuyer(40)) {
-                s.moveBy(0, speed);
-                s.setAnimationIfNot("Walk-Down");
-                
-            } else {
-                if (s.getAnimationCourrante().getNom().equals("Walk-Left")) {
-                    s.setAnimation("Idle-Left");
-                } else if (s.getAnimationCourrante().getNom().equals("Walk-Up")) {
-                    s.setAnimation("Idle-Up");
-                } else if (s.getAnimationCourrante().getNom().equals("Walk-Right")) {
-                    s.setAnimation("Idle-Right");
-                } else if (s.getAnimationCourrante().getNom().equals("Walk-Down")) {
-                    s.setAnimation("Idle-Down");
+                int speed = 6;
+
+                // LEFT
+                if (canvas.isAppuyer(37)) {
+                    s.moveBy(-speed, 0);
+                    s.setAnimationIfNot("Walk-Left");
+
+                // UP
+                } else if (canvas.isAppuyer(38)) {
+                    s.moveBy(0, -speed);
+                    s.setAnimationIfNot("Walk-Up");
+
+                // RIGHT
+                } else if (canvas.isAppuyer(39)) {
+                    s.moveBy(speed, 0);
+                    s.setAnimationIfNot("Walk-Right");
+
+                // DOWN
+                } else if (canvas.isAppuyer(40)) {
+                    s.moveBy(0, speed);
+                    s.setAnimationIfNot("Walk-Down");
+
+                } else {
+                    if (s.getAnimationCourrante().getNom().equals("Walk-Left")) {
+                        s.setAnimation("Idle-Left");
+                    } else if (s.getAnimationCourrante().getNom().equals("Walk-Up")) {
+                        s.setAnimation("Idle-Up");
+                    } else if (s.getAnimationCourrante().getNom().equals("Walk-Right")) {
+                        s.setAnimation("Idle-Right");
+                    } else if (s.getAnimationCourrante().getNom().equals("Walk-Down")) {
+                        s.setAnimation("Idle-Down");
+                    }
                 }
             }
             
@@ -311,8 +334,14 @@ public class Prog {
                     
                     Lieu l = (Lieu)event.getData();
                     
-                    // on ajoute un monstre dans chaque salle
-                    l.ajouter(monstre.copie()); // bien sur on copie le monstre
+                    // on copie le monstre
+                    Personnage m = (Personnage)monstre.copie();
+                    
+                    // on génère le monstre
+                    m.generate(l);
+                    
+                    // on ajoute le monstre dans chaque salle
+                    l.ajouter(m);
                     
                     System.out.println("[GENERATE] "+l);
                     

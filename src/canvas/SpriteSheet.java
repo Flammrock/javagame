@@ -5,6 +5,7 @@
  */
 package canvas;
 
+import canvas.collision.CollisionBox;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
@@ -235,7 +238,7 @@ public class SpriteSheet extends Sprite {
         //g.drawRect(c.toWorldX(x), c.toWorldY(y), c.toScale(w-x), c.toScale(h-y));
         
         this.nextKeyAnimation();
-        if (this.ondraw!=null) this.ondraw.accept(c);
+        if (this.ondraw!=null) this.ondraw.onDraw(c);
     }
     
     @Override
@@ -254,17 +257,26 @@ public class SpriteSheet extends Sprite {
     }
     
     public SpriteSheet copie() {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
-            oos.writeObject(this);
-
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            return (SpriteSheet) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            return null;
+        SpriteSheet c = new SpriteSheet(spritefile, x, y, spriteWidth, spriteHeight, width, height);
+        c.setSource(sx, sy, swidth, sheight);
+        c.setScaleWidth(this.scalewidth);
+        c.setScaleHeight(this.scaleheight);
+        c.setRepeatX(repeatX);
+        c.setRepeatY(repeatY);
+        for (CollisionBox b : this.collisionBoxList) {
+            c.addCollisionBox(b.copie());
         }
+        for (Drawable d : this.drawables) {
+            c.addDrawable(d.copie());
+        }
+        for (Iterator<Map.Entry<String, Animation>> it = this.animations.entrySet().iterator(); it.hasNext();) {
+            Map.Entry<String, Animation> entry = it.next();
+            c.ajouterAnimation(entry.getValue().copie());
+        }
+        c.setAnimation(this.animationCourrante);
+        c.setDecal(decalX,decalY,decalW,decalH);
+        c.loadImage();
+        return c;
     }
     
 }

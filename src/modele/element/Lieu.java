@@ -90,6 +90,16 @@ public class Lieu extends Element implements Generable, Collisionable {
     public int getY() {
         return y;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
+    
     
     
 
@@ -192,11 +202,15 @@ public class Lieu extends Element implements Generable, Collisionable {
     
     public boolean ajouter(Element o) {
         if (o instanceof Objet) {
-            this.objets.add((Objet)o.copie());
+            Element e = (Element)o.copie();
+            this.objets.add((Objet)e);
+            this.drawables.add(e);
             return true;
         }
         if (o instanceof Personnage) {
-            this.monstres.add((Personnage)o.copie());
+            Element e = (Element)o.copie();
+            this.monstres.add((Personnage)e);
+            this.drawables.add(e);
             return true;
         }
         return false;
@@ -606,6 +620,12 @@ public class Lieu extends Element implements Generable, Collisionable {
     @Override
     public void onGenerate(GenerateListener l) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    @Override
+    public Drawable copie() {
+        return null;
     }
 
 }

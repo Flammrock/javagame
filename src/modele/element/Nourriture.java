@@ -5,6 +5,8 @@
  */
 package modele.element;
 
+import canvas.Drawable;
+
 /**
  *
  * @author User
@@ -29,4 +31,12 @@ public class Nourriture extends Objet {
         return true;
     }
 
+    
+    
+    @Override
+    public Drawable copie() {
+        return null;
+    }
+    
+    
 }

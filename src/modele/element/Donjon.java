@@ -6,6 +6,7 @@
 package modele.element;
 
 
+import canvas.Drawable;
 import java.util.HashMap;
 
 /**
@@ -56,6 +57,12 @@ public class Donjon extends Element{
      */
     public boolean genererNiveau(int nbLieu) {
         return false;
+    }
+    
+    
+    @Override
+    public Drawable copie() {
+        return null;
     }
 
     

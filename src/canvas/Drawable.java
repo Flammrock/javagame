@@ -128,4 +128,10 @@ public interface Drawable extends Serializable {
     default public Drawable getParent() {
         return null;
     }
+    
+    /**
+     * Un Drawable doit pouvoir être copiable
+     * @return une nouvelle instance
+     */
+    public Drawable copie();
 }

@@ -65,7 +65,7 @@ public class Sprite implements Collisionable {
     String spritefile;
     
     // event ondraw
-    Consumer<Canvas> ondraw;
+    DrawListener ondraw;
     
     // un dispatcher d'events
     Dispatcher dispatcher;
@@ -367,10 +367,10 @@ public class Sprite implements Collisionable {
             if (xi >= ww) xi = 0;
         }
         
-        if (this.ondraw!=null) this.ondraw.accept(c);
+        if (this.ondraw!=null) this.ondraw.onDraw(c);
     }
     
-    public void setOnDraw(Consumer<Canvas> fn) {
+    public void setOnDraw(DrawListener fn) {
         this.ondraw = fn;
     }
     
@@ -502,17 +502,20 @@ public class Sprite implements Collisionable {
     
     
     public Sprite copie() {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
-            oos.writeObject(this);
-
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            return (Sprite) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            return null;
+        Sprite c = new Sprite(spritefile, x, y, width, height);
+        c.setSource(sx, sy, swidth, sheight);
+        c.setScaleWidth(this.scalewidth);
+        c.setScaleHeight(this.scaleheight);
+        c.setRepeatX(repeatX);
+        c.setRepeatY(repeatY);
+        for (CollisionBox b : this.collisionBoxList) {
+            c.addCollisionBox(b.copie());
         }
+        for (Drawable d : this.drawables) {
+            c.addDrawable(d.copie());
+        }
+        c.loadImage();
+        return c;
     }
     
 }

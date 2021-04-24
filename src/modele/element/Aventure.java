@@ -11,6 +11,11 @@ import canvas.Drawable;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -154,6 +159,24 @@ public class Aventure extends Element {
 
     public void addListerner(SimpleListener simpleListener) {
         dispatcher.addListener(simpleListener);
+    }
+    
+    
+    
+    @Override
+    public Drawable copie() {
+        /*try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(this);
+
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            return (Drawable)ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }*/
+        return null;
     }
     
 }

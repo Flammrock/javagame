@@ -6,6 +6,7 @@ import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
 import eventsystem.Dispatcher;
+import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import java.awt.Graphics;
 import java.io.File;
@@ -20,12 +21,12 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import map.Generable;
+import map.GenerateListener;
 
 
-public class Personnage extends Element implements Collisionable {
+public class Personnage extends Element implements Generable, Collisionable {
     
     private String nom;
-    private double probaDeGeneration;
 
     private ArrayList<Property> listproperties;
     
@@ -47,7 +48,6 @@ public class Personnage extends Element implements Collisionable {
 
     public Personnage(String nom, String description) {
         this.nom = nom;
-        this.probaDeGeneration = 1.0;
         this.description = description;
         this.inventaire = new ArrayList<>();
         this.main = null;
@@ -154,7 +154,8 @@ public class Personnage extends Element implements Collisionable {
 
     public void setPieceActuel(Lieu pieceActuel) {
         this.pieceActuel = pieceActuel;
-        pieceActuel.setVisible(true);
+        //pieceActuel.setVisible(true);
+        this.dispatcher.fireEvent("onEnterSalle", pieceActuel, new SimpleEvent(null));
     }
     
     public void setProperty(String nom, double valeur){
@@ -353,7 +354,7 @@ public class Personnage extends Element implements Collisionable {
     } 
     
     public boolean ajoutEffet(Effet o){
-        return this.effetCourant.add(o);
+        return this.effetCourant.add(o.copie());
     }
     
     public boolean ajoutEffets(ArrayList<Effet> o){
@@ -528,6 +529,75 @@ public class Personnage extends Element implements Collisionable {
     public boolean essaiEnfuir(Personnage Ennemi) {
         double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+Ennemi.valeurCombat());
         return aToucher(probabiliteDeToucher);
+    }
+
+    @Override
+    public void onGenerate(GenerateListener l) {
+        this.dispatcher.addListener(l);
+    }
+
+    @Override
+    public void generate(Object o) {
+        
+        if (o instanceof Lieu) {
+            Lieu l = (Lieu)o;
+            
+            this.setX(l.getX()+l.getWidth()/2);
+            this.setY(l.getX()+l.getHeight()/2);
+            
+        }
+        
+    }
+    
+    
+    @Override
+    public Drawable copie() {
+        Personnage c = new Personnage(nom, description);
+        for (CollisionBox b : this.collisionBoxList) {
+            c.addCollisionBox(b.copie());
+        }
+        
+        for (Property p : this.listproperties) {
+            c.setProperty(p.getNom(), p.getValeur());
+        }
+        
+        for (Objet o : this.inventaire) {
+            c.ajouter(o);
+        }
+        
+        if (this.main != null) {
+            int index = -1;
+            int i = 0;
+            for (Objet o : this.inventaire) {
+                if (o == main) break;
+                i++;
+            }
+            c.equip(index);
+        }
+        
+        if (this.armure != null) {
+            int index = -1;
+            int i = 0;
+            for (Objet o : this.inventaire) {
+                if (o == armure) break;
+                i++;
+            }
+            c.equip(index);
+        }
+        
+        c.setPieceActuel(pieceActuel);
+        
+        for (Effet e : this.effetCourant) {
+            c.ajoutEffet(e);
+        }
+
+        c.setSprite(sprite.copie());
+    
+        return c;
+    }
+
+    public void addListener(SimpleListener simpleListener) {
+        this.dispatcher.addListener(simpleListener);
     }
     
 }

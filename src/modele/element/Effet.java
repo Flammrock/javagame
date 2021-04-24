@@ -112,5 +112,16 @@ public class Effet extends Element {
         }
         return listesEffets;
     }
+    
+    
+    public Effet copie() {
+        Effet c = new Effet(Nom,description , permanant, consomable, duréeDeLEffet);
+        
+        for (Property p : this.listproperties) {
+            c.setProperty(p.getNom(), p.getValeur());
+        }
+        
+        return c;
+    }
 
 }

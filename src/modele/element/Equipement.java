@@ -5,6 +5,8 @@
  */
 package modele.element;
 
+import canvas.Drawable;
+
 /**
  *
  * @author User
@@ -40,6 +42,14 @@ public class Equipement extends Objet {
     }
     public double getModificateurProtection() {
         return this.bonus_protection;
+    }
+    
+    
+    
+    
+    @Override
+    public Drawable copie() {
+        return null;
     }
 
 }

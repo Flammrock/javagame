@@ -96,7 +96,8 @@ public class Light implements Drawable {
         this.y += y;
     }
     
-    public Light copie() {
+    @Override
+    public Drawable copie() {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);

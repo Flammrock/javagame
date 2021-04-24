@@ -6,6 +6,7 @@
 package modele.element;
 
 import canvas.Canvas;
+import canvas.Drawable;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
@@ -208,6 +209,12 @@ public class Porte extends Element implements Collisionable {
     public void onCollide(SimpleListener l) {
         l.setType("onCollide"); // on force le type
         this.dispatcher.addListener(l);
+    }
+    
+    
+    @Override
+    public Drawable copie() {
+        return null;
     }
     
 }

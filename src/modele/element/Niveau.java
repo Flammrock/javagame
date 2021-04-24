@@ -305,5 +305,11 @@ public class Niveau extends Element implements Generable {
     public void onGenerate(GenerateListener l) {
         this.dispatcher.addListener(l);
     }
+    
+    
+    @Override
+    public Drawable copie() {
+        return null;
+    }
 
 }

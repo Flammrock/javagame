@@ -314,5 +314,10 @@ public class Squeleton implements Drawable {
     public boolean isDraw() {
         return true;
     }
+
+    @Override
+    public Drawable copie() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
