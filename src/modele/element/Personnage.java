@@ -543,7 +543,7 @@ public class Personnage extends Element implements Generable, Collisionable {
             Lieu l = (Lieu)o;
             
             this.setX(l.getX()+l.getWidth()/2);
-            this.setY(l.getX()+l.getHeight()/2);
+            this.setY(l.getY()+l.getHeight()/2);
             
         }
         
