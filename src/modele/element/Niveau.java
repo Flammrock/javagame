@@ -16,6 +16,7 @@ import geometry.Direction;
 import java.util.ArrayList;
 import java.util.List;
 import map.Generable;
+import map.GenerateListener;
 import map.Squeleton;
 
 /**
@@ -138,7 +139,7 @@ public class Niveau extends Element implements Generable {
     }
 
     @Override
-    public boolean generate(Object o) {
+    public void generate(Object o) {
         
         Squeleton s = (Squeleton) o;
         
@@ -205,7 +206,7 @@ public class Niveau extends Element implements Generable {
         
         // on calcul les nouvelles collisions box
         for (Lieu l : this.salles) {
-            l.generate(null); // @TODO
+            l.generate(this);
         }
         
         /*
@@ -267,20 +268,6 @@ public class Niveau extends Element implements Generable {
         }
         
         this.setCurrentLieu(this.entree.getNom());*/
-        
-        return true;
-    }
-    
-    
-    
-    @Override
-    public double getProbabilite() {
-        return this.probaDeGeneration;
-    }
-
-    @Override
-    public void setProbabilite(double proba) {
-        this.probaDeGeneration = proba;
     }
     
     @Override
@@ -311,6 +298,11 @@ public class Niveau extends Element implements Generable {
     
     public ArrayList<Embellishment> getEmbellishments() {
         return this.embellishmentsList;
+    }
+
+    @Override
+    public void onGenerate(GenerateListener l) {
+        this.dispatcher.addListener(l);
     }
 
 }

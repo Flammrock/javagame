@@ -19,6 +19,7 @@ import eventsystem.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
+import map.GenerateListener;
 import map.Squeleton;
 
 public class Prog {
@@ -253,6 +254,9 @@ public class Prog {
         joueur.setSprite(s);
         
         
+        SpriteSheet s2 = s.copie();
+        monstre.setSprite(s2);
+        
         
         // test pour la collision
         //SpriteSheet srock = new SpriteSheet("/testcollision.png",0,0,465,420,465/3,420/3);
@@ -292,6 +296,14 @@ public class Prog {
                         p.teleport(joueur);
                     }
                 }
+            }
+        });
+        niveau1.onGenerate(new GenerateListener(){
+            @Override
+            public void onEvent(Object sender, SimpleEvent event) {
+                
+                
+                
             }
         });
         

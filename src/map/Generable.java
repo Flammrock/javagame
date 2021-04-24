@@ -5,6 +5,8 @@
  */
 package map;
 
+import eventsystem.Dispatcher;
+
 
 /**
  *
@@ -13,22 +15,23 @@ package map;
 public interface Generable {
     
     /**
-     * Permet de générer le Generable (avec des valeurs prédéfini, des algos, du random...)
-     * @param p Des paramètres pour la génératiob
-     * @return
+     * Un Generable possède un Dispatcher (lui permettant de propager des
+     * Events comme des Events de Génération par exemple)
+     * Par conséquent, un Générable doit pouvoir renvoyer un Dispatcher
+     * (il peut renvoyer null si aucun Dispatcher n'est connecté)
+     * @return retourne le Dispatcher
      */
-    boolean generate(Object p);
+    Dispatcher getDispatcher();
     
     /**
-     * Permet de récupérer la probabilité d'un Generable
-     * @return retourne la probabilité de générer le Generable
+     * Permet d'attacher un écouteur qui est appelé dès que le Generable est sur le point d'être généré
+     * @param l l'écouteur
      */
-    double getProbabilite();
+    public void onGenerate(GenerateListener l);
     
     /**
-     * Permet de définir la probabilité d'un Generable
-     * @param proba la probabilité d'apparition
+     * Permet de générer le Generable
      */
-    void setProbabilite(double proba);
+    public void generate(Object o);
     
 }

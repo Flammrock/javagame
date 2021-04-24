@@ -21,11 +21,11 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import map.Generable;
+import map.GenerateListener;
 
 public class Lieu extends Element implements Generable, Collisionable {
     
     String nom;
-    double probaDeGeneration;
 
     List<Porte> listePorte;
     List<Objet> objets;
@@ -50,7 +50,35 @@ public class Lieu extends Element implements Generable, Collisionable {
     TileSet tileset;
     Sprite sprite_wall;
     Sprite sprite_ground;
+    
+    /**
+     * Chaque lieu doit avoir un nom unique
+     * @param nom le nom du lieu
+     */
+    public Lieu(String nom) {
+        this.nom = nom;
+        this.listePorte = new ArrayList<>();
+        this.objets = new ArrayList<>();
+        this.monstres = new ArrayList<>();
+        this.drawables = new ArrayList<>();
+        this.collisionBoxList = new ArrayList<>();
+        this.dispatcher = new Dispatcher();
+        this.tileset = null;
+        this.sprite_wall = null;
+        this.isVisible = false;
+        this.embellishmentsList = new ArrayList<>();
+        this.embellishmentsListDrawed = new ArrayList<>();
+    }
 
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+    
+    
     public String getNom() {
         return nom;
     }
@@ -92,36 +120,6 @@ public class Lieu extends Element implements Generable, Collisionable {
     public void setMonstres(List<Personnage> monstres) {
         this.monstres = monstres;
     }
-
-
-    /**
-     * Chaque lieu doit avoir un nom unique
-     * @param nom le nom du lieu
-     */
-    public Lieu(String nom) {
-        this.nom = nom;
-        this.listePorte = new ArrayList<>();
-        this.objets = new ArrayList<>();
-        this.monstres = new ArrayList<>();
-        this.probaDeGeneration = 1.0;
-        this.drawables = new ArrayList<>();
-        this.collisionBoxList = new ArrayList<>();
-        this.dispatcher = new Dispatcher();
-        this.tileset = null;
-        this.sprite_wall = null;
-        this.isVisible = false;
-        this.embellishmentsList = new ArrayList<>();
-        this.embellishmentsListDrawed = new ArrayList<>();
-    }
-
-    public boolean isVisible() {
-        return isVisible;
-    }
-
-    public void setVisible(boolean isVisible) {
-        this.isVisible = isVisible;
-    }
-    
     
     
     /**
@@ -219,48 +217,6 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.monstres.clear();
         this.objets.clear();
     }
-
-    /*@Override
-    public boolean generate(GenerableParametre s) {
-        
-        // on génère la taille ainsi que la position
-        this.width = (int) (Math.random() * (500 - 200 + 1) + 200);
-        this.height = (int) (Math.random() * (500 - 200 + 1) + 200);
-        this.x = 200;
-        this.y = 200;
-        
-        int epaisseur = 10;
-        
-        // on ajoute 4 collisionsBox
-        this.collisionBoxList.clear();
-        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,width+epaisseur*2,epaisseur*2,true));
-        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur+height,width+epaisseur*2,epaisseur*2,true));
-        this.addCollisionBox(new CollisionBox(-epaisseur,-epaisseur,epaisseur*2,epaisseur*2+height,true));
-        this.addCollisionBox(new CollisionBox(-epaisseur+width,-epaisseur,epaisseur*2,epaisseur*2+height,true));
-        
-        // on cast pour récupérer les paramètres
-        GenerableLieuParametre p = (GenerableLieuParametre)s;
-        
-        // on vide le lieu
-        this.enleverTout();
-        
-        // on récupère les Generable
-        ArrayList<Generable> gs = p.getGenerables();
-        
-        // on itère sur tout les Generables et on ajoute
-        for (Generable g : gs) {
-            if (g instanceof Element) {
-                double r = Math.random();
-                if (r < g.getProbabilite()) {
-                    this.ajouter((Element) g);
-                }
-            }
-        }
-
-        // la génération s'est bien passé
-        return true;
-        
-    }*/
     
     public void setSize(Box b) {
         x = b.getX();
@@ -269,15 +225,6 @@ public class Lieu extends Element implements Generable, Collisionable {
         height = b.getHeight();
     }
 
-    @Override
-    public double getProbabilite() {
-        return this.probaDeGeneration;
-    }
-
-    @Override
-    public void setProbabilite(double proba) {
-        this.probaDeGeneration = proba;
-    }
     
     @Override
     public void draw(Canvas c, Graphics g) {
@@ -498,14 +445,11 @@ public class Lieu extends Element implements Generable, Collisionable {
     }
 
     @Override
-    public boolean generate(Object p) {
+    public void generate(Object o) {
         
         this.computeCollisonBox();
         
-        //int s = 200;
-        //this.drawables.add(new Light(this.x + s/2 + (int)(Math.random()*(this.width-s/2)),this.y + s/2 + (int)(Math.random()*(this.height-s/2)),s));
-        
-        if (this.embellishmentsList.isEmpty()) return true;
+        if (this.embellishmentsList.isEmpty()) return;
         
         // on génère des éléments de décors un peu à la random de tel sorte qu'il n'y est pas de collisions
         ArrayList<Embellishment> list = new ArrayList<>();
@@ -575,7 +519,6 @@ public class Lieu extends Element implements Generable, Collisionable {
             
         }
         
-        return true;
     }
     
     @Override
@@ -658,6 +601,11 @@ public class Lieu extends Element implements Generable, Collisionable {
         }
         
         return (Shape)clip_path;
+    }
+
+    @Override
+    public void onGenerate(GenerateListener l) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -3,7 +3,7 @@ package modele.element;
 
 import map.Generable;
 
-public abstract class Objet extends Element implements Generable {
+public abstract class Objet extends Element {
     
     String nom;
     double probaDeGeneration;
@@ -58,23 +58,6 @@ public abstract class Objet extends Element implements Generable {
 
     public int nbUtilisationRestante() {
         return this.nbUtilisation;
-    }
-    
-    
-    
-    @Override
-    public double getProbabilite() {
-        return this.probaDeGeneration;
-    }
-
-    @Override
-    public void setProbabilite(double proba) {
-        this.probaDeGeneration = proba;
-    }
-
-    @Override
-    public boolean generate(Object p) {
-        return false; // pas générable pour l'instant
     }
     
     

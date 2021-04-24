@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 import map.Generable;
 
 
-public class Personnage extends Element implements Generable, Collisionable {
+public class Personnage extends Element implements Collisionable {
     
     private String nom;
     private double probaDeGeneration;
@@ -417,21 +417,6 @@ public class Personnage extends Element implements Generable, Collisionable {
         
     }
     
-    
-    @Override
-    public double getProbabilite() {
-        return this.probaDeGeneration;
-    }
-
-    @Override
-    public void setProbabilite(double proba) {
-        this.probaDeGeneration = proba;
-    }
-
-    @Override
-    public boolean generate(Object p) {
-        return false; // pas générable pour l'instant
-    }
 
     public void ajouter(Element e) {
         if (e instanceof Objet) {
