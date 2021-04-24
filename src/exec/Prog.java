@@ -285,6 +285,8 @@ public class Prog {
         niveau1.addEmbellishment(e_ground);
         niveau1.addEmbellishment(e_wall_1);
         niveau1.addEmbellishment(e_light);
+        
+        // dès qu'il y a une collision dans ce niveau, ceci est appelé
         niveau1.onCollide(new SimpleListener("onCollide") {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
@@ -298,6 +300,8 @@ public class Prog {
                 }
             }
         });
+        
+        // dès que quelque chose est généré dans ce niveau, ceci est appelé
         niveau1.onGenerate(new GenerateListener(){
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
