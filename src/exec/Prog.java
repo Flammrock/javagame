@@ -306,7 +306,17 @@ public class Prog {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
                 
-                
+                // une salle a été généré
+                if (event.getData() instanceof Lieu) {
+                    
+                    Lieu l = (Lieu)event.getData();
+                    
+                    // on ajoute un monstre dans chaque salle
+                    l.ajouter(monstre.copie()); // bien sur on copie le monstre
+                    
+                    System.out.println("[GENERATE] "+l);
+                    
+                }
                 
             }
         });

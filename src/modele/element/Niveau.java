@@ -207,6 +207,7 @@ public class Niveau extends Element implements Generable {
         // on calcul les nouvelles collisions box
         for (Lieu l : this.salles) {
             l.generate(this);
+            this.dispatcher.fireEvent("onGenerate", this, new SimpleEvent(l));
         }
         
         /*
