@@ -31,6 +31,9 @@ public class Lieu extends Element implements Generable, Collisionable {
     List<Objet> objets;
     List<Personnage> monstres;
     
+    boolean entree;
+    boolean sortie;
+    
     int x;
     int y;
     int width;
@@ -66,8 +69,26 @@ public class Lieu extends Element implements Generable, Collisionable {
         this.tileset = null;
         this.sprite_wall = null;
         this.isVisible = false;
+        this.entree = false;
+        this.sortie = false;
         this.embellishmentsList = new ArrayList<>();
         this.embellishmentsListDrawed = new ArrayList<>();
+    }
+    
+    public boolean isEntree() {
+        return this.entree;
+    }
+    
+    public void setEntree(boolean e) {
+        this.entree = e;
+    }
+    
+    public boolean isSortie() {
+        return this.sortie;
+    }
+    
+    public void setSortie(boolean s) {
+        this.sortie = s;
     }
 
     public boolean isVisible() {
@@ -230,6 +251,7 @@ public class Lieu extends Element implements Generable, Collisionable {
     public void enleverTout() {
         this.monstres.clear();
         this.objets.clear();
+        this.drawables.clear();
     }
     
     public void setSize(Box b) {
@@ -459,11 +481,11 @@ public class Lieu extends Element implements Generable, Collisionable {
     }
 
     @Override
-    public void generate(Object o) {
+    public boolean generate(Object o) {
         
         this.computeCollisonBox();
         
-        if (this.embellishmentsList.isEmpty()) return;
+        if (this.embellishmentsList.isEmpty()) return true;
         
         // on génère des éléments de décors un peu à la random de tel sorte qu'il n'y est pas de collisions
         ArrayList<Embellishment> list = new ArrayList<>();
@@ -521,23 +543,45 @@ public class Lieu extends Element implements Generable, Collisionable {
             
         }
         
+        return true;
+        
     }
     
     public boolean isValide(Collisionable c) {
         Boolean r = false;
+        if (this.entree) {
+            Collisionable temp = new Lieu("");
+            int s = 100;
+            temp.addCollisionBox(new CollisionBox(x+width/2-s/2, y+height/2-s/2, s, s));
+            r = temp.isCollide(c);
+            if (r != null && r) {return false;}
+        }
+        r = false;
         for (Porte porte : this.listePorte) {
             r = porte.isCollide(c);
             if (r != null && r) {
                 break;
             }
         }
-        if (r != null && r) {
-            return false;
-        }
+        if (r != null && r) {return false;}
+        r = false;
         for (Embellishment et : this.embellishmentsListDrawed) {
             r = et.isCollide(c);
             if (r != null && r) {
                 break;
+            }
+        }
+        if (r!=null && r) {return false;}
+        r = this.isCollide(c);
+        if (r!=null && r) {return false;}
+        r = false;
+        for (Drawable d : this.drawables) {
+            if (d instanceof Collisionable) {
+                Collisionable dc = (Collisionable)d;
+                r = dc.isCollide(c);
+                if (r != null && r) {
+                    break;
+                }
             }
         }
         if (r!=null && r) {return false;}
@@ -635,6 +679,23 @@ public class Lieu extends Element implements Generable, Collisionable {
     @Override
     public Drawable copie() {
         return null;
+    }
+
+    public int randomX(Collisionable c) {
+        int x = this.x;
+        
+        x += (int)(Math.random()*(this.width-c.computeWidth()));
+        
+        return x;
+    }
+
+    public int randomY(Collisionable c) {
+        int y = this.y;
+        int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
+        
+        y += (int)(Math.random()*(this.height-c.computeHeight()-dh)) + dh;
+        
+        return y;
     }
 
 }

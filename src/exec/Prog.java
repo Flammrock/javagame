@@ -190,6 +190,7 @@ public class Prog {
         monstre.ajouter(banane);
         monstre.ajouter(armureBadass);
         monstre.equip(1);
+        monstre.addCollisionBox(new CollisionBox(0,35,28,14));
         
         //Personnage rock = new Personnage("rock", "inofensif");
         //rock.init(5, 10, 15, 20);
@@ -363,7 +364,7 @@ public class Prog {
         
         
         // on génère le niveau à partir d'un squelette
-        niveau1.generate(squeleton);
+        boolean nb = niveau1.generate(squeleton);
         
         
         // on ajoute le niveau dans le donjon

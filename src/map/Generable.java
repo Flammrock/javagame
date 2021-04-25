@@ -31,7 +31,9 @@ public interface Generable {
     
     /**
      * Permet de générer le Generable
+     * @param o Object pouvant servir pour la génération
+     * @return retourne true si la génération c'est bien passé, false sinon
      */
-    public void generate(Object o);
+    public boolean generate(Object o);
     
 }

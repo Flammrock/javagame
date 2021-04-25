@@ -151,4 +151,40 @@ public interface Collisionable extends Drawable {
         
         return false;
     }
+    
+    
+    /**
+     * Permet d'estimer la longueur d'un Collisionable
+     * @return retourne la longueur estimée
+     */
+    default public int computeWidth() {
+        ArrayList<CollisionBox> bs = this.getCollisionBoxList();
+        if (bs==null) return 0;
+        if (bs.isEmpty()) return 0;
+        int xmin = bs.get(0).getX();
+        int xmax = xmin;
+        for (CollisionBox b : bs) {
+            if (b.getX() < xmin) xmin = b.getX();
+            if (b.getX() > xmax) xmax = b.getX();
+        }
+        return xmax-xmin;
+    }
+    
+    /**
+     * Permet d'estimer la hauteur d'un Collisionable
+     * @return retourne la hauteur estimée
+     */
+    default public int computeHeight() {
+        ArrayList<CollisionBox> bs = this.getCollisionBoxList();
+        if (bs==null) return 0;
+        if (bs.isEmpty()) return 0;
+        int ymin = bs.get(0).getY();
+        int ymax = ymin;
+        for (CollisionBox b : bs) {
+            if (b.getY() < ymin) ymin = b.getY();
+            if (b.getY() > ymax) ymax = b.getY();
+        }
+        return ymax-ymin;
+    }
+    
 }

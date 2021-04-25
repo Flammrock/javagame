@@ -537,15 +537,22 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
 
     @Override
-    public void generate(Object o) {
+    public boolean generate(Object o) {
         
         if (o instanceof Lieu) {
             Lieu l = (Lieu)o;
             
-            this.setX(l.getX()+l.getWidth()/2);
-            this.setY(l.getY()+l.getHeight()/2);
+            double p = 1;
+            while (Math.random()<p) {
+                this.setX(l.randomX(this));
+                this.setY(l.randomY(this));
+                if (l.isValide(this)) return true;
+                p -= 0.1;
+            }
             
         }
+        
+        return true;
         
     }
     

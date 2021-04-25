@@ -26,7 +26,6 @@ import map.Squeleton;
 public class Niveau extends Element implements Generable {
     
     String nom;
-    double probaDeGeneration;
     List<Lieu> salles;
     Lieu entree;
     Lieu sortie;
@@ -42,7 +41,6 @@ public class Niveau extends Element implements Generable {
     
     public Niveau(String nom,String description) {
         this.nom = nom;
-        this.probaDeGeneration = 1.0;
         this.description = description;
         this.salles = new ArrayList<>();
         this.drawables = new ArrayList<>();
@@ -139,7 +137,7 @@ public class Niveau extends Element implements Generable {
     }
 
     @Override
-    public void generate(Object o) {
+    public boolean generate(Object o) {
         
         Squeleton s = (Squeleton) o;
         
@@ -166,9 +164,11 @@ public class Niveau extends Element implements Generable {
             this.drawables.add(lieu);
             if (i == 0) {
                 this.entree = lieu;
+                lieu.setEntree(true);
             }
             if (i == bones.size()-1) {
                 this.sortie = lieu;
+                lieu.setSortie(true);
             }
             
             // on propage l'events de collisions dans le dispatcher de ce niveau
@@ -269,6 +269,8 @@ public class Niveau extends Element implements Generable {
         }
         
         this.setCurrentLieu(this.entree.getNom());*/
+        
+        return true;
     }
     
     @Override
