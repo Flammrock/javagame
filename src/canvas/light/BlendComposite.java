@@ -497,6 +497,13 @@ public class BlendComposite implements Composite {
                             result[2] = src[2] == 0 ? 0 :
                                 Math.max(0, 255 - (255 - dst[2]) * (255 - dst[2]) / src[2]);
                             result[3] = Math.min(255, src[3] + dst[3] - (src[3] * dst[3]) / 255);*/
+                            if (src[3]==0) {
+                                result[0] = dst[0];
+                                result[1] = dst[1];
+                                result[2] = dst[2];
+                                result[3] = dst[3];
+                                return;
+                            }
                             result[0] = src[0] == 0 ? 0 :
                                 Math.max(0, 255 - (255 - dst[0]) * (255 - dst[0]) / src[0]);
                             result[1] = src[1] == 0 ? 0 :

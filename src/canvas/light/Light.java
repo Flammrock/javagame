@@ -27,6 +27,8 @@ import java.util.ArrayList;
  */
 public class Light implements Drawable {
     
+    static public BufferedImage image = null;
+    
     int x;
     int y;
     int radius;
@@ -48,12 +50,26 @@ public class Light implements Drawable {
     @Override
     public void draw(Canvas c, Graphics g) {
         
+        if (Light.image == null) {
+            int s = 40;
+            Light.image = new BufferedImage(s, s, BufferedImage.TYPE_INT_ARGB);
+            Graphics g3 = Light.image.getGraphics();
+            Graphics2D g3d = (Graphics2D)g3;
+            g3d.setColor(new Color(0,0,0,0));
+            g3d.fillRect(0, 0, s, s);
+            g3d.setColor(Color.WHITE);
+            g3d.fillArc(0, 0, s, s, 0, 360);
+            g3d.dispose();
+        }
+        
         Graphics2D g2d = (Graphics2D)g;
         
         int r = radius - (int)(5*Math.sin(this.v));
         
-        g2d.setColor(Color.WHITE);
-        g2d.fillArc(c.toWorldX(x - r / 2), c.toWorldY(y - r / 2), c.toScale(r), c.toScale(r), 0, 360);
+        //g2d.setColor(Color.WHITE);
+        //g2d.fillArc(c.toWorldX(x - r / 2), c.toWorldY(y - r / 2), c.toScale(r), c.toScale(r), 0, 360);
+        
+        g2d.drawImage(Light.image, c.toWorldX(x - r / 2), c.toWorldY(y - r / 2), c.toScale(r), c.toScale(r), null);
 
         if (this.tick > 10) {
             this.tick = 0;
