@@ -21,6 +21,10 @@ public class Dispatcher implements Serializable {
         this.listeners = new ArrayList<>();
     }
     
+    public List<SimpleListener> getListeners() {
+        return this.listeners;
+    }
+    
     public void addListener(SimpleListener listener) {
         this.listeners.add(listener);
     }
