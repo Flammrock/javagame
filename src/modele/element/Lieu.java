@@ -506,19 +506,7 @@ public class Lieu extends Element implements Generable, Collisionable {
                 e.setCollisionBoxList(e.getSprite().getCollisionBoxList(), ow, oh);
             }
             
-            
-            
-            Boolean r = false;
-            for (Porte porte : this.listePorte) {
-                r = porte.isCollide(e);
-                if (r!=null && r) break;
-            }
-            if (r!=null && r) {proba -= 0.01;continue;}
-            for (Embellishment et : this.embellishmentsListDrawed) {
-                r = et.isCollide(e);
-                if (r!=null && r) break;
-            }
-            if (r!=null && r) {proba -= 0.01;continue;}
+            if (!this.isValide(e)) {proba -= 0.01;continue;}
             
             proba -= 0.1;
             
@@ -533,6 +521,27 @@ public class Lieu extends Element implements Generable, Collisionable {
             
         }
         
+    }
+    
+    public boolean isValide(Collisionable c) {
+        Boolean r = false;
+        for (Porte porte : this.listePorte) {
+            r = porte.isCollide(c);
+            if (r != null && r) {
+                break;
+            }
+        }
+        if (r != null && r) {
+            return false;
+        }
+        for (Embellishment et : this.embellishmentsListDrawed) {
+            r = et.isCollide(c);
+            if (r != null && r) {
+                break;
+            }
+        }
+        if (r!=null && r) {return false;}
+        return true;
     }
     
     @Override
