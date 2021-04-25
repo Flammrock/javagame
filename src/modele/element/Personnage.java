@@ -610,8 +610,8 @@ public class Personnage extends Element implements Generable, Collisionable {
             
             double p = 1;
             while (Math.random()<p) {
-                this.setX(l.randomX(this));
-                this.setY(l.randomY(this));
+                this.setX(l.randomX(this,this.getWidth()));
+                this.setY(l.randomY(this,this.getHeight()));
                 if (l.isValide(this)) {
                     this.setPieceActuel(l);
                     return true;
