@@ -697,5 +697,22 @@ public class Lieu extends Element implements Generable, Collisionable {
         
         return y;
     }
+    
+    public int randomX(Collisionable c, int w) {
+        int x = this.x;
+        
+        x += (int)(Math.random()*(this.width-w));
+        
+        return x;
+    }
+
+    public int randomY(Collisionable c, int h) {
+        int y = this.y;
+        int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
+        
+        y += (int)(Math.random()*(this.height-h-dh)) + dh;
+        
+        return y;
+    }
 
 }
