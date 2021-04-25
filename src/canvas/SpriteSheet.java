@@ -170,13 +170,13 @@ public class SpriteSheet extends Sprite {
     
     public int computeWidth() {
         BufferedImage image = this.getImage();
-        int w = this.x+this.width - (int)(((double)this.width/(double)this.spriteWidth)*(double)(this.decalW+this.decalX));
+        int w = this.width - (int)(((double)this.width/(double)this.spriteWidth)*(double)(this.decalW+this.decalX));
         return w;
     }
 
     public int computeHeight() {
         BufferedImage image = this.getImage();
-        int h = this.y+this.height - (int)(((double)this.height/(double)this.spriteHeight)*(double)(this.decalH+this.decalY));
+        int h = this.height - (int)(((double)this.height/(double)this.spriteHeight)*(double)(this.decalH+this.decalY));
         return h;
     }
     
