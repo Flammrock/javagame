@@ -8,6 +8,7 @@ import canvas.collision.Collisionable;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
+import geometry.Point;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +16,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import static java.lang.Math.random;
 import static java.lang.StrictMath.random;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -436,12 +441,11 @@ public class Personnage extends Element implements Generable, Collisionable {
         // pour l'instant, on dessine juste le sprite
         if (this.sprite == null) return;
         
-        for (CollisionBox b : this.collisionBoxList) {
-            b.apply(this.getX(),this.getY());
-            //b.draw(c, g);
-        }
+        this.updateCollisionBox();
         
         this.sprite.draw(c, g);
+        
+        this.dispatcher.fireEvent("onUpdate", this, null);
         
     }
 
@@ -484,6 +488,17 @@ public class Personnage extends Element implements Generable, Collisionable {
     public void addCollisionBox(CollisionBox b) {
         if (b == null) return;
         this.collisionBoxList.add(b);
+    }
+    
+    public void clearCollisionBox() {
+        this.collisionBoxList.clear();
+    }
+    
+    public void updateCollisionBox() {
+        for (CollisionBox b : this.collisionBoxList) {
+            b.apply(this.getX(),this.getY());
+            //b.draw(c, g);
+        }
     }
 
     @Override
@@ -610,6 +625,7 @@ public class Personnage extends Element implements Generable, Collisionable {
             for (SimpleListener sl : this.dispatcher.getListeners()) {
                 c.addListener(sl);
             }
+            c.allowCopyListener();
         }
     
         return c;
@@ -621,6 +637,128 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     public void allowCopyListener() {
         this.allowCopyListener = true;
+    }
+
+    public void follow(Personnage p) {
+        
+        // temporaire
+        /////////////////////////////////////////////////////////////////////////
+        double speed = 2;
+        double angle = Math.atan2(p.getY()-this.getY(), p.getX()-this.getX());
+        int dxv = (int)(speed * Math.cos(angle));
+        int dyv = (int)(speed * Math.sin(angle));
+        this.moveBy(dxv, dyv); // try to go in this direction
+        if (1==1) return;
+        /////////////////////////////////////////////////////////////////////////
+        
+        // si le lieu où se trouve le personnage n'est pas défini alors on quitte
+        if (this.getPieceActuel()==null) return;
+        
+        // plus petit déplacement infinitesimal que le personnage peut faire
+        int dx = 1;
+        int dy = 1;
+        
+        // taille de la pièce
+        int w = this.getPieceActuel().getWidth();
+        
+        // algo A*
+        
+        // on init
+        PriorityQueue<PointNode> pile = new PriorityQueue<>(Comparator.comparing(x -> x.cost));
+        pile.offer(new PointNode(w,this.getX(),this.getY(),0));
+        HashMap<PointNode,Boolean> already_visited = new HashMap<>();
+        
+        // on créé un personnage temporaire pour pouvoir tester la validité
+        Personnage temp = (Personnage)this.copie();
+        
+        // on créé le tableau de direction possible
+        int dxs[] = new int[]{1,0,-1,0};
+        int dys[] = new int[]{0,1,0,-1};
+        
+        // tant qu'il y a des noeuds à visiter
+        while (!pile.isEmpty()) {
+        
+            // on récup le noeud le + intéressant
+            PointNode pn = pile.poll();
+            
+            // on vient de le visiter
+            already_visited.put(pn, true);
+            
+            // on récup les voisins possibles
+            for (int i = 0; i < dxs.length; i++) {
+                PointNode pn1 = pn.add(dxs[i],dys[i]);
+                
+                // si le noeud est déjà visité, alors on continue
+                if (already_visited.containsKey(pn1)) continue;
+                
+                // on regarde si ce nouveau point est valide
+                temp.setX(pn1.x);
+                temp.setY(pn1.y);
+                temp.updateCollisionBox();
+                if (this.getPieceActuel().isValide(temp)) {
+                    
+                    // on met à jour le cout de ce point
+                    //pile.cout = 
+                    
+                    pile.offer(pn1);
+                }
+            }
+        
+        }
+        
+        
+        
+        
+        //double speed = 2;
+        //double angle = Math.atan2(p.getY()-this.getY(), p.getX()-this.getX());
+        
+        
+        
+        //int dx = (int)(speed * Math.cos(angle));
+        //int dy = (int)(speed * Math.sin(angle));
+        //this.moveBy(dx, dy); // try to go in this direction
+        
+    }
+
+    private static class PointNode {
+
+        public int x;
+        public int y;
+        public int w;
+        public Integer cost;
+        
+        public PointNode(int w, int x, int y) {
+            this.w = w;
+            this.x = x;
+            this.y = y;
+            this.cost = null;
+        }
+        
+        public PointNode(int w, int x, int y, Integer cost) {
+            this.w = w;
+            this.x = x;
+            this.y = y;
+            this.cost = cost;
+        }
+        
+        public PointNode add(int dx, int dy) {
+            return new PointNode(w,x+dx,y+dy,cost);
+        }
+        
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof PointNode)) return false;
+            PointNode key = (PointNode) o;
+            return x == key.x && y == key.y;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = x;
+            result = w * result + y;
+            return result;
+        }
     }
     
 }

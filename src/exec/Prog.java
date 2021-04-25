@@ -195,6 +195,17 @@ public class Prog {
             @Override
             public void onEvent(Object sender, SimpleEvent e) {
                 
+                if (!(sender instanceof Personnage)) return;
+                
+                Personnage current_monstre = (Personnage)sender;
+                
+                // si le monstre est dans la même pièce que le joueur,
+                // alors le monstre suit le joueur
+                
+                if (joueur.getPieceActuel()==current_monstre.getPieceActuel()) {
+                    current_monstre.follow(joueur);
+                }
+                
             }
         };
         
