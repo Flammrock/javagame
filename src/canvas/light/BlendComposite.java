@@ -510,7 +510,7 @@ public class BlendComposite implements Composite {
                                 Math.max(0, 255 - (255 - dst[1]) * (255 - dst[1]) / src[1]);
                             result[2] = src[2] == 0 ? 0 :
                                 Math.max(0, 255 - (255 - dst[2]) * (255 - dst[2]) / src[2]);
-                            result[3] = Math.min(255, src[3] + dst[3] - (src[3] * dst[3]) / 255);
+                            result[3] = 255;
                         }
                     };
                 case GLOW:
