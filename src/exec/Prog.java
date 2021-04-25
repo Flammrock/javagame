@@ -214,7 +214,6 @@ public class Prog {
         monstre.ajouter(banane);
         monstre.ajouter(armureBadass);
         monstre.equip(1);
-        monstre.addCollisionBox(new CollisionBox(0,35,28,14));
         monstre.allowCopyListener();
         monstre.addListener(monstrelistener);
         
@@ -305,7 +304,15 @@ public class Prog {
         joueur.setSprite(s);
         
         
-        SpriteSheet s2 = s.copie();
+        
+        SpriteSheet s2 = new SpriteSheet("/minautor.png",0,0,96,96,96*2,92*2);
+        s2.loadImage();
+        s2.ajouterAnimation(new Animation("Idle-Left",new int[] {0, 1, 2, 3, 4}));
+        s2.ajouterAnimation(new Animation("Idle-Right",new int[] {100, 101, 102, 103, 104}));
+        s2.ajouterAnimation(new Animation("Walk-Left",new int[] {10, 11, 12, 13, 14, 15, 16, 17}));
+        s2.ajouterAnimation(new Animation("Walk-Right",new int[] {110, 111, 112, 113, 114, 115, 116, 117}));
+        s2.setAnimation("Walk-Left");
+        monstre.addCollisionBox(new CollisionBox(70,100,38,18));
         monstre.setSprite(s2);
         
         
