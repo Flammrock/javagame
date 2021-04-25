@@ -9,6 +9,7 @@ import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import geometry.Point;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,10 +53,15 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     boolean allowCopyListener;
     
+    // pas sur..
     int follow_tick;
     int follow_tick_max;
     ArrayList<PointNode> follow_path;
     int follow_path_index;
+    
+    
+    int radius_detection;
+    int radius_start_fight;
     
 
     public Personnage(String nom, String description) {
@@ -75,6 +81,9 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.follow_tick_max = 100;
         this.follow_path = new ArrayList<>();
         this.follow_path_index = 0;
+        
+        this.radius_detection = 300;
+        this.radius_start_fight = 100;
     }
     
     public void init(double age, double force, double agilite, double pv) {
@@ -453,7 +462,28 @@ public class Personnage extends Element implements Generable, Collisionable {
         
         this.updateCollisionBox();
         
+        g.setColor(new Color(255,140,0));
+        g.drawArc(
+                c.toWorldX(this.getX()+this.getWidth()/2-this.radius_detection/2), 
+                c.toWorldY(this.getY()+this.getHeight()/2-this.radius_detection/2), 
+                c.toScale(this.radius_detection), 
+                c.toScale(this.radius_detection),
+                0, 360
+        );
+        
+        g.setColor(new Color(255,0,0));
+        g.drawArc(
+                c.toWorldX(this.getX()+this.getWidth()/2-this.radius_start_fight/2),
+                c.toWorldY(this.getY()+this.getHeight()/2-this.radius_start_fight/2),
+                c.toScale(this.radius_start_fight),
+                c.toScale(this.radius_start_fight),
+                0, 360
+        );
+        
+        
         this.sprite.draw(c, g);
+        
+        
         
         this.dispatcher.fireEvent("onUpdate", this, null);
         
@@ -477,6 +507,14 @@ public class Personnage extends Element implements Generable, Collisionable {
     @Override
     public void setY(int y) {
         this.sprite.setY(y); // pour l'instant, on propage ça dans le sprite
+    }
+    
+    public int getWidth() {
+        return this.sprite.computeWidth();
+    }
+    
+    public int getHeight() {
+        return this.sprite.computeHeight();
     }
 
     @Override
@@ -650,6 +688,10 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
 
     public void follow(Personnage p) {
+        
+        int dxd = p.getX()+p.computeWidth()/2-this.getX()-this.computeWidth()/2;
+        int dyd = p.getY()+p.computeHeight()/2-this.getY()-this.computeHeight()/2;
+        if (dxd*dxd + dyd*dyd > this.radius_detection*this.radius_detection) return;
         
         // temporaire
         /////////////////////////////////////////////////////////////////////////
