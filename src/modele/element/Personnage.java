@@ -52,6 +52,11 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     boolean allowCopyListener;
     
+    int follow_tick;
+    int follow_tick_max;
+    ArrayList<PointNode> follow_path;
+    int follow_path_index;
+    
 
     public Personnage(String nom, String description) {
         this.nom = nom;
@@ -65,6 +70,11 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.listproperties = new ArrayList<>();
         this.dispatcher = new Dispatcher();
         this.allowCopyListener = false;
+        
+        this.follow_tick = 0;
+        this.follow_tick_max = 100;
+        this.follow_path = new ArrayList<>();
+        this.follow_path_index = 0;
     }
     
     public void init(double age, double force, double agilite, double pv) {
@@ -664,12 +674,19 @@ public class Personnage extends Element implements Generable, Collisionable {
         // algo A*
         
         // on init
-        PriorityQueue<PointNode> pile = new PriorityQueue<>(Comparator.comparing(x -> x.cost));
-        pile.offer(new PointNode(w,this.getX(),this.getY(),0));
-        HashMap<PointNode,Boolean> already_visited = new HashMap<>();
+        PointNode.g.clear();
+        PointNode.f.clear();
+        PointNode start = new PointNode(w,this.getX(),this.getY());
+        PointNode end = new PointNode(w,p.getX(),p.getY());
+        PriorityQueue<PointNode> pile = new PriorityQueue<>(Comparator.comparing(x -> x.fcost));
+        start.setgCost(0);
+        start.setfCost(PointNode.dist(start, end));
+        pile.offer(start);
         
         // on créé un personnage temporaire pour pouvoir tester la validité
         Personnage temp = (Personnage)this.copie();
+        
+        this.clearCollisionBox();
         
         // on créé le tableau de direction possible
         int dxs[] = new int[]{1,0,-1,0};
@@ -678,18 +695,22 @@ public class Personnage extends Element implements Generable, Collisionable {
         // tant qu'il y a des noeuds à visiter
         while (!pile.isEmpty()) {
         
-            // on récup le noeud le + intéressant
+            // on récup le noeud le + intéressant (et on l'enlève en même temps)
             PointNode pn = pile.poll();
             
-            // on vient de le visiter
-            already_visited.put(pn, true);
-            
+            // on regarde si on est arrivé
+            if (pn.equals(end)) {
+                end.parent = pn.parent;
+                break;
+            }
+
             // on récup les voisins possibles
             for (int i = 0; i < dxs.length; i++) {
                 PointNode pn1 = pn.add(dxs[i],dys[i]);
-                
-                // si le noeud est déjà visité, alors on continue
-                if (already_visited.containsKey(pn1)) continue;
+
+                // on estime le cout
+                Integer tentative_gcost = pn.gcost + PointNode.dist(pn,pn1);
+                if (tentative_gcost >= pn1.gcost) continue;
                 
                 // on regarde si ce nouveau point est valide
                 temp.setX(pn1.x);
@@ -697,15 +718,38 @@ public class Personnage extends Element implements Generable, Collisionable {
                 temp.updateCollisionBox();
                 if (this.getPieceActuel().isValide(temp)) {
                     
-                    // on met à jour le cout de ce point
-                    //pile.cout = 
                     
-                    pile.offer(pn1);
+                    
+                    // on définit le parent
+                    pn1.parent = pn;
+                    
+                    // on met à jour le cout de ce point
+                    pn1.setgCost(tentative_gcost);
+                    pn1.setfCost(pn1.gcost + PointNode.dist(pn1,end));
+                    
+                    // on l'ajoute dans les noeuds à visiter
+                    if (!pile.contains(pn1)) {
+                        pile.offer(pn1);
+                    }
                 }
             }
         
         }
         
+        for (CollisionBox b : temp.getCollisionBoxList()) {
+            this.addCollisionBox(b.copie());
+        }
+        
+        if (end.parent != null) {
+            // on remonte tout
+            PointNode current = end;
+            PointNode c = end;
+            while (current.parent!=null) {
+                c = current;
+                current = current.parent;
+            }
+            this.moveTo(c.x, c.y);
+        }
         
         
         
@@ -725,24 +769,44 @@ public class Personnage extends Element implements Generable, Collisionable {
         public int x;
         public int y;
         public int w;
-        public Integer cost;
+        public Integer gcost;
+        public Integer fcost;
+        public PointNode parent;
+        static public HashMap<PointNode,Integer> g = new HashMap<>();
+        static public HashMap<PointNode,Integer> f = new HashMap<>();
         
         public PointNode(int w, int x, int y) {
             this.w = w;
             this.x = x;
             this.y = y;
-            this.cost = null;
+            if (PointNode.g.containsKey(this)) this.gcost = PointNode.g.get(this);
+            else this.gcost = Integer.MAX_VALUE;
+            if (PointNode.g.containsKey(this)) this.fcost = PointNode.f.get(this);
+            else this.fcost = Integer.MAX_VALUE;
+            this.parent = null;
         }
         
-        public PointNode(int w, int x, int y, Integer cost) {
+        public PointNode(int w, int x, int y, Integer gcost, Integer fcost) {
             this.w = w;
             this.x = x;
             this.y = y;
-            this.cost = cost;
+            this.gcost = gcost;
+            this.fcost = fcost;
+            this.parent = null;
         }
         
         public PointNode add(int dx, int dy) {
-            return new PointNode(w,x+dx,y+dy,cost);
+            return new PointNode(w,x+dx,y+dy);
+        }
+        
+        public void setgCost(Integer g) {
+            this.gcost = g;
+            PointNode.g.put(this, g);
+        }
+        
+        public void setfCost(Integer f) {
+            this.fcost = f;
+            PointNode.f.put(this, f);
         }
         
         @Override
@@ -758,6 +822,12 @@ public class Personnage extends Element implements Generable, Collisionable {
             int result = x;
             result = w * result + y;
             return result;
+        }
+        
+        static public int dist(PointNode a, PointNode b) {
+            int dx = b.x-a.x;
+            int dy = b.y-a.y;
+            return dx*dx+dy*dy;
         }
     }
     
