@@ -45,6 +45,8 @@ public class Personnage extends Element implements Generable, Collisionable {
     Dispatcher dispatcher;
     
     
+    boolean allowCopyListener;
+    
 
     public Personnage(String nom, String description) {
         this.nom = nom;
@@ -57,6 +59,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.collisionBoxList = new ArrayList<>();
         this.listproperties = new ArrayList<>();
         this.dispatcher = new Dispatcher();
+        this.allowCopyListener = false;
     }
     
     public void init(double age, double force, double agilite, double pv) {
@@ -546,13 +549,16 @@ public class Personnage extends Element implements Generable, Collisionable {
             while (Math.random()<p) {
                 this.setX(l.randomX(this));
                 this.setY(l.randomY(this));
-                if (l.isValide(this)) return true;
+                if (l.isValide(this)) {
+                    this.setPieceActuel(l);
+                    return true;
+                }
                 p -= 0.1;
             }
             
         }
         
-        return true;
+        return false;
         
     }
     
@@ -599,12 +605,22 @@ public class Personnage extends Element implements Generable, Collisionable {
         }
 
         c.setSprite(sprite.copie());
+        
+        if (this.allowCopyListener) {
+            for (SimpleListener sl : this.dispatcher.getListeners()) {
+                c.addListener(sl);
+            }
+        }
     
         return c;
     }
 
     public void addListener(SimpleListener simpleListener) {
         this.dispatcher.addListener(simpleListener);
+    }
+
+    public void allowCopyListener() {
+        this.allowCopyListener = true;
     }
     
 }

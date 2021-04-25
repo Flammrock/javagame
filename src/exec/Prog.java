@@ -135,6 +135,11 @@ public class Prog {
         /*****************************************************/
         
         
+        // on créé un joueur
+        Personnage joueur = new Personnage("Héros","perso lambda nul");
+        joueur.init(20, 15, 15, 100);
+        
+        
         
         
         
@@ -185,12 +190,22 @@ public class Prog {
         /********************************************************/
         
         /***************** BIBLIOTHEQUE MONSTRE *****************/
+        
+        SimpleListener monstrelistener = new SimpleListener("onUpdate") {
+            @Override
+            public void onEvent(Object sender, SimpleEvent e) {
+                
+            }
+        };
+        
         Personnage monstre = new Personnage("Goblin", "monstre de la mort");
         monstre.init(5, 10, 15, 20);
         monstre.ajouter(banane);
         monstre.ajouter(armureBadass);
         monstre.equip(1);
         monstre.addCollisionBox(new CollisionBox(0,35,28,14));
+        monstre.allowCopyListener();
+        monstre.addListener(monstrelistener);
         
         //Personnage rock = new Personnage("rock", "inofensif");
         //rock.init(5, 10, 15, 20);
@@ -199,9 +214,9 @@ public class Prog {
         /********************************************************/
         
         
-        // on créé un joueur
-        Personnage joueur = new Personnage("Héros","perso lambda nul");
-        joueur.init(20, 15, 15, 100);
+        
+        
+        // on ajoute des trucs au joueur
         joueur.ajouter(epeeCasser);
         joueur.ajouter(pomme);
         joueur.ajouter(regeneration);
@@ -219,6 +234,7 @@ public class Prog {
                 }
             }
         });
+        
         
         
         // on créé le sprite pour le joueur
