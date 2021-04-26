@@ -63,7 +63,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         
         new Timer("Drawer", true).scheduleAtFixedRate( new TimerTask(){
             public void run(){
-               canvas1.repaint();
+               if (!_this.aventure.isPauseDraw()) canvas1.repaint();
                combatGraphique22.mettreAJourCanvas();
             }
         }, 
