@@ -204,6 +204,15 @@ public class Personnage extends Element implements Generable, Collisionable {
             }
         }
     }
+
+    public int getRadius_detection() {
+        return radius_detection;
+    }
+
+    public int getRadius_start_fight() {
+        return radius_start_fight;
+    }
+    
     
     public double getAjoute(String nom){
         double r = 0.0;
@@ -804,6 +813,25 @@ public class Personnage extends Element implements Generable, Collisionable {
         //int dy = (int)(speed * Math.sin(angle));
         //this.moveBy(dx, dy); // try to go in this direction
         
+    }
+
+    public boolean isInCircle(Personnage p,String TypeCercle) {
+        int tailleCercle = 0;
+        if(TypeCercle.equals("combat")){
+            tailleCercle = p.getRadius_start_fight();
+        }
+        else if(TypeCercle.equals("vision")){
+            tailleCercle = p.getRadius_detection();
+        }
+        else{
+            return false;
+        }
+        int xVect = p.getX() - this.getX();
+        int yVect = p.getY() - this.getY();
+        if((xVect*xVect + yVect*yVect) < (tailleCercle*tailleCercle)){
+            return true;
+        }
+        return false;
     }
 
     private static class PointNode {
