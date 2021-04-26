@@ -211,7 +211,7 @@ public class Prog {
             }
         };
         
-        Personnage monstre = new Personnage("Goblin", "monstre de la mort");
+        Personnage monstre = new Personnage("Minautor", "monstre de la mort");
         monstre.init(5, 10, 15, 20);
         monstre.ajouter(banane);
         monstre.ajouter(armureBadass);
