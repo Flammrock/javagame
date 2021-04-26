@@ -377,6 +377,8 @@ public class Prog {
                     
                     Lieu l = (Lieu)event.getData();
                     
+                    if (l.isEntree()) return;
+                    
                     // on copie le monstre
                     Personnage m = (Personnage)monstre.copie();
                     
