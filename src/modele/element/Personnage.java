@@ -136,6 +136,7 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     public void kill() {
         this.alive = false;
+        this.sprite.setAnimation("death");
     }
     
     public boolean isDead() {

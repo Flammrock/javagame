@@ -30,11 +30,15 @@ public class Aventure extends Element {
     private ArrayList<Drawable> drawables;
     Dispatcher dispatcher;
     
+    boolean pausedraw;
+    
     public Aventure(Personnage joueur) {
         this.dispatcher = new Dispatcher();
         this.description = "mon aventure";
         
         this.drawables = new ArrayList<>();
+        
+        this.pausedraw = false;
         
         // on créé le perso ici
         this.joueur = joueur;
@@ -43,6 +47,10 @@ public class Aventure extends Element {
         // on créé le donjon ici
         this.donjon = new Donjon();
         
+    }
+    
+    public boolean isPauseDraw() {
+        return this.pausedraw;
     }
 
     public Personnage getJoueur() {
@@ -54,6 +62,7 @@ public class Aventure extends Element {
         //monstre.init(5, 20, 15, 60);
         //monstre.initAleatoire();
         this.dispatcher.fireEvent("onCombatCommence",this, new DebutCombatEvent(Hero,Monstre));
+        this.pausedraw = true;
         System.out.println("Debut");
         
         //this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());
@@ -63,6 +72,7 @@ public class Aventure extends Element {
         this.joueur = Hero;
         System.out.println("fin");
         this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());
+        this.pausedraw = false;
     }
 
     /**
