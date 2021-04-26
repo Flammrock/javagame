@@ -97,14 +97,14 @@ public interface Collisionable extends Drawable {
     void onCollide(SimpleListener l);
     
     /**
-     * Permet de savoir si deux Collisionable sont en collisions.
-     * Pour que ce soit plus pratique, cette méthode n'est pas à implémenter
-     * sauf dans des cas très spécifique.
+     * Permet de savoir si deux Collisionable sont en collisions.Pour que ce soit plus pratique, cette méthode n'est pas à implémenter
+ sauf dans des cas très spécifique.
      * @param other l'autre Collisionable
+     * @param evenInactive true pour prendre en compte les CollisionBox inactive sinon false pour les ignorer
      * @return retourne null si la collision est invalide (pas de collisionBox, même objet en mémoire..),
      *         sinon renvoie true s'il y a collision sinon false
      */
-    default Boolean isCollide(Collisionable other) {
+    default Boolean isCollide(Collisionable other, boolean evenInactive) {
         
         // évidemment, on veut que les Collisionable soient bien deux objets distincts
         if (this == other) {
@@ -134,6 +134,8 @@ public interface Collisionable extends Drawable {
         for (CollisionBox b1 : list1) {
 
             for (CollisionBox b2 : list2) {
+                
+                if (evenInactive && (!b1.isActive() || !b2.isActive())) continue;
 
                 if (b1.isCollide(b2)) {
 

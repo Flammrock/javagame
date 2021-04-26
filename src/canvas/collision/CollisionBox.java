@@ -38,6 +38,7 @@ public class CollisionBox implements Drawable {
     int sy;
     
     boolean isdraw;
+    boolean active;
     
     /**
      * Constuire une boite de collision à l'aide de coordonnées relatives
@@ -61,6 +62,8 @@ public class CollisionBox implements Drawable {
         this.sx = 0;
         this.sy = 0;
         
+        this.active = true;
+        
         this.isdraw = false;
     }
     
@@ -76,6 +79,25 @@ public class CollisionBox implements Drawable {
         // pour l'instant, l'objet parent n'a pas encore appelé apply(int x, int y)
         this.sx = 0;
         this.sy = 0;
+        
+        this.active = true;
+        
+        this.isdraw = isdraw;
+    }
+    
+    public CollisionBox(int x, int y, int width, int height, boolean isdraw, boolean active) {
+        
+        // on enregistre les valeurs
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        
+        // pour l'instant, l'objet parent n'a pas encore appelé apply(int x, int y)
+        this.sx = 0;
+        this.sy = 0;
+        
+        this.active = active;
         
         this.isdraw = isdraw;
     }
@@ -220,6 +242,10 @@ public class CollisionBox implements Drawable {
     @Override
     public boolean isDraw() {
         return this.isdraw;
+    }
+    
+    public boolean isActive() {
+        return this.active;
     }
     
     public CollisionBox copie() {

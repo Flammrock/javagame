@@ -205,7 +205,7 @@ public class Canvas extends JPanel {
                             // on cast le 2ème item
                             Collisionable c2 = (Collisionable) item2;
                             
-                            Boolean r = c1.isCollide(c2);
+                            Boolean r = c1.isCollide(c2,false);
                             if (r == null) continue;
                             
                             if (r) canMove = false;

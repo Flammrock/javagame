@@ -564,12 +564,12 @@ public class Lieu extends Element implements Generable, Collisionable {
             Collisionable temp = new Lieu("");
             int s = 100;
             temp.addCollisionBox(new CollisionBox(x+width/2-s/2, y+height/2-s/2, s, s));
-            r = temp.isCollide(c);
+            r = temp.isCollide(c,true);
             if (r != null && r) {return false;}
         }
         r = false;
         for (Porte porte : this.listePorte) {
-            r = porte.isCollide(c);
+            r = porte.isCollide(c,true);
             if (r != null && r) {
                 break;
             }
@@ -577,19 +577,19 @@ public class Lieu extends Element implements Generable, Collisionable {
         if (r != null && r) {return false;}
         r = false;
         for (Embellishment et : this.embellishmentsListDrawed) {
-            r = et.isCollide(c);
+            r = et.isCollide(c,true);
             if (r != null && r) {
                 break;
             }
         }
         if (r!=null && r) {return false;}
-        r = this.isCollide(c);
+        r = this.isCollide(c,true);
         if (r!=null && r) {return false;}
         r = false;
         for (Drawable d : this.drawables) {
             if (d instanceof Collisionable) {
                 Collisionable dc = (Collisionable)d;
-                r = dc.isCollide(c);
+                r = dc.isCollide(c,true);
                 if (r != null && r) {
                     break;
                 }
