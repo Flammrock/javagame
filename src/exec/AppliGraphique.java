@@ -74,7 +74,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         mettreAJourTout();
         
         this.aventure.addListerner(new SimpleListener("onCombatCommence"){
-            //@override
+            @Override
             public void onEvent(Object sender, SimpleEvent e) {
                 Aventure aventure = (Aventure) sender;
                 DebutCombatEvent p = (DebutCombatEvent)e;
@@ -88,7 +88,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         });
     
         this.aventure.addListerner(new SimpleListener("onCombatTermine"){
-            //@override
+            @Override
             public void onEvent(Object sender, SimpleEvent e) {
                 combatGraphique22.setVisible(false);
                 Aventure aventure = (Aventure) sender;
