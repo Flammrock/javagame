@@ -205,10 +205,7 @@ public class Prog {
                 
                 if (joueur.getPieceActuel()==current_monstre.getPieceActuel()) {
                     current_monstre.follow(joueur);
-                    if(joueur.isInCircle(current_monstre,"combat")){
-                        
-                        current_monstre.collide(joueur);
-                    }
+                    current_monstre.tryFight(joueur);
                 }
                 
             }
@@ -356,8 +353,12 @@ public class Prog {
             public void onEvent(Object sender, SimpleEvent event) {
                 CollisionEvent e = (CollisionEvent) event;
                 if (e.getCollider1() instanceof Personnage && e.getCollider2() == joueur) {
-                    System.out.println("Collide");
-                    a.debutCombat((Personnage)e.getCollider2(), (Personnage)e.getCollider1());
+                    Personnage p1 = (Personnage)e.getCollider1();
+                    Personnage p2 = (Personnage)e.getCollider2();
+                    if (p1.canFight() && p2.canFight()) {
+                        System.out.println("[FIGHT] "+e.getCollider1()+" ---> "+e.getCollider2());
+                        a.debutCombat((Personnage)e.getCollider2(), (Personnage)e.getCollider1());
+                    }
                 } else if (e.getCollider2() == joueur) {
                     System.out.println("[COLLISION] "+e.getCollider1()+" ---> "+e.getCollider2());
                     if (e.getCollider1() instanceof Porte) {
