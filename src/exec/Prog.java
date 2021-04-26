@@ -316,6 +316,7 @@ public class Prog {
         s2.ajouterAnimation(new Animation("Idle-Right",new int[] {100, 101, 102, 103, 104}));
         s2.ajouterAnimation(new Animation("Walk-Left",new int[] {10, 11, 12, 13, 14, 15, 16, 17}));
         s2.ajouterAnimation(new Animation("Walk-Right",new int[] {110, 111, 112, 113, 114, 115, 116, 117}));
+        s2.ajouterAnimation(new Animation("Death",new int[] {195}));
         s2.setAnimation("Walk-Left");
         monstre.addCollisionBox(new CollisionBox(70,100,38,18));
         monstre.setSprite(s2);
