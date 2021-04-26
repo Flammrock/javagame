@@ -90,7 +90,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.follow_path = new ArrayList<>();
         this.follow_path_index = 0;
         
-        this.radius_detection = 300;
+        this.radius_detection = 500;
         this.radius_start_fight = 100;
     }
     
