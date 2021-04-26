@@ -506,7 +506,6 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.sprite.draw(c, g);
         
         
-        
         this.dispatcher.fireEvent("onUpdate", this, null);
         
     }
@@ -715,12 +714,13 @@ public class Personnage extends Element implements Generable, Collisionable {
         
         int dxd = p.getX()+p.getWidth()/2-this.getX()-this.getWidth()/2;
         int dyd = p.getY()+p.getHeight()/2-this.getY()-this.getHeight()/2;
-        if (dxd*dxd + dyd*dyd > this.radius_detection*this.radius_detection) return;
+        int r = this.getRadius_detection()/2;
+        if (dxd*dxd + dyd*dyd > r*r) return;
         
         // temporaire
         /////////////////////////////////////////////////////////////////////////
         double speed = 2;
-        double angle = Math.atan2(p.getY()-this.getY(), p.getX()-this.getX());
+        double angle = Math.atan2(dyd, dxd);
         int dxv = (int)(speed * Math.cos(angle));
         int dyv = (int)(speed * Math.sin(angle));
         this.moveBy(dxv, dyv); // try to go in this direction
@@ -833,16 +833,16 @@ public class Personnage extends Element implements Generable, Collisionable {
     public boolean isInCircle(Personnage p,String TypeCercle) {
         int tailleCercle = 0;
         if(TypeCercle.equals("combat")){
-            tailleCercle = p.getRadius_start_fight();
+            tailleCercle = p.getRadius_start_fight()/2;
         }
         else if(TypeCercle.equals("vision")){
-            tailleCercle = p.getRadius_detection();
+            tailleCercle = p.getRadius_detection()/2;
         }
         else{
             return false;
         }
-        int xVect = p.getX()+ p.getWidth()/2 - this.getX() + this.getWidth()/2;
-        int yVect = p.getY()+ p.getHeight()/2 - this.getY() + this.getHeight()/2 ;
+        int xVect = p.getX()+ p.getWidth()/2 - this.getX() - this.getWidth()/2;
+        int yVect = p.getY()+ p.getHeight()/2 - this.getY() - this.getHeight()/2 ;
         if((xVect*xVect + yVect*yVect) < (tailleCercle*tailleCercle)){
             return true;
         }
