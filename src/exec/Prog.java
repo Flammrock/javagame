@@ -398,6 +398,13 @@ public class Prog {
                     
                     if (l.isEntree()) return;
                     
+                    if (Math.random() < 0.2) {
+                        // on copie l'objet
+                        Arme a = (Arme)epeeCasser.copie();
+                        a.generate(l);
+                        l.ajouter(a);
+                    }
+                    
                     // on copie le monstre
                     Personnage m = (Personnage)monstre.copie();
                     
