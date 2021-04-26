@@ -715,7 +715,11 @@ public class Personnage extends Element implements Generable, Collisionable {
         int dxd = p.getX()+p.getWidth()/2-this.getX()-this.getWidth()/2;
         int dyd = p.getY()+p.getHeight()/2-this.getY()-this.getHeight()/2;
         int r = this.getRadius_detection()/2;
-        if (dxd*dxd + dyd*dyd > r*r) return;
+        if (dxd*dxd + dyd*dyd > r*r) {
+            if (this.sprite.getAnimationCourrante().getNom().equals("Walk-Left")) this.sprite.setAnimation("Idle-Left");
+            if (this.sprite.getAnimationCourrante().getNom().equals("Walk-Right")) this.sprite.setAnimation("Idle-Right");
+            return;
+        }
         
         // temporaire
         /////////////////////////////////////////////////////////////////////////
@@ -723,6 +727,11 @@ public class Personnage extends Element implements Generable, Collisionable {
         double angle = Math.atan2(dyd, dxd);
         int dxv = (int)(speed * Math.cos(angle));
         int dyv = (int)(speed * Math.sin(angle));
+        if (dxd < 0) {
+            this.sprite.setAnimationIfNot("Walk-Right");
+        } else {
+            this.sprite.setAnimationIfNot("Walk-Left");
+        }
         this.moveBy(dxv, dyv); // try to go in this direction
         if (1==1) return;
         /////////////////////////////////////////////////////////////////////////
