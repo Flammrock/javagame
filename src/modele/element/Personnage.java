@@ -484,7 +484,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         
         this.updateCollisionBox();
         
-        g.setColor(new Color(255,140,0));
+        /*g.setColor(new Color(255,140,0));
         g.drawArc(
                 c.toWorldX(this.getX()+this.getWidth()/2-this.radius_detection/2), 
                 c.toWorldY(this.getY()+this.getHeight()/2-this.radius_detection/2), 
@@ -500,7 +500,7 @@ public class Personnage extends Element implements Generable, Collisionable {
                 c.toScale(this.radius_start_fight),
                 c.toScale(this.radius_start_fight),
                 0, 360
-        );
+        );*/
         
         
         this.sprite.draw(c, g);
