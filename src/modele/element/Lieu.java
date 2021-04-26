@@ -227,6 +227,7 @@ public class Lieu extends Element implements Generable, Collisionable {
         Lieu _this = this;
         if (o instanceof Objet) {
             Element e = (Element)o.copie();
+            e.setZIndex(this.getZIndex()+1);
             this.objets.add((Objet)e);
             this.drawables.add(e);
             return true;
@@ -539,7 +540,6 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int x = this.x + (int)(Math.random()*(this.width-w));
                 int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
                 e.setBox(x,y,w,h);
-                e.setZIndex(this.getZIndex()+1);
                 e.setCollisionBoxList(e.getSprite().getCollisionBoxList(), ow, oh);
             }
             
