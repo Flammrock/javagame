@@ -138,6 +138,11 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.alive = false;
         this.sprite.setAnimation("Death");
         this.radius_start_fight = this.computeWidth();
+        this.setProperty(PropertyList.FORCE,0);
+        this.setProperty(PropertyList.AGILITE,0);
+        this.setProperty(PropertyList.PV,1);
+        this.setProperty(PropertyList.PVMAX,1);
+        this.setProperty(PropertyList.POIDSMAX,0);
     }
     
     public boolean isDead() {
@@ -463,7 +468,7 @@ public class Personnage extends Element implements Generable, Collisionable {
             return this.nom;
         }
         
-        return this.nom + " (" + this.description + ") " + getAjoute(PropertyList.PV) + "PV";
+        return (this.isDead()?"Cadavre ":"") + this.nom + " (" + this.description + ") " + getAjoute(PropertyList.PV) + "PV";
         
     }
     
