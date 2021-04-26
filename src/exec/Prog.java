@@ -7,6 +7,7 @@ package exec;
 
 import canvas.Animation;
 import canvas.Canvas;
+import canvas.Combat.DebutCombatEvent;
 import canvas.DrawListener;
 import canvas.SpriteSheet;
 import canvas.TileSet;
@@ -204,6 +205,10 @@ public class Prog {
                 
                 if (joueur.getPieceActuel()==current_monstre.getPieceActuel()) {
                     current_monstre.follow(joueur);
+                    if(joueur.isInCircle(current_monstre,"combat")){
+                        
+                        current_monstre.collide(joueur);
+                    }
                 }
                 
             }
@@ -349,7 +354,10 @@ public class Prog {
             @Override
             public void onEvent(Object sender, SimpleEvent event) {
                 CollisionEvent e = (CollisionEvent) event;
-                if (e.getCollider2() == joueur) {
+                if (e.getCollider1() instanceof Personnage && e.getCollider2() == joueur) {
+                    System.out.println("Collide");
+                    a.debutCombat((Personnage)e.getCollider1(), (Personnage)e.getCollider2());
+                } else if (e.getCollider2() == joueur) {
                     System.out.println("[COLLISION] "+e.getCollider1()+" ---> "+e.getCollider2());
                     if (e.getCollider1() instanceof Porte) {
                         Porte p = (Porte) e.getCollider1();
@@ -410,6 +418,6 @@ public class Prog {
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
         
-        a.debutCombat();
+        a.debutCombat(a.getJoueur(),null);
     }
 }
