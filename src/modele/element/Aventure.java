@@ -50,10 +50,10 @@ public class Aventure extends Element {
     }
     
     public void debutCombat(Personnage Hero, Personnage Monstre){
-        Personnage monstre = new Personnage("Goblin", "monstre de la mort");
+        //Personnage monstre = new Personnage("Goblin", "monstre de la mort");
         //monstre.init(5, 20, 15, 60);
-        monstre.initAleatoire();
-        this.dispatcher.fireEvent("onCombatCommence",this, new DebutCombatEvent(Hero,monstre));
+        //monstre.initAleatoire();
+        this.dispatcher.fireEvent("onCombatCommence",this, new DebutCombatEvent(Hero,Monstre));
         
         
         //this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());

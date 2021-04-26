@@ -421,6 +421,6 @@ public class Prog {
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);
         
-        a.debutCombat(a.getJoueur(),null);
+        //a.debutCombat(a.getJoueur(),null);
     }
 }
