@@ -222,6 +222,7 @@ public class Lieu extends Element implements Generable, Collisionable {
     }
     
     public boolean ajouter(Element o) {
+        Lieu _this = this;
         if (o instanceof Objet) {
             Element e = (Element)o.copie();
             this.objets.add((Objet)e);
@@ -230,8 +231,18 @@ public class Lieu extends Element implements Generable, Collisionable {
         }
         if (o instanceof Personnage) {
             Element e = (Element)o.copie();
-            this.monstres.add((Personnage)e);
-            this.drawables.add(e);
+            Personnage p = (Personnage)e;
+            
+            // on propage l'events de collisions dans le dispatcher de ce lieu
+            p.onCollide(new SimpleListener("onCollide"){
+                @Override
+                public void onEvent(Object sender, SimpleEvent event) {
+                    _this.getDispatcher().fireEvent("onCollide", _this, event);
+                }
+            });
+            
+            this.monstres.add(p);
+            this.drawables.add(p);
             return true;
         }
         return false;
