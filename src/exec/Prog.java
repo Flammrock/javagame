@@ -357,7 +357,7 @@ public class Prog {
                 CollisionEvent e = (CollisionEvent) event;
                 if (e.getCollider1() instanceof Personnage && e.getCollider2() == joueur) {
                     System.out.println("Collide");
-                    a.debutCombat((Personnage)e.getCollider1(), (Personnage)e.getCollider2());
+                    a.debutCombat((Personnage)e.getCollider2(), (Personnage)e.getCollider1());
                 } else if (e.getCollider2() == joueur) {
                     System.out.println("[COLLISION] "+e.getCollider1()+" ---> "+e.getCollider2());
                     if (e.getCollider1() instanceof Porte) {
