@@ -826,8 +826,8 @@ public class Personnage extends Element implements Generable, Collisionable {
         else{
             return false;
         }
-        int xVect = p.getX() - this.getX();
-        int yVect = p.getY() - this.getY();
+        int xVect = p.getX()+ p.computeWidth()/2 - this.getX() + this.computeWidth()/2;
+        int yVect = p.getY()+ p.computeHeight()/2 - this.getY() + this.computeHeight()/2 ;
         if((xVect*xVect + yVect*yVect) < (tailleCercle*tailleCercle)){
             return true;
         }
