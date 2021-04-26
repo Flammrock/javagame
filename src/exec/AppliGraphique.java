@@ -91,6 +91,10 @@ public class AppliGraphique extends javax.swing.JFrame {
             //@override
             public void onEvent(Object sender, SimpleEvent e) {
                 combatGraphique22.setVisible(false);
+                Aventure aventure = (Aventure) sender;
+                DebutCombatEvent p = (DebutCombatEvent)e;
+                Personnage perso2 = p.getPerso2();
+                aventure.getJoueur().getPieceActuel().kill(perso2);
             }
         });
         
