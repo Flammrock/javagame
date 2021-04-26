@@ -136,7 +136,8 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     public void kill() {
         this.alive = false;
-        this.sprite.setAnimation("death");
+        this.sprite.setAnimation("Death");
+        this.radius_start_fight = this.computeWidth();
     }
     
     public boolean isDead() {
@@ -710,8 +711,10 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     public void follow(Personnage p) {
         
-        int dxd = p.getX()+p.computeWidth()/2-this.getX()-this.computeWidth()/2;
-        int dyd = p.getY()+p.computeHeight()/2-this.getY()-this.computeHeight()/2;
+        if (this.isDead()) return;
+        
+        int dxd = p.getX()+p.getWidth()/2-this.getX()-this.getWidth()/2;
+        int dyd = p.getY()+p.getHeight()/2-this.getY()-this.getHeight()/2;
         if (dxd*dxd + dyd*dyd > this.radius_detection*this.radius_detection) return;
         
         // temporaire
@@ -838,8 +841,8 @@ public class Personnage extends Element implements Generable, Collisionable {
         else{
             return false;
         }
-        int xVect = p.getX()+ p.computeWidth()/2 - this.getX() + this.computeWidth()/2;
-        int yVect = p.getY()+ p.computeHeight()/2 - this.getY() + this.computeHeight()/2 ;
+        int xVect = p.getX()+ p.getWidth()/2 - this.getX() + this.getWidth()/2;
+        int yVect = p.getY()+ p.getHeight()/2 - this.getY() + this.getHeight()/2 ;
         if((xVect*xVect + yVect*yVect) < (tailleCercle*tailleCercle)){
             return true;
         }
