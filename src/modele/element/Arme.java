@@ -6,20 +6,33 @@
 package modele.element;
 
 import canvas.Canvas;
+import canvas.Drawable;
 import canvas.Sprite;
+import canvas.collision.CollisionBox;
+import canvas.collision.CollisionEvent;
+import canvas.collision.Collisionable;
+import eventsystem.Dispatcher;
+import eventsystem.SimpleListener;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import map.Generable;
+import map.GenerateListener;
 
 /**
  *
  * @author User
  */
-public class Arme extends Equipement {
+public class Arme extends Equipement implements Collisionable, Generable {
     
     Sprite sprite;
+    Dispatcher dispatcher;
+    ArrayList<CollisionBox> collisionBoxList;
     
     public Arme(String nom, String description, double poids, double agilite, double force) {
         super(nom,description,poids);
         this.sprite = null;
+        this.dispatcher = new Dispatcher();
+        this.collisionBoxList = new ArrayList<>();
         this.bonus_agilite = agilite;
         this.bonus_force = force;
     }
@@ -79,6 +92,86 @@ public class Arme extends Equipement {
         if (this.sprite == null) return;
         
         this.sprite.draw(c, g);
+    }
+    
+    @Override
+    public Drawable copie() {
+        Arme c = new Arme(nom, description, poids, bonus_agilite, bonus_force);
+        c.setSprite(sprite);
+        return c;
+    }
+
+    @Override
+    public Dispatcher getDispatcher() {
+        return this.dispatcher;
+    }
+
+    @Override
+    public void onGenerate(GenerateListener l) {
+        this.dispatcher.fireEvent("onGenerate", this, null);
+    }
+
+    @Override
+    public boolean generate(Object o) {
+        if (o instanceof Lieu) {
+            Lieu l = (Lieu)o;
+            
+            double p = 1;
+            while (Math.random()<p) {
+                this.setX(l.randomX(this,this.getWidth()));
+                this.setY(l.randomY(this,this.getHeight()));
+                if (l.isValide(this)) {
+                    return true;
+                }
+                p -= 0.1;
+            }
+            
+        }
+        
+        return false;
+    }
+
+    @Override
+    public ArrayList<CollisionBox> getCollisionBoxList() {
+        return this.collisionBoxList;
+    }
+
+    @Override
+    public void addCollisionBox(CollisionBox b) {
+        this.collisionBoxList.add(b);
+    }
+
+    @Override
+    public int getNewX() {
+        if (this.sprite == null) return 0;
+        return this.sprite.getX();
+    }
+
+    @Override
+    public int getNewY() {
+        if (this.sprite == null) return 0;
+        return this.sprite.getY();
+    }
+
+    @Override
+    public void applyMove() {
+        
+    }
+
+    @Override
+    public void cancelMove() {
+        
+    }
+
+    @Override
+    public void collide(Collisionable c) {
+        dispatcher.fireEvent("onCollide", this, new CollisionEvent(this,c));
+    }
+
+    @Override
+    public void onCollide(SimpleListener l) {
+        l.setType("onCollide"); // on force le type
+        this.dispatcher.addListener(l);
     }
     
 }
