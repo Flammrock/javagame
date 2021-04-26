@@ -71,7 +71,7 @@ public class Aventure extends Element {
     public void finCombat(Personnage Hero, Personnage Monstre){
         this.joueur = Hero;
         System.out.println("fin");
-        this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent());
+        this.dispatcher.fireEvent("onCombatTermine",this, new DebutCombatEvent(Hero,Monstre));
         this.pausedraw = false;
     }
 
