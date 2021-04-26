@@ -7,6 +7,7 @@ package map;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import modele.element.Personnage;
 
 /**
  *
@@ -102,6 +103,11 @@ public class Camera {
         this.sy = canvas.getHeight()/2;
         this.wx = (target!=null?target.getX():0);
         this.wy = (target!=null?target.getY():0);
+        if (this.target instanceof Personnage) {
+            Personnage ptarget = (Personnage)this.target;
+            this.wx += ptarget.getWidth()/2;
+            this.wy += ptarget.getHeight()/2;
+        }
     }
     
     
