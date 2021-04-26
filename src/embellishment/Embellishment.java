@@ -295,4 +295,9 @@ public class Embellishment implements Collisionable {
         }
     }
     
+    @Override
+    public int getZIndex() {
+        return this.getY()+this.getHeight();
+    }
+    
 }

@@ -134,4 +134,20 @@ public interface Drawable extends Serializable {
      * @return une nouvelle instance
      */
     public Drawable copie();
+    
+    /**
+     * Un Drawable doit pouvoir renvoyer un nombre définissant la priorité de dessin
+     * Priorité faible => Premier Drawable dessiné
+     * Priorité forte => Dernier Drawable dessiné
+     * (Le dernier Drawable dessiné est au-dessus de tout les autres)
+     * @return retourne la priorité d'ordre de dessinage
+     */
+    public int getZIndex();
+    
+    /**
+     * Un drawable doit pouvoir être capable de modifier son ordre de priorité
+     * Définition par défaut pour ne pas embêter les classes qui retournent directement brutamment le zIndex (i.e return 5)
+     * @param zindex Le nouveau Z-Index
+     */
+    default public void setZIndex(int zindex) {}
 }

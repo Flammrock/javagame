@@ -12,7 +12,9 @@ import embellishment.TypeEmbellishment;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
+import exec.Settings;
 import geometry.Box;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -336,9 +338,10 @@ public class Lieu extends Element implements Generable, Collisionable {
         //g2.dispose();
         //g.setClip(null);
         
-        //g.setColor(Color.orange);
-        //g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
-        
+        if (Settings.DEBUG) {
+            g.setColor(Color.orange);
+            g.drawRect(c.toWorldX(this.x), c.toWorldY(this.y), c.toScale(this.width), c.toScale(this.height));
+        }
         
     }
     
@@ -536,6 +539,7 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int x = this.x + (int)(Math.random()*(this.width-w));
                 int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
                 e.setBox(x,y,w,h);
+                e.setZIndex(this.getZIndex()+1);
                 e.setCollisionBoxList(e.getSprite().getCollisionBoxList(), ow, oh);
             }
             
@@ -734,6 +738,11 @@ public class Lieu extends Element implements Generable, Collisionable {
         } else {
             p.kill();
         }
+    }
+    
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // 1ère élément à être dessiné
     }
 
 }

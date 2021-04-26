@@ -313,5 +313,10 @@ public class Niveau extends Element implements Generable {
     public Drawable copie() {
         return null;
     }
+    
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // aucun impact
+    }
 
 }

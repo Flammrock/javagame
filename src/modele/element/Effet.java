@@ -123,5 +123,10 @@ public class Effet extends Element {
         
         return c;
     }
+    
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // pour le moment, on ne les dessine même pas
+    }
 
 }

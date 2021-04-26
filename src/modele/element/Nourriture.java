@@ -38,5 +38,8 @@ public class Nourriture extends Objet {
         return null;
     }
     
-    
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // on ne les dessine même pas pour le moment
+    }
 }

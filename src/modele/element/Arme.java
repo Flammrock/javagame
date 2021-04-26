@@ -26,10 +26,12 @@ public class Arme extends Equipement implements Collisionable, Generable {
     
     Sprite sprite;
     Dispatcher dispatcher;
+    int zindex;
     
     public Arme(String nom, String description, double poids, double agilite, double force) {
         super(nom,description,poids);
         this.sprite = null;
+        this.zindex = 0;
         this.dispatcher = new Dispatcher();
         this.bonus_agilite = agilite;
         this.bonus_force = force;
@@ -174,6 +176,16 @@ public class Arme extends Equipement implements Collisionable, Generable {
     public void onCollide(SimpleListener l) {
         l.setType("onCollide"); // on force le type
         this.dispatcher.addListener(l);
+    }
+    
+    @Override
+    public int getZIndex() {
+        return zindex; // défini par le zindex minimum du lieu
+    }
+    
+    @Override
+    public void setZIndex(int zindex) {
+        this.zindex = zindex;
     }
     
 }

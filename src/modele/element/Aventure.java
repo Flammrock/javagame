@@ -189,4 +189,9 @@ public class Aventure extends Element {
         return null;
     }
     
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // aucun impact
+    }
+    
 }

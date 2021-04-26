@@ -7,9 +7,11 @@ package map;
 
 import canvas.Canvas;
 import canvas.Drawable;
+import exec.Settings;
 import geometry.Box;
 import geometry.Direction;
 import geometry.Point;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -252,27 +254,30 @@ public class Squeleton implements Drawable {
     @Override
     public void draw(Canvas c, Graphics g) {
         
-        
-        //g.setColor(Color.RED);
-        //g.fillRect(c.toWorldX(0), c.toWorldY(0), c.toScale(200), c.toScale(200));
-        
-        /*for (Box b : bones) {
-            g.setColor(Color.BLUE);
-            g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
-        }*/
-        /*for (Point p : articulations) {
-            g.setColor(Color.YELLOW);
-            g.fillArc(c.toWorldX(p.x-50/2),c.toWorldY(p.y-50/2),c.toScale(50),c.toScale(50),0,360);
-        }*/
-        /*for (Box b : ligaments) {
-            g.setColor(Color.GREEN);
-            g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
-        }*/
-        
-        /*for (Box b : ligaments_bounds) {
-            g.setColor(Color.magenta);
-            g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
-        }*/
+        if (Settings.DEBUG) {
+            //g.setColor(Color.RED);
+            //g.fillRect(c.toWorldX(0), c.toWorldY(0), c.toScale(200), c.toScale(200));
+
+            for (Box b : bones) {
+                g.setColor(Color.BLUE);
+                g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y),c.toScale(b.size.x),c.toScale(b.size.y));
+            }
+            for (Point p : articulations) {
+                g.setColor(Color.YELLOW);
+                g.fillArc(c.toWorldX(p.x-50/2),c.toWorldY(p.y-50/2+40),c.toScale(50),c.toScale(50),0,360);
+            }
+            for (Box b : ligaments) {
+                g.setColor(Color.GREEN);
+                g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y+40),c.toScale(b.size.x),c.toScale(b.size.y));
+            }
+
+            for (ArrayList<Box> bs : ligaments_bounds) {
+                for (Box b : bs) {
+                    g.setColor(Color.magenta);
+                    g.drawRect(c.toWorldX(b.position.x),c.toWorldY(b.position.y+40),c.toScale(b.size.x),c.toScale(b.size.y));
+                }
+            }
+        }
     }
 
     @Override
@@ -318,6 +323,12 @@ public class Squeleton implements Drawable {
     @Override
     public Drawable copie() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    @Override
+    public int getZIndex() {
+        return Integer.MAX_VALUE; // haute priorité pour pouvoir le voir
     }
     
 }

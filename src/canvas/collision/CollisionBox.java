@@ -262,4 +262,9 @@ public class CollisionBox implements Drawable {
         }
     }
     
+    
+    @Override
+    public int getZIndex() {
+        return Integer.MAX_VALUE; // les collisionBox visiblie sont pour pouvoir débuguer (donc haute priorité)
+    }
 }

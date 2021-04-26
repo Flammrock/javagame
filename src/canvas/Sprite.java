@@ -211,7 +211,9 @@ public class Sprite implements Collisionable {
     }
 
     public int getWidth() {
-        return width;
+        BufferedImage image = this.getImage();
+        int ww = (this.width < 0 ? image.getWidth() : this.width);
+        return ww;
     }
 
     public void setWidth(int width) {
@@ -219,7 +221,9 @@ public class Sprite implements Collisionable {
     }
 
     public int getHeight() {
-        return height;
+        BufferedImage image = this.getImage();
+        int hh = (this.height < 0 ? image.getHeight() : this.height);
+        return hh;
     }
 
     public void setHeight(int height) {
@@ -516,6 +520,11 @@ public class Sprite implements Collisionable {
         }
         c.loadImage();
         return c;
+    }
+    
+    @Override
+    public int getZIndex() {
+        return this.getY()+this.getHeight();
     }
     
 }

@@ -8,6 +8,7 @@ import canvas.collision.Collisionable;
 import eventsystem.Dispatcher;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
+import exec.Settings;
 import geometry.Point;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -496,26 +497,34 @@ public class Personnage extends Element implements Generable, Collisionable {
             this.fuitetick--;
         }
         
-        /*g.setColor(new Color(255,140,0));
-        g.drawArc(
-                c.toWorldX(this.getX()+this.getWidth()/2-this.radius_detection/2), 
-                c.toWorldY(this.getY()+this.getHeight()/2-this.radius_detection/2), 
-                c.toScale(this.radius_detection), 
-                c.toScale(this.radius_detection),
-                0, 360
-        );
+        if (Settings.DEBUG) {
+            g.setColor(new Color(255,140,0));
+            g.drawArc(
+                    c.toWorldX(this.getX()+this.getWidth()/2-this.radius_detection/2), 
+                    c.toWorldY(this.getY()+this.getHeight()/2-this.radius_detection/2), 
+                    c.toScale(this.radius_detection), 
+                    c.toScale(this.radius_detection),
+                    0, 360
+            );
+
+            g.setColor(new Color(255,0,0));
+            g.drawArc(
+                    c.toWorldX(this.getX()+this.getWidth()/2-this.radius_start_fight/2),
+                    c.toWorldY(this.getY()+this.getHeight()/2-this.radius_start_fight/2),
+                    c.toScale(this.radius_start_fight),
+                    c.toScale(this.radius_start_fight),
+                    0, 360
+            );
+        }
         
-        g.setColor(new Color(255,0,0));
-        g.drawArc(
-                c.toWorldX(this.getX()+this.getWidth()/2-this.radius_start_fight/2),
-                c.toWorldY(this.getY()+this.getHeight()/2-this.radius_start_fight/2),
-                c.toScale(this.radius_start_fight),
-                c.toScale(this.radius_start_fight),
-                0, 360
-        );*/
         
         
         this.sprite.draw(c, g);
+        
+        if (Settings.DEBUG) {
+            g.setColor(new Color(255,255,0,120));
+            g.fillRect(c.toWorldX(this.getX()), c.toWorldY(this.getY()), c.toScale(this.getWidth()), c.toScale(this.getHeight()));
+        }
         
         
         this.dispatcher.fireEvent("onUpdate", this, null);
@@ -865,6 +874,11 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     public boolean canFight() {
         return this.fuitetick==0;
+    }
+    
+    @Override
+    public int getZIndex() {
+        return this.getY()+this.getHeight();
     }
 
     public boolean isInCircle(Personnage p,String TypeCercle) {

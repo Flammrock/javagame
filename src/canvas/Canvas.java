@@ -231,7 +231,7 @@ public class Canvas extends JPanel {
         // en O(nlog(n))
         Collections.sort(items, new Comparator<Drawable>() {
             public int compare(Drawable a, Drawable b) {
-                return b.getY() < a.getY() ? 1 : b.getY() > a.getY() ? -1 : 0;
+                return b.getZIndex() < a.getZIndex() ? 1 : b.getZIndex() > a.getZIndex() ? -1 : 0;
             }
         });
         

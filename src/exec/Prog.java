@@ -159,7 +159,7 @@ public class Prog {
         SpriteSheet lightsprite = new SpriteSheet("/light.png",0,0,16,26,16*3,26*3);
         lightsprite.loadImage();
         lightsprite.ajouterAnimation(new Animation("Lighting",new int[] {0, 1, 2, 3, 4, 5, 6, 7}));
-        lightsprite.addCollisionBox(new CollisionBox(4, 14, 8, 11));
+        lightsprite.addCollisionBox(new CollisionBox(4, 14, 8, 11,Settings.DEBUG));
         lightsprite.setAnimation("Lighting");
         lightsprite.addDrawable(new Light(16/2,26/2,200));
         
@@ -171,7 +171,8 @@ public class Prog {
         /////////////////////////////////////////////////////////////
         
         
-        Sprite sprite_epee = new Sprite("/items/Item__01.png",0,0,64,64);
+        Sprite sprite_epee = new Sprite("/items/Item__01.png",0,0,24,24);
+        sprite_epee.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
         
         
         
@@ -253,7 +254,7 @@ public class Prog {
         hommeDeFer.setProperty(PropertyList.FORCE, 5);
         popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
         joueur.ajouter(potion);
-        joueur.addCollisionBox(new CollisionBox(0,35,28,14));
+        joueur.addCollisionBox(new CollisionBox(0,35,28,14,Settings.DEBUG));
         joueur.addListener(new SimpleListener("onEnterSalle") {
             @Override
             public void onEvent(Object sender, SimpleEvent e) {
@@ -332,7 +333,8 @@ public class Prog {
         s2.ajouterAnimation(new Animation("Walk-Right",new int[] {110, 111, 112, 113, 114, 115, 116, 117}));
         s2.ajouterAnimation(new Animation("Death",new int[] {195}));
         s2.setAnimation("Walk-Left");
-        monstre.addCollisionBox(new CollisionBox(70,100,38,18));
+        s2.setDecal(0, 20, 0, 30);
+        monstre.addCollisionBox(new CollisionBox(75,70,38,18,Settings.DEBUG));
         monstre.setSprite(s2);
         
         
@@ -398,7 +400,7 @@ public class Prog {
                     
                     if (l.isEntree()) return;
                     
-                    if (Math.random() < 0.2) {
+                    if (Math.random() < 1.0) {
                         // on copie l'objet
                         Arme a = (Arme)epeeCasser.copie();
                         a.generate(l);

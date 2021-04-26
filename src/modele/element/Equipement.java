@@ -51,5 +51,10 @@ public class Equipement extends Objet {
     public Drawable copie() {
         return null;
     }
+    
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // pour l'instant
+    }
 
 }

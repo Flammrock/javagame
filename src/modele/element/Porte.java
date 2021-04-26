@@ -217,4 +217,9 @@ public class Porte extends Element implements Collisionable {
         return null;
     }
     
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // aucun impact
+    }
+    
 }

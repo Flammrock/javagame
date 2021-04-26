@@ -291,4 +291,9 @@ public class SpriteSheet extends Sprite {
         return c;
     }
     
+    @Override
+    public int getZIndex() {
+        return this.getY()+this.computeHeight();
+    }
+    
 }

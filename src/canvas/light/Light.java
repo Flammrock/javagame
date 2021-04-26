@@ -137,4 +137,9 @@ public class Light implements Drawable {
         return this.parent;
     }
     
+    
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // aucun impact (les lumières sont rajouté tout à la fin via une opération de blending)
+    }
 }

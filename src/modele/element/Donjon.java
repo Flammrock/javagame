@@ -65,5 +65,9 @@ public class Donjon extends Element{
         return null;
     }
 
+    @Override
+    public int getZIndex() {
+        return Integer.MIN_VALUE; // aucun impact
+    }
     
 }
