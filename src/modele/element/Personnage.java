@@ -63,6 +63,8 @@ public class Personnage extends Element implements Generable, Collisionable {
     int radius_detection;
     int radius_start_fight;
     
+    int fuitetick;
+    
     boolean alive;
     
 
@@ -80,6 +82,8 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.allowCopyListener = false;
         
         this.alive = true;
+        
+        this.fuitetick = 0;
         
         this.follow_tick = 0;
         this.follow_tick_max = 100;
@@ -469,7 +473,6 @@ public class Personnage extends Element implements Generable, Collisionable {
         }
         
         return (this.isDead()?"Cadavre ":"") + this.nom + " (" + this.description + ") " + getAjoute(PropertyList.PV) + "PV";
-        
     }
     
 
@@ -488,6 +491,10 @@ public class Personnage extends Element implements Generable, Collisionable {
         if (this.sprite == null) return;
         
         this.updateCollisionBox();
+        
+        if (this.fuitetick > 0) {
+            this.fuitetick--;
+        }
         
         /*g.setColor(new Color(255,140,0));
         g.drawArc(
@@ -620,7 +627,11 @@ public class Personnage extends Element implements Generable, Collisionable {
 
     public boolean essaiEnfuir(Personnage Ennemi) {
         double probabiliteDeToucher = this.valeurCombat()/(this.valeurCombat()+Ennemi.valeurCombat());
-        return aToucher(probabiliteDeToucher);
+        boolean a = aToucher(probabiliteDeToucher);
+        if (a) {
+            this.fuitetick = 60*3; // 3 secondes
+        }
+        return a;
     }
 
     @Override
@@ -716,6 +727,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     public void follow(Personnage p) {
         
         if (this.isDead()) return;
+        if (this.fuitetick > 0) return;
         
         int dxd = p.getX()+p.getWidth()/2-this.getX()-this.getWidth()/2;
         int dyd = p.getY()+p.getHeight()/2-this.getY()-this.getHeight()/2;
@@ -842,6 +854,17 @@ public class Personnage extends Element implements Generable, Collisionable {
         //int dy = (int)(speed * Math.sin(angle));
         //this.moveBy(dx, dy); // try to go in this direction
         
+    }
+    
+    public void tryFight(Personnage p) {
+        if (this.fuitetick > 0) return;
+        if (p.isInCircle(this,"combat")){
+            this.collide(p);
+        }
+    }
+    
+    public boolean canFight() {
+        return this.fuitetick==0;
     }
 
     public boolean isInCircle(Personnage p,String TypeCercle) {
