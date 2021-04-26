@@ -135,7 +135,7 @@ public interface Collisionable extends Drawable {
 
             for (CollisionBox b2 : list2) {
                 
-                if (evenInactive && (!b1.isActive() || !b2.isActive())) continue;
+                if (!evenInactive && (!b1.isActive() || !b2.isActive())) continue;
 
                 if (b1.isCollide(b2)) {
 
