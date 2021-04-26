@@ -370,7 +370,7 @@ private Personnage Ennemi;
         System.out.println(Ennemi.attaque(this.Moi));
         this.Moi.actionEffetFinDuTour();
         this.Ennemi.actionEffetFinDuTour();
-        if(this.Moi.getAjoute("pv") == 0 || this.Ennemi.getAjoute("pv") == 0){
+        if(this.Moi.getAjoute("pv") <= 0 || this.Ennemi.getAjoute("pv") <= 0){
             this.aventure.finCombat(Moi,Ennemi);
         }
         miseAJourComposants();
