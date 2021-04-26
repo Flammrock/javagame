@@ -725,5 +725,15 @@ public class Lieu extends Element implements Generable, Collisionable {
         
         return y;
     }
+    
+    
+    public void kill(Personnage p) {
+        if (p.isDead()) {
+            this.drawables.remove(p);
+            this.monstres.remove(p);
+        } else {
+            p.kill();
+        }
+    }
 
 }
