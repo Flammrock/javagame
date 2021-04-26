@@ -9,6 +9,7 @@ import canvas.Animation;
 import canvas.Canvas;
 import canvas.Combat.DebutCombatEvent;
 import canvas.DrawListener;
+import canvas.Sprite;
 import canvas.SpriteSheet;
 import canvas.TileSet;
 import canvas.collision.CollisionBox;
@@ -170,24 +171,40 @@ public class Prog {
         /////////////////////////////////////////////////////////////
         
         
+        Sprite sprite_epee = new Sprite("/items/Item__01.png",0,0,64,64);
+        
+        
+        
+        
         // tout les objets on les met ici :
         
         /****************** BIBLIOTHEQUE OBJET ******************/
         Arme epeeCasser = new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0);
+        epeeCasser.setSprite(sprite_epee);
+        
         Effet effetPomme = new Effet("","",false,true,0);
         effetPomme.setProperty(PropertyList.PV,10);
+        
         Effet regeneration = new Effet("régeneration","augmente la vie dans le temmps",true,false,0);
         regeneration.setProperty(PropertyList.PV,3);
+        
         Nourriture pomme = new Nourriture("Pomme","Une bonne petite pomme",2.0,effetPomme);
+        
         Effet hommeDeFer = new Effet("Homme de fer","augmente la force",false,false,3);
         hommeDeFer.setProperty(PropertyList.FORCE, 5);
+        
         Effet popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
         popo.setProperty(PropertyList.PV, 3);
+        
         Nourriture potion = new Nourriture("Potion de regen","regen la vie",1,popo);
+        
         Effet effetBanane = new Effet("","",false,true,0);
         effetBanane.setProperty(PropertyList.PV, 15);
+        
         Nourriture banane = new Nourriture("banane","Une grosse banane",2.0,effetBanane);
+        
         Armure armureBadass = new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10);
+        
         /********************************************************/
         
         /***************** BIBLIOTHEQUE MONSTRE *****************/
