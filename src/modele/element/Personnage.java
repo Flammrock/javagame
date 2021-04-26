@@ -63,6 +63,8 @@ public class Personnage extends Element implements Generable, Collisionable {
     int radius_detection;
     int radius_start_fight;
     
+    boolean alive;
+    
 
     public Personnage(String nom, String description) {
         this.nom = nom;
@@ -76,6 +78,8 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.listproperties = new ArrayList<>();
         this.dispatcher = new Dispatcher();
         this.allowCopyListener = false;
+        
+        this.alive = true;
         
         this.follow_tick = 0;
         this.follow_tick_max = 100;
@@ -130,6 +134,13 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.sprite = sprite;
     }
 
+    public void kill() {
+        this.alive = false;
+    }
+    
+    public boolean isDead() {
+        return !this.alive;
+    }
     
     public String getNom() {
         return nom;
