@@ -26,13 +26,11 @@ public class Arme extends Equipement implements Collisionable, Generable {
     
     Sprite sprite;
     Dispatcher dispatcher;
-    ArrayList<CollisionBox> collisionBoxList;
     
     public Arme(String nom, String description, double poids, double agilite, double force) {
         super(nom,description,poids);
         this.sprite = null;
         this.dispatcher = new Dispatcher();
-        this.collisionBoxList = new ArrayList<>();
         this.bonus_agilite = agilite;
         this.bonus_force = force;
     }
@@ -90,7 +88,9 @@ public class Arme extends Equipement implements Collisionable, Generable {
     @Override
     public void draw(Canvas c, Graphics g) {
         if (this.sprite == null) return;
-        
+        for (CollisionBox b : this.getCollisionBoxList()) {
+            b.apply(this.getX(),this.getY());
+        }
         this.sprite.draw(c, g);
     }
     
@@ -133,12 +133,14 @@ public class Arme extends Equipement implements Collisionable, Generable {
 
     @Override
     public ArrayList<CollisionBox> getCollisionBoxList() {
-        return this.collisionBoxList;
+        if (this.sprite == null) return null;
+        return this.sprite.getCollisionBoxList();
     }
 
     @Override
     public void addCollisionBox(CollisionBox b) {
-        this.collisionBoxList.add(b);
+        if (this.sprite == null) return;
+        this.sprite.getCollisionBoxList().add(b);
     }
 
     @Override
