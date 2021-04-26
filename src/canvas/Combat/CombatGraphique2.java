@@ -379,7 +379,7 @@ private Personnage Ennemi;
     private void FuiteBouttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FuiteBouttonActionPerformed
         if(this.Moi.essaiEnfuir(this.Ennemi)){
             this.aventure.finCombat(Moi,Ennemi);
-        }else{
+        }else if (!Ennemi.isDead()) {
             Ennemi.attaque(this.Moi);
         }
         this.Moi.actionEffetFinDuTour();

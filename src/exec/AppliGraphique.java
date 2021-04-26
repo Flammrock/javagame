@@ -94,7 +94,9 @@ public class AppliGraphique extends javax.swing.JFrame {
                 Aventure aventure = (Aventure) sender;
                 DebutCombatEvent p = (DebutCombatEvent)e;
                 Personnage perso2 = p.getPerso2();
-                aventure.getJoueur().getPieceActuel().kill(perso2);
+                if (perso2.isDead()) {
+                    aventure.getJoueur().getPieceActuel().kill(perso2);
+                }
             }
         });
         
