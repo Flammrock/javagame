@@ -159,7 +159,7 @@ public class inventoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseReleased
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
-        evt.consume();
+        // TODO add your handling code here:
     }//GEN-LAST:event_formMouseWheelMoved
 
 
