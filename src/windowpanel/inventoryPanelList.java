@@ -5,8 +5,10 @@
  */
 package windowpanel;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -52,8 +54,14 @@ public class inventoryPanelList extends javax.swing.JPanel {
         int h = this.getHeight();
         int s = 50;
         
-        g.setColor(new Color(85,148,255,220));
-        g.fillPolygon(new int[]{0,w-s,w,w,s,0,0}, new int[]{0,0,s,h,h,h-s,0}, 7);
+        Graphics2D g2d = (Graphics2D)g;
+        
+        g2d.setColor(new Color(255,255,255,220));
+        g2d.fillPolygon(new int[]{0,w-s,w,w,s,0,0}, new int[]{0,0,s,h,h,h-s,0}, 7);
+        
+        g2d.setColor(new Color(113,113,113));
+        g2d.setStroke(new BasicStroke(10));
+        g2d.drawPolygon(new int[]{0,w-s,w,w,s,0,0}, new int[]{0,0,s,h,h,h-s,0}, 7);
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
