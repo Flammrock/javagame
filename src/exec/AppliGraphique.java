@@ -20,6 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import map.Camera;
 import modele.element.*;
+import windowpanel.inventoryPanel;
 
 
 /**
@@ -29,6 +30,7 @@ import modele.element.*;
 public class AppliGraphique extends javax.swing.JFrame {
     
     private Aventure aventure;
+    private inventoryPanel invpanel;
     /**
      * Creates new form AppliGraphique
      * @param aventure
@@ -36,6 +38,8 @@ public class AppliGraphique extends javax.swing.JFrame {
     public AppliGraphique(Aventure aventure) {
         this.aventure = aventure;
         initComponents();
+        
+        initCustom();
 
         AppliGraphique _this = this;
         /*listeObjetInventaire.addListSelectionListener(new ListSelectionListener(){
@@ -156,6 +160,16 @@ public class AppliGraphique extends javax.swing.JFrame {
         utiliserBouton.setVisible(false);*/
     }
     
+    public void initCustom() {
+    
+        invpanel = new inventoryPanel(canvas1);
+        invpanel.setBounds(0, 0, 100, 100);
+        invpanel.setVisible(true);
+        
+        getRootPane().setGlassPane(invpanel);
+        getRootPane().getGlassPane().setVisible(true);
+        
+    }
     
     
     public String onActionJoueur(String action,Personnage ennemie) {
