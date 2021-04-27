@@ -66,6 +66,8 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     int fuitetick;
     
+    boolean iscanramasse;
+    
     boolean alive;
     
 
@@ -85,6 +87,8 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.alive = true;
         
         this.fuitetick = 0;
+        
+        this.iscanramasse = false;
         
         this.follow_tick = 0;
         this.follow_tick_max = 100;
@@ -898,6 +902,14 @@ public class Personnage extends Element implements Generable, Collisionable {
             return true;
         }
         return false;
+    }
+
+    public boolean canRamasse(Ramassable ramas) {
+        return this.iscanramasse;
+    }
+    
+    public void setCanRamasse(boolean iscanramasse) {
+        this.iscanramasse = iscanramasse;
     }
 
     private static class PointNode {

@@ -254,6 +254,7 @@ public class Prog {
         hommeDeFer.setProperty(PropertyList.FORCE, 5);
         popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
         joueur.ajouter(potion);
+        joueur.setCanRamasse(true);
         joueur.addCollisionBox(new CollisionBox(0,35,28,14,Settings.DEBUG));
         joueur.addListener(new SimpleListener("onEnterSalle") {
             @Override

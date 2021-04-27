@@ -22,17 +22,19 @@ import map.GenerateListener;
  *
  * @author User
  */
-public class Arme extends Equipement implements Collisionable, Generable {
+public class Arme extends Equipement implements Ramassable, Generable {
     
     Sprite sprite;
     Dispatcher dispatcher;
     int zindex;
+    int radiusramassable;
     
     public Arme(String nom, String description, double poids, double agilite, double force) {
         super(nom,description,poids);
         this.sprite = null;
-        this.zindex = 0;
+        this.zindex = Integer.MIN_VALUE;
         this.dispatcher = new Dispatcher();
+        this.radiusramassable = 50;
         this.bonus_agilite = agilite;
         this.bonus_force = force;
     }
@@ -186,6 +188,25 @@ public class Arme extends Equipement implements Collisionable, Generable {
     @Override
     public void setZIndex(int zindex) {
         this.zindex = zindex;
+    }
+
+    @Override
+    public int getRadiusRamassable() {
+        return this.radiusramassable;
+    }
+
+    @Override
+    public void setRadiusRamassable(int radius) {
+        this.radiusramassable = radius;
+    }
+
+    @Override
+    public boolean isRamassable(Personnage p) {
+        if (this.sprite==null) return false;
+        int dx = p.getX()+p.getWidth()/2-(this.getX()+this.getWidth()/2);
+        int dy = p.getY()+p.getHeight()/2-(this.getY()+this.getHeight()/2);
+        int r = this.getRadiusRamassable();
+        return dx*dx + dy*dy <= r*r;
     }
     
 }

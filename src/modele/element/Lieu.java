@@ -6,6 +6,7 @@ import canvas.Sprite;
 import canvas.SpriteSheet;
 import canvas.TileSet;
 import canvas.collision.CollisionBox;
+import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
 import embellishment.Embellishment;
 import embellishment.TypeEmbellishment;
@@ -228,6 +229,24 @@ public class Lieu extends Element implements Generable, Collisionable {
         if (o instanceof Objet) {
             Element e = (Element)o.copie();
             e.setZIndex(this.getZIndex()+1);
+            if (e instanceof Ramassable) {
+                Ramassable r = (Ramassable)e;
+                r.onRamasse(new SimpleListener("onRamasse") {
+                    @Override
+                    public void onEvent(Object sender, SimpleEvent event) {
+                        if (event instanceof CollisionEvent) {
+                            CollisionEvent eventc = (CollisionEvent)event;
+                            if (eventc.getCollider1() instanceof Personnage && eventc.getCollider2() instanceof Ramassable) {
+                                Personnage perso = (Personnage)eventc.getCollider1();
+                                Ramassable ramas = (Ramassable)eventc.getCollider2();
+                                if (ramas instanceof Element && _this.enlever((Element)ramas)) {
+                                    perso.ajouter((Element)ramas.copie());
+                                }
+                            }
+                        }
+                    }
+                });
+            }
             this.objets.add((Objet)e);
             this.drawables.add(e);
             return true;
@@ -743,6 +762,14 @@ public class Lieu extends Element implements Generable, Collisionable {
     @Override
     public int getZIndex() {
         return Integer.MIN_VALUE; // 1ère élément à être dessiné
+    }
+
+    public boolean enlever(Element e) {
+        if (e instanceof Objet) {
+            this.drawables.remove((Drawable)e);
+            return this.objets.remove((Objet)e);
+        }
+        return false;
     }
 
 }

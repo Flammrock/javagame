@@ -6,9 +6,11 @@
 package canvas;
 
 import canvas.collision.CollisionBox;
+import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
 import canvas.light.BlendComposite;
 import canvas.light.Light;
+import eventsystem.Dispatcher;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -25,6 +28,8 @@ import map.Camera;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.Scanner;
+import modele.element.Personnage;
+import modele.element.Ramassable;
 
 /**
  *
@@ -197,6 +202,33 @@ public class Canvas extends JPanel {
                     
                     // pour la même raison que précédemment, on vérifie que pour les "collisionable"
                     if (item2 instanceof Collisionable) {
+                        
+                        // on veut vérifier rapidemment si l'item1 peut ramasser l'item2
+                        if (item instanceof Personnage && item2 instanceof Ramassable) {
+                            
+                            // on cast
+                            Personnage perso = (Personnage)item;
+                            Ramassable ramas = (Ramassable)item2;
+                            
+                            // on teste s'ils sont compatibles ente eux
+                            if (perso.canRamasse(ramas) && ramas.isRamassable(perso)) {
+                                HashMap<Integer,Boolean> keys = ramas.getListKey();
+                                Dispatcher d = ramas.getDispatcher();
+                                if (d!=null && keys==null) {
+                                    d.fireEvent("onRamasse", this, new CollisionEvent(perso,ramas));
+                                } else if (d!=null) {
+                                    for (Map.Entry<Integer,Boolean> entry : keys.entrySet()) {
+                                        if (entry.getValue()!=null && entry.getValue()) {
+                                            if (this.isAppuyer(entry.getKey())) {
+                                                d.fireEvent("onRamasse", this, new CollisionEvent(perso,ramas));
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
                         
                         // les objets doivent être différents (pas la même adresse)
                         // (un item est toujours en collision avec lui-même)
