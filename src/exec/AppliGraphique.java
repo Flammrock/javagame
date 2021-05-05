@@ -166,8 +166,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         invpanel.setBounds(0, 0, 100, 100);
         invpanel.setVisible(true);
         
-        getRootPane().setGlassPane(invpanel);
-        getRootPane().getGlassPane().setVisible(true);
+        //getRootPane().setGlassPane(invpanel);
+        //getRootPane().getGlassPane().setVisible(true);
         
     }
     
