@@ -327,7 +327,9 @@ public class Personnage extends Element implements Generable, Collisionable {
         boolean toucher = aToucher(probabiliteDeToucher);
         double attaque = 0;
         if(toucher){
-            attaque = this.blesse(ennemie);   
+            ennemie.setArmure(ennemie.getArmure());
+            attaque = this.blesse(ennemie);
+            this.setMain(abimer(this.getMain()));
         }
         //this.actionEffetFinDuTour();
         if(toucher){
@@ -471,19 +473,28 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
     private boolean isMorceau(int n){
+        int j=0, index = -1;
         for (Objet i : this.inventaire){
             if (i instanceof Morceau){
-                return true;
+                Morceau m = (Morceau)i;
+                if(m.getLevel() == n){
+                    index = j;
+                    break;
+                }
             }
+        }
+        if(index!=-1){
+            this.inventaire.remove(index);
+            return true;
         }
         return true;
     }
     
-    public boolean repare(){
-        if(isMorceau(0)){
-            
+    public Equipement repare(Equipement e){
+        if(isMorceau(Rarity.COMMON)){
+            e.setVie_Objet(1);
         }
-        return true;
+        return e;
     }
     
     @Override
@@ -925,6 +936,14 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     public void setCanRamasse(boolean iscanramasse) {
         this.iscanramasse = iscanramasse;
+    }
+
+    private Equipement abimer(Equipement e) {
+        e.setVie_Objet(e.getVie_Objet()-0.2);
+        if(e.getVie_Objet()<=0){
+            return null;
+        }
+        return e;
     }
 
     private static class PointNode {
