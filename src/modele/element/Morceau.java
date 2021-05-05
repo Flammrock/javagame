@@ -9,7 +9,7 @@ package modele.element;
  *
  * @author Utilisateur
  */
-public class Morceau {
+public class Morceau extends Objet {
     private Rarity level;
 
     public Morceau(Rarity level) {
@@ -19,5 +19,4 @@ public class Morceau {
     public Rarity getLevel() {
         return level;
     }
-
 }
