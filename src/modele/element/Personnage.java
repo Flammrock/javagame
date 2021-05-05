@@ -41,7 +41,6 @@ public class Personnage extends Element implements Generable, Collisionable {
     private Equipement main;
     private Equipement armure;
     private Lieu pieceActuel;
-    
     private ArrayList<Effet> effetCourant;
     
     private SpriteSheet sprite;
@@ -467,6 +466,22 @@ public class Personnage extends Element implements Generable, Collisionable {
         }
             for(int j=0;j<i;j++){
             this.effetCourant.remove(effetASupp[j]-j);
+        }
+        return true;
+    }
+    
+    private boolean isMorceau(int n){
+        for(Objet i : this.inventaire){
+            if (i instanceof Morceau){
+                return true;
+            }
+        }
+        return true;
+    }
+    
+    public boolean repare(){
+        if(isMorceau(0)){
+            
         }
         return true;
     }
