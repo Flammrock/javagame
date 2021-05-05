@@ -178,8 +178,8 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     public void hideCustom() {
-        getRootPane().setGlassPane(uipanel);
-        getRootPane().getGlassPane().setVisible(true);
+        //getRootPane().setGlassPane(null);
+        getRootPane().getGlassPane().setVisible(false);
     }
     
     
