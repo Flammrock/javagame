@@ -23,6 +23,11 @@ public class Equipement extends Objet {
         this.bonus_force = 0.0;
         this.bonus_protection = 0.0;
         this.bonus_agilite = 0.0;
+        this.vie_Objet = 1;
+    }
+
+    public void setVie_Objet(double vie_Objet) {
+        this.vie_Objet = vie_Objet;
     }
     
     public void setModificateurAgilite(double agilite) {
