@@ -16,6 +16,7 @@ public class Equipement extends Objet {
     double bonus_agilite;
     double bonus_protection;
     double bonus_force;
+    double vie_Objet;
     
     public Equipement(String nom, String description, double poids) {
         super(nom,description,poids);
@@ -43,9 +44,11 @@ public class Equipement extends Objet {
     public double getModificateurProtection() {
         return this.bonus_protection;
     }
-    
-    
-    
+
+    public double getVie_Objet() {
+        return vie_Objet;
+    }
+
     
     @Override
     public Drawable copie() {
