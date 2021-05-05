@@ -5,6 +5,8 @@
  */
 package modele.element;
 
+import canvas.Drawable;
+
 /**
  *
  * @author Utilisateur
@@ -18,5 +20,15 @@ public class Morceau extends Objet {
 
     public Rarity getLevel() {
         return level;
+    }
+
+    @Override
+    public Drawable copie() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getZIndex() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
