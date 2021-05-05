@@ -12,14 +12,14 @@ import canvas.Drawable;
  * @author Utilisateur
  */
 public class Morceau extends Objet {
-    private Rarity level;
+    private int level;
 
-    public Morceau(Rarity level) {
+    public Morceau(int level) {
         this.level = level;
     }
 
-    public Rarity getLevel() {
-        return level;
+    public int getLevel() {
+        return this.level;
     }
 
     @Override
