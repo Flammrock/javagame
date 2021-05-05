@@ -939,9 +939,11 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
 
     private Equipement abimer(Equipement e) {
-        e.setVie_Objet(e.getVie_Objet()-0.2);
-        if(e.getVie_Objet()<=0){
-            return null;
+        if(e!=null){
+            e.setVie_Objet(e.getVie_Objet()-0.2);
+            if(e.getVie_Objet()<=0){
+                return null;
+            }
         }
         return e;
     }
