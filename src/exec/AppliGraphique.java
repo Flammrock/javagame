@@ -21,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 import map.Camera;
 import modele.element.*;
 import windowpanel.inventoryPanel;
+import windowpanel.uiPanel;
 
 
 /**
@@ -31,6 +32,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     private Aventure aventure;
     private inventoryPanel invpanel;
+    private uiPanel uipanel;
     /**
      * Creates new form AppliGraphique
      * @param aventure
@@ -162,13 +164,22 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     public void initCustom() {
     
-        invpanel = new inventoryPanel(canvas1);
+        invpanel = new inventoryPanel(this);
         invpanel.setBounds(0, 0, 100, 100);
         invpanel.setVisible(true);
         
-        //getRootPane().setGlassPane(invpanel);
-        //getRootPane().getGlassPane().setVisible(true);
+        uipanel = new uiPanel(this);
+        uipanel.setBounds(0, 0, 100, 100);
+        uipanel.setVisible(true);
         
+        getRootPane().setGlassPane(invpanel);
+        getRootPane().getGlassPane().setVisible(true);
+        
+    }
+    
+    public void hideCustom() {
+        getRootPane().setGlassPane(uipanel);
+        getRootPane().getGlassPane().setVisible(true);
     }
     
     
@@ -196,7 +207,7 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         }
         logs += "Fin du tour\n\n";
-
+        
         for (int j=0;j<i;j++) {
             if(!(monstres.remove(j).getNom().equals("Cadavre"))){
                 //ArrayList<Objet> listeloot = new ArrayList<Objet>();

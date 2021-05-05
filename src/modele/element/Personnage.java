@@ -471,7 +471,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
     private boolean isMorceau(int n){
-        for(Objet i : this.inventaire){
+        for (Objet i : this.inventaire){
             if (i instanceof Morceau){
                 return true;
             }

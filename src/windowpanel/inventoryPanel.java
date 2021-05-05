@@ -7,6 +7,7 @@ package windowpanel;
 
 import canvas.Canvas;
 import java.awt.BorderLayout;
+import exec.AppliGraphique;
 
 /**
  *
@@ -14,14 +15,14 @@ import java.awt.BorderLayout;
  */
 public class inventoryPanel extends javax.swing.JPanel {
 
-    private Canvas canvas;
+    private AppliGraphique app;
     
     /**
      * Creates new form inventoryPanel
      */
-    public inventoryPanel(Canvas canvas) {
+    public inventoryPanel(AppliGraphique app) {
         initComponents();
-        this.canvas = canvas;
+        this.app = app;
     }
 
     /**
@@ -139,7 +140,7 @@ public class inventoryPanel extends javax.swing.JPanel {
             .addGroup(inventoryPanelList1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -213,7 +214,7 @@ public class inventoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseWheelMoved
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
+        this.app.hideCustom();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
