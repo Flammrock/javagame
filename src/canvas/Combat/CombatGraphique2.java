@@ -73,6 +73,8 @@ private Personnage Ennemi;
         jScrollPane23 = new javax.swing.JScrollPane();
         listeEffetJoueur = new javax.swing.JList<>();
 
+        setBackground(new java.awt.Color(255, 204, 0));
+
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
 
         DessinEnnemi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
