@@ -189,7 +189,7 @@ public class AppliGraphique extends javax.swing.JFrame {
 
         layeredpane.add(canvas1, JLayeredPane.DEFAULT_LAYER);
         layeredpane.add(combatGraphique22, JLayeredPane.MODAL_LAYER);
-        layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
+        //layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
         layeredpane.add(uipanel, JLayeredPane.PALETTE_LAYER);
         
         setContentPane(layeredpane);
