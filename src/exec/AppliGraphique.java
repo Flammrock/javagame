@@ -209,11 +209,12 @@ public class AppliGraphique extends javax.swing.JFrame {
         
     }
     
-    public void hideCustom() {
-        //getRootPane().setGlassPane(null);
-        //getRootPane().getGlassPane().setVisible(false);
-        
+    public void hideInventory() {
         layeredpane.remove(invpanel);
+    }
+    
+    public void showInventory() {
+        layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
     }
     
     
