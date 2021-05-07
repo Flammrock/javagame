@@ -5,10 +5,14 @@
  */
 package exec;
 
+import canvas.Canvas;
+import canvas.Combat.CombatGraphique2;
 import canvas.Combat.DebutCombatEvent;
 import eventsystem.SimpleEvent;
 import eventsystem.SimpleListener;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
@@ -16,6 +20,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.DefaultListModel;
+import javax.swing.JLayeredPane;
+import javax.swing.OverlayLayout;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import map.Camera;
@@ -163,8 +169,32 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     public void initCustom() {
-    
+        
+        
+        canvas1 = new Canvas();
+        combatGraphique22 = new CombatGraphique2();
         invpanel = new inventoryPanel(this);
+        uipanel = new uiPanel(this);
+        layeredpane = new JLayeredPane();
+        layeredpane.setBackground(Color.red);
+        layeredpane.setLayout(new OverlayLayout(layeredpane));
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+
+        layeredpane.add(canvas1, JLayeredPane.DEFAULT_LAYER);
+        layeredpane.add(combatGraphique22, JLayeredPane.MODAL_LAYER);
+        layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
+        layeredpane.add(uipanel, JLayeredPane.PALETTE_LAYER);
+        
+        setContentPane(layeredpane);
+    
+        /*invpanel = new inventoryPanel(this);
         invpanel.setBounds(0, 0, 100, 100);
         invpanel.setVisible(true);
         
@@ -173,13 +203,17 @@ public class AppliGraphique extends javax.swing.JFrame {
         uipanel.setVisible(true);
         
         getRootPane().setGlassPane(invpanel);
-        getRootPane().getGlassPane().setVisible(true);
+        getRootPane().getGlassPane().setVisible(true);*/
+        
+        
         
     }
     
     public void hideCustom() {
         //getRootPane().setGlassPane(null);
-        getRootPane().getGlassPane().setVisible(false);
+        //getRootPane().getGlassPane().setVisible(false);
+        
+        layeredpane.remove(invpanel);
     }
     
     
@@ -345,33 +379,17 @@ public class AppliGraphique extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        canvas1 = new canvas.Canvas();
-        combatGraphique22 = new canvas.Combat.CombatGraphique2();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        canvas1.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout canvas1Layout = new javax.swing.GroupLayout(canvas1);
-        canvas1.setLayout(canvas1Layout);
-        canvas1Layout.setHorizontalGroup(
-            canvas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(combatGraphique22, javax.swing.GroupLayout.PREFERRED_SIZE, 905, Short.MAX_VALUE)
-        );
-        canvas1Layout.setVerticalGroup(
-            canvas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(combatGraphique22, javax.swing.GroupLayout.PREFERRED_SIZE, 540, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(canvas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 657, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(canvas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 478, Short.MAX_VALUE)
         );
 
         pack();
@@ -413,11 +431,11 @@ public class AppliGraphique extends javax.swing.JFrame {
     }*****/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private canvas.Canvas canvas1;
-    private canvas.Combat.CombatGraphique2 combatGraphique22;
     // End of variables declaration//GEN-END:variables
 
-
+    private Canvas canvas1;
+    private CombatGraphique2 combatGraphique22;
+    private JLayeredPane layeredpane;
 
 
     private class MyDispatcher implements KeyEventDispatcher {
