@@ -70,6 +70,7 @@ public class inventoryPanel extends javax.swing.JPanel {
                 (this.current == null && !(o instanceof Arme) && !(o instanceof Armure) && !(o instanceof Nourriture)) ||
                 (this.current != null && o.getClass().isAssignableFrom(this.current.getClass()))
             ) {
+                if (i==0 && j==0) inventoryDetails2.set(o);
                 os[i][j++] = o;
                 if (j==4) {
                     i++;
