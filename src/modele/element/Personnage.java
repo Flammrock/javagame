@@ -270,6 +270,12 @@ public class Personnage extends Element implements Generable, Collisionable {
         if (index < 0 || index > this.inventaire.size()) return false;
         Objet obj = this.inventaire.get(index);
         if (obj == null) return false;
+        if(obj instanceof Equipement){
+            Equipement Equ = (Equipement)obj;
+            if(Equ.getNom().contains(" cassé")){
+                return false;
+            }
+        }
         if (obj instanceof Arme) {
             this.setMain((Arme)obj);
             return true;
@@ -492,6 +498,9 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     public Equipement repare(Equipement e){
         if(isMorceau(Rarity.COMMON)){
+            if(e.getNom().contains(" cassé")){
+            e.setNom(e.getNom().replaceAll(" cassé", ""));
+            }
             e.setVie_Objet(1);
         }
         return e;
@@ -942,21 +951,22 @@ public class Personnage extends Element implements Generable, Collisionable {
         if(e!=null){
             e.setVie_Objet(e.getVie_Objet()-0.2);
             if(e.getVie_Objet()<=0){
-                return detruire(e);
+                e.setNom(e.getNom()+ " cassé");
+                return null;
             }
         }
         return e;
     }
     
-    public Equipement detruire(Equipement e){
-        if(e.getPoids()>1){
+    public void detruire(int index){
+        Objet e = this.inventaire.remove(index);
+        if(e.getPoids()>=1){
             this.inventaire.add(new Morceau(Rarity.COMMON));
         }else if(e.getPoids()>=3){
             this.inventaire.add(new Morceau(Rarity.RARE));
         }else if(e.getPoids()>=10){
             this.inventaire.add(new Morceau(Rarity.EPIC));
         }
-        return null;
     }
 
     private static class PointNode {
