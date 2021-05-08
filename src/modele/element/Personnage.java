@@ -942,10 +942,21 @@ public class Personnage extends Element implements Generable, Collisionable {
         if(e!=null){
             e.setVie_Objet(e.getVie_Objet()-0.2);
             if(e.getVie_Objet()<=0){
-                return null;
+                return detruire(e);
             }
         }
         return e;
+    }
+    
+    public Equipement detruire(Equipement e){
+        if(e.getPoids()>1){
+            this.inventaire.add(new Morceau(Rarity.COMMON));
+        }else if(e.getPoids()>=3){
+            this.inventaire.add(new Morceau(Rarity.RARE));
+        }else if(e.getPoids()>=10){
+            this.inventaire.add(new Morceau(Rarity.EPIC));
+        }
+        return null;
     }
 
     private static class PointNode {
