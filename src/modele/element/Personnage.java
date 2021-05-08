@@ -114,8 +114,9 @@ public class Personnage extends Element implements Generable, Collisionable {
         try (Scanner scan = new Scanner(in)) {
             int nbrLigne = 23;  //A modifier a chaque modification du fichier montres
             Random random = new Random();
-            int LigneRdm = random.nextInt(nbrLigne) + 1;
-            for(int i = 0;i<LigneRdm - 1;i++){
+            int LigneRdm = random.nextInt(nbrLigne);
+            scan.nextLine();
+            for(int i = 0;i<LigneRdm-1;i++){
                 scan.nextLine();
             }
             String phrase = scan.nextLine();
@@ -387,6 +388,9 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
 
     private void mort(Personnage ennemie) {
+        if(ennemie.getNom().equals("Héros")){
+            ennemie.dispatcher.fireEvent("gameOver", null, new SimpleEvent(null));
+        }
         ennemie.setPv(0.0);
         ArrayList<Element> e = new ArrayList<>();
         e.addAll(ennemie.getInventaire());
