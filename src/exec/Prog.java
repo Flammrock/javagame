@@ -141,9 +141,13 @@ public class Prog {
         Personnage joueur = new Personnage("Héros","perso lambda nul");
         joueur.init(20, 30, 30, 150);
         
-        
-        
-        
+        joueur.addListener(new SimpleListener("gameOver") {
+            @Override
+            public void onEvent(Object sender, SimpleEvent e) {
+                System.out.println("GameOver");
+            }
+        });
+
         
         /////////////////////// TILESET TEST ////////////////////////////
         
