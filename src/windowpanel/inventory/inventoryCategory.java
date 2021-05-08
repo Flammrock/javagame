@@ -9,6 +9,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -16,11 +19,56 @@ import java.awt.Graphics2D;
  */
 public class inventoryCategory extends javax.swing.JPanel {
 
+    String imagename;
+    BufferedImage image;
+    boolean selected;
+    boolean hovered;
+    
     /**
      * Creates new form inventoryCategory
      */
     public inventoryCategory() {
         initComponents();
+        this.image = null;
+        this.selected = false;
+        this.hovered = false;
+    }
+    
+    public void setImage(String imagename) {
+        this.imagename = imagename;
+        try {
+            this.image = ImageIO.read(getClass().getResourceAsStream(this.imagename));
+        } catch (IOException e) {
+            this.image = null;
+        }
+    }
+    
+    public void setSelect(boolean s) {
+        this.selected = s;
+    }
+    
+    public boolean isSelected() {
+        return this.selected;
+    }
+    
+    public void select() {
+        this.selected = true;
+    }
+    
+    public void unselect() {
+       this.selected = false;
+    }
+    
+    public void hover() {
+        this.hovered = true;
+    }
+    
+    public void unhover() {
+        this.hovered = false;
+    }
+    
+    public boolean isHover() {
+        return this.hovered;
     }
 
     /**
@@ -56,18 +104,32 @@ public class inventoryCategory extends javax.swing.JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        int w = this.getWidth();
+        int w = this.getHeight();
         int h = this.getHeight();
         int s = 20;
         
         Graphics2D g2d = (Graphics2D)g;
         
+        Color hc = (this.hovered && !this.selected) ? new Color(160,160,160) : new Color(113,113,113);
+        
+        if (this.selected) {
+            g2d.setColor(new Color(113,113,113));
+            g2d.fillRect(s, 0, w*2, h);
+        } else if (this.hovered) {
+            g2d.setColor(hc);
+            g2d.fillRect(s, 0, w*2, h);
+        }
+        
         g2d.setColor(new Color(255,255,255,220));
         g2d.fillPolygon(new int[]{0,w-s,w,w,s,0,0}, new int[]{0,0,s,h,h,h-s,0}, 7);
         
-        g2d.setColor(new Color(113,113,113));
+        g2d.setColor(hc);
         g2d.setStroke(new BasicStroke(10));
         g2d.drawPolygon(new int[]{0,w-s,w,w,s,0,0}, new int[]{0,0,s,h,h,h-s,0}, 7);
+        
+        if (this.image != null) {
+           g2d.drawImage(this.image, s/2, s/2, w-s, h-s, null);
+        }
         
     }
 

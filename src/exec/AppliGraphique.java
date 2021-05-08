@@ -203,6 +203,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     public void showInventory() {
+        invpanel.prepare(aventure.getJoueur());
         layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
         layeredpane.revalidate();
     }

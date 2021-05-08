@@ -9,6 +9,9 @@ import canvas.Canvas;
 import java.awt.BorderLayout;
 import exec.AppliGraphique;
 import java.util.ArrayList;
+import modele.element.Arme;
+import modele.element.Objet;
+import modele.element.Personnage;
 
 /**
  *
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 public class inventoryPanel extends javax.swing.JPanel {
 
     private AppliGraphique app;
+    private Objet current;
 
     /**
      * Creates new form inventoryPanel
@@ -24,10 +28,48 @@ public class inventoryPanel extends javax.swing.JPanel {
     public inventoryPanel(AppliGraphique app) {
         initComponents();
         this.app = app;
+        this.current = new Arme("","",0,0,0);
+        
+        this.inventoryCategory1.setImage("/items/Item__01.png");
+        this.inventoryCategory2.setImage("/items/Item__45.png");
+        this.inventoryCategory3.setImage("/items/Item__64.png");
+        this.inventoryCategory4.setImage("/items/Item__38.png");
+        
+        this.inventoryCategory1.select();
     }
     
     
-    
+    public void prepare(Personnage p) {
+        ArrayList<Objet> inv = p.getInventaire();
+        
+        int s = 0;
+        for (Objet o : inv) {
+            if (o.getClass().isAssignableFrom(this.current.getClass())) {
+                s++;
+            }
+        }
+        
+        Object os[][] = new Object[(int)Math.ceil(inv.size()/4.0)][4];
+        int i = 0;
+        int j = 0;
+        for (Objet o : inv) {
+            if (o.getClass().isAssignableFrom(this.current.getClass())) {
+                os[i][j++] = o;
+                if (j==4) {
+                    i++;
+                    j = 0;
+                }
+            }
+        }
+        
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            os,
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        
+    }
     
 
     /**
@@ -39,8 +81,6 @@ public class inventoryPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         inventoryPanelList1 = new windowpanel.inventory.inventoryPanelList();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -58,19 +98,6 @@ public class inventoryPanel extends javax.swing.JPanel {
         inventoryCategory4 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory2 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory3 = new windowpanel.inventory.inventoryCategory();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         setBackground(new java.awt.Color(255, 0, 0));
         setOpaque(false);
@@ -180,16 +207,34 @@ public class inventoryPanel extends javax.swing.JPanel {
 
         jPanel1.setOpaque(false);
 
+        inventoryCategory1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                inventoryCategory1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                inventoryCategory1MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout inventoryCategory1Layout = new javax.swing.GroupLayout(inventoryCategory1);
         inventoryCategory1.setLayout(inventoryCategory1Layout);
         inventoryCategory1Layout.setHorizontalGroup(
             inventoryCategory1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 63, Short.MAX_VALUE)
         );
         inventoryCategory1Layout.setVerticalGroup(
             inventoryCategory1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 53, Short.MAX_VALUE)
         );
+
+        inventoryCategory4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                inventoryCategory4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                inventoryCategory4MouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout inventoryCategory4Layout = new javax.swing.GroupLayout(inventoryCategory4);
         inventoryCategory4.setLayout(inventoryCategory4Layout);
@@ -202,6 +247,15 @@ public class inventoryPanel extends javax.swing.JPanel {
             .addGap(0, 53, Short.MAX_VALUE)
         );
 
+        inventoryCategory2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                inventoryCategory2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                inventoryCategory2MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout inventoryCategory2Layout = new javax.swing.GroupLayout(inventoryCategory2);
         inventoryCategory2.setLayout(inventoryCategory2Layout);
         inventoryCategory2Layout.setHorizontalGroup(
@@ -213,11 +267,20 @@ public class inventoryPanel extends javax.swing.JPanel {
             .addGap(0, 53, Short.MAX_VALUE)
         );
 
+        inventoryCategory3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                inventoryCategory3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                inventoryCategory3MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout inventoryCategory3Layout = new javax.swing.GroupLayout(inventoryCategory3);
         inventoryCategory3.setLayout(inventoryCategory3Layout);
         inventoryCategory3Layout.setHorizontalGroup(
             inventoryCategory3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 53, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         inventoryCategory3Layout.setVerticalGroup(
             inventoryCategory3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,13 +291,10 @@ public class inventoryPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 4, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inventoryCategory3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inventoryCategory2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inventoryCategory1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inventoryCategory4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(inventoryCategory1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(inventoryCategory4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(inventoryCategory2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(inventoryCategory3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,11 +315,11 @@ public class inventoryPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(inventoryPanelList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,6 +380,38 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.app.hideInventory();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void inventoryCategory1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory1MouseEntered
+        this.inventoryCategory1.hover();
+    }//GEN-LAST:event_inventoryCategory1MouseEntered
+
+    private void inventoryCategory1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory1MouseExited
+        this.inventoryCategory1.unhover();
+    }//GEN-LAST:event_inventoryCategory1MouseExited
+
+    private void inventoryCategory4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory4MouseEntered
+        this.inventoryCategory4.hover();
+    }//GEN-LAST:event_inventoryCategory4MouseEntered
+
+    private void inventoryCategory4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory4MouseExited
+        this.inventoryCategory4.unhover();
+    }//GEN-LAST:event_inventoryCategory4MouseExited
+
+    private void inventoryCategory2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory2MouseEntered
+        this.inventoryCategory2.hover();
+    }//GEN-LAST:event_inventoryCategory2MouseEntered
+
+    private void inventoryCategory2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory2MouseExited
+        this.inventoryCategory2.unhover();
+    }//GEN-LAST:event_inventoryCategory2MouseExited
+
+    private void inventoryCategory3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory3MouseEntered
+        this.inventoryCategory3.hover();
+    }//GEN-LAST:event_inventoryCategory3MouseEntered
+
+    private void inventoryCategory3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory3MouseExited
+        this.inventoryCategory3.unhover();
+    }//GEN-LAST:event_inventoryCategory3MouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private windowpanel.inventory.inventoryCategory inventoryCategory1;
@@ -330,9 +422,7 @@ public class inventoryPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
