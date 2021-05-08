@@ -115,7 +115,7 @@ public class Personnage extends Element implements Generable, Collisionable {
             int nbrLigne = 23;  //A modifier a chaque modification du fichier montres
             Random random = new Random();
             int LigneRdm = random.nextInt(nbrLigne) + 1;
-            for(int i = 0;i<LigneRdm;i++){
+            for(int i = 0;i<LigneRdm - 1;i++){
                 scan.nextLine();
             }
             String phrase = scan.nextLine();
