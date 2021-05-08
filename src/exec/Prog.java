@@ -139,7 +139,7 @@ public class Prog {
         
         // on créé un joueur
         Personnage joueur = new Personnage("Héros","perso lambda nul");
-        joueur.init(20, 15, 15, 100);
+        joueur.init(20, 30, 30, 150);
         
         
         
@@ -415,6 +415,9 @@ public class Prog {
                     
                     // on copie le monstre
                     Personnage m = (Personnage)monstre.copie();
+                    
+                    // on le randomise
+                    m.initAleatoire();
                     
                     // on génère le monstre
                     m.generate(l);
