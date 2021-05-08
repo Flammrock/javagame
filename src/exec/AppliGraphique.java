@@ -26,7 +26,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import map.Camera;
 import modele.element.*;
-import windowpanel.inventoryPanel;
+import windowpanel.inventory.inventoryPanel;
 import windowpanel.uiPanel;
 
 
@@ -175,6 +175,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         combatGraphique22 = new CombatGraphique2();
         invpanel = new inventoryPanel(this);
         uipanel = new uiPanel(this);
+        
         layeredpane = new JLayeredPane();
         layeredpane.setBackground(Color.red);
         layeredpane.setLayout(new OverlayLayout(layeredpane));
@@ -193,28 +194,17 @@ public class AppliGraphique extends javax.swing.JFrame {
         layeredpane.add(uipanel, JLayeredPane.PALETTE_LAYER);
         
         setContentPane(layeredpane);
-    
-        /*invpanel = new inventoryPanel(this);
-        invpanel.setBounds(0, 0, 100, 100);
-        invpanel.setVisible(true);
-        
-        uipanel = new uiPanel(this);
-        uipanel.setBounds(0, 0, 100, 100);
-        uipanel.setVisible(true);
-        
-        getRootPane().setGlassPane(invpanel);
-        getRootPane().getGlassPane().setVisible(true);*/
-        
-        
         
     }
     
     public void hideInventory() {
         layeredpane.remove(invpanel);
+        layeredpane.revalidate();
     }
     
     public void showInventory() {
         layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
+        layeredpane.revalidate();
     }
     
     
