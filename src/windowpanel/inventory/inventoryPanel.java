@@ -114,7 +114,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         inventoryCategory4 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory2 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory3 = new windowpanel.inventory.inventoryCategory();
-        inventoryDetails1 = new windowpanel.inventory.inventoryDetails();
+        inventoryDetails2 = new windowpanel.inventory.inventoryDetails();
 
         setBackground(new java.awt.Color(255, 0, 0));
         setOpaque(false);
@@ -339,17 +339,6 @@ public class inventoryPanel extends javax.swing.JPanel {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout inventoryDetails1Layout = new javax.swing.GroupLayout(inventoryDetails1);
-        inventoryDetails1.setLayout(inventoryDetails1Layout);
-        inventoryDetails1Layout.setHorizontalGroup(
-            inventoryDetails1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 219, Short.MAX_VALUE)
-        );
-        inventoryDetails1Layout.setVerticalGroup(
-            inventoryDetails1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -360,15 +349,15 @@ public class inventoryPanel extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(inventoryPanelList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(inventoryDetails1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addComponent(inventoryDetails2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(162, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(inventoryDetails1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inventoryDetails2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inventoryPanelList1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(159, Short.MAX_VALUE))
@@ -501,7 +490,7 @@ public class inventoryPanel extends javax.swing.JPanel {
     private windowpanel.inventory.inventoryCategory inventoryCategory2;
     private windowpanel.inventory.inventoryCategory inventoryCategory3;
     private windowpanel.inventory.inventoryCategory inventoryCategory4;
-    private windowpanel.inventory.inventoryDetails inventoryDetails1;
+    private windowpanel.inventory.inventoryDetails inventoryDetails2;
     private windowpanel.inventory.inventoryPanelList inventoryPanelList1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
