@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.OverlayLayout;
 import javax.swing.event.ListSelectionEvent;
@@ -58,6 +59,8 @@ public class AppliGraphique extends javax.swing.JFrame {
                 }
             }
         });*/
+        
+        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
         
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
