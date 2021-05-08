@@ -183,6 +183,9 @@ public class Prog {
         Arme epeeCasser = new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0);
         epeeCasser.setSprite(sprite_epee);
         
+        Arme epeeDeBase = new Arme("épée de base","",1,0,3);
+        
+        
         Effet effetPomme = new Effet("","",false,true,0);
         effetPomme.setProperty(PropertyList.PV,10);
         
@@ -247,10 +250,12 @@ public class Prog {
         
         
         // on ajoute des trucs au joueur
+        joueur.ajouter(epeeDeBase);
         joueur.ajouter(epeeCasser);
         joueur.ajouter(pomme);
         joueur.ajouter(regeneration);
         joueur.ajouter(hommeDeFer);
+        joueur.equip(0);
         hommeDeFer.setProperty(PropertyList.FORCE, 5);
         popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
         joueur.ajouter(potion);
