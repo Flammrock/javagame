@@ -174,17 +174,28 @@ public class Prog {
         Sprite sprite_epee = new Sprite("/items/Item__01.png",0,0,24,24);
         sprite_epee.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
         
+        Sprite sprite_epeecasser = new Sprite("/items/Item__01c.png",0,0,24,24);
+        sprite_epeecasser.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
         
+        Sprite sprite_pomme = new Sprite("/items/Item__64.png",0,0,24,24);
+        sprite_pomme.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
         
+        Sprite sprite_banane = new Sprite("/items/Item__72.png",0,0,24,24);
+        sprite_banane.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
+        
+        Sprite sprite_armureBadass = new Sprite("/items/Item__57.png",0,0,24,24);
+        sprite_armureBadass.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
         
         // tout les objets on les met ici :
         
         /****************** BIBLIOTHEQUE OBJET ******************/
         Arme epeeCasser = new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0);
+        epeeCasser.setSprite(sprite_epeecasser);
+        epeeCasser.setIcon(sprite_epeecasser.getFileName());
+        
+        Arme epeeDeBase = new Arme("épée de base","une épée simple et basique",1,0,3);
         epeeCasser.setSprite(sprite_epee);
-        
-        Arme epeeDeBase = new Arme("épée de base","",1,0,3);
-        
+        epeeDeBase.setIcon(sprite_epee.getFileName());
         
         Effet effetPomme = new Effet("","",false,true,0);
         effetPomme.setProperty(PropertyList.PV,10);
@@ -193,6 +204,8 @@ public class Prog {
         regeneration.setProperty(PropertyList.PV,3);
         
         Nourriture pomme = new Nourriture("Pomme","Une bonne petite pomme",2.0,effetPomme);
+        pomme.setSprite(sprite_pomme);
+        pomme.setIcon(sprite_pomme.getFileName());
         
         Effet hommeDeFer = new Effet("Homme de fer","augmente la force",false,false,3);
         hommeDeFer.setProperty(PropertyList.FORCE, 5);
@@ -206,8 +219,12 @@ public class Prog {
         effetBanane.setProperty(PropertyList.PV, 15);
         
         Nourriture banane = new Nourriture("banane","Une grosse banane",2.0,effetBanane);
+        banane.setSprite(sprite_banane);
+        banane.setIcon(sprite_banane.getFileName());
         
         Armure armureBadass = new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10);
+        armureBadass.setSprite(sprite_armureBadass);
+        armureBadass.setIcon(sprite_armureBadass.getFileName());
         
         /********************************************************/
         
