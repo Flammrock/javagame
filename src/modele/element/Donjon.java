@@ -62,7 +62,13 @@ public class Donjon extends Element{
     
     @Override
     public Drawable copie() {
-        return null;
+        Donjon c = new Donjon();
+        
+        /*for (Niveau n : this.list_niveaux) {
+            c.ajouterNiveau((Niveau)n.copie());
+        }*/
+        
+        return c;
     }
 
     @Override
