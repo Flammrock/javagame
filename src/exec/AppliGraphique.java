@@ -27,6 +27,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import map.Camera;
 import modele.element.*;
+import windowpanel.creditPanel;
 import windowpanel.gameoverPanel;
 import windowpanel.inventory.inventoryPanel;
 import windowpanel.titlePanel;
@@ -44,6 +45,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private uiPanel uipanel;
     private gameoverPanel gameoverpanel;
     private titlePanel titlepanel;
+    private creditPanel creditpanel;
     
     /**
      * Creates new form AppliGraphique
@@ -203,6 +205,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         uipanel = new uiPanel(this);
         gameoverpanel = new gameoverPanel(this);
         titlepanel = new titlePanel(this);
+        creditpanel = new creditPanel(this);
         
         layeredpane = new JLayeredPane();
         layeredpane.setBackground(Color.red);
@@ -225,6 +228,16 @@ public class AppliGraphique extends javax.swing.JFrame {
         
         setContentPane(layeredpane);
         
+    }
+    
+    public void hideCreditScreen() {
+        layeredpane.remove(creditpanel);
+        layeredpane.revalidate();
+    }
+    
+    public void showCreditScreen() {
+        layeredpane.add(creditpanel, Integer.valueOf(50000));
+        layeredpane.revalidate();
     }
     
     public void hideTitleScreen() {

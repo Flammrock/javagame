@@ -395,26 +395,31 @@ public class Aventure extends Element {
         
         
         // on ajoute des trucs au joueur
-        joueur.ajouter(epeeDeBase);
-        joueur.ajouter(epeeCasser);
-        joueur.ajouter(pomme);
-        joueur.ajouter(regeneration);
-        joueur.ajouter(hommeDeFer);
-        joueur.equip(0);
+        if(this.joueurSavedDefault==null) {
+            joueur.ajouter(epeeDeBase);
+            joueur.ajouter(epeeCasser);
+            joueur.ajouter(pomme);
+            joueur.ajouter(regeneration);
+            joueur.ajouter(hommeDeFer);
+            joueur.equip(0);
+        }
         hommeDeFer.setProperty(PropertyList.FORCE, 5);
         popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
-        joueur.ajouter(potion);
-        joueur.setCanRamasse(true);
-        joueur.addCollisionBox(new CollisionBox(0,35,28,14,Settings.DEBUG));
-        joueur.addListener(new SimpleListener("onEnterSalle") {
-            @Override
-            public void onEvent(Object sender, SimpleEvent e) {
-                if (sender instanceof Lieu) {
-                    Lieu l = (Lieu)sender;
-                    l.setVisible(true);
+        if(this.joueurSavedDefault==null) {
+            joueur.ajouter(potion);
+            joueur.setCanRamasse(true);
+            joueur.addCollisionBox(new CollisionBox(0,35,28,14,Settings.DEBUG));
+            joueur.addListener(new SimpleListener("onEnterSalle") {
+                @Override
+                public void onEvent(Object sender, SimpleEvent e) {
+                    if (sender instanceof Lieu) {
+                        Lieu l = (Lieu)sender;
+                        l.setVisible(true);
+                    }
                 }
-            }
-        });
+            });
+        }
+        
         joueur.denyCopyListener();
         
         
