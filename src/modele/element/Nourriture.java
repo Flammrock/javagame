@@ -33,11 +33,13 @@ public class Nourriture extends Objet {
     
     @Override
     public Drawable copie() {
-        return null;
+        Nourriture c = new Nourriture(nom,description,poids);
+        c.setSprite(sprite);
+        c.setIcon(this.icon);
+        if (this.effet!=null) c.setEffet(this.effet.copie());
+        c.setRadiusRamassable(this.radiusramassable);
+        c.setZIndex(this.zindex);
+        return c;
     }
     
-    @Override
-    public int getZIndex() {
-        return Integer.MIN_VALUE; // on ne les dessine même pas pour le moment
-    }
 }

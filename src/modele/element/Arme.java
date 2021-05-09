@@ -33,7 +33,7 @@ public class Arme extends Equipement {
         Arme c = new Arme(nom, description, poids);
         c.setSprite(sprite);
         c.setIcon(this.icon);
-        c.setEffet(this.effet.copie());
+        if (this.effet!=null) c.setEffet(this.effet.copie());
         c.setRadiusRamassable(this.radiusramassable);
         c.setZIndex(this.zindex);
         return c;

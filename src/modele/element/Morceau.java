@@ -46,7 +46,7 @@ public class Morceau extends Objet {
         Morceau c = new Morceau(this.level);
         c.setSprite(sprite);
         c.setIcon(this.icon);
-        c.setEffet(this.effet.copie());
+        if (this.effet!=null) c.setEffet(this.effet.copie());
         c.setRadiusRamassable(this.radiusramassable);
         c.setZIndex(this.zindex);
         return c;
