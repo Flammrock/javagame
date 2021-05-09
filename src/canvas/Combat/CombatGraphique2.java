@@ -318,8 +318,8 @@ private Personnage Ennemi;
         System.out.println(perso1+ " versus " + perso2);
         this.Moi = perso1;
         this.Ennemi = perso2;
-        combatGraphiqueContainerPersonnage1.bind(perso1);
-        combatGraphiqueContainerPersonnage2.bind(perso2);
+        combatGraphiqueContainerPersonnage1.bind(perso1,"Idle-Right");
+        combatGraphiqueContainerPersonnage2.bind(perso2,"Idle-Left");
         miseAJourComposants();
     }
     

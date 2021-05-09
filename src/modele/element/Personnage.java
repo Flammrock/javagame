@@ -69,6 +69,8 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     boolean alive;
     
+    boolean isFighting;
+    
 
     public Personnage(String nom, String description) {
         this.nom = nom;
@@ -96,6 +98,8 @@ public class Personnage extends Element implements Generable, Collisionable {
         
         this.radius_detection = 500;
         this.radius_start_fight = 100;
+        
+        this.isFighting = false;
     }
     
     public void init(double age, double force, double agilite, double pv) {
@@ -789,6 +793,10 @@ public class Personnage extends Element implements Generable, Collisionable {
     public void allowCopyListener() {
         this.allowCopyListener = true;
     }
+    
+    public void removeAllListeners() {
+        this.dispatcher.clear();
+    }
 
     public void follow(Personnage p) {
         
@@ -811,9 +819,9 @@ public class Personnage extends Element implements Generable, Collisionable {
         int dxv = (int)(speed * Math.cos(angle));
         int dyv = (int)(speed * Math.sin(angle));
         if (dxd < 0) {
-            this.sprite.setAnimationIfNot("Walk-Right");
-        } else {
             this.sprite.setAnimationIfNot("Walk-Left");
+        } else {
+            this.sprite.setAnimationIfNot("Walk-Right");
         }
         this.moveBy(dxv, dyv); // try to go in this direction
         if (1==1) return;
@@ -930,7 +938,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
     public boolean canFight() {
-        return this.fuitetick==0;
+        return this.fuitetick==0 && !this.isFighting;
     }
     
     @Override
@@ -1024,6 +1032,14 @@ public class Personnage extends Element implements Generable, Collisionable {
         if (index < 0 || index > this.inventaire.size()-1) return false;
         Objet e = this.inventaire.get(index);
         return this.isEquiped(e);
+    }
+    
+    public void beginFight() {
+        this.isFighting = true;
+    }
+    
+    public void endFight() {
+        this.isFighting = false;
     }
 
     private static class PointNode {

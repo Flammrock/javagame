@@ -369,12 +369,12 @@ public class Prog {
         
         SpriteSheet s2 = new SpriteSheet("/minautor.png",0,0,96,96,96*2,92*2);
         s2.loadImage();
-        s2.ajouterAnimation(new Animation("Idle-Left",new int[] {0, 1, 2, 3, 4}));
-        s2.ajouterAnimation(new Animation("Idle-Right",new int[] {100, 101, 102, 103, 104}));
-        s2.ajouterAnimation(new Animation("Walk-Left",new int[] {10, 11, 12, 13, 14, 15, 16, 17}));
-        s2.ajouterAnimation(new Animation("Walk-Right",new int[] {110, 111, 112, 113, 114, 115, 116, 117}));
+        s2.ajouterAnimation(new Animation("Idle-Right",new int[] {0, 1, 2, 3, 4}));
+        s2.ajouterAnimation(new Animation("Idle-Left",new int[] {100, 101, 102, 103, 104}));
+        s2.ajouterAnimation(new Animation("Walk-Right",new int[] {10, 11, 12, 13, 14, 15, 16, 17}));
+        s2.ajouterAnimation(new Animation("Walk-Left",new int[] {110, 111, 112, 113, 114, 115, 116, 117}));
         s2.ajouterAnimation(new Animation("Death",new int[] {195}));
-        s2.setAnimation("Walk-Left");
+        s2.setAnimation("Walk-Right");
         s2.setDecal(0, 20, 0, 30);
         monstre.addCollisionBox(new CollisionBox(75,70,38,18,Settings.DEBUG));
         monstre.setSprite(s2);

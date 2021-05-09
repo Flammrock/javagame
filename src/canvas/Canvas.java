@@ -68,6 +68,11 @@ public class Canvas extends JPanel {
     }
     
     
+    public void enleverAllItem() {
+        this.itemsdrawable.clear();
+    }
+    
+    
     public void setCamera(Camera camera) {
         if (camera!=null) {
             this.camera = camera;

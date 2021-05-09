@@ -95,6 +95,8 @@ public class AppliGraphique extends javax.swing.JFrame {
                 DebutCombatEvent p = (DebutCombatEvent)e;
                 Personnage perso1 = p.getPerso1();
                 Personnage perso2 = p.getPerso2();
+                perso1.beginFight();
+                perso2.beginFight();
                 combatGraphique22.bindAventure(aventure);
                 combatGraphique22.lancerCombat(perso1,perso2);
                 combatGraphique22.setVisible(true);
@@ -108,7 +110,10 @@ public class AppliGraphique extends javax.swing.JFrame {
                 combatGraphique22.setVisible(false);
                 Aventure aventure = (Aventure) sender;
                 DebutCombatEvent p = (DebutCombatEvent)e;
+                Personnage perso1 = p.getPerso2();
                 Personnage perso2 = p.getPerso2();
+                perso1.endFight();
+                perso2.endFight();
                 if (perso2.getAjoute(PropertyList.PV) <= 0) {
                     aventure.getJoueur().getPieceActuel().kill(perso2);
                 }

@@ -5,6 +5,7 @@
  */
 package canvas.Combat;
 
+import map.Camera;
 import modele.element.Personnage;
 
 /**
@@ -14,16 +15,26 @@ import modele.element.Personnage;
 public class CombatGraphiqueContainerPersonnage extends javax.swing.JPanel {
 
     private Personnage p;
+    private Camera c;
     
     /**
      * Creates new form CombatGraphiqueContainerPersonnage
      */
     public CombatGraphiqueContainerPersonnage() {
         initComponents();
+        this.c = new Camera();
     }
     
-    public void bind(Personnage p) {
+    public void bind(Personnage p, String animation) {
         this.p = p;
+        Personnage tmp = (Personnage)p.copie();
+        tmp.removeAllListeners();
+        tmp.getSprite().setAnimation(animation);
+        this.c.setTarget(tmp);
+        canvas1.setCamera(this.c);
+        canvas1.enleverAllItem();
+        canvas1.ajouterItem(tmp);
+        
     }
     
     public void redessiner() {
