@@ -28,12 +28,21 @@ public class inventoryDetails extends javax.swing.JPanel {
     private int index;
     private int pindex;
     
+    private Color c1;
+    private Color c2;
+    private Color c3;
+    private Color c4;
+    
     /**
      * Creates new form inventoryDetails
      */
     public inventoryDetails() {
         this.app = null;
         initComponents();
+        c1 = jButton1.getBackground();
+        c2 = jButton2.getBackground();
+        c3 = jButton3.getBackground();
+        c4 = jButton4.getBackground();
         this.unset();
     }
     
@@ -53,6 +62,10 @@ public class inventoryDetails extends javax.swing.JPanel {
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
+        jButton1.setBackground(c1);
+        jButton2.setBackground(c2);
+        jButton3.setBackground(c3);
+        jButton4.setBackground(c4);
     }
     
     public void set(Personnage p, Objet o, int index, int pindex) {
@@ -80,9 +93,11 @@ public class inventoryDetails extends javax.swing.JPanel {
         }
         if (!o.isDetruisable()) {
             jButton2.setEnabled(false);
+            jButton2.setBackground(new Color(50,50,50));
         }
         if (!o.isReparable()) {
             jButton4.setEnabled(false);
+            jButton4.setBackground(new Color(50,50,50));
         }
     }
 
