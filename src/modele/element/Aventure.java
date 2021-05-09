@@ -283,6 +283,9 @@ public class Aventure extends Element {
         Sprite sprite_potion = new Sprite("/items/Item__31.png",0,0,24,24);
         sprite_potion.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
         
+        Sprite sprite_morceau = new Sprite("/items/Item__39.png",0,0,24,24);
+        sprite_morceau.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
+        
         // tout les objets on les met ici :
         
         /****************** BIBLIOTHEQUE OBJET ******************/
@@ -335,6 +338,10 @@ public class Aventure extends Element {
         armureBadass.setSprite(sprite_armureBadass);
         armureBadass.setIcon(sprite_armureBadass.getFileName());
         armureBadass.setEffet(effetArmureBadass);
+        
+        Morceau morceauRare = new Morceau(Rarity.RARE);
+        morceauRare.setSprite(sprite_morceau);
+        morceauRare.setIcon(sprite_morceau.getFileName());
         
         /********************************************************/
         
@@ -542,49 +549,50 @@ public class Aventure extends Element {
                     
                     // on copie le monstre
                     Personnage m = (Personnage)monstre.copie();
-                    
-                     if(l.isSortie()){
-                        // on init le boss
-                        m.init(40,50,50,100);
-                        m.setNom("Boss");
-                        m.setBoss(true);
-                        
-                        //on configure la salle
-                        l.setNom("Salle du Boss");
-                        SpriteSheet trape = new SpriteSheet("/trape.png",0,0,188,227,50,50);
-                        trape.loadImage();
-                        trape.ajouterAnimation(new Animation("Close",new int[] {0}));
-                        trape.ajouterAnimation(new Animation("Open",new int[] {1}));
-                        trape.setAnimation("Close");
-                        CollisionBox col = new CollisionBox(0,0,50,50,Settings.DEBUG);
-                        trape.addCollisionBox(col);
-                        trape.setZIndex(Integer.MIN_VALUE);
-                        trape.setX(l.getMiddleX());
-                        trape.setY(l.getMiddleY());
-                        
-                        //on ajoute les eventListner
-                        m.addListener(new SimpleListener("gameOver") {
-                            @Override
-                            public void onEvent(Object sender, SimpleEvent e) {
-                                if(sender instanceof Personnage){
-                                    trape.setAnimation("Open");
-                                }
-                            }
-                        });
-                        trape.onCollide(new SimpleListener("onCollide") {
-                            @Override
-                            public void onEvent(Object sender, SimpleEvent event) {
-                                CollisionEvent e = (CollisionEvent) event;
-                                if (e.getCollider1()==joueur || e.getCollider2()==joueur) {
-                                    if(trape.getAnimationCourrante().getNom().equals("Open")){
-                                        //newStage
-                                        System.out.println("newStage");
-                                    }
-                                }
-                            }                   
-                        });
-                        trape.setParent(l);
-                        l.addDrawable(trape);
+                    if(l.isSortie()){
+                       // on init le boss
+                       m.init(40,50,50,100);
+                       m.setNom("Boss");
+                       m.setBoss(true);
+                       
+                       m.ajouterObjet(morceauRare);
+
+                       //on configure la salle
+                       l.setNom("Salle du Boss");
+                       SpriteSheet trape = new SpriteSheet("/trape.png",0,0,188,227,50,50);
+                       trape.loadImage();
+                       trape.ajouterAnimation(new Animation("Close",new int[] {0}));
+                       trape.ajouterAnimation(new Animation("Open",new int[] {1}));
+                       trape.setAnimation("Close");
+                       CollisionBox col = new CollisionBox(0,0,50,50,Settings.DEBUG);
+                       trape.addCollisionBox(col);
+                       trape.setZIndex(Integer.MIN_VALUE);
+                       trape.setX(l.getMiddleX());
+                       trape.setY(l.getMiddleY());
+
+                       //on ajoute les eventListner
+                       m.addListener(new SimpleListener("gameOver") {
+                           @Override
+                           public void onEvent(Object sender, SimpleEvent e) {
+                               if(sender instanceof Personnage){
+                                   trape.setAnimation("Open");
+                               }
+                           }
+                       });
+                       trape.onCollide(new SimpleListener("onCollide") {
+                           @Override
+                           public void onEvent(Object sender, SimpleEvent event) {
+                               CollisionEvent e = (CollisionEvent) event;
+                               if (e.getCollider1()==joueur || e.getCollider2()==joueur) {
+                                   if(trape.getAnimationCourrante().getNom().equals("Open")){
+                                       generateNiveau(7);
+                                       System.out.println("newStage");
+                                   }
+                               }
+                           }                   
+                       });
+                       trape.setParent(l);
+                       l.addDrawable(trape);
                     }else{
                         // on le randomise
                         m.initAleatoire();
