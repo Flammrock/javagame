@@ -31,6 +31,9 @@ public abstract class Objet extends Element implements Ramassable, Generable, De
     
     Effet effet;
     
+    double life;
+    double maxlife;
+    
     public Objet() {
         this.nom = "";
         this.probaDeGeneration = 1.0;
@@ -42,6 +45,8 @@ public abstract class Objet extends Element implements Ramassable, Generable, De
         this.dispatcher = new Dispatcher();
         this.radiusramassable = 50;
         this.effet = null;
+        this.life = 20;
+        this.maxlife = 20;
     }
     
     public Objet(String nom, String description, double poids) {
@@ -56,6 +61,8 @@ public abstract class Objet extends Element implements Ramassable, Generable, De
         this.dispatcher = new Dispatcher();
         this.radiusramassable = 50;
         this.effet = null;
+        this.life = 20;
+        this.maxlife = 20;
     }
     
     public void setEffet(Effet effet) {
@@ -285,4 +292,36 @@ public abstract class Objet extends Element implements Ramassable, Generable, De
         return dx*dx + dy*dy <= r*r;
     }
     
+    
+    
+    
+    @Override
+    public boolean isDetruisable() {
+        return true;
+    }
+
+    @Override
+    public double getLife() {
+        return this.life;
+    }
+
+    @Override
+    public void setLife(double l) {
+        this.life = l;
+    }
+
+    @Override
+    public double getMaxLife() {
+        return this.maxlife;
+    }
+
+    @Override
+    public void setMaxLife(double l) {
+        this.maxlife = l;
+    }
+
+    @Override
+    public boolean isReparable() {
+        return false;
+    }
 }

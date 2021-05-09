@@ -350,7 +350,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         if(toucher){
             ennemie.setArmure(ennemie.getArmure());
             attaque = this.blesse(ennemie);
-            this.setMain(abimer(this.getMain()));
+            this.setMain((Equipement)abimer(this.getMain()));
         }
         //this.actionEffetFinDuTour();
         if(toucher){
@@ -496,31 +496,23 @@ public class Personnage extends Element implements Generable, Collisionable {
         return true;
     }
     
-    private boolean isMorceau(int n){
-        int j=0, index = -1;
-        for (Objet i : this.inventaire){
-            if (i instanceof Morceau){
-                Morceau m = (Morceau)i;
-                if(m.getLevel() == n){
-                    index = j;
-                    break;
-                }
+    public ArrayList<Morceau> getMorceaux(int amount) {
+        ArrayList<Morceau> m = new ArrayList<>();
+        int k = 0;
+        if (amount <= 0) amount = 1;
+        for (Objet o : this.inventaire) {
+            if (o instanceof Morceau) {
+                m.add((Morceau)o);
+                k++;
+                if (k==amount) break;
             }
         }
-        if(index!=-1){
-            this.inventaire.remove(index);
-            return true;
-        }
-        return true;
+        return m;
     }
     
-    public Equipement repare(Equipement e){
-        if(isMorceau(Rarity.COMMON)){
-            if(e.getNom().contains(" cassé")){
-            e.setNom(e.getNom().replaceAll(" cassé", ""));
-            }
-            e.setVie_Objet(1);
-        }
+    public Objet repare(Objet e){
+        if (!e.isReparable()) return e;
+        e.reparer(this.getMorceaux(1));
         return e;
     }
     
@@ -965,14 +957,10 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.iscanramasse = iscanramasse;
     }
 
-    private Equipement abimer(Equipement e) {
-        if(e!=null){
-            e.setVie_Objet(e.getVie_Objet()-0.2);
-            if(e.getVie_Objet()<=0){
-                e.setNom(e.getNom()+ " cassé");
-                return null;
-            }
-        }
+    public Objet abimer(Objet e) {
+        if (e == null) return null;
+        if (!e.isDetruisable()) return e;
+        e.abimer();
         return e;
     }
     

@@ -19,7 +19,7 @@ public interface Reparable {
     
     public double getMaxLife();
     
-    public double setMaxLife();
+    public void setMaxLife(double l);
     
     default public boolean isCasser() {
         return this.getLife() <= 0.0;

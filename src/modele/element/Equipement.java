@@ -13,21 +13,8 @@ import canvas.Drawable;
  */
 public class Equipement extends Objet {
     
-    double vie_Objet;
-    
     public Equipement(String nom, String description, double poids) {
         super(nom,description,poids);
-        this.vie_Objet = 1;
-    }
-
-    public void setVie_Objet(double vie_Objet) {
-        this.vie_Objet = vie_Objet;
-    }
-    
-    
-
-    public double getVie_Objet() {
-        return vie_Objet;
     }
 
     public String getNom() {
@@ -43,6 +30,12 @@ public class Equipement extends Objet {
     @Override
     public Drawable copie() {
         return null;
+    }
+    
+    
+    @Override
+    public boolean isReparable() {
+        return true;
     }
 
 }
