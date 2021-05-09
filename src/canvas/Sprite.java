@@ -74,6 +74,8 @@ public class Sprite implements Collisionable {
     ArrayList<CollisionBox> collisionBoxList;
     ArrayList<Drawable> drawables;
     
+    Drawable parent;
+    
     /**
      * Permet de créer un Sprite à partir d'un fichier image
      * @param spritefile le nom du fichier
@@ -99,6 +101,7 @@ public class Sprite implements Collisionable {
         this.dispatcher = new Dispatcher();
         this.collisionBoxList = new ArrayList<>();
         this.drawables = new ArrayList<>();
+        this.parent = null;
     }
     
     /**
@@ -525,6 +528,17 @@ public class Sprite implements Collisionable {
     @Override
     public int getZIndex() {
         return this.getY()+this.getHeight();
+    }
+    
+    
+    @Override
+    public void setParent(Drawable d) {
+        this.parent = d;
+    }
+    
+    @Override
+    public Drawable getParent() {
+        return this.parent;
     }
     
 }
