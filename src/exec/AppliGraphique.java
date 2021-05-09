@@ -27,6 +27,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import map.Camera;
 import modele.element.*;
+import windowpanel.gameoverPanel;
 import windowpanel.inventory.inventoryPanel;
 import windowpanel.uiPanel;
 
@@ -40,6 +41,8 @@ public class AppliGraphique extends javax.swing.JFrame {
     private Aventure aventure;
     private inventoryPanel invpanel;
     private uiPanel uipanel;
+    private gameoverPanel gameoverpanel;
+    
     /**
      * Creates new form AppliGraphique
      * @param aventure
@@ -110,7 +113,7 @@ public class AppliGraphique extends javax.swing.JFrame {
                 combatGraphique22.setVisible(false);
                 Aventure aventure = (Aventure) sender;
                 DebutCombatEvent p = (DebutCombatEvent)e;
-                Personnage perso1 = p.getPerso2();
+                Personnage perso1 = p.getPerso1();
                 Personnage perso2 = p.getPerso2();
                 perso1.endFight();
                 perso2.endFight();
@@ -183,6 +186,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         combatGraphique22 = new CombatGraphique2();
         invpanel = new inventoryPanel(this);
         uipanel = new uiPanel(this);
+        gameoverpanel = new gameoverPanel(this);
         
         layeredpane = new JLayeredPane();
         layeredpane.setBackground(Color.red);
@@ -200,6 +204,8 @@ public class AppliGraphique extends javax.swing.JFrame {
         layeredpane.add(combatGraphique22, JLayeredPane.MODAL_LAYER);
         //layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
         layeredpane.add(uipanel, JLayeredPane.PALETTE_LAYER);
+        
+        //layeredpane.add(gameoverpanel, Integer.valueOf(10000));
         
         setContentPane(layeredpane);
         
