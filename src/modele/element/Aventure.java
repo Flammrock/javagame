@@ -546,6 +546,8 @@ public class Aventure extends Element {
                         trape.setAnimation("Close");
                         trape.addCollisionBox(new CollisionBox(50,50,38,18,Settings.DEBUG));
                         trape.setZIndex(Integer.MIN_VALUE);
+                        trape.setX(l.getMiddleX());
+                        trape.setY(l.getMiddleY());
                         //on ajoute les eventListner
                         m.addListener(new SimpleListener("gameOver") {
                             @Override
