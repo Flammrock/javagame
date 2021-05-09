@@ -40,6 +40,8 @@ public class Aventure extends Element {
     
     private Personnage joueur;
     private Donjon donjon;
+    private Personnage joueurSaved;
+    private int nbsallesSaved;
     
     private ArrayList<Drawable> drawables;
     Dispatcher dispatcher;
@@ -220,7 +222,9 @@ public class Aventure extends Element {
     
     
     
-    
+    public void recommancerNiveau() {
+        
+    }
     
     
     public void generateNiveau(int nbsalles) {
@@ -610,6 +614,9 @@ public class Aventure extends Element {
 
         // on place le joueur dans le 1er lieu de ce niveau
         this.getJoueur().setPieceActuel(this.getLieu(niveau1,niveau1.getEntree().getNom()));
+        
+        this.joueurSaved = (Personnage)this.joueur.copie();
+        this.nbsallesSaved = nbsalles;
     }
     
 }
