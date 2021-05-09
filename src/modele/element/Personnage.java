@@ -401,9 +401,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
 
     private void mort(Personnage ennemie) {
-        if(ennemie.getNom().equals("Héros")){
-            ennemie.dispatcher.fireEvent("gameOver", null, new SimpleEvent(null));
-        }
+        ennemie.dispatcher.fireEvent("gameOver", ennemie, new SimpleEvent(null));
         ennemie.setPv(0.0);
         ArrayList<Element> e = new ArrayList<>();
         e.addAll(ennemie.getInventaire());
