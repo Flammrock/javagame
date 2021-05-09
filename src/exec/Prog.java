@@ -139,11 +139,15 @@ public class Prog {
         
         // on créé un joueur
         Personnage joueur = new Personnage("Héros","perso lambda nul");
-        joueur.init(20, 15, 15, 100);
+        joueur.init(20, 30, 30, 150);
         
-        
-        
-        
+        joueur.addListener(new SimpleListener("gameOver") {
+            @Override
+            public void onEvent(Object sender, SimpleEvent e) {
+                System.out.println("GameOver");
+            }
+        });
+
         
         /////////////////////// TILESET TEST ////////////////////////////
         
@@ -443,6 +447,9 @@ public class Prog {
                     
                     // on copie le monstre
                     Personnage m = (Personnage)monstre.copie();
+                    
+                    // on le randomise
+                    m.initAleatoire();
                     
                     // on génère le monstre
                     m.generate(l);
