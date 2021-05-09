@@ -238,6 +238,14 @@ public class AppliGraphique extends javax.swing.JFrame {
         return d;
     }
     
+    public boolean reparerObjet(int index, int pindex) {
+        Personnage p = this.aventure.getJoueur();
+        if (p==null) return true;
+        boolean d = p.reparer(index);
+        invpanel.prepare(p,d?-1:pindex);
+        layeredpane.revalidate();
+        return d;
+    }
     
     
     public String onActionJoueur(String action,Personnage ennemie) {

@@ -994,6 +994,14 @@ public class Personnage extends Element implements Generable, Collisionable {
         return false;
     }
     
+    public boolean reparer(int index) {
+        if (index < 0 || index > this.inventaire.size()-1) return false;
+        Objet e = this.inventaire.get(index);
+        if (!e.isReparable()) return false;
+        this.repare(e);
+        return false;
+    }
+    
     public boolean isEquiped(Objet e) {
         if (e == null) return false;
         return this.getMain()==e || this.getArmure()==e;

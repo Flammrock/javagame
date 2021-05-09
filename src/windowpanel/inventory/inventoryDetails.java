@@ -205,6 +205,11 @@ public class inventoryDetails extends javax.swing.JPanel {
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
         jButton4.setFocusPainted(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(255, 204, 51));
         jButton3.setFont(new java.awt.Font("Sitka Display", 0, 14)); // NOI18N
@@ -312,6 +317,14 @@ public class inventoryDetails extends javax.swing.JPanel {
             this.pindex = -1;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        boolean r = this.app.reparerObjet(this.index,this.pindex);
+        if (r) {
+            this.index = -1;
+            this.pindex = -1;
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
