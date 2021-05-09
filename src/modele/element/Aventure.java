@@ -559,7 +559,7 @@ public class Aventure extends Element {
 
                        //on configure la salle
                        l.setNom("Salle du Boss");
-                       SpriteSheet trape = new SpriteSheet("/trape.png",0,0,188,227,50,50);
+                       SpriteSheet trape = new SpriteSheet("/trape.png",0,0,188,183,50,50);
                        trape.loadImage();
                        trape.ajouterAnimation(new Animation("Close",new int[] {0}));
                        trape.ajouterAnimation(new Animation("Open",new int[] {1}));
