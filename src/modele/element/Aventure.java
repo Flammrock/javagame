@@ -531,8 +531,35 @@ public class Aventure extends Element {
                     // on copie le monstre
                     Personnage m = (Personnage)monstre.copie();
                     
-                    // on le randomise
-                    m.initAleatoire();
+                     if(l.isSortie()){
+                        // on init le boss
+                        m.init(40,50,50,100);
+                        m.setNom("Boss");
+                        m.setBoss(true);
+                        
+                        l.setNom("Salle du Boss");
+                        SpriteSheet trape = new SpriteSheet("/trape.png",0,0,188,227,75*2,75*2);
+                        trape.loadImage();
+                        trape.ajouterAnimation(new Animation("Close",new int[] {0}));
+                        trape.ajouterAnimation(new Animation("Open",new int[] {1}));
+                        trape.setAnimation("Close");
+                        trape.addCollisionBox(new CollisionBox(75,70,38,18,Settings.DEBUG));
+                        
+                        m.addListener(new SimpleListener("gameOver") {
+                            @Override
+                            public void onEvent(Object sender, SimpleEvent e) {
+                                if(sender instanceof Personnage){
+                                    Personnage p = (Personnage)sender;
+                                    trape.setAnimation("Open");
+                                }
+                            }
+                        });
+                        trape.setParent(l);
+                        l.addDrawable(trape);
+                    }else{
+                        // on le randomise
+                        m.initAleatoire();
+                    }
                     
                     // on génère le monstre
                     m.generate(l);
