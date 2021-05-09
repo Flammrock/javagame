@@ -8,6 +8,7 @@ import canvas.TileSet;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
 import canvas.collision.Collisionable;
+import canvas.light.Light;
 import embellishment.Embellishment;
 import embellishment.TypeEmbellishment;
 import eventsystem.Dispatcher;
@@ -528,6 +529,8 @@ public class Lieu extends Element implements Generable, Collisionable {
         
         int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
         
+        int nblight = 0;
+        
         while (Math.random() < proba) {
             
             Embellishment temp = this.embellishmentsList.get((int)(Math.random()*this.embellishmentsList.size()));
@@ -546,6 +549,7 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int x = this.x + (int)(Math.random()*(this.width-w));
                 int y = this.y + dh - h;
                 e.setBox(x,y,w,h);
+                e.setCollideEmbellishment(false);
             } else if (e.getType().equals(TypeEmbellishment.OBJECT)) {
                 int ow = e.getSprite().getWidth();
                 int oh = e.getSprite().getHeight();
@@ -560,7 +564,16 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
                 e.setBox(x,y,w,h);
                 e.setCollisionBoxList(e.getSprite().getCollisionBoxList(), ow, oh);
+                ArrayList<Drawable> ds = e.getDrawables();
+                for (Drawable d : ds) {
+                    if (d instanceof Light) {
+                        nblight++;
+                        break;
+                    }
+                }
             }
+            
+            if (nblight > 2) continue;
             
             if (!this.isValide(e)) {proba -= 0.01;continue;}
             
@@ -598,6 +611,10 @@ public class Lieu extends Element implements Generable, Collisionable {
             }
         }
         if (r != null && r) {return false;}
+        if (c instanceof Embellishment) {
+            Embellishment e = (Embellishment)c;
+            if (!e.getCollideEmbellishment()) return true;
+        }
         r = false;
         for (Embellishment et : this.embellishmentsListDrawed) {
             r = et.isCollide(c,true);
