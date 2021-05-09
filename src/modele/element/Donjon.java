@@ -8,6 +8,7 @@ package modele.element;
 
 import canvas.Drawable;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -64,9 +65,9 @@ public class Donjon extends Element{
     public Drawable copie() {
         Donjon c = new Donjon();
         
-        /*for (Niveau n : this.list_niveaux) {
-            c.ajouterNiveau((Niveau)n.copie());
-        }*/
+        for (Map.Entry<String, Niveau> entry : this.list_niveaux.entrySet()) {
+            c.ajouterNiveau((Niveau)entry.getValue().copie());
+        }
         
         return c;
     }
