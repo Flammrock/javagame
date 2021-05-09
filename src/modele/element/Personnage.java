@@ -764,6 +764,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         for (Effet e : j.getEffets()) {
             this.ajoutEffet(e);
         }
+        this.isFighting = false;
     }
     
     @Override
