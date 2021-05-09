@@ -250,8 +250,8 @@ public class Lieu extends Element implements Generable, Collisionable {
                             if (eventc.getCollider1() instanceof Personnage && eventc.getCollider2() instanceof Ramassable) {
                                 Personnage perso = (Personnage)eventc.getCollider1();
                                 Ramassable ramas = (Ramassable)eventc.getCollider2();
-                                if (ramas instanceof Element && _this.enlever((Element)ramas)) {
-                                    perso.ajouter((Element)ramas.copie());
+                                if (ramas instanceof Element && perso.ajouter((Element)ramas.copie())) {
+                                    _this.enlever((Element)ramas);
                                 }
                             }
                         }

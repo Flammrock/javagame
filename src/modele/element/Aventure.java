@@ -334,7 +334,7 @@ public class Aventure extends Element {
         potion.setIcon(sprite_potion.getFileName());
         
         Effet effetBanane = new Effet("","",false,true,0);
-        effetBanane.setProperty(PropertyList.PV, 15);
+        effetBanane.setProperty(PropertyList.PV, 50);
         
         Nourriture banane = new Nourriture("banane","Une grosse banane",2.0);
         banane.setSprite(sprite_banane);
