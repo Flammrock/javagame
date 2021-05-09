@@ -596,6 +596,9 @@ public class Aventure extends Element {
                     }else{
                         // on le randomise
                         m.initAleatoire();
+                        Arme armeAleatoire = new Arme("","",1);
+                        armeAleatoire.initAleatoire();
+                        m.ajouter(armeAleatoire);
                     }
                     
                     // on génère le monstre
