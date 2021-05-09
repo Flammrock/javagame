@@ -24,14 +24,19 @@ public class inventoryPanel extends javax.swing.JPanel {
     private AppliGraphique app;
     private Objet current;
     private Personnage temp_p;
+    private int selected;
 
     /**
      * Creates new form inventoryPanel
      */
     public inventoryPanel(AppliGraphique app) {
-        initComponents();
         this.app = app;
+        
+        initComponents();
+        
         this.current = new Arme("","",0);
+        
+        this.selected = -1;
         
         this.temp_p = null;
         
@@ -41,42 +46,68 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.inventoryCategory3.setImage("/items/Item__38.png");
         
         this.inventoryCategory1.select();
+        
+        this.jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (temp_p == null) return;
+                ArrayList<Objet> inv = temp_p.getInventaire();
+                int row = jTable2.rowAtPoint(evt.getPoint());
+                int col = jTable2.columnAtPoint(evt.getPoint());
+                if (row >= 0 && col >= 0 && (row*4+col) < inv.size()) {
+                    prepare(temp_p,row*4+col);
+                }
+            }
+        });
     }
     
     
-    public void prepare(Personnage p) {
+    public void prepare(Personnage p, int selected) {
         
         if (p == null) return;
         
+        int selec = selected;
         this.temp_p = p;
+        this.selected = -1;
         
         ArrayList<Objet> inv = p.getInventaire();
         
         int s = 0;
+        int m = 0;
         for (Objet o : inv) {
             if (
                 (this.current == null && !(o instanceof Arme) && !(o instanceof Armure) && !(o instanceof Nourriture)) ||
                 (this.current != null && o.getClass().isAssignableFrom(this.current.getClass()))
             ) {
+                if (m==selec && m>=0) {
+                    m=-1;
+                    selec = s;
+                } 
                 s++;
             }
+            if (m>=0) m++;
         }
         
         Object os[][] = new Object[(int)Math.ceil(inv.size()/4.0)][4];
         int i = 0;
         int j = 0;
+        int k = 0;
         for (Objet o : inv) {
             if (
                 (this.current == null && !(o instanceof Arme) && !(o instanceof Armure) && !(o instanceof Nourriture)) ||
                 (this.current != null && o.getClass().isAssignableFrom(this.current.getClass()))
             ) {
-                if (i==0 && j==0) inventoryDetails2.set(o);
+                if (i==0 && j==0 || (selec >= 0 && (i*4+j)==selec)) {
+                    inventoryDetails2.set(o,k);
+                    this.selected = k;
+                }
                 os[i][j++] = o;
                 if (j==4) {
                     i++;
                     j = 0;
                 }
             }
+            k++;
         }
         
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -115,7 +146,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         inventoryCategory4 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory2 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory3 = new windowpanel.inventory.inventoryCategory();
-        inventoryDetails2 = new windowpanel.inventory.inventoryDetails();
+        inventoryDetails2 = new windowpanel.inventory.inventoryDetails(this.app);
 
         setBackground(new java.awt.Color(255, 0, 0));
         setOpaque(false);
@@ -452,7 +483,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.inventoryCategory3.unselect();
         this.inventoryCategory2.unselect();
         this.current = new Arme("","",0);
-        this.prepare(this.temp_p);
+        this.prepare(this.temp_p,-1);
     }//GEN-LAST:event_inventoryCategory1MouseClicked
 
     private void inventoryCategory4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory4MouseClicked
@@ -462,7 +493,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.inventoryCategory3.unselect();
         this.inventoryCategory2.unselect();
         this.current = new Armure("","",0);
-        this.prepare(this.temp_p);
+        this.prepare(this.temp_p,-1);
     }//GEN-LAST:event_inventoryCategory4MouseClicked
 
     private void inventoryCategory2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory2MouseClicked
@@ -472,7 +503,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.inventoryCategory3.unselect();
         this.inventoryCategory2.select();
         this.current = new Nourriture("","",0);
-        this.prepare(this.temp_p);
+        this.prepare(this.temp_p,-1);
     }//GEN-LAST:event_inventoryCategory2MouseClicked
 
     private void inventoryCategory3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryCategory3MouseClicked
@@ -482,7 +513,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.inventoryCategory3.select();
         this.inventoryCategory2.unselect();
         this.current = null;
-        this.prepare(this.temp_p);
+        this.prepare(this.temp_p,-1);
     }//GEN-LAST:event_inventoryCategory3MouseClicked
 
 

@@ -296,6 +296,9 @@
       </SubComponents>
     </Container>
     <Component class="windowpanel.inventory.inventoryDetails" name="inventoryDetails2">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new windowpanel.inventory.inventoryDetails(this.app)"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

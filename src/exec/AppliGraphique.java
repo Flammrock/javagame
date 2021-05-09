@@ -206,8 +206,16 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     public void showInventory() {
-        invpanel.prepare(aventure.getJoueur());
+        invpanel.prepare(aventure.getJoueur(),-1);
         layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
+        layeredpane.revalidate();
+    }
+    
+    public void jeterObjet(int index) {
+        Personnage p = this.aventure.getJoueur();
+        if (p==null) return;
+        p.jeter(index);
+        invpanel.prepare(p,-1);
         layeredpane.revalidate();
     }
     

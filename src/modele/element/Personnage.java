@@ -267,6 +267,20 @@ public class Personnage extends Element implements Generable, Collisionable {
         return r;
     }
     
+    public boolean jeter(int index) {
+        if (index < 0 || index > this.inventaire.size()) return false;
+        Objet obj = this.inventaire.get(index);
+        Lieu l = this.getPieceActuel();
+        if (l==null) this.inventaire.remove(index);
+        else {
+            obj.setX(this.getX());
+            obj.setY(this.getY());
+            l.ajouter(obj);
+            this.inventaire.remove(index);
+        }
+        return true;
+    }
+    
     public boolean equip(int index) {
         if (index < 0 || index > this.inventaire.size()) return false;
         Objet obj = this.inventaire.get(index);
