@@ -285,12 +285,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         if (index < 0 || index > this.inventaire.size()) return false;
         Objet obj = this.inventaire.get(index);
         if (obj == null) return false;
-        if(obj instanceof Equipement){
-            Equipement Equ = (Equipement)obj;
-            if(Equ.getNom().contains(" cassé")){
-                return false;
-            }
-        }
+        if (obj.isCasser()) return false;
         if (obj instanceof Arme) {
             this.setMain((Arme)obj);
             return true;
@@ -974,6 +969,40 @@ public class Personnage extends Element implements Generable, Collisionable {
             this.inventaire.add(k);
         }
         return true;
+    }
+    
+    /**
+     *
+     * @return retourne true si l'objet a été détruit pendant l'utilisation
+     */
+    public boolean utiliser(int index) {
+        if (index < 0 || index > this.inventaire.size()-1) return false;
+        Objet e = this.inventaire.get(index);
+        if (e instanceof Arme || e instanceof Armure) {
+            if (this.getMain()==e || this.getArmure()==e) {
+                this.desequip(index);
+            } else {
+                this.equip(index);
+            }
+        } else {
+            utiliserObjet(index);
+            for (Objet o : this.inventaire) {
+                if (o==e) return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isEquiped(Objet e) {
+        if (e == null) return false;
+        return this.getMain()==e || this.getArmure()==e;
+    }
+    
+    public boolean isEquiped(int index) {
+        if (index < 0 || index > this.inventaire.size()-1) return false;
+        Objet e = this.inventaire.get(index);
+        return this.isEquiped(e);
     }
 
     private static class PointNode {

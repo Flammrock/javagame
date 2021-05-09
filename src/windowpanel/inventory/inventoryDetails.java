@@ -13,7 +13,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import modele.element.Arme;
+import modele.element.Equipement;
+import modele.element.Nourriture;
 import modele.element.Objet;
+import modele.element.Personnage;
 
 /**
  *
@@ -23,6 +26,7 @@ public class inventoryDetails extends javax.swing.JPanel {
 
     private AppliGraphique app;
     private int index;
+    private int pindex;
     
     /**
      * Creates new form inventoryDetails
@@ -39,11 +43,14 @@ public class inventoryDetails extends javax.swing.JPanel {
         jTextArea1.setText("");
         jTextArea2.setText("(Description de l'Objet)");
         this.index = -1;
+        this.pindex = -1;
+        jButton3.setText("Utiliser");
     }
     
-    public void set(Objet o, int index) {
+    public void set(Personnage p, Objet o, int index, int pindex) {
         this.unset();
         this.index = index;
+        this.pindex = index;
         jLabel1.setText(o.getNom());
         if (o.getDescription().trim().length() > 0) jTextArea2.setText("("+o.getDescription()+")");
         else jTextArea2.setText("");
@@ -52,6 +59,16 @@ public class inventoryDetails extends javax.swing.JPanel {
         }
         if (o.getEffet()!=null) {
             jTextArea1.setText(o.getEffet().toString());
+        }
+        if (o instanceof Equipement) {
+            if (p.isEquiped(o)) {
+                jButton3.setText("Déséquiper");
+            } else {
+                jButton3.setText("Équiper");
+            }
+        }
+        if (o instanceof Nourriture) {
+            jButton3.setText("Manger");
         }
     }
 
@@ -195,6 +212,11 @@ public class inventoryDetails extends javax.swing.JPanel {
         jButton3.setBorder(null);
         jButton3.setBorderPainted(false);
         jButton3.setFocusPainted(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -268,14 +290,28 @@ public class inventoryDetails extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.app.jeterObjet(this.index);
-        this.index = -1;
+        boolean r = this.app.jeterObjet(this.index, this.pindex);
+        if (r) {
+            this.index = -1;
+            this.pindex = -1;
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.app.detruireObjet(this.index);
-        this.index = -1;
+        boolean r = this.app.detruireObjet(this.index,this.pindex);
+        if (r) {
+            this.index = -1;
+            this.pindex = -1;
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        boolean r = this.app.utiliserObjet(this.index,this.pindex);
+        if (r) {
+            this.index = -1;
+            this.pindex = -1;
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

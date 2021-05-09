@@ -211,20 +211,31 @@ public class AppliGraphique extends javax.swing.JFrame {
         layeredpane.revalidate();
     }
     
-    public void jeterObjet(int index) {
+    public boolean jeterObjet(int index, int pindex) {
         Personnage p = this.aventure.getJoueur();
-        if (p==null) return;
-        p.jeter(index);
-        invpanel.prepare(p,-1);
+        if (p==null) return true;
+        boolean d = p.jeter(index);
+        invpanel.prepare(p,d?-1:pindex);
         layeredpane.revalidate();
+        return d;
     }
     
-    public void detruireObjet(int index) {
+    public boolean detruireObjet(int index, int pindex) {
         Personnage p = this.aventure.getJoueur();
-        if (p==null) return;
-        p.detruire(index);
-        invpanel.prepare(p,-1);
+        if (p==null) return true;
+        boolean d = p.detruire(index);
+        invpanel.prepare(p,d?-1:pindex);
         layeredpane.revalidate();
+        return d;
+    }
+    
+    public boolean utiliserObjet(int index, int pindex) {
+        Personnage p = this.aventure.getJoueur();
+        if (p==null) return true;
+        boolean d = p.utiliser(index);
+        invpanel.prepare(p,d?-1:pindex);
+        layeredpane.revalidate();
+        return d;
     }
     
     

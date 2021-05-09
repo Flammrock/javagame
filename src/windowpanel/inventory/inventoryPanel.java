@@ -92,7 +92,7 @@ public class inventoryPanel extends javax.swing.JPanel {
                 (this.current != null && o.getClass().isAssignableFrom(this.current.getClass()))
             ) {
                 if (i==0 && j==0 || (selec >= 0 && (i*4+j)==selec)) {
-                    inventoryDetails2.set(o,k);
+                    inventoryDetails2.set(p,o,k,i*4+j);
                     this.selected = k;
                 }
                 os[i][j++] = o;
