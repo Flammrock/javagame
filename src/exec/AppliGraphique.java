@@ -303,7 +303,12 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     public void abandonner() {
-        
+        this.hideInventory();
+        this.hideGameOver();
+        combatGraphique22.setVisible(false);
+        this.aventure.pause();
+        this.aventure.restart();
+        this.showTitleScreen();
     }
     
     public void startGame() {

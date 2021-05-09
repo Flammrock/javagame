@@ -41,6 +41,7 @@ public class Aventure extends Element {
     private Personnage joueur;
     private Donjon donjon;
     private Personnage joueurSaved;
+    private Personnage joueurSavedDefault;
     private int nbsallesSaved;
     
     private ArrayList<Drawable> drawables;
@@ -71,6 +72,8 @@ public class Aventure extends Element {
             }
         });
         
+        this.joueurSavedDefault = null;
+        
         // on créé le donjon ici
         this.donjon = new Donjon();
         
@@ -82,6 +85,10 @@ public class Aventure extends Element {
     
     public boolean isPauseDraw() {
         return this.pausedraw;
+    }
+    
+    public void restart() {
+        this.joueur.setState(this.joueurSavedDefault);
     }
 
     public Personnage getJoueur() {
@@ -643,6 +650,7 @@ public class Aventure extends Element {
         
         this.joueurSaved = (Personnage)this.joueur.copie();
         this.nbsallesSaved = nbsalles;
+        if(this.joueurSavedDefault==null) this.joueurSavedDefault = (Personnage)this.joueur.copie();
     }
     
 }
