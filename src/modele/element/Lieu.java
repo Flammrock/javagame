@@ -536,6 +536,8 @@ public class Lieu extends Element implements Generable, Collisionable {
             Embellishment temp = this.embellishmentsList.get((int)(Math.random()*this.embellishmentsList.size()));
             Embellishment e = temp.copie();
             
+            double valuep = 0.1;
+            
             // en fonction du type, on le place différemment
             if (e.getType().equals(TypeEmbellishment.GROUND)) {
                 int w = (int)(Math.random()*(100-50+1)+50);
@@ -543,6 +545,7 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int x = this.x + (int)(Math.random()*(this.width-w));
                 int y = this.y + dh + (int)(Math.random()*(this.height-dh-h));
                 e.setBox(x,y,w,h);
+                valuep = 0.02;
             } else if (e.getType().equals(TypeEmbellishment.WALL)) {
                 int w = 50;
                 int h = (int)(w*(1.0/e.getSprite().getRatio()));
@@ -550,6 +553,7 @@ public class Lieu extends Element implements Generable, Collisionable {
                 int y = this.y + dh - h;
                 e.setBox(x,y,w,h);
                 e.setCollideEmbellishment(false);
+                valuep = 0.05;
             } else if (e.getType().equals(TypeEmbellishment.OBJECT)) {
                 int ow = e.getSprite().getWidth();
                 int oh = e.getSprite().getHeight();
@@ -571,13 +575,14 @@ public class Lieu extends Element implements Generable, Collisionable {
                         break;
                     }
                 }
+                valuep = 0.05;
             }
             
             if (nblight > 2) continue;
             
             if (!this.isValide(e)) {proba -= 0.01;continue;}
             
-            proba -= 0.1;
+            proba -= valuep;
             
             e.setParent(this);
             if (e.getType().equals(TypeEmbellishment.OBJECT)) {
@@ -611,10 +616,6 @@ public class Lieu extends Element implements Generable, Collisionable {
             }
         }
         if (r != null && r) {return false;}
-        if (c instanceof Embellishment) {
-            Embellishment e = (Embellishment)c;
-            if (!e.getCollideEmbellishment()) return true;
-        }
         r = false;
         for (Embellishment et : this.embellishmentsListDrawed) {
             r = et.isCollide(c,true);
@@ -623,6 +624,10 @@ public class Lieu extends Element implements Generable, Collisionable {
             }
         }
         if (r!=null && r) {return false;}
+        if (c instanceof Embellishment) {
+            Embellishment e = (Embellishment)c;
+            if (!e.getCollideEmbellishment()) return true;
+        }
         r = this.isCollide(c,true);
         if (r!=null && r) {return false;}
         r = false;
