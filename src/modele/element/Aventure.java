@@ -391,6 +391,7 @@ public class Aventure extends Element {
                 }
             }
         });
+        joueur.denyCopyListener();
         
         
         
