@@ -283,7 +283,9 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     public void recommencer() {
         this.aventure.recommencerNiveau();
+        this.hideInventory();
         this.hideGameOver();
+        combatGraphique22.setVisible(false);
     }
     
     public void abandonner() {

@@ -233,7 +233,7 @@ public class Aventure extends Element {
         
         this.drawables.clear();
         
-        
+        this.pausedraw = false;
         
         /////////////////////// TILESET TEST ////////////////////////////
         
