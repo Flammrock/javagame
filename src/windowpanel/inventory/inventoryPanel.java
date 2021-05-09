@@ -73,19 +73,13 @@ public class inventoryPanel extends javax.swing.JPanel {
         ArrayList<Objet> inv = p.getInventaire();
         
         int s = 0;
-        int m = 0;
         for (Objet o : inv) {
             if (
                 (this.current == null && !(o instanceof Arme) && !(o instanceof Armure) && !(o instanceof Nourriture)) ||
                 (this.current != null && o.getClass().isAssignableFrom(this.current.getClass()))
             ) {
-                if (m==selec && m>=0) {
-                    m=-1;
-                    selec = s;
-                } 
                 s++;
             }
-            if (m>=0) m++;
         }
         
         Object os[][] = new Object[(int)Math.ceil(s/4.0)][4];
