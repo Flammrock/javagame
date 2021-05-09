@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import exec.Settings;
 
 /**
  *
@@ -107,9 +108,17 @@ public class Porte extends Element implements Collisionable {
             y += height + sp;
         }
         this.collisionBoxList.clear();
-        CollisionBox c = new CollisionBox(0,0, width, height, false);
+        CollisionBox c = new CollisionBox(0,0, width, height, Settings.DEBUG);
         c.apply(x,y);
         this.addCollisionBox(c);
+        
+        int x2 = this.d.isRight()?-40-width:0;
+        int y2 = this.d.isDown()?-50:0;
+        int w2 = (this.d.isLeft()||this.d.isRight())?width+40+width:width;
+        int h2 = (this.d.isUp()||this.d.isDown())?height+50:height;
+        CollisionBox c2 = new CollisionBox(x2,y2,w2,h2, Settings.DEBUG, false);
+        c2.apply(x,y);
+        this.addCollisionBox(c2);
     }
     
     public void setDirection(Direction d) {

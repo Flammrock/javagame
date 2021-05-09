@@ -379,7 +379,7 @@ public class Lieu extends Element implements Generable, Collisionable {
     public void computeCollisonBox() {
     
         int epaisseur = 10;
-        boolean display = false;
+        boolean display = Settings.DEBUG;
         
         // on ajoute 4 collisionsBox
         this.collisionBoxList.clear();
