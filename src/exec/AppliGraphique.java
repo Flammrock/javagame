@@ -224,7 +224,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         //layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
         layeredpane.add(uipanel, JLayeredPane.PALETTE_LAYER);
         
-        layeredpane.add(titlepanel, Integer.valueOf(20000));
+        layeredpane.add(titlepanel, Integer.valueOf(19000));
         
         setContentPane(layeredpane);
         
@@ -233,10 +233,12 @@ public class AppliGraphique extends javax.swing.JFrame {
     public void hideCreditScreen() {
         layeredpane.remove(creditpanel);
         layeredpane.revalidate();
+        hideTitleScreen();
+        showTitleScreen();
     }
     
     public void showCreditScreen() {
-        layeredpane.add(creditpanel, Integer.valueOf(50000));
+        layeredpane.add(creditpanel, Integer.valueOf(20000));
         layeredpane.revalidate();
     }
     
@@ -246,7 +248,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     public void showTitleScreen() {
-        layeredpane.add(titlepanel, Integer.valueOf(20000));
+        layeredpane.add(titlepanel, Integer.valueOf(19000));
         layeredpane.revalidate();
     }
     
