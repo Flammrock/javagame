@@ -976,15 +976,16 @@ public class Personnage extends Element implements Generable, Collisionable {
         return e;
     }
     
-    public void detruire(int index){
-        Objet e = this.inventaire.remove(index);
-        if(e.getPoids()>=1){
-            this.inventaire.add(new Morceau(Rarity.COMMON));
-        }else if(e.getPoids()>=3){
-            this.inventaire.add(new Morceau(Rarity.RARE));
-        }else if(e.getPoids()>=10){
-            this.inventaire.add(new Morceau(Rarity.EPIC));
+    public boolean detruire(int index){
+        if (index < 0 || index > this.inventaire.size()-1) return false;
+        Objet e = this.inventaire.get(index);
+        if (!e.isDetruisable()) return false;
+        ArrayList<Morceau> m = e.detruire();
+        this.inventaire.remove(index);
+        for (Morceau k : m) {
+            this.inventaire.add(k);
         }
+        return true;
     }
 
     private static class PointNode {

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import map.Generable;
 import map.GenerateListener;
 
-public abstract class Objet extends Element implements Ramassable, Generable {
+public abstract class Objet extends Element implements Ramassable, Generable, Detruisable, Reparable {
     
     String nom;
     double probaDeGeneration;
