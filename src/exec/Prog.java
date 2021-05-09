@@ -139,7 +139,7 @@ public class Prog {
         
         // on créé un joueur
         Personnage joueur = new Personnage("Héros","perso lambda nul");
-        joueur.init(20, 30, 30, 1);
+        joueur.init(20, 30, 30, 1000);
         
         joueur.addListener(new SimpleListener("gameOver") {
             @Override
