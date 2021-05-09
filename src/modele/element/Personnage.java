@@ -533,6 +533,14 @@ public class Personnage extends Element implements Generable, Collisionable {
         }
         return true;
     }
+    
+    public double getPV() {
+        return getAjoute(PropertyList.PV);
+    }
+    
+    public double getMaxPV() {
+        return getAjoute(PropertyList.PVMAX);
+    }
 
     @Override
     public void draw(Canvas c, Graphics g) {

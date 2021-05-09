@@ -27,9 +27,6 @@ private Personnage Ennemi;
      */
     public CombatGraphique2(){
         initComponents();
-        SpriteSheet sprite = new SpriteSheet("/HerosSpriteSheet.png",0,0,64,64,64*4,64*4);
-        sprite.loadImage();
-        DessinHero.ajouterItem(sprite);
         jPanel3.setVisible(false);
     }
     public void bindAventure(Aventure a) {
@@ -46,18 +43,6 @@ private Personnage Ennemi;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        DessinEnnemi = new canvas.Canvas();
-        PanelHero = new javax.swing.JPanel();
-        VieEnnemiBar = new javax.swing.JProgressBar();
-        VieEnnemiText = new javax.swing.JTextField();
-        NomEnnemiText = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        PanelEnnemi = new javax.swing.JPanel();
-        VieHeroBar = new javax.swing.JProgressBar();
-        VieHeroText = new javax.swing.JTextField();
-        NomHeroText = new javax.swing.JTextField();
-        DessinHero = new canvas.Canvas();
         jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane19 = new javax.swing.JScrollPane();
@@ -72,151 +57,10 @@ private Personnage Ennemi;
         FuiteBoutton = new javax.swing.JButton();
         jScrollPane23 = new javax.swing.JScrollPane();
         listeEffetJoueur = new javax.swing.JList<>();
+        combatGraphiqueContainerPersonnage1 = new canvas.Combat.CombatGraphiqueContainerPersonnage();
+        combatGraphiqueContainerPersonnage2 = new canvas.Combat.CombatGraphiqueContainerPersonnage();
 
         setBackground(new java.awt.Color(28, 17, 23));
-
-        jPanel1.setOpaque(false);
-
-        DessinEnnemi.setBackground(new java.awt.Color(28, 17, 23));
-        DessinEnnemi.setOpaque(false);
-
-        javax.swing.GroupLayout DessinEnnemiLayout = new javax.swing.GroupLayout(DessinEnnemi);
-        DessinEnnemi.setLayout(DessinEnnemiLayout);
-        DessinEnnemiLayout.setHorizontalGroup(
-            DessinEnnemiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
-        );
-        DessinEnnemiLayout.setVerticalGroup(
-            DessinEnnemiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 167, Short.MAX_VALUE)
-        );
-
-        PanelHero.setOpaque(false);
-
-        VieEnnemiText.setText("jTextField1");
-
-        NomEnnemiText.setText("jTextField1");
-
-        javax.swing.GroupLayout PanelHeroLayout = new javax.swing.GroupLayout(PanelHero);
-        PanelHero.setLayout(PanelHeroLayout);
-        PanelHeroLayout.setHorizontalGroup(
-            PanelHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelHeroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanelHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(VieEnnemiBar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(PanelHeroLayout.createSequentialGroup()
-                        .addComponent(VieEnnemiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(NomEnnemiText)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        PanelHeroLayout.setVerticalGroup(
-            PanelHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelHeroLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(PanelHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(VieEnnemiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NomEnnemiText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(VieEnnemiBar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(DessinEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(PanelHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(PanelHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DessinEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(169, 169, 169))
-        );
-
-        jPanel2.setOpaque(false);
-
-        PanelEnnemi.setOpaque(false);
-
-        VieHeroText.setText("jTextField2");
-
-        NomHeroText.setText("jTextField1");
-
-        javax.swing.GroupLayout PanelEnnemiLayout = new javax.swing.GroupLayout(PanelEnnemi);
-        PanelEnnemi.setLayout(PanelEnnemiLayout);
-        PanelEnnemiLayout.setHorizontalGroup(
-            PanelEnnemiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelEnnemiLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(PanelEnnemiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelEnnemiLayout.createSequentialGroup()
-                        .addComponent(VieHeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(NomHeroText))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEnnemiLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(VieHeroBar, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        PanelEnnemiLayout.setVerticalGroup(
-            PanelEnnemiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEnnemiLayout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(PanelEnnemiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(VieHeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NomHeroText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(VieHeroBar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7))
-        );
-
-        DessinHero.setBackground(new java.awt.Color(28, 17, 23));
-        DessinHero.setOpaque(false);
-
-        javax.swing.GroupLayout DessinHeroLayout = new javax.swing.GroupLayout(DessinHero);
-        DessinHero.setLayout(DessinHeroLayout);
-        DessinHeroLayout.setHorizontalGroup(
-            DessinHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
-        );
-        DessinHeroLayout.setVerticalGroup(
-            DessinHeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 188, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(DessinHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(PanelEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(PanelEnnemi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DessinHero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0)));
 
@@ -329,7 +173,7 @@ private Personnage Ennemi;
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(PanelOptionsHero, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,31 +189,30 @@ private Personnage Ennemi;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(139, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(combatGraphiqueContainerPersonnage1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(combatGraphiqueContainerPersonnage2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(62, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                        .addComponent(combatGraphiqueContainerPersonnage2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(combatGraphiqueContainerPersonnage1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -407,7 +250,7 @@ private Personnage Ennemi;
         boolean needUpdate = false;
 
         if (obj instanceof Equipement) {
-            if (this.aventure.getJoueur().getMain()==obj) {
+            if (this.aventure.getJoueur().getMain()==obj || this.aventure.getJoueur().getArmure()==obj) {
                 needUpdate = this.aventure.getJoueur().desequip(selected);
             } else {
                 needUpdate = this.aventure.getJoueur().equip(selected);
@@ -428,22 +271,12 @@ private Personnage Ennemi;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AttaqueBoutton;
-    private canvas.Canvas DessinEnnemi;
-    private canvas.Canvas DessinHero;
     private javax.swing.JButton FuiteBoutton;
     private javax.swing.JButton InventaireBoutton;
-    private javax.swing.JTextField NomEnnemiText;
-    private javax.swing.JTextField NomHeroText;
-    private javax.swing.JPanel PanelEnnemi;
-    private javax.swing.JPanel PanelHero;
     private javax.swing.JPanel PanelOptionsHero;
-    private javax.swing.JProgressBar VieEnnemiBar;
-    private javax.swing.JTextField VieEnnemiText;
-    private javax.swing.JProgressBar VieHeroBar;
-    private javax.swing.JTextField VieHeroText;
+    private canvas.Combat.CombatGraphiqueContainerPersonnage combatGraphiqueContainerPersonnage1;
+    private canvas.Combat.CombatGraphiqueContainerPersonnage combatGraphiqueContainerPersonnage2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane19;
@@ -456,30 +289,37 @@ private Personnage Ennemi;
     // End of variables declaration//GEN-END:variables
 
     private void miseAJourComposants() {
-        VieHeroBar.setMaximum((int)this.Moi.getAjoute("pv max"));
-        VieHeroBar.setValue((int)this.Moi.getAjoute("pv"));
-        VieHeroText.setText(this.Moi.getAjoute("pv") + "/" + this.Moi.getAjoute("pv max"));
-        NomHeroText.setText(this.Moi.getNom());
+        //VieHeroBar.setMaximum((int)this.Moi.getAjoute("pv max"));
+        //VieHeroBar.setValue((int)this.Moi.getAjoute("pv"));
+        //VieHeroText.setText(this.Moi.getAjoute("pv") + "/" + this.Moi.getAjoute("pv max"));
+        //NomHeroText.setText(this.Moi.getNom());
         
-        VieEnnemiBar.setMaximum((int)this.Ennemi.getAjoute("pv max"));
-        VieEnnemiBar.setValue((int)this.Ennemi.getAjoute("pv"));
-        VieEnnemiText.setText(this.Ennemi.getAjoute("pv") + "/" + this.Ennemi.getAjoute("pv max"));
-        NomEnnemiText.setText(this.Ennemi.getNom());
+        //VieEnnemiBar.setMaximum((int)this.Ennemi.getAjoute("pv max"));
+        //VieEnnemiBar.setValue((int)this.Ennemi.getAjoute("pv"));
+        //VieEnnemiText.setText(this.Ennemi.getAjoute("pv") + "/" + this.Ennemi.getAjoute("pv max"));
+        //NomEnnemiText.setText(this.Ennemi.getNom());
         //DessinHero.(s);
+        
+        combatGraphiqueContainerPersonnage1.miseAJour();
+        combatGraphiqueContainerPersonnage2.miseAJour();
         
         mettreAJourListeInventaire();
         mettreAJourListeEffet();
     }
 
     public void mettreAJourCanvas() {
-        DessinEnnemi.repaint();
-        DessinHero.repaint();
+        //DessinEnnemi.repaint();
+        //DessinHero.repaint();
+        combatGraphiqueContainerPersonnage1.redessiner();
+        combatGraphiqueContainerPersonnage2.redessiner();
     }
 
     public void lancerCombat(Personnage perso1, Personnage perso2) {
         System.out.println(perso1+ " versus " + perso2);
         this.Moi = perso1;
         this.Ennemi = perso2;
+        combatGraphiqueContainerPersonnage1.bind(perso1);
+        combatGraphiqueContainerPersonnage2.bind(perso2);
         miseAJourComposants();
     }
     
