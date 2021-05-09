@@ -554,6 +554,17 @@ public class Aventure extends Element {
                                 }
                             }
                         });
+                        trape.onCollide(new SimpleListener("onCollide") {
+                            @Override
+                            public void onEvent(Object sender, SimpleEvent event) {
+                                CollisionEvent e = (CollisionEvent) event;
+                                if (e.getCollider1()==joueur || e.getCollider2()==joueur) {
+                                    if(trape.getAnimations().containsValue("Open")){
+                                        //nextLevel
+                                    }
+                                }
+                            }                   
+                        });
                         trape.setParent(l);
                         l.addDrawable(trape);
                     }else{
