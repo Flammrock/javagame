@@ -71,6 +71,7 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     boolean isFighting;
     
+    boolean boss;
 
     public Personnage(String nom, String description) {
         this.nom = nom;
@@ -98,7 +99,7 @@ public class Personnage extends Element implements Generable, Collisionable {
         
         this.radius_detection = 500;
         this.radius_start_fight = 100;
-        
+        this.boss = false;
         this.isFighting = false;
     }
     
@@ -120,7 +121,8 @@ public class Personnage extends Element implements Generable, Collisionable {
             Random random = new Random();
             int LigneRdm = random.nextInt(nbrLigne);
             scan.nextLine();
-            for(int i = 0;i<LigneRdm-1;i++){
+            scan.nextLine();
+            for(int i = 0;i<LigneRdm-2;i++){
                 scan.nextLine();
             }
             String phrase = scan.nextLine();
@@ -160,6 +162,14 @@ public class Personnage extends Element implements Generable, Collisionable {
     
     public boolean isDead() {
         return !this.alive;
+    }
+
+    public void setBoss(boolean boss) {
+        this.boss = boss;
+    }
+
+    public boolean isBoss() {
+        return boss;
     }
     
     public String getNom() {
