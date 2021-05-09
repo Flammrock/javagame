@@ -6,6 +6,7 @@
 package canvas.Combat;
 
 import canvas.SpriteSheet;
+import java.awt.Color;
 import javax.swing.DefaultListModel;
 import modele.element.Aventure;
 import modele.element.Effet;
@@ -99,7 +100,7 @@ private Personnage Ennemi;
 
         AttaqueBoutton.setBackground(new java.awt.Color(255, 0, 0));
         AttaqueBoutton.setFont(new java.awt.Font("Sitka Display", 0, 24)); // NOI18N
-        AttaqueBoutton.setText("Attaque");
+        AttaqueBoutton.setText("Attaquer");
         AttaqueBoutton.setFocusPainted(false);
         AttaqueBoutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,6 +325,13 @@ private Personnage Ennemi;
         this.Ennemi = perso2;
         combatGraphiqueContainerPersonnage1.bind(perso1,"Idle-Right");
         combatGraphiqueContainerPersonnage2.bind(perso2,"Idle-Left");
+        if (perso2.isDead()) {
+            AttaqueBoutton.setText("Dépecer");
+            AttaqueBoutton.setBackground(new Color(0,204,0));
+        } else {
+            AttaqueBoutton.setText("Attaquer");
+            AttaqueBoutton.setBackground(new Color(255,0,0));
+        }
         miseAJourComposants();
     }
     
