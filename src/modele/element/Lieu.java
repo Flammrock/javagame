@@ -90,6 +90,10 @@ public class Lieu extends Element implements Generable, Collisionable {
     public boolean isSortie() {
         return this.sortie;
     }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
     
     public void setSortie(boolean s) {
         this.sortie = s;
