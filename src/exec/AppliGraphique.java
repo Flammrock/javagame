@@ -259,6 +259,11 @@ public class AppliGraphique extends javax.swing.JFrame {
     }
     
     
+    public void recommencer() {
+        
+    }
+    
+    
     public String onActionJoueur(String action,Personnage ennemie) {
         String logs = "";
         if(action.equals("attaque")){
