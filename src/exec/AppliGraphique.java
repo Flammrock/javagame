@@ -219,6 +219,15 @@ public class AppliGraphique extends javax.swing.JFrame {
         layeredpane.revalidate();
     }
     
+    public void detruireObjet(int index) {
+        Personnage p = this.aventure.getJoueur();
+        if (p==null) return;
+        p.detruire(index);
+        invpanel.prepare(p,-1);
+        layeredpane.revalidate();
+    }
+    
+    
     
     public String onActionJoueur(String action,Personnage ennemie) {
         String logs = "";

@@ -88,7 +88,7 @@ public class inventoryPanel extends javax.swing.JPanel {
             if (m>=0) m++;
         }
         
-        Object os[][] = new Object[(int)Math.ceil(inv.size()/4.0)][4];
+        Object os[][] = new Object[(int)Math.ceil(s/4.0)][4];
         int i = 0;
         int j = 0;
         int k = 0;

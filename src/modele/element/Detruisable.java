@@ -20,7 +20,7 @@ public interface Detruisable {
         double p = this.getPoids()+1;
         ArrayList<Morceau> m = new ArrayList<>();
         while (p > 0) {
-            double r = Math.random() * p;
+            double r = Math.random() * (this.getPoids()+1);
             p-=r;
             if (r*2 > 15) {
                 m.add(new Morceau(Rarity.LEGENDARY));
