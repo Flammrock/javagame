@@ -39,6 +39,7 @@ public class CollisionBox implements Drawable {
     
     boolean isdraw;
     boolean active;
+    boolean ghost;
     
     /**
      * Constuire une boite de collision à l'aide de coordonnées relatives
@@ -65,6 +66,8 @@ public class CollisionBox implements Drawable {
         this.active = true;
         
         this.isdraw = false;
+        
+        this.ghost = false;
     }
     
     
@@ -260,6 +263,14 @@ public class CollisionBox implements Drawable {
         } catch (IOException | ClassNotFoundException e) {
             return null;
         }
+    }
+    
+    public void setGhost(boolean f) {
+        this.ghost = f;
+    }
+    
+    public boolean isGhost() {
+        return this.ghost;
     }
     
     

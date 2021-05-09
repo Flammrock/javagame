@@ -143,7 +143,7 @@ public interface Collisionable extends Drawable {
                     this.collide(other);
                     other.collide(this);
 
-                    return true;
+                    if (b1.isGhost() || b2.isGhost()) return true;
 
                 }
 

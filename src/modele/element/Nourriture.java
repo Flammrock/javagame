@@ -34,7 +34,7 @@ public class Nourriture extends Objet {
     @Override
     public Drawable copie() {
         Nourriture c = new Nourriture(nom,description,poids);
-        if (sprite!=null) c.setSprite(sprite);
+        c.setSprite(sprite);
         c.setIcon(this.icon);
         if (this.effet!=null) c.setEffet(this.effet.copie());
         c.setRadiusRamassable(this.radiusramassable);

@@ -280,6 +280,9 @@ public class Aventure extends Element {
         Sprite sprite_armureBadass = new Sprite("/items/Item__57.png",0,0,24,24);
         sprite_armureBadass.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
         
+        Sprite sprite_potion = new Sprite("/items/Item__31.png",0,0,24,24);
+        sprite_potion.addCollisionBox(new CollisionBox(0, 0, 24, 24,Settings.DEBUG,false));
+        
         // tout les objets on les met ici :
         
         /****************** BIBLIOTHEQUE OBJET ******************/
@@ -313,6 +316,8 @@ public class Aventure extends Element {
         
         Nourriture potion = new Nourriture("Potion de regen","regen la vie",1);
         potion.setEffet(popo);
+        potion.setSprite(sprite_potion);
+        potion.setIcon(sprite_potion.getFileName());
         
         Effet effetBanane = new Effet("","",false,true,0);
         effetBanane.setProperty(PropertyList.PV, 15);
