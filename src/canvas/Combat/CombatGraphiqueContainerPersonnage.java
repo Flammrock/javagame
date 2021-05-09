@@ -31,6 +31,7 @@ public class CombatGraphiqueContainerPersonnage extends javax.swing.JPanel {
         tmp.removeAllListeners();
         tmp.getSprite().setAnimation(animation);
         this.c.setTarget(tmp);
+        this.c.setScale(2);
         canvas1.setCamera(this.c);
         canvas1.enleverAllItem();
         canvas1.ajouterItem(tmp);
