@@ -28,7 +28,11 @@ public class CombatGraphiquePersonnage extends javax.swing.JPanel {
         if (p == null) return;
         int v = (int)((p.getPV()/p.getMaxPV())*100);
         jProgressBar1.setValue(v);
+        jProgressBar1.setString(p.getPV()+"/"+p.getMaxPV());
         jLabel1.setText(p.getNom());
+        if (p.isDead()) {
+            jLabel1.setText(p.getNom()+" (Cadavre)");
+        }
         if (v < 20) {
             jProgressBar1.setForeground(new Color(204,0,0));
         } else if (v < 50) {
@@ -59,6 +63,7 @@ public class CombatGraphiquePersonnage extends javax.swing.JPanel {
 
         jProgressBar1.setForeground(new java.awt.Color(0, 204, 0));
         jProgressBar1.setValue(100);
+        jProgressBar1.setStringPainted(true);
 
         jLabel2.setFont(new java.awt.Font("Sitka Display", 0, 14)); // NOI18N
         jLabel2.setText("Lvl.1");

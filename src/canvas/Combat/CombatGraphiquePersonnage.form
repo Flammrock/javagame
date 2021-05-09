@@ -67,6 +67,7 @@
           <Color blue="0" green="cc" red="0" type="rgb"/>
         </Property>
         <Property name="value" type="int" value="100"/>
+        <Property name="stringPainted" type="boolean" value="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

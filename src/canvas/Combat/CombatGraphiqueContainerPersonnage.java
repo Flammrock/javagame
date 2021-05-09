@@ -29,7 +29,11 @@ public class CombatGraphiqueContainerPersonnage extends javax.swing.JPanel {
         this.p = p;
         Personnage tmp = (Personnage)p.copie();
         tmp.removeAllListeners();
-        tmp.getSprite().setAnimation(animation);
+        if (p.isDead()) {
+            tmp.getSprite().setAnimation("Death");
+        } else {
+            tmp.getSprite().setAnimation(animation);
+        }
         this.c.setTarget(tmp);
         this.c.setScale(2);
         canvas1.setCamera(this.c);
