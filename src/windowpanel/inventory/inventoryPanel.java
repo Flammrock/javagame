@@ -34,6 +34,8 @@ public class inventoryPanel extends javax.swing.JPanel {
         
         initComponents();
         
+        this.inventoryDetails2.bindApp(app);
+        
         this.current = new Arme("","",0);
         
         this.selected = -1;
@@ -64,7 +66,11 @@ public class inventoryPanel extends javax.swing.JPanel {
     
     public void prepare(Personnage p, int selected) {
         
+        jLabel2.setText("Poids 0/0");
+        
         if (p == null) return;
+        
+        jLabel2.setText("Poids "+p.getPoidsInventaire()+"/"+p.getPoidsMaxInventaire());
         
         int selec = selected;
         this.temp_p = p;
@@ -135,12 +141,13 @@ public class inventoryPanel extends javax.swing.JPanel {
             }
 
         };
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         inventoryCategory1 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory4 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory2 = new windowpanel.inventory.inventoryCategory();
         inventoryCategory3 = new windowpanel.inventory.inventoryCategory();
-        inventoryDetails2 = new windowpanel.inventory.inventoryDetails(this.app);
+        inventoryDetails2 = new windowpanel.inventory.inventoryDetails();
 
         setBackground(new java.awt.Color(255, 0, 0));
         setOpaque(false);
@@ -220,18 +227,24 @@ public class inventoryPanel extends javax.swing.JPanel {
         jTable2.setRowSelectionAllowed(false);
         jTable2.setCellSelectionEnabled(true);
 
+        jLabel2.setFont(new java.awt.Font("Sitka Display", 0, 24)); // NOI18N
+        jLabel2.setText("Poids 0/0");
+
         javax.swing.GroupLayout inventoryPanelList1Layout = new javax.swing.GroupLayout(inventoryPanelList1);
         inventoryPanelList1.setLayout(inventoryPanelList1Layout);
         inventoryPanelList1Layout.setHorizontalGroup(
             inventoryPanelList1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
             .addGroup(inventoryPanelList1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(inventoryPanelList1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventoryPanelList1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2))
+                .addGroup(inventoryPanelList1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(inventoryPanelList1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2))
+                    .addGroup(inventoryPanelList1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         inventoryPanelList1Layout.setVerticalGroup(
@@ -242,7 +255,9 @@ public class inventoryPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(inventoryPanelList1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addContainerGap())
         );
 
@@ -354,7 +369,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(inventoryCategory1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inventoryCategory4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,7 +377,7 @@ public class inventoryPanel extends javax.swing.JPanel {
                 .addComponent(inventoryCategory2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inventoryCategory3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -520,6 +535,7 @@ public class inventoryPanel extends javax.swing.JPanel {
     private windowpanel.inventory.inventoryPanelList inventoryPanelList1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;

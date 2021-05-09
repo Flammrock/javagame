@@ -428,6 +428,10 @@ public class Personnage extends Element implements Generable, Collisionable {
         return poidsInventaire;
     }
     
+    public double getPoidsMaxInventaire() {
+        return this.getAjoute(PropertyList.POIDSMAX);
+    }
+    
     public boolean ajouterObjet(Objet o){
         if(o.getPoids()+ this.getPoidsInventaire()<=(this.getAjoute(PropertyList.POIDSMAX) + this.getEffet(PropertyList.POIDS))){
             return this.inventaire.add(o);

@@ -31,10 +31,14 @@ public class inventoryDetails extends javax.swing.JPanel {
     /**
      * Creates new form inventoryDetails
      */
-    public inventoryDetails(AppliGraphique app) {
-        this.app = app;
+    public inventoryDetails() {
+        this.app = null;
         initComponents();
         this.unset();
+    }
+    
+    public void bindApp(AppliGraphique app) {
+        this.app = app;
     }
     
     public void unset() {
