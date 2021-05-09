@@ -27,14 +27,23 @@ public class inventoryDetails extends javax.swing.JPanel {
         initComponents();
     }
     
+    public void unset() {
+        jLabel1.setText("Nom de l'Objet");
+        jLabel3.setIcon(null);
+        jTextArea1.setText("");
+        jLabel2.setText("(Description de l'Objet)");
+    }
     
     public void set(Objet o) {
+        this.unset();
         jLabel1.setText(o.getNom());
         if (o.getDescription().trim().length() > 0) jLabel2.setText("("+o.getDescription()+")");
         else jLabel2.setText("");
-        jLabel3.setIcon(null);
         if (o.getIcon()!=null) {
             jLabel3.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource(o.getIcon())).getImage().getScaledInstance(50,50, Image.SCALE_SMOOTH)));
+        }
+        if (o.getEffet()!=null) {
+            jTextArea1.setText(o.getEffet().toString());
         }
     }
 

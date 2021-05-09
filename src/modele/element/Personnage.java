@@ -305,11 +305,11 @@ public class Personnage extends Element implements Generable, Collisionable {
      * @return retourne la valeur de combat
      */
     public double valeurCombat(){
-        double bonusArmure;
+        double bonusArmure = 0;
         if (this.getArmure()==null){
             bonusArmure = 0;
-        }else{
-            bonusArmure = this.getArmure().getModificateurAgilite();
+        }else if (this.getArmure().getEffet()!=null){
+            bonusArmure = this.getArmure().getEffet().getAjoute(PropertyList.AGILITE);
         }
         double bonusEffet = this.getEffet(PropertyList.AGILITE);
         double valeurCombat = this.getAjoute(PropertyList.AGILITE)+bonusArmure+bonusEffet;
@@ -358,11 +358,11 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
 
     private double caluleDegatsBrut() {
-        double bonusArme;
+        double bonusArme = 0;
         if (this.getMain()==null){
             bonusArme = 0;
-        }else{
-            bonusArme = this.getMain().getModificateurForce();
+        }else if (this.getMain().getEffet()!=null){
+            bonusArme = this.getMain().getEffet().getAjoute(PropertyList.FORCE);
         }
         double bonusForce = this.getAjoute(PropertyList.FORCE);
         double bonusEffet = this.getEffet(PropertyList.FORCE);
@@ -375,11 +375,11 @@ public class Personnage extends Element implements Generable, Collisionable {
      * @return l'armure totale
      */
     public double getArmureTotal() {
-        double bonusArmure;
+        double bonusArmure = 0;
         if (this.getArmure()==null){
             bonusArmure = 0.0;
-        }else{
-            bonusArmure = this.getArmure().getModificateurProtection();
+        }else if (this.getArmure().getEffet()!=null){
+            bonusArmure = this.getArmure().getEffet().getAjoute(PropertyList.ARMURE);
         }
         double bonusEffet = this.getEffet(PropertyList.ARMURE);
         double armureTotal = bonusArmure + bonusEffet;

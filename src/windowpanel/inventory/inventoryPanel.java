@@ -31,7 +31,7 @@ public class inventoryPanel extends javax.swing.JPanel {
     public inventoryPanel(AppliGraphique app) {
         initComponents();
         this.app = app;
-        this.current = new Arme("","",0,0,0);
+        this.current = new Arme("","",0);
         
         this.temp_p = null;
         
@@ -451,7 +451,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.inventoryCategory4.unselect();
         this.inventoryCategory3.unselect();
         this.inventoryCategory2.unselect();
-        this.current = new Arme("","",0,0,0);
+        this.current = new Arme("","",0);
         this.prepare(this.temp_p);
     }//GEN-LAST:event_inventoryCategory1MouseClicked
 
@@ -461,7 +461,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.inventoryCategory4.select();
         this.inventoryCategory3.unselect();
         this.inventoryCategory2.unselect();
-        this.current = new Armure("","",0,0,0);
+        this.current = new Armure("","",0);
         this.prepare(this.temp_p);
     }//GEN-LAST:event_inventoryCategory4MouseClicked
 
@@ -471,7 +471,7 @@ public class inventoryPanel extends javax.swing.JPanel {
         this.inventoryCategory4.unselect();
         this.inventoryCategory3.unselect();
         this.inventoryCategory2.select();
-        this.current = new Nourriture("","",0,null);
+        this.current = new Nourriture("","",0);
         this.prepare(this.temp_p);
     }//GEN-LAST:event_inventoryCategory2MouseClicked
 

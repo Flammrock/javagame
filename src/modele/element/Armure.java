@@ -5,6 +5,8 @@
  */
 package modele.element;
 
+import canvas.Drawable;
+
 /**
  *
  * @author User
@@ -13,9 +15,19 @@ public class Armure extends Equipement {
     
     
     
-    public Armure(String nom, String description, double poids, double agilite, double protection) {
+    public Armure(String nom, String description, double poids) {
         super(nom, description, poids);
-        this.bonus_agilite = agilite;
-        this.bonus_protection = protection;
+    }
+    
+    
+    @Override
+    public Drawable copie() {
+        Armure c = new Armure(nom, description, poids);
+        c.setSprite(sprite);
+        c.setIcon(this.icon);
+        c.setEffet(this.effet.copie());
+        c.setRadiusRamassable(this.radiusramassable);
+        c.setZIndex(this.zindex);
+        return c;
     }
 }

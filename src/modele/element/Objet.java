@@ -2,6 +2,7 @@
 package modele.element;
 
 import canvas.Canvas;
+import canvas.Drawable;
 import canvas.Sprite;
 import canvas.collision.CollisionBox;
 import canvas.collision.CollisionEvent;
@@ -28,6 +29,8 @@ public abstract class Objet extends Element implements Ramassable, Generable {
     
     int radiusramassable;
     
+    Effet effet;
+    
     public Objet() {
         this.nom = "";
         this.probaDeGeneration = 1.0;
@@ -38,6 +41,7 @@ public abstract class Objet extends Element implements Ramassable, Generable {
         this.sprite = null;
         this.dispatcher = new Dispatcher();
         this.radiusramassable = 50;
+        this.effet = null;
     }
     
     public Objet(String nom, String description, double poids) {
@@ -51,6 +55,15 @@ public abstract class Objet extends Element implements Ramassable, Generable {
         this.sprite = null;
         this.dispatcher = new Dispatcher();
         this.radiusramassable = 50;
+        this.effet = null;
+    }
+    
+    public void setEffet(Effet effet) {
+        this.effet = effet;
+    }
+    
+    public Effet getEffet() {
+        return this.effet;
     }
     
     public void setSprite(Sprite s) {
@@ -271,4 +284,5 @@ public abstract class Objet extends Element implements Ramassable, Generable {
         int r = this.getRadiusRamassable();
         return dx*dx + dy*dy <= r*r;
     }
+    
 }

@@ -24,17 +24,18 @@ import map.GenerateListener;
  */
 public class Arme extends Equipement {
     
-    public Arme(String nom, String description, double poids, double agilite, double force) {
+    public Arme(String nom, String description, double poids) {
         super(nom,description,poids);
-        this.bonus_agilite = agilite;
-        this.bonus_force = force;
-    }
-    
-    @Override
-    public Drawable copie() {
-        Arme c = new Arme(nom, description, poids, bonus_agilite, bonus_force);
-        c.setSprite(sprite);
-        return c;
     }
 
+    @Override
+    public Drawable copie() {
+        Arme c = new Arme(nom, description, poids);
+        c.setSprite(sprite);
+        c.setIcon(this.icon);
+        c.setEffet(this.effet.copie());
+        c.setRadiusRamassable(this.radiusramassable);
+        c.setZIndex(this.zindex);
+        return c;
+    }
 }

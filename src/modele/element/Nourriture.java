@@ -13,11 +13,9 @@ import canvas.Drawable;
  */
 public class Nourriture extends Objet {
     
-    private Effet effetConsommable;
-    
-    public Nourriture(String nom, String description, double poids ,Effet effetConsommable) {
+
+    public Nourriture(String nom, String description, double poids) {
         super(nom,description,poids);
-        this.effetConsommable = effetConsommable;
     }
     
 
@@ -27,7 +25,7 @@ public class Nourriture extends Objet {
     }
     
     public boolean onUtiliser(Personnage p) {
-        p.ajouter(this.effetConsommable);
+        p.ajouter(this.effet);
         return true;
     }
 

@@ -22,15 +22,15 @@ public class Morceau extends Objet {
             break;
             case(Rarity.RARE):
                 this.nom = "Morceau rare";
-                this.description = "Utile pour la construction avancé";
+                this.description = "Utile pour la construction avancée";
             break;
             case(Rarity.EPIC):
                 this.nom = "Morceau epic";
-                this.description = "Utile pour la construction avancé";
+                this.description = "Utile pour la construction avancée";
             break;
             case(Rarity.LEGENDARY):
                 this.nom = "Morceau legendaire";
-                this.description = "Utile pour la construction avancé";
+                this.description = "Utile pour la construction avancée";
             break;
         }
         this.level = level;
@@ -43,11 +43,12 @@ public class Morceau extends Objet {
 
     @Override
     public Drawable copie() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getZIndex() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Morceau c = new Morceau(this.level);
+        c.setSprite(sprite);
+        c.setIcon(this.icon);
+        c.setEffet(this.effet.copie());
+        c.setRadiusRamassable(this.radiusramassable);
+        c.setZIndex(this.zindex);
+        return c;
     }
 }

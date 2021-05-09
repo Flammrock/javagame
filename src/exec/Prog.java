@@ -189,13 +189,16 @@ public class Prog {
         // tout les objets on les met ici :
         
         /****************** BIBLIOTHEQUE OBJET ******************/
-        Arme epeeCasser = new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1,0,0);
+        Arme epeeCasser = new Arme("épée cassé","une épée qui jadis tranchas des têtes et inspirait la terreur",1);
         epeeCasser.setSprite(sprite_epeecasser);
         epeeCasser.setIcon(sprite_epeecasser.getFileName());
         
-        Arme epeeDeBase = new Arme("épée de base","une épée simple et basique",1,0,3);
-        epeeCasser.setSprite(sprite_epee);
+        Effet effetEpeeDeBase = new Effet("attaque","attaque boosté",true,false,0);
+        effetEpeeDeBase.setProperty(PropertyList.FORCE, 5);
+        Arme epeeDeBase = new Arme("épée de base","une épée simple et basique",1);
+        epeeDeBase.setSprite(sprite_epee);
         epeeDeBase.setIcon(sprite_epee.getFileName());
+        epeeDeBase.setEffet(effetEpeeDeBase);
         
         Effet effetPomme = new Effet("","",false,true,0);
         effetPomme.setProperty(PropertyList.PV,10);
@@ -203,9 +206,10 @@ public class Prog {
         Effet regeneration = new Effet("régeneration","augmente la vie dans le temmps",true,false,0);
         regeneration.setProperty(PropertyList.PV,3);
         
-        Nourriture pomme = new Nourriture("Pomme","Une bonne petite pomme",2.0,effetPomme);
+        Nourriture pomme = new Nourriture("Pomme","Une bonne petite pomme",2.0);
         pomme.setSprite(sprite_pomme);
         pomme.setIcon(sprite_pomme.getFileName());
+        pomme.setEffet(effetPomme);
         
         Effet hommeDeFer = new Effet("Homme de fer","augmente la force",false,false,3);
         hommeDeFer.setProperty(PropertyList.FORCE, 5);
@@ -213,18 +217,25 @@ public class Prog {
         Effet popo = new Effet("régeneration","augmente la vie dans le temmps",false,false,3);
         popo.setProperty(PropertyList.PV, 3);
         
-        Nourriture potion = new Nourriture("Potion de regen","regen la vie",1,popo);
+        Nourriture potion = new Nourriture("Potion de regen","regen la vie",1);
+        potion.setEffet(popo);
         
         Effet effetBanane = new Effet("","",false,true,0);
         effetBanane.setProperty(PropertyList.PV, 15);
         
-        Nourriture banane = new Nourriture("banane","Une grosse banane",2.0,effetBanane);
+        Nourriture banane = new Nourriture("banane","Une grosse banane",2.0);
         banane.setSprite(sprite_banane);
         banane.setIcon(sprite_banane.getFileName());
+        banane.setEffet(effetBanane);
         
-        Armure armureBadass = new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15,0,10);
+        
+        Effet effetArmureBadass = new Effet("résistance","résistance contre les attaques",true,false,0);
+        effetArmureBadass.setProperty(PropertyList.ARMURE, 10);
+        popo.setProperty(PropertyList.PV, 3);
+        Armure armureBadass = new Armure("Armure de badass","Une armure crée par les geants pour encaiser des coups",15);
         armureBadass.setSprite(sprite_armureBadass);
         armureBadass.setIcon(sprite_armureBadass.getFileName());
+        armureBadass.setEffet(effetArmureBadass);
         
         /********************************************************/
         

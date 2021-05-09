@@ -13,16 +13,10 @@ import canvas.Drawable;
  */
 public class Equipement extends Objet {
     
-    double bonus_agilite;
-    double bonus_protection;
-    double bonus_force;
     double vie_Objet;
     
     public Equipement(String nom, String description, double poids) {
         super(nom,description,poids);
-        this.bonus_force = 0.0;
-        this.bonus_protection = 0.0;
-        this.bonus_agilite = 0.0;
         this.vie_Objet = 1;
     }
 
@@ -30,25 +24,7 @@ public class Equipement extends Objet {
         this.vie_Objet = vie_Objet;
     }
     
-    public void setModificateurAgilite(double agilite) {
-        this.bonus_agilite = agilite;
-    }
-    public void setModificateurForce(double force) {
-        this.bonus_force = force;
-    }
-    public void setModificateurProtection(double protection) {
-        this.bonus_protection = protection;
-    }
-   
-    public double getModificateurAgilite() {
-        return this.bonus_agilite;
-    }
-    public double getModificateurForce() {
-        return this.bonus_force;
-    }
-    public double getModificateurProtection() {
-        return this.bonus_protection;
-    }
+    
 
     public double getVie_Objet() {
         return vie_Objet;
@@ -67,11 +43,6 @@ public class Equipement extends Objet {
     @Override
     public Drawable copie() {
         return null;
-    }
-    
-    @Override
-    public int getZIndex() {
-        return Integer.MIN_VALUE; // pour l'instant
     }
 
 }
