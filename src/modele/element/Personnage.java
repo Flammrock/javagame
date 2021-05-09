@@ -827,6 +827,10 @@ public class Personnage extends Element implements Generable, Collisionable {
         this.allowCopyListener = true;
     }
     
+    public void denyCopyListener() {
+        this.allowCopyListener = false;
+    }
+    
     public void removeAllListeners() {
         this.dispatcher.clear();
     }
