@@ -56,7 +56,17 @@ public class Aventure extends Element {
         
         // on créé le perso ici
         this.joueur = joueur;
-        
+        joueur.addListener(new SimpleListener("gameOver") {
+            @Override
+            public void onEvent(Object sender, SimpleEvent e) {
+                if(sender instanceof Personnage){
+                    Personnage p = (Personnage)sender;
+                    if(p == getJoueur()){
+                        pausedraw = true;
+                    }
+                }
+            }
+        });
         
         // on créé le donjon ici
         this.donjon = new Donjon();
