@@ -150,9 +150,9 @@ public class Prog {
         
         // on créé une aventure
         Aventure a = new Aventure(joueur);
-
-        
-        a.generateNiveau(7);
+        a.generateNiveau(1);
+        a.pause();
+        //a.generateNiveau(7);
         
         AppliGraphique g = new AppliGraphique(a);
         g.setVisible(true);

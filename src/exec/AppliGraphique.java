@@ -66,6 +66,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         });*/
         
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        this.setTitle("ULTRA BASIC SIMPLE GAME EVEN A NOOB PROGRAMER CAN MAKE | V1.0.6654.1874115");
         
         
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
@@ -220,7 +221,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         //layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
         layeredpane.add(uipanel, JLayeredPane.PALETTE_LAYER);
         
-        //layeredpane.add(titlepanel, Integer.valueOf(20000));
+        layeredpane.add(titlepanel, Integer.valueOf(20000));
         
         setContentPane(layeredpane);
         
@@ -303,6 +304,14 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     public void abandonner() {
         
+    }
+    
+    public void startGame() {
+        this.aventure.generateNiveau(7);
+        this.hideInventory();
+        this.hideGameOver();
+        combatGraphique22.setVisible(false);
+        this.hideTitleScreen();
     }
     
     public String onActionJoueur(String action,Personnage ennemie) {

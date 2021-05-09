@@ -76,6 +76,10 @@ public class Aventure extends Element {
         
     }
     
+    public void pause() {
+        this.pausedraw = true;
+    }
+    
     public boolean isPauseDraw() {
         return this.pausedraw;
     }
