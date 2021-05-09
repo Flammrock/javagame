@@ -49,6 +49,10 @@ public class inventoryDetails extends javax.swing.JPanel {
         this.index = -1;
         this.pindex = -1;
         jButton3.setText("Utiliser");
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
     }
     
     public void set(Personnage p, Objet o, int index, int pindex) {
@@ -73,6 +77,12 @@ public class inventoryDetails extends javax.swing.JPanel {
         }
         if (o instanceof Nourriture) {
             jButton3.setText("Manger");
+        }
+        if (!o.isDetruisable()) {
+            jButton2.setEnabled(false);
+        }
+        if (!o.isReparable()) {
+            jButton4.setEnabled(false);
         }
     }
 

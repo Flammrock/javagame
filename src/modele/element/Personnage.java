@@ -525,12 +525,13 @@ public class Personnage extends Element implements Generable, Collisionable {
     }
     
 
-    public void ajouter(Element e) {
+    public boolean ajouter(Element e) {
         if (e instanceof Objet) {
-            this.inventaire.add((Objet)e);
+            return this.ajouterObjet((Objet)e);
         } else if (e instanceof Effet) {
             this.effetCourant.add((Effet)e);
         }
+        return true;
     }
 
     @Override
