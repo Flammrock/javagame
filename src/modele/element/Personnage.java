@@ -740,6 +740,31 @@ public class Personnage extends Element implements Generable, Collisionable {
         
     }
     
+    public ArrayList<Property> getProperties() {
+        return this.listproperties;
+    }
+    
+    public ArrayList<Effet> getEffets() {
+        return this.effetCourant;
+    }
+    
+    public void setState(Personnage j) {
+        this.listproperties.clear();
+        for (Property p : j.getProperties()) {
+            this.setProperty(p.getNom(), p.getValeur());
+        }
+        this.inventaire.clear();
+        for (Objet o : this.inventaire) {
+            this.ajouter(o);
+        }
+        this.main = j.getMain();
+        this.armure = j.getArmure();
+        this.setPieceActuel(j.getPieceActuel());
+        this.effetCourant.clear();
+        for (Effet e : j.getEffets()) {
+            this.ajoutEffet(e);
+        }
+    }
     
     @Override
     public Drawable copie() {
