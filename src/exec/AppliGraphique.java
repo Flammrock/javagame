@@ -260,7 +260,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     
     public void recommencer() {
-        
+        this.aventure.recommencerNiveau();
     }
     
     public void gameover() {
