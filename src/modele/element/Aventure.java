@@ -537,19 +537,20 @@ public class Aventure extends Element {
                         m.setNom("Boss");
                         m.setBoss(true);
                         
+                        //on configure la salle
                         l.setNom("Salle du Boss");
-                        SpriteSheet trape = new SpriteSheet("/trape.png",0,0,188,227,75*2,75*2);
+                        SpriteSheet trape = new SpriteSheet("/trape.png",0,0,188,227,50,50);
                         trape.loadImage();
                         trape.ajouterAnimation(new Animation("Close",new int[] {0}));
                         trape.ajouterAnimation(new Animation("Open",new int[] {1}));
                         trape.setAnimation("Close");
-                        trape.addCollisionBox(new CollisionBox(75,70,38,18,Settings.DEBUG));
-                        
+                        trape.addCollisionBox(new CollisionBox(50,50,38,18,Settings.DEBUG));
+                        trape.setZIndex(Integer.MIN_VALUE);
+                        //on ajoute les eventListner
                         m.addListener(new SimpleListener("gameOver") {
                             @Override
                             public void onEvent(Object sender, SimpleEvent e) {
                                 if(sender instanceof Personnage){
-                                    Personnage p = (Personnage)sender;
                                     trape.setAnimation("Open");
                                 }
                             }
@@ -559,9 +560,7 @@ public class Aventure extends Element {
                             public void onEvent(Object sender, SimpleEvent event) {
                                 CollisionEvent e = (CollisionEvent) event;
                                 if (e.getCollider1()==joueur || e.getCollider2()==joueur) {
-                                    if(trape.getAnimations().containsValue("Open")){
-                                        //nextLevel
-                                    }
+                                    System.out.println(trape.getAnimationCourrante());
                                 }
                             }                   
                         });
