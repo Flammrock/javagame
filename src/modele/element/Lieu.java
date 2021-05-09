@@ -129,8 +129,14 @@ public class Lieu extends Element implements Generable, Collisionable {
     }
     
     
+    public int getMiddleX() {
+        return x+width/2;
+    }
     
-    
+    public int getMiddleY() {
+        int dh = this.sprite_wall == null ? 0 : this.sprite_wall.getHeight();
+        return y+height/2+dh;
+    }
 
     public List<Porte> getListePorte() {
         return listePorte;
