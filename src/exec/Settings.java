@@ -11,6 +11,6 @@ package exec;
  */
 public interface Settings {
     
-    public boolean DEBUG = true;
+    public boolean DEBUG = false;
     
 }
