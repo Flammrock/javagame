@@ -29,6 +29,7 @@ import map.Camera;
 import modele.element.*;
 import windowpanel.gameoverPanel;
 import windowpanel.inventory.inventoryPanel;
+import windowpanel.titlePanel;
 import windowpanel.uiPanel;
 
 
@@ -42,6 +43,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     private inventoryPanel invpanel;
     private uiPanel uipanel;
     private gameoverPanel gameoverpanel;
+    private titlePanel titlepanel;
     
     /**
      * Creates new form AppliGraphique
@@ -199,6 +201,7 @@ public class AppliGraphique extends javax.swing.JFrame {
         invpanel = new inventoryPanel(this);
         uipanel = new uiPanel(this);
         gameoverpanel = new gameoverPanel(this);
+        titlepanel = new titlePanel(this);
         
         layeredpane = new JLayeredPane();
         layeredpane.setBackground(Color.red);
@@ -217,10 +220,20 @@ public class AppliGraphique extends javax.swing.JFrame {
         //layeredpane.add(invpanel, JLayeredPane.POPUP_LAYER);
         layeredpane.add(uipanel, JLayeredPane.PALETTE_LAYER);
         
-        //layeredpane.add(gameoverpanel, Integer.valueOf(10000));
+        //layeredpane.add(titlepanel, Integer.valueOf(20000));
         
         setContentPane(layeredpane);
         
+    }
+    
+    public void hideTitleScreen() {
+        layeredpane.remove(titlepanel);
+        layeredpane.revalidate();
+    }
+    
+    public void showTitleScreen() {
+        layeredpane.add(titlepanel, Integer.valueOf(20000));
+        layeredpane.revalidate();
     }
     
     public void hideInventory() {
