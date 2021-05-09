@@ -222,6 +222,16 @@ public class AppliGraphique extends javax.swing.JFrame {
         layeredpane.revalidate();
     }
     
+    public void hideGameOver() {
+        layeredpane.remove(gameoverpanel);
+        layeredpane.revalidate();
+    }
+    
+    public void showGameOver() {
+        layeredpane.add(gameoverpanel, Integer.valueOf(10000));
+        layeredpane.revalidate();
+    }
+    
     public boolean jeterObjet(int index, int pindex) {
         Personnage p = this.aventure.getJoueur();
         if (p==null) return true;
@@ -263,10 +273,9 @@ public class AppliGraphique extends javax.swing.JFrame {
         this.aventure.recommencerNiveau();
     }
     
-    public void gameover() {
-    
+    public void abandonner() {
+        
     }
-    
     
     public String onActionJoueur(String action,Personnage ennemie) {
         String logs = "";
