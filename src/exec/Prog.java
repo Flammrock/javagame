@@ -158,6 +158,8 @@ public class Prog {
         tileset.setSprite("ground", 0, 38, 14, 10);
         tileset.setSprite("embellishment_ground",5,93,55,44);
         tileset.setSprite("embellishment_wall_1",96,53,16,33);
+        tileset.setSprite("embellishment_wall_2",49,56,15,27);
+        tileset.setSprite("embellishment_wall_3",66,2,12,22);
         
         // spritesheet light
         SpriteSheet lightsprite = new SpriteSheet("/light.png",0,0,16,26,16*3,26*3);
@@ -169,6 +171,8 @@ public class Prog {
         
         Embellishment e_ground = new Embellishment(TypeEmbellishment.GROUND, tileset.getSprite("embellishment_ground"));
         Embellishment e_wall_1 = new Embellishment(TypeEmbellishment.WALL, tileset.getSprite("embellishment_wall_1"));
+        Embellishment e_wall_2 = new Embellishment(TypeEmbellishment.WALL, tileset.getSprite("embellishment_wall_2"));
+        Embellishment e_wall_3 = new Embellishment(TypeEmbellishment.WALL, tileset.getSprite("embellishment_wall_3"));
         Embellishment e_light = new Embellishment(TypeEmbellishment.OBJECT, lightsprite);
         
         
@@ -402,6 +406,8 @@ public class Prog {
         niveau1.setTileSet(tileset);
         niveau1.addEmbellishment(e_ground);
         niveau1.addEmbellishment(e_wall_1);
+        niveau1.addEmbellishment(e_wall_2);
+        niveau1.addEmbellishment(e_wall_3);
         niveau1.addEmbellishment(e_light);
         
         // dès qu'il y a une collision dans ce niveau, ceci est appelé
