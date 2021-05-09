@@ -413,10 +413,12 @@ public class Personnage extends Element implements Generable, Collisionable {
     private void mort(Personnage ennemie) {
         ennemie.dispatcher.fireEvent("gameOver", ennemie, new SimpleEvent(null));
         ennemie.setPv(0.0);
-        ArrayList<Objet> e = new ArrayList<>();
+        ArrayList<Element> e = new ArrayList<>();
         e.addAll(ennemie.getInventaire());
-        for (Objet o : e) {
-            
+        for (Element o : e) {
+            double angle = Math.random() * 2 * Math.PI;
+            o.setX(this.getX()+this.getWidth()/2+(int)(50*Math.cos(angle)));
+            o.setY(this.getY()+this.getHeight()/2+(int)(50*Math.sin(angle)));
         }
         this.pieceActuel.ajouterPlusieurs(e);
     }
