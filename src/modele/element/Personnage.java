@@ -1023,7 +1023,10 @@ public class Personnage extends Element implements Generable, Collisionable {
     public Objet abimer(Objet e) {
         if (e == null) return null;
         if (!e.isDetruisable()) return e;
-        e.abimer();
+        if(!e.abimer()){
+            e.nom += "(brisé)";
+            return null;
+        }
         return e;
     }
     
@@ -1066,6 +1069,9 @@ public class Personnage extends Element implements Generable, Collisionable {
         if (index < 0 || index > this.inventaire.size()-1) return false;
         Objet e = this.inventaire.get(index);
         if (!e.isReparable()) return false;
+        if(!e.isCasser()){
+            e.nom = e.nom.replace("(brisé)", "");
+        }
         this.repare(e);
         return false;
     }
