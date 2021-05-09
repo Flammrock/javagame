@@ -568,7 +568,7 @@ public class Aventure extends Element {
                                 CollisionEvent e = (CollisionEvent) event;
                                 if (e.getCollider1()==joueur || e.getCollider2()==joueur) {
                                     if(trape.getAnimationCourrante().getNom().equals("Open")){
-                                        //newStage
+                                        //newStage esttset
                                     }
                                 }
                             }                   
