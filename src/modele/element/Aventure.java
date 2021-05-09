@@ -65,6 +65,7 @@ public class Aventure extends Element {
                     Personnage p = (Personnage)sender;
                     if(p == getJoueur()){
                         pausedraw = true;
+                        dispatcher.fireEvent("gameOver", sender, e);
                     }
                 }
             }

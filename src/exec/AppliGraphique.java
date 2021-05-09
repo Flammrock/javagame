@@ -123,6 +123,18 @@ public class AppliGraphique extends javax.swing.JFrame {
             }
         });
         
+        this.aventure.addListerner(new SimpleListener("gameOver") {
+            @Override
+            public void onEvent(Object sender, SimpleEvent e) {
+                if(sender instanceof Personnage){
+                    Personnage p = (Personnage)sender;
+                    if(p == aventure.getJoueur()){
+                        showGameOver();
+                    }
+                }
+            }
+        });
+        
         //Combattre.setVisible(false);
         //allerDansPorte.setVisible(false);
         //canvas1.setVisible(false);
@@ -271,6 +283,7 @@ public class AppliGraphique extends javax.swing.JFrame {
     
     public void recommencer() {
         this.aventure.recommencerNiveau();
+        this.hideGameOver();
     }
     
     public void abandonner() {
