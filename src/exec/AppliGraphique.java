@@ -263,6 +263,10 @@ public class AppliGraphique extends javax.swing.JFrame {
         
     }
     
+    public void gameover() {
+    
+    }
+    
     
     public String onActionJoueur(String action,Personnage ennemie) {
         String logs = "";
