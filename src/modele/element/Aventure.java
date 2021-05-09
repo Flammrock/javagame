@@ -222,8 +222,9 @@ public class Aventure extends Element {
     
     
     
-    public void recommancerNiveau() {
-        
+    public void recommencerNiveau() {
+        this.joueur.setState(this.joueurSaved);
+        this.generateNiveau(this.nbsallesSaved);
     }
     
     
