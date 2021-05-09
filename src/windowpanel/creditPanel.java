@@ -21,6 +21,7 @@ public class creditPanel extends javax.swing.JPanel {
     public creditPanel(AppliGraphique app) {
         this.app = app;
         initComponents();
+        this.creditPanelWindow2.bind(this.app);
     }
 
     /**
@@ -32,41 +33,92 @@ public class creditPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        creditPanelWindow1 = new windowpanel.creditPanelWindow();
+        creditPanelWindow2 = new windowpanel.creditPanelWindow();
 
         setOpaque(false);
-
-        javax.swing.GroupLayout creditPanelWindow1Layout = new javax.swing.GroupLayout(creditPanelWindow1);
-        creditPanelWindow1.setLayout(creditPanelWindow1Layout);
-        creditPanelWindow1Layout.setHorizontalGroup(
-            creditPanelWindow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-        );
-        creditPanelWindow1Layout.setVerticalGroup(
-            creditPanelWindow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
+        addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                formMouseWheelMoved(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                formMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(348, Short.MAX_VALUE)
-                .addComponent(creditPanelWindow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(346, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(329, Short.MAX_VALUE)
+                .addComponent(creditPanelWindow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(355, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(135, Short.MAX_VALUE)
-                .addComponent(creditPanelWindow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE)
+                .addComponent(creditPanelWindow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        evt.consume();
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        evt.consume();
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        evt.consume();
+    }//GEN-LAST:event_formMouseEntered
+
+    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
+        evt.consume();
+    }//GEN-LAST:event_formMouseExited
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        evt.consume();
+    }//GEN-LAST:event_formMouseMoved
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        evt.consume();
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        evt.consume();
+    }//GEN-LAST:event_formMouseReleased
+
+    private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
+        evt.consume();
+    }//GEN-LAST:event_formMouseWheelMoved
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private windowpanel.creditPanelWindow creditPanelWindow1;
+    private windowpanel.creditPanelWindow creditPanelWindow2;
     // End of variables declaration//GEN-END:variables
 }
