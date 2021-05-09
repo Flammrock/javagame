@@ -38,7 +38,7 @@ public class Arme extends Equipement {
         String[] mots;
         InputStream in = getClass().getResourceAsStream("/armes");
         try (Scanner scan = new Scanner(in)) {
-            int nbrLigne = 42;  //A modifier a chaque modification du fichier montres
+            int nbrLigne = 42;  //A modifier a chaque modification du fichier armes
             Random random = new Random();
             int LigneRdm = random.nextInt(nbrLigne);
             scan.nextLine();
@@ -60,7 +60,6 @@ public class Arme extends Equipement {
         try {
             in.close();
         } catch (IOException ex) {}
-        
     }
 
     @Override
